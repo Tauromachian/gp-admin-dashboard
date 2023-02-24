@@ -1,17 +1,20 @@
 <template>
-  <v-container fill-height fluid style="flex-wrap: wrap;">
+  <v-container fill-height fluid style="flex-wrap: wrap">
     <material-card color="green">
-      <div slot="header">
-        <div class="title font-weight-light mb-2">Material Design Icons</div>
-        <div class="category font-weight-thin">
-          See all available
-          <a
-            class="white--text"
-            href="https://materialdesignicons.com/"
-            target="_blank"
-          >Icons</a>
+      <template #header>
+        <div>
+          <div class="title font-weight-light mb-2">Material Design Icons</div>
+          <div class="category font-weight-thin">
+            See all available
+            <a
+              class="white--text"
+              href="https://materialdesignicons.com/"
+              target="_blank"
+              >Icons</a
+            >
+          </div>
         </div>
-      </div>
+      </template>
 
       <v-layout align-center justify-center wrap>
         <v-flex v-for="icon in icons" :key="icon" ma-2>
@@ -256,8 +259,8 @@ export default {
       "mdi-backburger",
       "mdi-backspace",
       "mdi-backup-restore",
-      "mdi-badminton"
-    ]
-  })
+      "mdi-badminton",
+    ],
+  }),
 };
 </script>

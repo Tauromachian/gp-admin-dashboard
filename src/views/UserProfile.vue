@@ -3,16 +3,26 @@
     <v-row>
       <v-col md="4">
         <material-card class="v-card-profile">
-          <v-avatar slot="offset" class="mx-auto d-block" size="130">
-            <img src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg" />
-          </v-avatar>
+          <template #offset>
+            <v-avatar class="mx-auto d-block" size="130">
+              <img
+                src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+              />
+            </v-avatar>
+          </template>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
+            <h6 class="category text-gray font-weight-thin mb-3">
+              CEO / CO-FOUNDER
+            </h6>
             <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p
-              class="card-description font-weight-light"
-            >Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
-            <v-btn color="success" rounded class="font-weight-light">Follow</v-btn>
+            <p class="card-description font-weight-light">
+              Don't be scared of the truth because we need to restart the human
+              foundation in truth And I love you like Kanye loves Kanye I love
+              Rick Owens’ bed design but the back is...
+            </p>
+            <v-btn color="success" rounded class="font-weight-light"
+              >Follow</v-btn
+            >
           </v-card-text>
         </material-card>
       </v-col>
@@ -65,15 +75,15 @@ export default {
       infoContact: {
         name: "Jorge Garcia",
         email: "jacomino@tuta.io",
-        phone: 14912459
+        phone: 14912459,
       },
 
       infoCharge: {
         institution: "",
         rol: "",
-        charge: ""
-      }
+        charge: "",
+      },
     };
-  }
+  },
 };
 </script>
