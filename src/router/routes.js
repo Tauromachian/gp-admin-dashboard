@@ -27,20 +27,6 @@ export default [
     component: () => import("@/views/$1"),
   },
 
-  { path: "/typography", component: () => import("@/views/$1") },
-
-  { path: "/icons", component: () => import("@/views/$1") },
-
-  { path: "/maps", component: () => import("@/views/$1") },
-
-  { path: "/notifications", component: () => import("@/views/$1") },
-
-  {
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    component: () => import("@/views/$1"),
-  },
-
   {
     path: "",
     component: page("auth/AuthWrapper"),
