@@ -1,9 +1,26 @@
 <template>
   <v-main>
-    <router-view />
+    <div id="core-view">
+      <v-fade-transition mode="out-in">
+        <router-view />
+      </v-fade-transition>
+    </div>
+    <core-footer v-if="$route.name !== 'Maps'" />
   </v-main>
 </template>
 
-<script setup>
-  //
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: "Departamento de Energía, UCLV",
+    };
+  },
+};
 </script>
+
+<style>
+#core-view {
+  padding-bottom: 100px;
+}
+</style>
