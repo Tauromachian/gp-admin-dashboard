@@ -1,9 +1,10 @@
 <template>
   <v-form ref="form" @submit.prevent="submit" lazy-validation v-model="valid">
     <v-text-field
-      :label="$t('password')"
+      label="Contraseña"
       v-model="form.password"
-      :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'" @click:append="() => (passwordHidden = !passwordHidden)"
+      :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+      @click:append="() => (passwordHidden = !passwordHidden)"
       :type="passwordHidden ? 'password' : 'text'"
       :error-messages="errors.password"
       :disabled="loading"
@@ -13,7 +14,7 @@
     ></v-text-field>
 
     <v-text-field
-      :label="$t('confirm_password')"
+      label="Confirmar Contraseña"
       v-model="form.password_confirmation"
       :type="passwordHidden ? 'password' : 'text'"
       :error-messages="errors.password_confirmation"
@@ -31,16 +32,16 @@
         :disabled="loading || !valid"
         color="primary"
       >
-        {{ $t('set_new_password') }}
+        Establecer contraseña
       </v-btn>
     </v-layout>
   </v-form>
 </template>
 
 <script>
-import axios from 'axios/index'
-import { api } from '~/config'
-import Form from '~/mixins/form'
+import axios from "axios/index";
+import { api } from "~/config";
+import Form from "~/mixins/form";
 
 export default {
   mixins: [Form],
@@ -49,8 +50,8 @@ export default {
     passwordHidden: true,
 
     labels: {
-      password: 'New Password',
-      password_confirmation: 'Confirm New Password'
+      password: "New Password",
+      password_confirmation: "Confirm New Password",
     },
 
     form: {
@@ -58,33 +59,33 @@ export default {
       email: null,
       username: null,
       password: null,
-      password_confirmation: null
-    }
+      password_confirmation: null,
+    },
   }),
 
   created() {
-    this.form.email = this.$route.query.email
-    this.form.username = this.$route.query.username
-    this.form.token = this.$route.params.token
+    this.form.email = this.$route.query.email;
+    this.form.username = this.$route.query.username;
+    this.form.token = this.$route.params.token;
   },
 
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        this.loading = true
-        axios.post(api.path('password.reset'), this.form)
+        this.loading = true;
+        axios
+          .post(api.path("password.reset"), this.form)
           .then((res) => {
-            this.$toast.success('Your password has been reset.')
-            this.$emit('success', this.form)
+            this.$emit("success", this.form);
           })
-          .catch(err => {
-            this.handleErrors(err.response.data.errors)
+          .catch((err) => {
+            this.handleErrors(err.response.data.errors);
           })
           .then(() => {
-            this.loading = false
-          })
+            this.loading = false;
+          });
       }
     },
-  }
-}
+  },
+};
 </script>

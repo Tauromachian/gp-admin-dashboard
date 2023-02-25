@@ -10,10 +10,10 @@
           >
             <v-tabs-slider></v-tabs-slider>
             <v-tab class="mr-3">
-              <v-icon class="mr-2">mdi-file-table</v-icon>{{ $t('services.manage') }}
+              <v-icon class="mr-2">mdi-file-table</v-icon>Gestionar Servicio
             </v-tab>
             <v-tab class="mr-3">
-              <v-icon class="mr-2">mdi-bug</v-icon>{{ $t('services.create') }}
+              <v-icon class="mr-2">mdi-bug</v-icon>Crear Servicio
             </v-tab>
             <v-tab-item>
               <app-service-table></app-service-table>
@@ -30,11 +30,11 @@
 
 <script>
 export default {
-  name: 'Service',
-  middleware: 'auth',
+  name: "Service",
+  middleware: "auth",
 
-  metaInfo () {
-    return { title: this.$t('route.' + this.$route.name) }
-  }
-}
+  metaInfo() {
+    return { title: this.$route.name };
+  },
+};
 </script>

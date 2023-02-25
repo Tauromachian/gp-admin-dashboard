@@ -1,14 +1,14 @@
 <template>
   <v-form ref="form" @submit.prevent="submit" lazy-validation v-model="valid">
     <v-text-field
-        :label="$t('username')"
-        v-model="form.username"
-        type="email"
-        :error-messages="errors.username"
-        :rules="[rules.required('username')]"
-        :disabled="loading"
-        prepend-icon="mdi-account"
-        @input="clearErrors('username')"
+      label="Nombre de usuario"
+      v-model="form.username"
+      type="email"
+      :error-messages="errors.username"
+      :rules="[rules.required('username')]"
+      :disabled="loading"
+      prepend-icon="mdi-account"
+      @input="clearErrors('username')"
     ></v-text-field>
     <v-text-field
       :label="labels.email"
@@ -26,7 +26,7 @@
       <v-btn
         text
         :disabled="loading"
-        :to="{ name: 'login', query: {email: form.email} }"
+        :to="{ name: 'login', query: { email: form.email } }"
         color="grey darken-2"
         exact
       >
@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import axios from 'axios/index'
-import { api } from '~/config'
-import Form from '~/mixins/form'
+import axios from "axios/index";
+import { api } from "~/config";
+import Form from "~/mixins/form";
 
 export default {
   mixins: [Form],
@@ -57,32 +57,32 @@ export default {
   data: () => ({
     form: {
       email: null,
-      username: null
-    }
+      username: null,
+    },
   }),
 
   created() {
-    this.form.email = this.$route.query.email || null
-    this.form.username = this.$route.query.username || null
+    this.form.email = this.$route.query.email || null;
+    this.form.username = this.$route.query.username || null;
   },
 
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        this.loading = true
-        axios.post(api.path('password.forgot'), this.form)
+        this.loading = true;
+        axios
+          .post(api.path("password.forgot"), this.form)
           .then((res) => {
-            this.$toast.info('An email with password reset instructions has been sent to your email address.')
-            this.$emit('success')
+            this.$emit("success");
           })
-          .catch(err => {
-            this.handleErrors(err.response.data.errors)
+          .catch((err) => {
+            this.handleErrors(err.response.data.errors);
           })
           .then(() => {
-            this.loading = false
-          })
+            this.loading = false;
+          });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

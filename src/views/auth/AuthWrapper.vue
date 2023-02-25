@@ -7,14 +7,12 @@
 </template>
 
 <script>
-
 export default {
-  name: 'AuthWrapper',
-  middleware: 'guest',
+  name: "AuthWrapper",
+  middleware: "guest",
 
-  metaInfo () {
-    return { title: this.$t('route.' + this.$route.name) }
-  }
-}
-
+  metaInfo() {
+    return { title: this.$route.name };
+  },
+};
 </script>

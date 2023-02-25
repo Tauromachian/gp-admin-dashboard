@@ -1,10 +1,10 @@
 <template>
   <v-card>
     <v-toolbar dark color="primary" flat>
-      <v-toolbar-title>{{ $t($route.name) }}</v-toolbar-title>
+      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
-      <p>{{ $t('choose_password') }}</p>
+      <p>Escriba su nueva contraseña</p>
 
       <password-reset-form @success="success"></password-reset-form>
     </v-card-text>
@@ -12,17 +12,17 @@
 </template>
 
 <script>
-import PasswordResetForm from './PasswordResetForm'
+import PasswordResetForm from "./PasswordResetForm";
 
 export default {
-	components: {
-		PasswordResetForm
-	},
+  components: {
+    PasswordResetForm,
+  },
 
-	methods: {
-		success(form) {
-			this.$router.push({ name: 'login', query: {email: form.email} })
-		}
-	}
-}
+  methods: {
+    success(form) {
+      this.$router.push({ name: "login", query: { email: form.email } });
+    },
+  },
+};
 </script>

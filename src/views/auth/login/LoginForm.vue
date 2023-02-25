@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form" @submit.prevent="submit" lazy-validation v-model="valid">
     <v-text-field
-      :label="$t('username')"
+      label="Nombre de usuario"
       v-model="form.username"
       type="email"
       :error-messages="errors.username"
@@ -12,9 +12,10 @@
     ></v-text-field>
 
     <v-text-field
-      :label="$t('password')"
+      label="Contraseña"
       v-model="form.password"
-      :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'" @click:append="() => (passwordHidden = !passwordHidden)"
+      :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+      @click:append="() => (passwordHidden = !passwordHidden)"
       :type="passwordHidden ? 'password' : 'text'"
       :error-messages="errors.password"
       :disabled="loading"
@@ -29,10 +30,10 @@
       <v-btn
         text
         :disabled="loading"
-        :to="{ name: 'forgot_password', query: {email: form.email} }"
+        :to="{ name: 'forgot_password', query: { email: form.email } }"
         color="grey darken-2"
       >
-        {{ $t('forgot_password') }}
+        ¿Olvidó la Contraseña?
       </v-btn>
 
       <v-btn
@@ -49,9 +50,9 @@
 </template>
 
 <script>
-import axios from 'axios/index'
-import { api } from '~/config'
-import Form from '~/mixins/form'
+import axios from "axios/index";
+import { api } from "~/config";
+import Form from "~/mixins/form";
 
 export default {
   mixins: [Form],
@@ -62,30 +63,33 @@ export default {
 
     form: {
       username: null,
-      password: null
+      password: null,
     },
 
-    remember: false
+    remember: false,
   }),
 
   created() {
-    this.form.username = this.$route.query.username || null
+    this.form.username = this.$route.query.username || null;
   },
 
   methods: {
     submit() {
-      const self = this
+      const self = this;
       if (this.$refs.form.validate()) {
-        self.loading = true
+        self.loading = true;
 
-        axios.post(api.path('login'), this.form).then(res => {
-          this.$emit('success', res.data, self.remember)
-          self.loading = false
-        }).catch(err => {
-          this.handleErrors(err.response.data.errors)
-        })
+        axios
+          .post(api.path("login"), this.form)
+          .then((res) => {
+            this.$emit("success", res.data, self.remember);
+            self.loading = false;
+          })
+          .catch((err) => {
+            this.handleErrors(err.response.data.errors);
+          });
       }
     },
-  }
-}
+  },
+};
 </script>
