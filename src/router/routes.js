@@ -1,30 +1,123 @@
+function layout(path) {
+  return () => import(`@/layouts/${path}.vue`).then((m) => m.default || m);
+}
+
+function page(path) {
+  return () => import(`@/views/${path}.vue`).then((m) => m.default || m);
+}
+
 export default [
-  { path: "/", name: "services", component: () => import("@/views/$1") },
-
-  { path: "/plan-form", name: "plans", component: () => import("@/views/$1") },
-
   {
-    path: "/user-profile",
-    name: "user-profile",
-    component: () => import("@/views/$1"),
-  },
+    path: "/",
+    redirect: { name: "institutions" },
+    component: layout("default"),
+    children: [
+      {
+        path: "institutions",
+        name: "institutions",
+        component: page("app/Institution"),
+      },
+      {
+        path: "/institution/:id",
+        component: layout("institutionContent"),
+        children: [
+          {
+            path: "services",
+            name: "services",
+            component: page("app/Service"),
+          },
 
-  {
-    path: "/user-management",
-    name: "user-management",
-    component: () => import("@/views/$1"),
-  },
+          {
+            path: "service/:idService",
+            name: "services",
+            component: layout("serviceContent"),
 
-  {
-    path: "/monitorization",
-    name: "monitoring",
-    component: () => import("@/views/$1"),
-  },
+            children: [
+              {
+                path: "one-read",
+                name: "oneRead",
+                component: page("app/OneRead"),
+              },
+            ],
+          },
+          {
+            path: "read",
+            name: "read",
+            component: page("app/Read"),
+          },
 
-  {
-    path: "/table-list",
-    name: "Table List",
-    component: () => import("@/views/$1"),
+          {
+            path: "/plan-form",
+            name: "plans",
+            component: page("app/Plan"),
+          },
+
+          {
+            path: "/user-profile",
+            name: "User Profile",
+            component: page("app/UserProfile"),
+          },
+
+          {
+            path: "/user-management",
+            name: "user-management",
+            component: page("app/UserManagement"),
+          },
+
+          {
+            path: "/monitorization",
+            name: "monitoring",
+            component: page("app/Monitorization"),
+          },
+
+          {
+            path: "/docs",
+            name: "docs",
+            component: page("app/Docs"),
+          },
+
+          {
+            path: "/consumption",
+            name: "consumption",
+            component: page("app/Consumption"),
+          },
+
+          {
+            path: "/closure",
+            name: "closure",
+            component: page("app/Closure"),
+          },
+
+          {
+            path: "/table-list",
+            name: "Table List",
+            component: page("app/TableList"),
+          },
+
+          {
+            path: "/typography",
+            component: page("app/Typography"),
+          },
+
+          {
+            path: "/icons",
+            component: page("app/Icons"),
+          },
+
+          {
+            path: "/notifications",
+            name: "notifications",
+            component: page("app/Notifications"),
+          },
+
+          {
+            path: "documents",
+            name: "documents",
+            component: page("app/Documents"),
+          },
+        ],
+      },
+    ],
   },
 
   {
@@ -32,11 +125,7 @@ export default [
     component: page("auth/AuthWrapper"),
     redirect: { name: "login" },
     children: [
-      {
-        path: "/login",
-        name: "login",
-        component: page("auth/login/Login"),
-      },
+      { path: "/login", name: "login", component: page("auth/login/Login") },
       {
         path: "/password",
         component: page("auth/password/PasswordWrapper"),
@@ -56,5 +145,5 @@ export default [
     ],
   },
 
-  { path: "*", component: page("errors/404.vue") },
+  { path: "*", component: page("errors/404") },
 ];
