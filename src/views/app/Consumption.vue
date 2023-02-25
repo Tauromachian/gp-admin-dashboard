@@ -1,14 +1,13 @@
 <template>
   <iframe
     class="iframe"
-    src="http://localhost:9090/dashboard/42e084d0-6554-11ea-b9ac-a11d877c0848?publicId=fac81910-6553-11ea-b9ac-a11d877c0848"
-    frameborder="0"
-  ></iframe>
+    src="https://thingsboard.uclv.cu/dashboard/5b8671f0-af7a-11ea-8208-f59c606872e2?publicId=9c237170-3173-11ea-8ed0-9d17cbe9ab55"
+  />
 </template>
 
 <script>
 export default {
-  name: "Monitorization"
+  name: 'Consumption'
 }
 </script>
 
