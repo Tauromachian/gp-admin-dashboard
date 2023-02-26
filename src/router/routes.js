@@ -1,9 +1,9 @@
 function layout(path) {
-  return () => import(`@/layouts/${path}.vue`).then((m) => m.default || m);
+  return () => import(`@/layouts/${path}`);
 }
 
 function page(path) {
-  return () => import(`@/views/${path}.vue`).then((m) => m.default || m);
+  return () => import(`@/views/${path}`);
 }
 
 export default [
@@ -122,23 +122,29 @@ export default [
 
   {
     path: "",
-    component: page("auth/AuthWrapper"),
+    component: () => import("@/views/auth/AuthWrapper"),
     redirect: { name: "login" },
     children: [
-      { path: "/login", name: "login", component: page("auth/login/Login") },
+      {
+        path: "/login",
+        name: "login",
+        component: () => import("@/views/auth/login/Login"),
+      },
       {
         path: "/password",
-        component: page("auth/password/PasswordWrapper"),
+        component: () => import("@/views/auth/password/PasswordWrapper"),
         children: [
           {
             path: "",
             name: "forgot_password",
-            component: page("auth/password/password-forgot/PasswordForgot"),
+            component: () =>
+              import("@/views/auth/password/password-forgot/PasswordForgot"),
           },
           {
             path: "reset/:token",
             name: "reset_password",
-            component: page("auth/password/password-reset/PasswordReset"),
+            component: () =>
+              import("@/views/auth/password/password-reset/PasswordReset"),
           },
         ],
       },
