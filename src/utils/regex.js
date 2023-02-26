@@ -69,7 +69,7 @@ const isPhone = (string) => {
   return phoneRegex.test(string);
 };
 
-module.exports = {
+export {
   isNumber,
   isOnlyLetters,
   isLettersWithBlankSpaces,
