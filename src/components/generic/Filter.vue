@@ -12,7 +12,7 @@
     <template #activator="{ on }">
       <v-btn
         class="elevation-0"
-        :class="{'position-right': right, 'position-left': left}"
+        :class="{ 'position-right': right, 'position-left': left }"
         color="grey"
         dark
         fab
@@ -34,49 +34,21 @@
 </template>
 
 <script>
-// Utilities
-import { mapMutations, mapState } from 'vuex'
-
 export default {
   props: {
     left: {
       type: Boolean,
-      default: false
+      default: false,
     },
     right: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data: () => ({
-    colors: ['primary', 'info', 'success', 'warning', 'danger']
-  }),
-  computed: {
-    ...mapState('app', ['image', 'color']),
-    color () {
-      return this.$store.state.app.color
-    }
-  },
-
-  methods: {
-    ...mapMutations('app', ['setImage']),
-    setColor (color) {
-      this.$store.state.app.color = color
-    }
-  }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-.v-avatar,
-.v-responsive {
-  cursor: pointer;
-}
-.v-btn--fixed {
-  background-color: rgba(black, 0.3) !important;
-  padding: 0;
-}
-
+<style scoped>
 .position-right {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
