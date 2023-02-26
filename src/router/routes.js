@@ -145,5 +145,5 @@ export default [
     ],
   },
 
-  { path: "*", component: page("errors/404") },
+  { path: "/:catchAll(.*)", component: page("errors/404") },
 ];
