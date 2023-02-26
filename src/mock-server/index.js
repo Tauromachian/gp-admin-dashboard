@@ -1,0 +1,140 @@
+import { Server, Response, Model, Factory, hasMany, belongsTo } from "miragejs";
+
+export function makeServer({ environment = "development" } = {}) {
+  let server = new Server({
+    models: {
+      institution: Model.extend({
+        coordinators: hasMany(),
+        services: hasMany(),
+      }),
+      coordinator: Model.extend({
+        institution: belongsTo(),
+        mails: hasMany(),
+        phone: hasMany(),
+      }),
+      mail: Model.extend({
+        coordinator: belongsTo(),
+      }),
+      phone: Model.extend({
+        coordinator: belongsTo(),
+      }),
+      service: Model.extend({
+        institution: belongsTo(),
+      }),
+    },
+    environment,
+    factories: {
+      institution: Factory.extend({
+        name(i) {
+          return `Institution ${i + 1}`;
+        },
+        description(i) {
+          return `Some description ${i + 1}`;
+        },
+        province(i) {
+          return `Some province ${i + 1}`;
+        },
+        representative(i) {
+          return `Representative ${i + 1}`;
+        },
+        organism(i) {
+          return `Organism ${i + 1}`;
+        },
+        afterCreate(institution, server) {
+          server.createList("coordinator", 5, { institution });
+          server.createList("service", 5, { institution });
+        },
+      }),
+      service: Factory.extend({
+        codigo_cliente(i) {
+          return i;
+        },
+        name(i) {
+          return `Some description ${i + 1}`;
+        },
+        crf(i) {
+          return `Some province ${i + 1}`;
+        },
+      }),
+      coordinator: Factory.extend({
+        name(i) {
+          return `Coordinator name ${i}`;
+        },
+        charge(i) {
+          return `Coordinator name ${i}`;
+        },
+        afterCreate(coordinator, server) {
+          server.createList("mail", 5, { coordinator });
+          server.createList("phone", 5, { coordinator });
+        },
+      }),
+      mail: Factory.extend({
+        name(i) {
+          return `Some mail ${i}`;
+        },
+      }),
+      phone: Factory.extend({
+        name(i) {
+          return `Some phone ${i}`;
+        },
+      }),
+    },
+    seeds(server) {
+      server.createList("institution", 5);
+    },
+    routes() {
+      this.get("/institutions", (schema) => {
+        const { models } = schema.institutions.all();
+        const institutions = models.map((model) => {
+          return model.attrs;
+        });
+        return new Response(200, {}, institutions);
+      });
+      this.post("/institutions", (schema, request) => {
+        const institutionReq = request.requestBody;
+        const institution = JSON.parse(institutionReq);
+        const createdInstitution = schema.institutions.create(institution);
+        return new Response(201, {}, createdInstitution.attrs);
+      });
+      this.patch("/institutions/:id", (schema, request) => {
+        const institutionId = request.params.id;
+        const institutionReq = request.requestBody;
+        const newInstitutionData = JSON.parse(institutionReq);
+        const institutionToUpdate = schema.institutions.find(institutionId);
+        institutionToUpdate.update(newInstitutionData);
+        return new Response(201, {}, institutionToUpdate.attrs);
+      });
+      this.delete("/institution/:id", (schema, request) => {
+        const institutionId = request.params.id;
+        const institution = schema.institutions.find(institutionId);
+        institution.destroy();
+        return new Response(200);
+      });
+      this.get("/institution/:id/coordinators", (schema, request) => {
+        const institutionId = request.params.id;
+        const institution = schema.institutions.find(institutionId);
+
+        return new Response(200, {}, institution.coordinators);
+      });
+      this.get("/institution/:id/services", (schema, request) => {
+        const institutionId = request.params.id;
+        const institution = schema.institutions.find(institutionId);
+        return new Response(200, {}, institution.services.models);
+      });
+      this.get("/coordinator/:id/mails", (schema, request) => {
+        const coordinatorId = request.params.id;
+        const coordinator = schema.coordinators.find(coordinatorId);
+
+        return new Response(200, {}, coordinator.mails);
+      });
+      this.get("/coordinator/:id/phones", (schema, request) => {
+        const coordinatorId = request.params.id;
+        const coordinator = schema.coordinators.find(coordinatorId);
+
+        return new Response(200, {}, coordinator.phones);
+      });
+    },
+  });
+
+  return server;
+}
