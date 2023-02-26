@@ -3,13 +3,15 @@
     <v-layout>
       <v-col xs12>
         <material-card color="green">
-          <div slot="header">
-            <div class="title font-weight-light mb-2">Notifications</div>
-            <div class="category">
-              Handcrafted by us with
-              <v-icon size="17"> mdi-heart </v-icon>
+          <template #header>
+            <div>
+              <div class="title font-weight-light mb-2">Notifications</div>
+              <div class="category">
+                Handcrafted by us with
+                <v-icon size="17"> mdi-heart </v-icon>
+              </div>
             </div>
-          </div>
+          </template>
 
           <v-card-text>
             <v-layout row wrap>
