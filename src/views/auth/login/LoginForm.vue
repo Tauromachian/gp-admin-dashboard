@@ -1,11 +1,10 @@
 <template>
-  <v-form ref="form" @submit.prevent="submit" lazy-validation v-model="valid">
+  <v-form ref="form" @submit.prevent="submit" lazy-validation>
     <v-text-field
       label="Nombre de usuario"
       v-model="form.username"
       type="email"
-      :error-messages="errors.username"
-      :rules="[rules.required('username')]"
+      :rules="[rules.required]"
       :disabled="loading"
       prepend-icon="mdi-account"
       @input="clearErrors('username')"
@@ -17,9 +16,8 @@
       :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
       @click:append="() => (passwordHidden = !passwordHidden)"
       :type="passwordHidden ? 'password' : 'text'"
-      :error-messages="errors.password"
       :disabled="loading"
-      :rules="[rules.required('password')]"
+      :rules="[rules.password]"
       prepend-icon="mdi-lock"
       @input="clearErrors('password')"
     ></v-text-field>
@@ -51,11 +49,17 @@
 
 <script>
 import { login } from "@/services/auth";
+import { required, password } from "@/utils/rules";
 
 export default {
   data: () => ({
     loading: false,
     passwordHidden: true,
+
+    rules: {
+      required,
+      password,
+    },
 
     form: {
       username: null,
