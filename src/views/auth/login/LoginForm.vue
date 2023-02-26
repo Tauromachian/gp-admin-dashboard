@@ -23,15 +23,6 @@
     <v-layout class="mt-4 mx-0">
       <v-spacer></v-spacer>
 
-      <v-btn
-        text
-        :disabled="loading"
-        :to="{ name: 'forgot_password', query: { email: form.email } }"
-        color="grey darken-2"
-      >
-        ¿Olvidó la Contraseña?
-      </v-btn>
-
       <v-btn type="submit" :loading="loading" color="primary" class="ml-4">
         Login
       </v-btn>
