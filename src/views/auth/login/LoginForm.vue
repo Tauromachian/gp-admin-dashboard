@@ -31,8 +31,10 @@
 </template>
 
 <script>
-import { login } from "@/services/auth";
 import { required, password } from "@/utils/rules";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 export default {
   data: () => ({
@@ -62,12 +64,7 @@ export default {
 
       this.loading = true;
 
-      try {
-        await login(this.form);
-        this.$emit("success", res.data, this.remember);
-      } catch (error) {
-        this.handleErrors(err.response.data.errors);
-      }
+      await authStore.login();
 
       this.loading = false;
     },
