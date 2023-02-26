@@ -1,170 +1,233 @@
 <template>
-  <material-card
-    color="primary"
-    title="Formulario de servicio"
-    text="Inserta un nuevo servicio"
-  >
+  <material-form :title="$t('services.form_name')">
     <v-form ref="form">
       <v-container py-0>
-        <v-layout wrap>
-          <v-col xs12 md2>
-            <v-text-field
-              label="Numero del metro"
-              v-model="meterNumber"
-              :rules="meterNumberRules"
-            />
-          </v-col>
-          <v-col xs12 md4>
-            <v-text-field
-              label="Nombre del Servicio"
-              v-model="serviceName"
-              :rules="serviceNameRules"
-            />
-          </v-col>
+        <v-text-field
+          v-model="form.meter_no"
+          :label="$t('services.fields.meter_number')"
+          :rules="meterNumberRules"
+        />
+        <v-text-field
+          v-model="form.name"
+          :label="$t('services.fields.service_name')"
+          :rules="serviceNameRules"
+        />
 
-          <v-col xs12 md9>
-            <material-button-group
-              v-model="serviceTypeTransformer"
-              label="Tipo de servicio (Segun transformación)"
-            >
-              <v-btn class="ml-0" value="Monofásico 110 V"
-                >Monofásico 110 V</v-btn
-              >
-              <v-btn value="Monofásico 220 V">Monofásico 220 V</v-btn>
-              <v-btn value="Trifásico 220 V">Trifásico 220 V</v-btn>
-              <v-btn value="Trifásico 480 V">Trifásico 480 V</v-btn>
-            </material-button-group>
-          </v-col>
+        <material-button-group
+          v-model="form.serviceTypePay"
+          :label="$t('services.fields.service_type_by_payment_type')"
+        >
+          <v-btn value="Pospago">
+            {{ $t("services.fields.pospay") }}
+          </v-btn>
+          <v-btn class="ml-0" value="Prepago">
+            {{ $t("services.fields.prepay") }}
+          </v-btn>
+        </material-button-group>
 
-          <v-col xs12 md3>
-            <material-button-group
-              v-model="serviceTypePay"
-              label="Tipo de servicio (Segun pago)"
-            >
-              <v-btn class="ml-0" value="Prepago">Prepago</v-btn>
-              <v-btn value="Pospago">Pospago</v-btn>
-            </material-button-group>
-          </v-col>
+        <v-text-field
+          v-model="form.codcli"
+          :label="$t('services.fields.client_code')"
+          :rules="serviceCodeRules"
+        />
+        <v-switch
+          v-model="form.exclusivo"
+          :label="$t('services.fields.exclusive')"
+        />
+        <v-text-field v-model="form.crf" label="CRF" :rules="crfRules" />
 
-          <v-col xs12 md3>
-            <v-text-field
-              label="Codigo del servicio"
-              v-model="serviceCode"
-              :rules="serviceCodeRules"
-            />
-          </v-col>
-          <v-col xs6 md3 class="ml-0.5">
-            <v-switch label="Exclusivo" v-model="exclusive" />
-          </v-col>
-          <v-col xs12 md3>
-            <v-text-field label="CRF" v-model="crf" :rules="crfRules" />
-          </v-col>
+        <v-text-field
+          v-model.number="form.demanda"
+          :label="$t('services.fields.hired_demand') + ' (kW)'"
+          :rules="hiredDemandRules"
+        />
 
-          <v-col xs12 md3>
-            <v-text-field
-              label="Demanda Contratada (kW)"
-              v-model="hiredDemand"
-              :rules="hiredDemandRules"
-            />
-          </v-col>
+        <v-col xs="12" cols="12" />
 
-          <v-col xs12 md3>
-            <material-button-group v-model="tarifType" label="Tipo de tarifa">
-              <v-btn class="ml-0" value="B1">B1</v-btn>
-              <v-btn value="M1-A">M1-A</v-btn>
-              <v-btn value="M1-C">M1-C</v-btn>
-            </material-button-group>
-          </v-col>
+        <v-autocomplete
+          v-model="form.tipo_tarifa"
+          :label="$t('services.fields.tarif_type')"
+          :items="tarifTypes"
+          hide-no-data
+          hide-details
+        />
 
-          <v-col xs12 md3>
-            <material-button-group v-model="alimentation" label="Alimentación">
-              <v-btn class="ml-0" value="Simple">Simple</v-btn>
-              <v-btn value="Doble">Doble</v-btn>
-            </material-button-group>
-          </v-col>
+        <material-button-group
+          v-model="form.alimentacion"
+          :label="$t('services.fields.alimentation')"
+        >
+          <v-btn class="ml-0" value="Simple">
+            {{ $t("services.fields.alimentation_simple") }}
+          </v-btn>
+          <v-btn value="Doble">
+            {{ $t("services.fields.alimentation_double") }}
+          </v-btn>
+        </material-button-group>
 
-          <v-col xs6 md2>
-            <v-subheader class="pl-0">Turnos de trabajo</v-subheader>
-            <v-slider
-              v-model="turn"
-              :thumb-size="24"
-              thumb-label="always"
-              :max="3"
-              :min="1"
-            ></v-slider>
-          </v-col>
+        <material-number-stepper
+          v-model="form.turnos"
+          show-number
+          :min="1"
+          :max="3"
+          :label="$t('services.fields.turns')"
+          :allow-number-editing="false"
+        />
 
-          <v-col md12></v-col>
+        <v-col md="12" />
 
-          <v-col xs12 md2>
-            <material-button-group v-model="metrage" label="Metraje">
-              <v-btn class="ml-0" value="Alta">Alta</v-btn>
-              <v-btn value="Baja">Baja</v-btn>
-            </material-button-group>
-          </v-col>
-          <v-col xs12 md4 v-if="metrage == 'Alta'">
-            <v-text-field
-              label="Capacidad (kVA)"
-              v-model="capacity"
-              :rules="capacityRules"
-            />
-          </v-col>
-          <v-col xs12 md4 v-else>
-            <v-subheader class="pl-0">Cantidad de transformadores</v-subheader>
+        <material-button-group
+          v-model="form.metraje"
+          :label="$t('services.fields.metraje')"
+        >
+          <v-btn class="ml-0" value="Alta"> Alta </v-btn>
+          <v-btn value="Baja"> Baja </v-btn>
+        </material-button-group>
+        <v-text-field
+          v-model="capacityComputed"
+          :label="$t('services.fields.capacity') + ' (kVA)'"
+          :rules="capacityRules"
+          :disabled="disableCapacityInput"
+        />
 
-            <v-slider
-              v-model="transformersAmount"
-              :thumb-size="24"
-              thumb-label="always"
-              :max="3"
-              :min="1"
-            ></v-slider>
-          </v-col>
+        <v-autocomplete
+          v-if="form.metraje === 'Baja'"
+          v-model="serviceType"
+          label="Tipo de servicio (Segun transformación)"
+          :items="serviceTypes"
+          hide-no-data
+          hide-details
+        />
 
-          <v-col md12 class="pt-0 pb-0"></v-col>
+        <div v-if="form.metraje === 'Baja'">
+          <v-subheader class="pl-0">
+            {{ $t("services.fields.transformers_amount") }}
+          </v-subheader>
 
-          <v-col xs12 md4 v-for="i in transformersAmount" :key="i">
-            <app-transformer-form></app-transformer-form>
-          </v-col>
+          <v-btn-toggle group class="test">
+            <v-btn @click="transformerAmountMinusOne">
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
 
-          <v-col xs12 text-xs-right>
-            <v-btn
-              class="mx-0 font-weight-light btn-test"
-              color="primary"
-              @click="validate"
-              >Insertar</v-btn
-            >
-          </v-col>
-        </v-layout>
+            <v-btn @click="transformerAmountPlusOne">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-btn-toggle>
+        </div>
+
+        <v-col sm="12" md="12" class="pt-0 pb-0" />
+
+        <app-transformer-form
+          v-for="(transformer, i) in transformers"
+          :key="i"
+          :mono-phase="transformerCapacitiesMonoPhase.capacities"
+          :three-phase="transformerCapacitiesThreePhase.capacities"
+          v-model:type="transformer.type"
+          v-model:capacity="transformer.capacity"
+          @on-close-transformer="deleteTransformer(i)"
+        />
+
+        <v-btn
+          class="mx-0 font-weight-light btn-test"
+          color="primary"
+          large
+          @click="serviceCredentialsFormDialog = true"
+        >
+          {{ $t("services.fields.open_credentials_button") }}
+        </v-btn>
+
+        <v-dialog v-model="serviceCredentialsFormDialog" width="400">
+          <app-service-user-form
+            v-model:inserted-succesfully="insertedSuccesfully"
+            :accepted-ip="form.accepted_ip"
+            :device-token="form.device_token"
+            class-computed="ml-10 mr-10"
+            @on-delete-credentials="deleteServiceCredentials"
+            @click:submit="createServiceCredentials"
+            @click:cancel="closeServiceCredentialsFormDialog"
+          />
+        </v-dialog>
+
+        <slot name="form-actions" :serviceSubmit="createService">
+          <material-form-actions
+            :loading-buttons="loading"
+            :enable-cancel="true"
+            @on-submit="createService"
+            @on-cancel="closeClick"
+          />
+        </slot>
       </v-container>
     </v-form>
-  </material-card>
+  </material-form>
 </template>
 
 <script>
-import { isNumber, isLettersWithBlankSpaces } from "~/helpers/regex";
+import { isNumber, isSentence } from "~/helpers/regex";
+import axios from "axios";
+import { mapActions } from "vuex";
+import { api } from "~/config";
 
 export default {
   name: "ServiceForm",
+  props: {
+    codcli: {
+      type: [Number, String],
+      default: 0,
+    },
+    insertedSuccesfully: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: function () {
     return {
-      serviceName: "",
-      serviceCode: "",
-      serviceTypeTransformer: "",
-      serviceTypePay: "",
-      crf: "",
-      exclusive: false,
-      tarifType: "M1-A",
-      turn: 1,
-      hiredDemand: "",
-      meterNumber: "",
-      alimentation: "Simple",
-      metrage: "Alta",
-      capacity: "",
-      transformersAmount: 0,
+      loading: false,
+      form: {
+        name: "",
+        codcli: "",
+        serviceTypeTransformer: "",
+        serviceTypePay: "Pospago",
+        crf: "",
+        exclusivo: false,
+        tipo_tarifa: "M1A",
+        turnos: 1,
+        demanda: "",
+        meter_no: "",
+        alimentacion: "",
+        metraje: "",
+        capacidad: this.capacityComputed,
+        device_token: "",
+        accepted_ip: null,
+      },
+      serviceCredentialsFormDialog: false,
+      serviceId: null,
+      serviceUserForm: {
+        username: "",
+        name: "",
+        password: "",
+        password_confirmation: "",
+      },
+      serviceType: "Monofásico 110 V",
+      serviceTypes: [
+        "Monofásico 110 V",
+        "Monofásico 220 V",
+        "Trifásico 220 V",
+        "Trifásico 480 V",
+      ],
+      tarifTypes: ["A1", "B1", "M1A", "M1C", "M1D", "M3A", "M3B", "M4"],
+      transformerCapacitiesMonoPhase: {
+        type: "mono_phase",
+        ids: [],
+        capacities: [],
+      },
+      transformerCapacitiesThreePhase: {
+        type: "three_phase",
+        ids: [],
+        capacities: [],
+      },
+      transformers: [],
       serviceNameRules: [
         (v) => !!v || "El nombre del servicio falta",
-        (v) => isLettersWithBlankSpaces(v) || "Caracteres no permitidos",
+        (v) => isSentence(v) || "Caracteres no permitidos",
       ],
       serviceCodeRules: [(v) => !!v || "El codigo del servicio falta"],
       crfRules: [(v) => !!v || "El CRF falta"],
@@ -182,24 +245,239 @@ export default {
       ],
     };
   },
-  methods: {
-    validate: function () {
-      this.$refs.form.validate();
+  computed: {
+    metraje() {
+      return this.form.metraje;
+    },
+    disableCapacityInput() {
+      if (this.form.metraje === "Alta") {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    capacityComputed: {
+      get() {
+        let capacidad = 0;
+        if (this.transformers.length) {
+          for (const { capacity } of this.transformers) {
+            if (capacity !== "" && capacity) {
+              capacidad += capacity;
+            }
+          }
+          return capacidad;
+        } else {
+          return this.form.capacidad;
+        }
+      },
+      set(val) {
+        this.form.capacidad = val;
+      },
     },
   },
   watch: {
-    metrage: function (val) {
-      if (val === "Alta") {
-        this.transformersAmount = 0;
+    insertedSuccesfully(val) {
+      if (this.insertedSuccesfully) {
+        this.cleanForm();
+        this.cleanServiceCredentialsForm();
+        this.$emit("update:inserted-succesfully", false);
       }
     },
-    tarifType: function (val) {
-      if (val === "B1") {
-        this.exclusive = false;
-      } else if (val === "M1-A") {
-        this.exclusive = true;
+    codcli() {
+      this.fillForm();
+    },
+    metraje(val) {
+      if (val === "Alta") {
+        this.transformers = [];
       }
+    },
+  },
+  mounted() {
+    this.fillData();
+  },
+  methods: {
+    ...mapActions("service", ["setCredentialsFormData", "setHasSensitiveData"]),
+    cleanForm() {
+      this.form.name = "";
+      this.form.codcli = "";
+      this.form.serviceTypeTransformer = "";
+      this.form.serviceTypePay = "Pospago";
+      this.form.crf = "";
+      this.form.exclusivo = false;
+      this.form.tipo_tarifa = "";
+      this.form.turnos = 1;
+      this.form.demanda = "";
+      this.form.meter_no = "";
+      this.form.alimentacion = "";
+      this.form.metraje = "";
+      this.form.capacidad = "";
+      this.form.device_token = "";
+      this.form.accepted_ip = null;
+      this.$refs.form.resetValidation();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    cleanServiceCredentialsForm() {
+      this.serviceUserForm.name = "";
+      this.serviceUserForm.username = "";
+      this.serviceUserForm.password_confirmation = "";
+      this.serviceUserForm.password_confirmation = "";
+    },
+    async deleteServiceCredentials() {
+      if (this.serviceId) {
+        const url = `${api.path("service")}/${this.serviceId}/user`;
+
+        this.serviceId = null;
+        try {
+          await axios.delete(url);
+        } catch (error) {
+          return this.$emit("delete-unsuccesful");
+        }
+      } else {
+      }
+      this.$emit("delete-succesful");
+    },
+    createServiceCredentials(credentials) {
+      this.loading = true;
+      this.form.device_token = credentials.device_token;
+      this.form.accepted_ip = credentials.accepted_ip;
+      this.serviceUserForm.username = credentials.username;
+      this.serviceUserForm.name = credentials.username;
+      this.serviceUserForm.password = credentials.password;
+      this.serviceUserForm.password_confirmation =
+        credentials.password_confirmation;
+      this.loading = false;
+      this.serviceCredentialsFormDialog = false;
+    },
+    deleteTransformer(i) {
+      this.transformers.splice(i, 1);
+    },
+    closeServiceCredentialsFormDialog() {
+      this.serviceCredentialsFormDialog = false;
+    },
+    async fillData() {
+      await this.fillTransformersData();
+      if (this.codcli) {
+        await this.fillForm();
+      }
+    },
+
+    async fillForm() {
+      this.fetchService(this.codcli)
+        .then((res) => {
+          const transformers = res.data.transformers;
+          for (let i = 0; i < transformers.length; i++) {
+            this.transformers.push({
+              type: transformers[i].type,
+              capacity: transformers[i].capacity,
+            });
+          }
+          this.form = res.data;
+          this.setCredentialsFormData({
+            device_token: this.form.device_token,
+            accepted_ip: this.form.accepted_ip,
+            username: "",
+            password: "",
+            password_confirmation: "",
+          });
+          if (this.form.auth_id && this.codcli) {
+            this.serviceId = this.form.id;
+            this.setHasSensitiveData(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchService: function (id) {
+      const url = `${api.path("service")}/${id}`;
+      return axios.get(url);
+    },
+    transformerAmountMinusOne() {
+      if (this.transformers.length > 0) {
+        this.transformers.pop();
+      }
+    },
+    transformerAmountPlusOne() {
+      if (this.transformers.length < 3) {
+        this.transformers.push({ type: "mono_phase", capacity: "" });
+      }
+    },
+    validate: function () {
+      return this.$refs.form.validate();
+    },
+    createService: function () {
+      if (!this.validate()) {
+        return;
+      }
+      if (this.transformers.length > 0) {
+        this.form.transformers_ids = this.getTransformersId(this.transformers);
+      }
+
+      if (this.capacityComputed) {
+        this.form.capacidad = this.capacityComputed;
+      }
+
+      const serviceUserForm = this.serviceUserForm.username
+        ? this.serviceUserForm
+        : null;
+
+      this.$emit("service-submit", this.form, serviceUserForm);
+    },
+    closeClick() {
+      this.$emit("click:cancel");
+    },
+    getTransformersId(transformers) {
+      let tranformersIdsString = "";
+      for (let i = 0; i < transformers.length; i++) {
+        if (this.getTransformerId(transformers[i])) {
+          tranformersIdsString += this.getTransformerId(transformers[i]) + ",";
+        }
+      }
+      return tranformersIdsString.slice(0, -1);
+    },
+    getTransformerId(transformer) {
+      if (transformer.type === "mono") {
+        const index = this.transformerCapacitiesMonoPhase.capacities.indexOf(
+          transformer.capacity
+        );
+        return this.transformerCapacitiesMonoPhase.ids[index];
+      } else {
+        const index = this.transformerCapacitiesThreePhase.capacities.indexOf(
+          transformer.capacity
+        );
+        return this.transformerCapacitiesThreePhase.ids[index];
+      }
+    },
+    async fillTransformersData() {
+      axios
+        .get("/api/v1/transformer")
+        .then((res) => {
+          res.data.forEach((transformer) => {
+            if (transformer.type === "mono") {
+              this.transformerCapacitiesMonoPhase.ids.push(transformer.id);
+              this.transformerCapacitiesMonoPhase.capacities.push(
+                transformer.capacity
+              );
+            } else {
+              this.transformerCapacitiesThreePhase.ids.push(transformer.id);
+              this.transformerCapacitiesThreePhase.capacities.push(
+                transformer.capacity
+              );
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
 </script>
+
+<style scoped>
+.v-subheader {
+  height: inherit;
+}
+</style>
