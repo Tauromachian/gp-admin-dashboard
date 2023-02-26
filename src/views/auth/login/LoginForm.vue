@@ -1,10 +1,10 @@
 <template>
-  <v-form ref="form" @submit.prevent="submit" lazy-validation>
+  <v-form ref="form" @submit.prevent="submit">
     <v-text-field
       label="Nombre de usuario"
       v-model="form.username"
       type="email"
-      :rules="[rules.required]"
+      :rules="[rules.required()]"
       :disabled="loading"
       prepend-icon="mdi-account"
       @input="clearErrors('username')"
@@ -17,7 +17,7 @@
       @click:append="() => (passwordHidden = !passwordHidden)"
       :type="passwordHidden ? 'password' : 'text'"
       :disabled="loading"
-      :rules="[rules.password]"
+      :rules="[rules.password()]"
       prepend-icon="mdi-lock"
       @input="clearErrors('password')"
     ></v-text-field>
