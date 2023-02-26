@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 export const useAppStore = defineStore("app", {
   state: () => ({
+    notifications: [],
     drawer: window.localStorage.getItem("drawer"),
     color: window.localStorage.getItem("color")
       ? window.localStorage.getItem("color")
@@ -13,6 +14,7 @@ export const useAppStore = defineStore("app", {
   }),
 
   actions: {
+    addNotification: (notification) => this.notifications.push(notification),
     setDrawer: (drawer) => (this.drawer = drawer),
     setColor: (color) => (this.color = color),
     toggleDrawer: () => (this.drawer = !this.drawer),
