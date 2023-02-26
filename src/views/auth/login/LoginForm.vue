@@ -50,13 +50,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import { api } from "~/config";
-import Form from "~/mixins/form";
+import { login } from "@/services/auth";
 
 export default {
-  mixins: [Form],
-
   data: () => ({
     loading: false,
     passwordHidden: true,
@@ -74,21 +70,19 @@ export default {
   },
 
   methods: {
-    submit() {
-      const self = this;
-      if (this.$refs.form.validate()) {
-        self.loading = true;
+    async submit() {
+      if (!this.$$refs.form.validate()) return;
 
-        axios
-          .post(api.path("login"), this.form)
-          .then((res) => {
-            this.$emit("success", res.data, self.remember);
-            self.loading = false;
-          })
-          .catch((err) => {
-            this.handleErrors(err.response.data.errors);
-          });
+      this.loading = true;
+
+      try {
+        await login(this.form);
+        this.$emit("success", res.data, this.remember);
+      } catch (error) {
+        this.handleErrors(err.response.data.errors);
       }
+
+      this.loading = false;
     },
   },
 };
