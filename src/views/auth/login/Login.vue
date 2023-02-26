@@ -3,7 +3,7 @@
     <v-container fluid fill-height justify-center align-center>
       <transition name="fade" mode="out-in">
         <v-col sm8 md6 lg4>
-          <v-card>
+          <v-card class="login-form">
             <v-toolbar dark color="primary" flat>
               <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
             </v-toolbar>
@@ -38,3 +38,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.login-form {
+  max-width: 600px;
+  margin: auto;
+}
+</style>
