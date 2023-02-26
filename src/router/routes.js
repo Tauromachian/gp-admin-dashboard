@@ -1,119 +1,111 @@
-function layout(path) {
-  return () => import(`@/layouts/${path}`);
-}
-
-function page(path) {
-  return () => import(`@/views/${path}`);
-}
-
 export default [
   {
     path: "/",
     redirect: { name: "institutions" },
-    component: layout("default"),
+    component: () => import("@/views/default"),
     children: [
       {
         path: "institutions",
         name: "institutions",
-        component: page("app/Institution"),
+        component: () => import("@/views/app/Institution"),
       },
       {
         path: "/institution/:id",
-        component: layout("institutionContent"),
+        component: () => import("@/views/institutionContent"),
         children: [
           {
             path: "services",
             name: "services",
-            component: page("app/Service"),
+            component: () => import("@/views/app/Service"),
           },
 
           {
             path: "service/:idService",
             name: "services",
-            component: layout("serviceContent"),
+            component: () => import("@/views/serviceContent"),
 
             children: [
               {
                 path: "one-read",
                 name: "oneRead",
-                component: page("app/OneRead"),
+                component: () => import("@/views/app/OneRead"),
               },
             ],
           },
           {
             path: "read",
             name: "read",
-            component: page("app/Read"),
+            component: () => import("@/views/app/Read"),
           },
 
           {
             path: "/plan-form",
             name: "plans",
-            component: page("app/Plan"),
+            component: () => import("@/views/app/Plan"),
           },
 
           {
             path: "/user-profile",
             name: "User Profile",
-            component: page("app/UserProfile"),
+            component: () => import("@/views/app/UserProfile"),
           },
 
           {
             path: "/user-management",
             name: "user-management",
-            component: page("app/UserManagement"),
+            component: () => import("@/views/app/UserManagement"),
           },
 
           {
             path: "/monitorization",
             name: "monitoring",
-            component: page("app/Monitorization"),
+            component: () => import("@/views/app/Monitorization"),
           },
 
           {
             path: "/docs",
             name: "docs",
-            component: page("app/Docs"),
+            component: () => import("@/views/app/Docs"),
           },
 
           {
             path: "/consumption",
             name: "consumption",
-            component: page("app/Consumption"),
+            component: () => import("@/views/app/Consumption"),
           },
 
           {
             path: "/closure",
             name: "closure",
-            component: page("app/Closure"),
+            component: () => import("@/views/app/Closure"),
           },
 
           {
             path: "/table-list",
             name: "Table List",
-            component: page("app/TableList"),
+            component: () => import("@/views/app/TableList"),
           },
 
           {
             path: "/typography",
-            component: page("app/Typography"),
+            component: () => import("@/views/app/Typography"),
           },
 
           {
             path: "/icons",
-            component: page("app/Icons"),
+            component: () => import("@/views/app/Icons"),
           },
 
           {
             path: "/notifications",
             name: "notifications",
-            component: page("app/Notifications"),
+            component: () => import("@/views/app/Notifications"),
           },
 
           {
             path: "documents",
             name: "documents",
-            component: page("app/Documents"),
+            component: () => import("@/views/app/Documents"),
           },
         ],
       },
@@ -151,5 +143,5 @@ export default [
     ],
   },
 
-  { path: "/:catchAll(.*)", component: page("errors/404") },
+  { path: "/:catchAll(.*)", component: () => import("@/views/errors/404") },
 ];
