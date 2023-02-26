@@ -1,5 +1,5 @@
 <template>
-  <material-card
+  <v-card
     color="primary"
     title="Formulario de usuarios"
     text="Inserta un nuevo usuario"
@@ -59,7 +59,7 @@
         </v-layout>
       </v-container>
     </v-form>
-  </material-card>
+  </v-card>
 </template>
 
 <script>

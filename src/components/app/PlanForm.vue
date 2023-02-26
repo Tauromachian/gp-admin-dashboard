@@ -1,9 +1,5 @@
 <template>
-  <material-card
-    color="primary"
-    title="Plan anual"
-    text="Inserta un nuevo plan"
-  >
+  <v-card color="primary" title="Plan anual" text="Inserta un nuevo plan">
     <v-form ref="form">
       <v-container py-0>
         <v-layout wrap>
@@ -65,7 +61,7 @@
         </v-layout>
       </v-container>
     </v-form>
-  </material-card>
+  </v-card>
 </template>
 
 <script>

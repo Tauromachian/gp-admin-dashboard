@@ -2,7 +2,7 @@
   <v-container fluid grid-list-xl fill-height>
     <v-layout>
       <v-col xs12>
-        <material-card color="green">
+        <v-card color="green">
           <template #header>
             <div>
               <div class="title font-weight-light mb-2">Notifications</div>
@@ -145,7 +145,7 @@
               </v-icon>
             </v-snackbar>
           </v-card-text>
-        </material-card>
+        </v-card>
       </v-col>
     </v-layout>
   </v-container>
