@@ -34,13 +34,7 @@
         ¿Olvidó la Contraseña?
       </v-btn>
 
-      <v-btn
-        type="submit"
-        :loading="loading"
-        :disabled="loading || !valid"
-        color="primary"
-        class="ml-4"
-      >
+      <v-btn type="submit" :loading="loading" color="primary" class="ml-4">
         Login
       </v-btn>
     </v-layout>
@@ -75,7 +69,7 @@ export default {
 
   methods: {
     async submit() {
-      if (!this.$$refs.form.validate()) return;
+      if (!this.$refs.form.validate()) return;
 
       this.loading = true;
 
