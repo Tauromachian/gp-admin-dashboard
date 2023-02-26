@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-container fluid fill-height justify-center align-center>
       <transition name="fade" mode="out-in">
         <v-col sm8 md6 lg4>
@@ -14,7 +14,7 @@
         </v-col>
       </transition>
     </v-container>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
