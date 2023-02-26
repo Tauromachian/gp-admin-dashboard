@@ -11,7 +11,7 @@ export default [
       },
       {
         path: "/institution/:id",
-        component: () => import("@/views/institutionContent"),
+        component: () => import("@/views/InstitutionContent"),
         children: [
           {
             path: "services",
@@ -39,65 +39,65 @@ export default [
           },
 
           {
-            path: "/plan-form",
+            path: "plan-form",
             name: "plans",
             component: () => import("@/views/app/Plan"),
           },
 
           {
-            path: "/user-profile",
+            path: "user-profile",
             name: "User Profile",
             component: () => import("@/views/app/UserProfile"),
           },
 
           {
-            path: "/user-management",
+            path: "user-management",
             name: "user-management",
             component: () => import("@/views/app/UserManagement"),
           },
 
           {
-            path: "/monitorization",
+            path: "monitorization",
             name: "monitoring",
             component: () => import("@/views/app/Monitorization"),
           },
 
           {
-            path: "/docs",
+            path: "docs",
             name: "docs",
             component: () => import("@/views/app/Docs"),
           },
 
           {
-            path: "/consumption",
+            path: "consumption",
             name: "consumption",
             component: () => import("@/views/app/Consumption"),
           },
 
           {
-            path: "/closure",
+            path: "closure",
             name: "closure",
             component: () => import("@/views/app/Closure"),
           },
 
           {
-            path: "/table-list",
+            path: "table-list",
             name: "Table List",
             component: () => import("@/views/app/TableList"),
           },
 
           {
-            path: "/typography",
+            path: "typography",
             component: () => import("@/views/app/Typography"),
           },
 
           {
-            path: "/icons",
+            path: "icons",
             component: () => import("@/views/app/Icons"),
           },
 
           {
-            path: "/notifications",
+            path: "notifications",
             name: "notifications",
             component: () => import("@/views/app/Notifications"),
           },
