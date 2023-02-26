@@ -1,19 +1,19 @@
 <template>
   <v-main>
-    <div id="core-view">
-      <v-fade-transition mode="out-in">
-        <router-view />
-      </v-fade-transition>
-    </div>
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </v-main>
 </template>
 
 <script>
 export default {
-  metaInfo () {
+  metaInfo() {
     return {
-      title: 'Departamento de Energía, UCLV'
-    }
-  }
-}
+      title: "Departamento de Energía, UCLV",
+    };
+  },
+};
 </script>

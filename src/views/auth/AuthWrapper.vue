@@ -1,8 +1,10 @@
 <template>
   <v-container fluid fill-height justify-center align-center>
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
   </v-container>
 </template>
 
