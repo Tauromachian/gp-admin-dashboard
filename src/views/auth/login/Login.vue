@@ -2,7 +2,7 @@
   <v-content>
     <v-container fluid fill-height justify-center align-center>
       <transition name="fade" mode="out-in">
-        <v-flex sm8 md6 lg4>
+        <v-col sm8 md6 lg4>
           <v-card>
             <v-toolbar dark color="primary" flat>
               <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
@@ -11,7 +11,7 @@
               <login-form @success="success"></login-form>
             </v-card-text>
           </v-card>
-        </v-flex>
+        </v-col>
       </transition>
     </v-container>
   </v-content>
