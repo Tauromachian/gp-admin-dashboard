@@ -1,19 +1,29 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import { api } from "~/config";
-import * as types from "../mutation-types";
-
-// Utilities
 import { defineStore } from "pinia";
+
+import { login } from "@/services/auth";
+import { useNotificationsStore } from "./notifications";
+
+const notificationsStore = useNotificationsStore();
 
 export const useAuthStore = defineStore("app", {
   state: () => ({
     user: null,
-    token: Cookies.get("token"),
+    token: "",
   }),
 
   actions: {
     async setUser() {},
+    async login(form) {
+      try {
+        const { data } = await login(form);
+        this.token = data.token;
+      } catch (error) {
+        notificationsStore.addNotification({
+          message: error.response.data.message,
+          color: "error",
+        });
+      }
+    },
     async logout() {},
   },
 });
