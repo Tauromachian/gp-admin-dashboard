@@ -7,7 +7,6 @@
       :rules="[rules.required()]"
       :disabled="loading"
       prepend-icon="mdi-account"
-      @input="clearErrors('username')"
     ></v-text-field>
 
     <v-text-field
@@ -19,7 +18,6 @@
       :disabled="loading"
       :rules="[rules.password()]"
       prepend-icon="mdi-lock"
-      @input="clearErrors('password')"
     ></v-text-field>
 
     <v-layout class="mt-4 mx-0">
