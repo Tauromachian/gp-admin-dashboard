@@ -69,7 +69,7 @@ export default {
 
   methods: {
     async submit() {
-      if (!this.$refs.form.validate()) return;
+      if (!(await this.$refs.form.validate().valid)) return;
 
       this.loading = true;
 
