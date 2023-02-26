@@ -11,6 +11,7 @@ export function makeServer({ environment = "development" } = {}) {
       server.createList("institution", 5);
     },
     routes() {
+      this.post("/auth/login", () => {});
       this.get("/institutions", (schema) => {
         const { models } = schema.institutions.all();
         const institutions = models.map((model) => {

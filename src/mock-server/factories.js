@@ -1,6 +1,17 @@
 import { Factory } from "miragejs";
 
 export default factories = {
+  user: Factory.extend({
+    username(i) {
+      return `User ${i + 1}`;
+    },
+    email(i) {
+      return `Email ${i + 1}`;
+    },
+    password(i) {
+      return `Password ${i + 1}`;
+    },
+  }),
   institution: Factory.extend({
     name(i) {
       return `Institution ${i + 1}`;
