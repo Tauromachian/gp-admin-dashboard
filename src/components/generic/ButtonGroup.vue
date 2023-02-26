@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <label>{{ label }}</label>
-    <v-btn-toggle group mandatory v-model="selection" color="primary">
-      <slot></slot>
+  <div class="mt-1">
+    <v-subheader v-if="label" class="pl-0 pr-0 height-24">
+      {{ label }}
+    </v-subheader>
+    <v-btn-toggle v-model="selection" group mandatory color="primary">
+      <slot />
     </v-btn-toggle>
   </div>
 </template>
@@ -11,8 +13,8 @@
 export default {
   name: "ButtonGroup",
   props: {
-    value: String,
-    label: String
+    value: { type: String, default: "" },
+    label: { type: String, default: "" },
   },
   computed: {
     selection: {
@@ -21,8 +23,14 @@ export default {
       },
       set(selection) {
         this.$emit("input", selection);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
+
+<style scoped>
+.height-24 {
+  height: 24px;
+}
+</style>

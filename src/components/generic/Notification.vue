@@ -1,34 +1,36 @@
 <template>
-  <v-alert
-    v-bind="$attrs"
-    :class="[`elevation-${elevation}`]"
-    :value="value"
-    class="v-alert--notification"
-  >
-    <slot />
-  </v-alert>
+  <v-snackbar v-model="snackbar" :color="color" right>
+    {{ text }}
+    <v-icon size="16" @click="snackbar = false"> mdi-close-circle </v-icon>
+  </v-snackbar>
 </template>
 
 <script>
 export default {
-  inheritAttrs: false,
-
+  name: "Notification",
   props: {
-    elevation: {
-      type: [Number, String],
-      default: 6,
-    },
     value: {
       type: Boolean,
-      default: true,
+      default: false,
+    },
+    color: {
+      type: String,
+      default: "primary",
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    snackbar: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
     },
   },
 };
 </script>
-
-<style>
-.v-alert--notification {
-  border-radius: 4px !important;
-  border-top: none !important;
-}
-</style>
