@@ -13,7 +13,7 @@
       &copy;
       {{ (new Date()).getFullYear() }}
       Hecho con
-      <v-icon color="success" size="17">mdi-heart</v-icon>para un planeta verde
+      <v-icon color="success" size="17">mdi-heart</v-icon> para un planeta verde
     </span>
   </v-footer>
 </template>

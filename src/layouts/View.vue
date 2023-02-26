@@ -5,22 +5,15 @@
         <router-view />
       </v-fade-transition>
     </div>
-    <core-footer v-if="$route.name !== 'Maps'" />
   </v-main>
 </template>
 
 <script>
 export default {
-  metaInfo() {
+  metaInfo () {
     return {
-      title: "Departamento de Energía, UCLV",
-    };
-  },
-};
-</script>
-
-<style>
-#core-view {
-  padding-bottom: 100px;
+      title: 'Departamento de Energía, UCLV'
+    }
+  }
 }
-</style>
+</script>
