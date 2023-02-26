@@ -9,9 +9,7 @@
       >
         <template #activator="{ on }">
           <v-btn color="primary" v-on="on">
-            <v-icon dark>
-              mdi-eye
-            </v-icon>
+            <v-icon dark> mdi-eye </v-icon>
           </v-btn>
         </template>
 
@@ -24,20 +22,18 @@
           <v-card-actions>
             <v-spacer />
             <v-btn color="primary" text @click="columnSelectListDialog = false">
-              {{ $t('button.actions.accept') }}
+              {{ $t("button.actions.accept") }}
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
       <v-btn v-if="!disableEdit" color="primary" @click="onOpenUpdateDialog">
-        <v-icon dark>
-          mdi-pencil
-        </v-icon>
+        <v-icon dark> mdi-pencil </v-icon>
       </v-btn>
 
       <material-delete-confirmation-dialog
         v-if="!disableDelete"
-        :delete-dialog-button.sync="deleteDialogButtonComputed"
+        v-model:delete-dialog-button="deleteDialogButtonComputed"
         @on-delete-button-clicked="deleteButtonClicked"
         @delete="deleteRow"
       />
@@ -61,7 +57,7 @@
 
 <script>
 export default {
-  name: 'Toolbar',
+  name: "Toolbar",
   props: {
     disableHideColumnsDialog: { type: Boolean, default: false },
     columnDefs: { type: Array, required: true },
@@ -71,62 +67,62 @@ export default {
     deleteDialogButton: { type: Boolean, default: false },
     disableEdit: { type: Boolean, default: false },
     disableDelete: { type: Boolean, default: false },
-    disableDetails: { type: Boolean, default: false }
+    disableDetails: { type: Boolean, default: false },
   },
-  data () {
+  data() {
     return {
       columnSelectListDialog: false,
       formDialog: false,
-      pageAmounts: [10, 50, 100]
-    }
+      pageAmounts: [10, 50, 100],
+    };
   },
 
   computed: {
     deleteDialogButtonComputed: {
-      get () {
-        return this.deleteDialogButton
+      get() {
+        return this.deleteDialogButton;
       },
-      set (val) {
-        this.$emit('update:delete-dialog-button', val)
-      }
+      set(val) {
+        this.$emit("update:delete-dialog-button", val);
+      },
     },
     denseComputed: {
-      get () {
-        return this.dense
+      get() {
+        return this.dense;
       },
-      set (val) {
-        this.$emit('update:dense', val)
-      }
+      set(val) {
+        this.$emit("update:dense", val);
+      },
     },
     visibleColumnsComputed: {
-      get () {
-        return this.visibleColumns
+      get() {
+        return this.visibleColumns;
       },
-      set (val) {
-        this.$emit('update:visibleColumns', val)
-      }
-    }
+      set(val) {
+        this.$emit("update:visibleColumns", val);
+      },
+    },
   },
 
   methods: {
-    deleteButtonClicked () {
-      this.$emit('on-delete-button-clicked')
+    deleteButtonClicked() {
+      this.$emit("on-delete-button-clicked");
     },
-    deleteRow () {
-      this.$emit('delete-row')
+    deleteRow() {
+      this.$emit("delete-row");
     },
-    updateService () {
-      this.$emit('update:service')
+    updateService() {
+      this.$emit("update:service");
     },
-    closeUpdateDialog () {
-      this.formDialog = false
+    closeUpdateDialog() {
+      this.formDialog = false;
     },
-    openUpdateDialog () {
-      this.formDialog = true
+    openUpdateDialog() {
+      this.formDialog = true;
     },
-    onOpenUpdateDialog () {
-      this.$emit('on-open-update-dialog', this.openUpdateDialog)
-    }
-  }
-}
+    onOpenUpdateDialog() {
+      this.$emit("on-open-update-dialog", this.openUpdateDialog);
+    },
+  },
+};
 </script>

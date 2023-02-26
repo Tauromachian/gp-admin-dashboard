@@ -61,7 +61,7 @@
       <v-col sm="4" md="4" cols="12">
         <material-details-sidebar
           :allow-dialog="isScreenSmall"
-          :dialog.sync="institutionDetailsDialog"
+          v-model:dialog="institutionDetailsDialog"
           toolbar-title="Institution details"
         >
           <app-institution-details
@@ -73,218 +73,218 @@
       </v-col>
     </v-row>
     <material-filter left>
-      <app-institution-filter :name.sync="institutionName" />
+      <app-institution-filter v-model:name="institutionName" />
     </material-filter>
   </v-container>
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions, mapState, mapGetters } from 'vuex'
-import debounce from '~/helpers/debouncer'
+import axios from "axios";
+import { mapActions, mapState, mapGetters } from "vuex";
+import debounce from "~/helpers/debouncer";
 
 export default {
-  name: 'Institution',
-  middleware: 'auth',
+  name: "Institution",
+  middleware: "auth",
   data: function () {
     return {
-      selectedInstitutionId: '',
-      institutionToUpdateId: '',
+      selectedInstitutionId: "",
+      institutionToUpdateId: "",
       institutionToUpdate: {},
       institutionFormDialog: false,
       institutionDetailsDialog: false,
       isUpdating: false,
       loading: false,
-      institutionName: '',
-      timer: null
-    }
+      institutionName: "",
+      timer: null,
+    };
   },
   computed: {
-    ...mapState('institution', ['institutions', 'institutionForm']),
-    ...mapState('app', ['notification', 'isScreenSmall']),
-    ...mapGetters('institution', ['institutionsById']),
+    ...mapState("institution", ["institutions", "institutionForm"]),
+    ...mapState("app", ["notification", "isScreenSmall"]),
+    ...mapGetters("institution", ["institutionsById"]),
     institutionFormComputed: {
-      get () {
-        return this.institutionForm
+      get() {
+        return this.institutionForm;
       },
-      set (form) {
-        this.setFormData(form)
-      }
-    }
+      set(form) {
+        this.setFormData(form);
+      },
+    },
   },
   watch: {
-    institutionName (val) {
+    institutionName(val) {
       debounce(() => {
-        this.loadData(val)
-      })
-    }
+        this.loadData(val);
+      });
+    },
   },
-  mounted () {
-    this.loadData()
+  mounted() {
+    this.loadData();
   },
   methods: {
-    ...mapActions('institution', [
-      'setInstitutions',
-      'deleteInstitution',
-      'addInstitution',
-      'updateInstitution',
-      'setFormData',
-      'clearFormData'
+    ...mapActions("institution", [
+      "setInstitutions",
+      "deleteInstitution",
+      "addInstitution",
+      "updateInstitution",
+      "setFormData",
+      "clearFormData",
     ]),
-    ...mapActions('app', ['addNotification', 'setDrawerSubtitle']),
+    ...mapActions("app", ["addNotification", "setDrawerSubtitle"]),
 
-    showInstitutionDetails (institutionId) {
-      this.selectedInstitutionId = institutionId
+    showInstitutionDetails(institutionId) {
+      this.selectedInstitutionId = institutionId;
       if (this.isScreenSmall) {
-        this.institutionDetailsDialog = true
+        this.institutionDetailsDialog = true;
       }
     },
-    submitInstitution () {
+    submitInstitution() {
       if (this.isUpdating) {
-        this.patchInstitution()
-        this.isUpdating = false
+        this.patchInstitution();
+        this.isUpdating = false;
       } else {
-        this.createInstitution()
+        this.createInstitution();
       }
     },
-    openInsertForm () {
-      this.clearFormData()
-      this.isUpdating = false
+    openInsertForm() {
+      this.clearFormData();
+      this.isUpdating = false;
       if (this.$refs.institutionForm) {
-        this.$refs.institutionForm.resetValidation()
+        this.$refs.institutionForm.resetValidation();
       }
-      this.institutionFormDialog = true
+      this.institutionFormDialog = true;
     },
-    goToServices (id, name) {
-      this.setDrawerSubtitle(name)
-      this.$router.push({ name: 'services', params: { id } })
+    goToServices(id, name) {
+      this.setDrawerSubtitle(name);
+      this.$router.push({ name: "services", params: { id } });
     },
-    async loadData (val = '') {
+    async loadData(val = "") {
       if (val) {
-        const data = await this.getInstitutions(val)
-        this.setInstitutions(data)
+        const data = await this.getInstitutions(val);
+        this.setInstitutions(data);
       } else {
-        const data = await this.getInstitutions()
-        this.setInstitutions(data)
+        const data = await this.getInstitutions();
+        this.setInstitutions(data);
       }
-      this.selectedInstitutionId = this.institutions[0].id
+      this.selectedInstitutionId = this.institutions[0].id;
     },
-    async getInstitutions (filter) {
-      let url = this.$urlBuilder.getRoute('institution')
+    async getInstitutions(filter) {
+      let url = this.$urlBuilder.getRoute("institution");
       if (filter) {
-        url += `?q=name:${filter}`
+        url += `?q=name:${filter}`;
       }
-      let data
+      let data;
       try {
-        const response = await axios.get(url)
-        data = response.data
+        const response = await axios.get(url);
+        data = response.data;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-      return data
+      return data;
     },
-    openUpdateForm (id) {
-      this.loadDataForUpdate(id)
-      this.institutionFormDialog = true
-      this.isUpdating = true
+    openUpdateForm(id) {
+      this.loadDataForUpdate(id);
+      this.institutionFormDialog = true;
+      this.isUpdating = true;
     },
-    loadDataForUpdate (id) {
-      this.institutionToUpdateId = id
+    loadDataForUpdate(id) {
+      this.institutionToUpdateId = id;
       this.institutionFormComputed = Object.assign(
         {},
         this.institutionsById.get(id)[0]
-      )
+      );
     },
-    fillAndPatch () {
-      this.loadDataForUpdate(this.selectedInstitutionId)
-      this.patchInstitution()
+    fillAndPatch() {
+      this.loadDataForUpdate(this.selectedInstitutionId);
+      this.patchInstitution();
     },
     // axios call methods
-    async patchInstitution () {
-      const url = `/api/v1/institution/${this.institutionToUpdateId}`
-      this.loading = true
-      let notification
-      let data
+    async patchInstitution() {
+      const url = `/api/v1/institution/${this.institutionToUpdateId}`;
+      this.loading = true;
+      let notification;
+      let data;
       try {
-        const response = await axios.patch(url, this.institutionFormComputed)
-        data = response.data
+        const response = await axios.patch(url, this.institutionFormComputed);
+        data = response.data;
       } catch (err) {
         notification = {
-          message: this.$t('notifications.unsuccesfull_update'),
-          color: 'error'
-        }
-        this.addNotification(notification)
-        this.loading = false
-        console.log(err)
-        return
+          message: this.$t("notifications.unsuccesfull_update"),
+          color: "error",
+        };
+        this.addNotification(notification);
+        this.loading = false;
+        console.log(err);
+        return;
       }
       notification = {
-        message: this.$t('notifications.succesfull_update'),
-        color: 'success'
-      }
-      this.addNotification(notification)
+        message: this.$t("notifications.succesfull_update"),
+        color: "success",
+      };
+      this.addNotification(notification);
       this.updateInstitution({
         institutionId: this.institutionToUpdateId,
-        institution: data
-      })
-      this.loading = false
-      this.institutionFormDialog = false
+        institution: data,
+      });
+      this.loading = false;
+      this.institutionFormDialog = false;
     },
 
-    async createInstitution (form) {
+    async createInstitution(form) {
       if (!this.$refs.institutionForm.validate()) {
-        return
+        return;
       }
 
-      const url = '/api/v1/institution'
-      this.loading = true
-      let data
-      let notification
+      const url = "/api/v1/institution";
+      this.loading = true;
+      let data;
+      let notification;
 
       try {
-        const response = await axios.post(url, this.institutionFormComputed)
-        data = response.data
+        const response = await axios.post(url, this.institutionFormComputed);
+        data = response.data;
       } catch (err) {
         notification = {
-          message: this.$t('notifications.unsuccesfull_insert'),
-          color: 'error'
-        }
-        this.addNotification(notification)
-        this.loading = false
-        console.log(err)
-        return
+          message: this.$t("notifications.unsuccesfull_insert"),
+          color: "error",
+        };
+        this.addNotification(notification);
+        this.loading = false;
+        console.log(err);
+        return;
       }
       notification = {
-        message: this.$t('notifications.succesfull_insert'),
-        color: 'success'
-      }
-      this.addNotification(notification)
-      this.addInstitution(data)
-      this.loading = false
-      this.institutionFormDialog = false
+        message: this.$t("notifications.succesfull_insert"),
+        color: "success",
+      };
+      this.addNotification(notification);
+      this.addInstitution(data);
+      this.loading = false;
+      this.institutionFormDialog = false;
     },
 
-    async removeInstitution (id) {
-      const url = `/api/v1/institution/${id}`
-      let notification
+    async removeInstitution(id) {
+      const url = `/api/v1/institution/${id}`;
+      let notification;
       try {
-        await axios.delete(url)
+        await axios.delete(url);
       } catch (err) {
-        console.error(err)
+        console.error(err);
         notification = {
-          message: this.$t('notifications.error_at_delete'),
-          color: 'success'
-        }
-        this.addNotification(notification)
-        console.error(err)
+          message: this.$t("notifications.error_at_delete"),
+          color: "success",
+        };
+        this.addNotification(notification);
+        console.error(err);
       }
-      this.deleteInstitution(id)
+      this.deleteInstitution(id);
       notification = {
-        message: this.$t('notifications.successful_delete'),
-        color: 'success'
-      }
-      this.addNotification(notification)
-    }
-  }
-}
+        message: this.$t("notifications.successful_delete"),
+        color: "success",
+      };
+      this.addNotification(notification);
+    },
+  },
+};
 </script>

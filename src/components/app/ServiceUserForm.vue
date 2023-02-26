@@ -6,7 +6,7 @@
         <material-delete-confirmation-dialog
           :text="$t('services.fields.delete_credentials_button')"
           color="danger"
-          :delete-dialog-button.sync="deleteCredentialsDialog"
+          v-model:delete-dialog-button="deleteCredentialsDialog"
           @on-delete-button-clicked="
             deleteCredentialsDialog = !deleteCredentialsDialog
           "
@@ -29,41 +29,41 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: 'ServiceUserForm',
-  data () {
+  name: "ServiceUserForm",
+  data() {
     return {
       form: {},
       deleteCredentialsDialog: false,
-      loading: false
-    }
+      loading: false,
+    };
   },
   computed: {
-    ...mapState('service', ['hasSensitiveData'])
+    ...mapState("service", ["hasSensitiveData"]),
   },
   methods: {
-    ...mapActions('service', ['setHasSensitiveData']),
-    updateForm (form) {
-      this.form = form
+    ...mapActions("service", ["setHasSensitiveData"]),
+    updateForm(form) {
+      this.form = form;
     },
-    createServiceCredentials (v) {
+    createServiceCredentials(v) {
       if (!this.validate()) {
-        return
+        return;
       }
-      this.$emit('click:submit', this.form)
+      this.$emit("click:submit", this.form);
     },
-    closeClick () {
-      this.$emit('click:cancel')
+    closeClick() {
+      this.$emit("click:cancel");
     },
     validate: function () {
-      return this.$refs.form.validate()
+      return this.$refs.form.validate();
     },
-    deleteServiceCredentials () {
-      this.setHasSensitiveData(false)
-      this.$emit('on-delete-credentials')
-    }
-  }
-}
+    deleteServiceCredentials() {
+      this.setHasSensitiveData(false);
+      this.$emit("on-delete-credentials");
+    },
+  },
+};
 </script>

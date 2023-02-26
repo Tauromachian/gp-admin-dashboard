@@ -4,7 +4,7 @@
     v-model="startMenu"
     :close-on-content-click="false"
     :nudge-right="40"
-    :return-value.sync="monthAndYear"
+    v-model:return-value="monthAndYear"
     transition="scale-transition"
     min-width="290px"
     offset-y
@@ -23,25 +23,10 @@
         v-on="on"
       />
     </template>
-    <v-date-picker
-      v-model="monthAndYear"
-      no-title
-      scrollable
-      type="month"
-    >
+    <v-date-picker v-model="monthAndYear" no-title scrollable type="month">
       <v-spacer />
-      <v-btn
-        text
-        color="primary"
-        @click="startMenu = false"
-      >
-        Cancel
-      </v-btn>
-      <v-btn
-        text
-        color="primary"
-        @click="$refs.startMenu.save(monthAndYear)"
-      >
+      <v-btn text color="primary" @click="startMenu = false"> Cancel </v-btn>
+      <v-btn text color="primary" @click="$refs.startMenu.save(monthAndYear)">
         OK
       </v-btn>
     </v-date-picker>
@@ -50,27 +35,27 @@
 
 <script>
 export default {
-  name: 'MonthAndYearPicker',
+  name: "MonthAndYearPicker",
   props: {
     value: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      startMenu: false
-    }
+      startMenu: false,
+    };
   },
   computed: {
     monthAndYear: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  }
-}
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
+};
 </script>

@@ -36,7 +36,7 @@
             <material-details-sidebar
               class="mt-2"
               :allow-dialog="isScreenSmall"
-              :dialog.sync="serviceDetailsDialog"
+              v-model:dialog="serviceDetailsDialog"
             >
               <app-service-details :service="selectedService" elevation="0" />
             </material-details-sidebar>
@@ -55,13 +55,7 @@
     </v-row>
 
     <!-- Service view actions   -->
-    <v-speed-dial
-      v-model="fab"
-      fixed
-      bottom
-      right
-      direction="top"
-    >
+    <v-speed-dial v-model="fab" fixed bottom right direction="top">
       <template #activator>
         <v-btn
           v-model="fab"
@@ -70,12 +64,8 @@
           class="mb-9 z-index-100 perfectly-round-button"
           fab
         >
-          <v-icon v-if="fab">
-            mdi-close
-          </v-icon>
-          <v-icon v-else>
-            mdi-hand
-          </v-icon>
+          <v-icon v-if="fab"> mdi-close </v-icon>
+          <v-icon v-else> mdi-hand </v-icon>
         </v-btn>
       </template>
       <!-- Insert button -->
@@ -105,7 +95,7 @@
         </template>
         <v-card>
           <v-card-title>
-            {{ $t('options') }}
+            {{ $t("options") }}
           </v-card-title>
           <v-card-text>
             <div class="d-flex">
@@ -144,7 +134,7 @@
     <v-dialog v-model="formDialog" width="400">
       <app-service-form
         ref="form"
-        :inserted-succesfully.sync="insertedSuccesfully"
+        v-model:inserted-succesfully="insertedSuccesfully"
         :codcli="codcli"
         @service-submit="submitService"
         @delete-succesful="deleteSuccesful"
@@ -156,21 +146,21 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import axios from "axios";
+import { mapState, mapActions, mapGetters } from "vuex";
 
-import { api } from '~/config'
+import { api } from "~/config";
 
-import debounce from '~/helpers/debouncer'
+import debounce from "~/helpers/debouncer";
 
 export default {
-  name: 'Service',
-  middleware: 'auth',
+  name: "Service",
+  middleware: "auth",
 
-  data () {
+  data() {
     return {
       fab: false,
-      serviceName: '',
+      serviceName: "",
       isTableActive: false,
       loading: false,
       formDialog: false,
@@ -178,254 +168,256 @@ export default {
       isFormUpdating: false,
       codcli: {},
       selectedService: {},
-      serviceDetailsDialog: false
-    }
+      serviceDetailsDialog: false,
+    };
   },
 
-  metaInfo () {
-    return { title: this.$t('route.' + this.$route.name) }
+  metaInfo() {
+    return { title: this.$t("route." + this.$route.name) };
   },
 
   computed: {
-    ...mapGetters('service', { services: 'tableData' }),
-    ...mapState('app', ['notification', 'isScreenSmall'])
+    ...mapGetters("service", { services: "tableData" }),
+    ...mapState("app", ["notification", "isScreenSmall"]),
   },
 
   watch: {
-    serviceName (val) {
+    serviceName(val) {
       debounce(() => {
-        console.log('lol')
-        console.log(this.loadData)
-        this.loadData(val)
-      })
-    }
+        console.log("lol");
+        console.log(this.loadData);
+        this.loadData(val);
+      });
+    },
   },
 
-  mounted () {
-    this.loadData()
+  mounted() {
+    this.loadData();
   },
 
   methods: {
-    ...mapActions('service', {
-      setServices: 'setServices',
-      removeServiceFromStore: 'deleteService',
-      addServiceToStore: 'addService',
-      editServiceInStore: 'editService',
-      clearCredentialsFormData: 'clearCredentialsFormData'
+    ...mapActions("service", {
+      setServices: "setServices",
+      removeServiceFromStore: "deleteService",
+      addServiceToStore: "addService",
+      editServiceInStore: "editService",
+      clearCredentialsFormData: "clearCredentialsFormData",
     }),
-    ...mapActions('app', ['addNotification', 'setDrawerSubtitle']),
+    ...mapActions("app", ["addNotification", "setDrawerSubtitle"]),
 
-    async loadData (val = '') {
-      const id = this.$route.params.id
-      const services = await this.getServices(id, val)
-      this.setServices(services)
-      this.selectedService = this.services[0]
+    async loadData(val = "") {
+      const id = this.$route.params.id;
+      const services = await this.getServices(id, val);
+      this.setServices(services);
+      this.selectedService = this.services[0];
     },
 
-    goToManageServiceSubdata (id, name) {
-      this.setDrawerSubtitle(name)
-      this.$router.push({ name: 'oneRead', params: { idService: id } })
+    goToManageServiceSubdata(id, name) {
+      this.setDrawerSubtitle(name);
+      this.$router.push({ name: "oneRead", params: { idService: id } });
     },
 
-    showServiceDetails (service) {
-      this.selectedService = service
+    showServiceDetails(service) {
+      this.selectedService = service;
       if (this.isScreenSmall) {
-        this.serviceDetailsDialog = true
+        this.serviceDetailsDialog = true;
       }
     },
 
-    submitService (form, credentialsForm) {
+    submitService(form, credentialsForm) {
       this.isFormUpdating
         ? this.editService(form, credentialsForm)
-        : this.addService(form, credentialsForm)
+        : this.addService(form, credentialsForm);
     },
 
-    deleteSuccesful () {
+    deleteSuccesful() {
       this.addNotification({
-        message: this.$t('notifications.successful_delete'),
-        color: 'success'
-      })
+        message: this.$t("notifications.successful_delete"),
+        color: "success",
+      });
     },
 
-    deleteUnsuccesful (err) {
-      this.addNotification({ message: err, color: 'error' })
+    deleteUnsuccesful(err) {
+      this.addNotification({ message: err, color: "error" });
     },
 
-    openFormForInsert () {
+    openFormForInsert() {
       if (this.isFormUpdating) {
-        this.$refs.form.reset()
+        this.$refs.form.reset();
       }
-      this.codcli = ''
-      this.isFormUpdating = false
-      this.formDialog = true
+      this.codcli = "";
+      this.isFormUpdating = false;
+      this.formDialog = true;
     },
 
-    openFormForEdit (codcli) {
-      this.isFormUpdating = true
-      this.formDialog = true
-      this.codcli = codcli
+    openFormForEdit(codcli) {
+      this.isFormUpdating = true;
+      this.formDialog = true;
+      this.codcli = codcli;
     },
 
-    async getServices (id, val) {
+    async getServices(id, val) {
       const url = `${this.$urlBuilder.getRoute(
-        'service'
-      )}?institution=${id},q=name:${val}`
-      let data
+        "service"
+      )}?institution=${id},q=name:${val}`;
+      let data;
       try {
-        const response = await axios.get(url)
-        data = response.data
+        const response = await axios.get(url);
+        data = response.data;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-      return data
+      return data;
     },
 
-    async addService (form, serviceFormCredentials) {
-      this.loading = true
+    async addService(form, serviceFormCredentials) {
+      this.loading = true;
 
       try {
-        const serviceInsertionStatus = await this.insertService(form)
+        const serviceInsertionStatus = await this.insertService(form);
 
         if (!serviceInsertionStatus) {
-          this.loading = false
-          return
+          this.loading = false;
+          return;
         }
 
-        const serviceCredentialsInsertionStatus = await this.insertServiceCredentials(
-          serviceFormCredentials,
-          form.codcli
-        )
+        const serviceCredentialsInsertionStatus =
+          await this.insertServiceCredentials(
+            serviceFormCredentials,
+            form.codcli
+          );
 
         if (!serviceCredentialsInsertionStatus) {
-          this.loading = false
-          return
+          this.loading = false;
+          return;
         }
 
-        const newService = await this.getServiceByCodCli(form.codcli)
-        this.addServiceToStore(newService)
-        this.closeFormDialog()
-        this.insertedSuccesfully = true
+        const newService = await this.getServiceByCodCli(form.codcli);
+        this.addServiceToStore(newService);
+        this.closeFormDialog();
+        this.insertedSuccesfully = true;
         this.addNotification({
-          message: this.$t('notifications.succesfull_insert'),
-          color: 'success'
-        })
+          message: this.$t("notifications.succesfull_insert"),
+          color: "success",
+        });
       } catch (error) {
-        this.addNotification({ message: error.message, color: 'error' })
+        this.addNotification({ message: error.message, color: "error" });
       }
-      this.loading = false
+      this.loading = false;
     },
 
-    async editService (form, serviceCredentialsForm) {
-      this.loading = true
+    async editService(form, serviceCredentialsForm) {
+      this.loading = true;
 
-      const patchServiceStatus = this.patchService(form, form.id)
+      const patchServiceStatus = this.patchService(form, form.id);
 
       if (!patchServiceStatus) {
-        this.loading = false
-        return
+        this.loading = false;
+        return;
       }
 
-      const serviceCredentialsInsertionStatus = await this.insertServiceCredentials(
-        serviceCredentialsForm,
-        form.codcli
-      )
+      const serviceCredentialsInsertionStatus =
+        await this.insertServiceCredentials(
+          serviceCredentialsForm,
+          form.codcli
+        );
 
       if (!serviceCredentialsInsertionStatus) {
-        this.loading = false
-        return
+        this.loading = false;
+        return;
       }
 
-      this.clearCredentialsFormData()
+      this.clearCredentialsFormData();
 
-      this.editServiceInStore(form)
+      this.editServiceInStore(form);
 
       this.addNotification({
-        message: this.$t('notifications.succesfull_update'),
-        color: 'success'
-      })
-      this.loading = false
-      this.formDialog = false
+        message: this.$t("notifications.succesfull_update"),
+        color: "success",
+      });
+      this.loading = false;
+      this.formDialog = false;
     },
 
-    async patchService (form, id) {
-      const url = `${api.path('service')}/${id}`
+    async patchService(form, id) {
+      const url = `${api.path("service")}/${id}`;
 
       try {
-        await axios.patch(url, form)
-        return true
+        await axios.patch(url, form);
+        return true;
       } catch (error) {
         this.addNotification({
-          message: this.$t('notifications.unsuccesfull_update'),
-          color: 'error'
-        })
-        return false
+          message: this.$t("notifications.unsuccesfull_update"),
+          color: "error",
+        });
+        return false;
       }
     },
 
     getServiceByCodCli: async function (codcli) {
-      const url = `${api.path('service')}/${codcli}`
+      const url = `${api.path("service")}/${codcli}`;
 
-      const res = await axios.get(url)
-      const service = res.data
+      const res = await axios.get(url);
+      const service = res.data;
 
-      return service
+      return service;
     },
 
-    async insertService (form) {
+    async insertService(form) {
       try {
-        form.institution_id = this.$route.params.id
-        await axios.post(api.path('service'), form)
-        return true
+        form.institution_id = this.$route.params.id;
+        await axios.post(api.path("service"), form);
+        return true;
       } catch (err) {
         this.addNotification({
-          message: this.$t('notifications.unsuccesfull_insert'),
-          color: 'error'
-        })
-        return false
+          message: this.$t("notifications.unsuccesfull_insert"),
+          color: "error",
+        });
+        return false;
       }
     },
-    async insertServiceCredentials (serviceFormCredentials, codcli) {
+    async insertServiceCredentials(serviceFormCredentials, codcli) {
       if (!serviceFormCredentials) {
-        return true
+        return true;
       }
 
       try {
-        const urlForService = `${api.path('service')}/${codcli}`
-        const { data } = await axios.get(urlForService)
-        const id = data.id
-        const urlForServiceCredentials = `${api.path('service')}/${id}/user`
-        await axios.post(urlForServiceCredentials, serviceFormCredentials)
-        return true
+        const urlForService = `${api.path("service")}/${codcli}`;
+        const { data } = await axios.get(urlForService);
+        const id = data.id;
+        const urlForServiceCredentials = `${api.path("service")}/${id}/user`;
+        await axios.post(urlForServiceCredentials, serviceFormCredentials);
+        return true;
       } catch (error) {
         this.addNotification({
-          message: this.$t('notifications.unsuccesfull_insert'),
-          color: 'error'
-        })
-        return false
+          message: this.$t("notifications.unsuccesfull_insert"),
+          color: "error",
+        });
+        return false;
       }
     },
-    closeFormDialog () {
-      this.formDialog = false
+    closeFormDialog() {
+      this.formDialog = false;
     },
 
-    async removeService (serviceId) {
-      const url = `${api.path('service')}/${serviceId}`
+    async removeService(serviceId) {
+      const url = `${api.path("service")}/${serviceId}`;
 
       try {
-        axios.delete(url)
-        this.removeServiceFromStore(serviceId)
+        axios.delete(url);
+        this.removeServiceFromStore(serviceId);
         this.addNotification({
-          messsage: this.$t('notifications.successful_delete'),
-          color: 'success'
-        })
+          messsage: this.$t("notifications.successful_delete"),
+          color: "success",
+        });
       } catch (error) {
         this.addNotification({
-          message: this.$t('notifications.error_at_delete'),
-          color: 'error'
-        })
-        console.log(error)
+          message: this.$t("notifications.error_at_delete"),
+          color: "error",
+        });
+        console.log(error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

@@ -12,10 +12,9 @@
       :doSearch="doSearch"
     >
       <material-toolbar
-        :search.sync="search"
-        :row-amount.sync="rowAmount"
-        :visible-columns.sync="visibleColumns"
-
+        v-model:search="search"
+        v-model:row-amount="rowAmount"
+        v-model:visible-columns="visibleColumns"
         :column-defs="columnDefs"
         :row-height="rowHeight"
         @update:rowHeight="setRowHeight"
@@ -40,103 +39,104 @@
 
 <script>
 export default {
-  name: 'DataTable',
+  name: "DataTable",
   props: {
     width: {
       type: [Number, String],
-      default: 'inherit'
+      default: "inherit",
     },
     height: {
       type: [Number, String],
-      default: 500
+      default: 500,
     },
-    defaultColDef: { type: Object,
+    defaultColDef: {
+      type: Object,
       default: () => ({
         sortable: true,
         resizable: true,
         filter: true,
-        editable: true
-      })
+        editable: true,
+      }),
     },
     columnDefs: {
       type: Array,
-      required: true
+      required: true,
     },
     rowData: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       gridOptions: {},
       gridApi: {},
       pagination: true,
       rowAmount: 10,
-      rowHeight: '48',
-      search: '',
+      rowHeight: "48",
+      search: "",
       visibleColumns: [],
-      columnFields: []
-    }
+      columnFields: [],
+    };
   },
   computed: {
-    style () {
-      return `width: ${this.width}; height: ${this.height};`
+    style() {
+      return `width: ${this.width}; height: ${this.height};`;
     },
-    selectedRows () {
-      return this.gridApi.getSelectedRows()
-    }
+    selectedRows() {
+      return this.gridApi.getSelectedRows();
+    },
   },
   watch: {
     rowAmount: function (val) {
-      this.gridApi.paginationSetPageSize(Number(val))
+      this.gridApi.paginationSetPageSize(Number(val));
     },
 
     visibleColumns: function (val) {
-      let difference = this.columnFields.filter(x => !val.includes(x))
-      this.gridOptions.columnApi.setColumnsVisible(val, true)
-      this.gridOptions.columnApi.setColumnsVisible(difference, false)
-    }
+      let difference = this.columnFields.filter((x) => !val.includes(x));
+      this.gridOptions.columnApi.setColumnsVisible(val, true);
+      this.gridOptions.columnApi.setColumnsVisible(difference, false);
+    },
   },
-  mounted () {
-    this.gridApi = this.gridOptions.api
-    this.setVisibleColumns()
-    this.setColumnFields()
+  mounted() {
+    this.gridApi = this.gridOptions.api;
+    this.setVisibleColumns();
+    this.setColumnFields();
   },
   methods: {
     setVisibleColumns: function () {
-      this.visibleColumns = this.columnDefs.map(element => {
+      this.visibleColumns = this.columnDefs.map((element) => {
         if (this.gridOptions.columnApi.getColumn(element.field).visible) {
-          return element.field
+          return element.field;
         }
-      })
+      });
     },
     changeVisibleColumns: function (val) {
-      this.visibleColumns = val
+      this.visibleColumns = val;
     },
     setColumnFields: function () {
-      this.columnFields = this.columnDefs.map(element => {
-        return element.field
-      })
+      this.columnFields = this.columnDefs.map((element) => {
+        return element.field;
+      });
     },
     deleteRow: function () {
-      const selectedRow = this.gridApi.getFocusedCell()
+      const selectedRow = this.gridApi.getFocusedCell();
       if (selectedRow) {
-        this.gridOptions.rowData.splice(selectedRow.rowIndex, 1)
-        this.gridApi.setRowData(this.gridOptions.rowData)
+        this.gridOptions.rowData.splice(selectedRow.rowIndex, 1);
+        this.gridApi.setRowData(this.gridOptions.rowData);
       }
     },
     setRowHeight: function (val) {
-      this.rowHeight = val
-      this.gridOptions.rowHeight = Number(val)
-      this.gridApi.resetRowHeights()
+      this.rowHeight = val;
+      this.gridOptions.rowHeight = Number(val);
+      this.gridApi.resetRowHeights();
     },
     setRowAmount: function (val) {
-      this.rowAmount = val
+      this.rowAmount = val;
     },
     doSearch: function (val) {
-      this.search = val
-    }
-  }
-}
+      this.search = val;
+    },
+  },
+};
 </script>

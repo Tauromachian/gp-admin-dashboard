@@ -1,10 +1,15 @@
 <template>
   <div>
-    <input v-model="searchComputed" v-smart-routes="routes" type="text" hidden>
+    <input
+      v-model="searchComputed"
+      v-smart-routes="routes"
+      type="text"
+      hidden
+    />
 
     <v-autocomplete
       v-model="viewName"
-      :search-input.sync="search"
+      v-model:search-input="search"
       :label="$t('search') + '...'"
       append-icon="mdi-magnify"
       :items="items"
@@ -17,37 +22,37 @@
 
 <script>
 export default {
-  name: 'RouteWideSearch',
-  data () {
+  name: "RouteWideSearch",
+  data() {
     return {
       routes: [],
       viewName: {},
-      search: ''
-    }
+      search: "",
+    };
   },
   computed: {
-    searchComputed () {
+    searchComputed() {
       if (this.search === null) {
-        return ''
+        return "";
       }
-      return this.search
+      return this.search;
     },
-    items () {
-      return this.routes.map(route => {
+    items() {
+      return this.routes.map((route) => {
         return {
           text: route.title,
-          value: route.name
-        }
-      })
-    }
+          value: route.name,
+        };
+      });
+    },
   },
   methods: {
-    changeRoute () {
+    changeRoute() {
       if (this.$route.name === this.viewName) {
-        return
+        return;
       }
-      this.$router.push({ name: this.viewName })
-    }
-  }
-}
+      this.$router.push({ name: this.viewName });
+    },
+  },
+};
 </script>
