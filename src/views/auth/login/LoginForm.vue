@@ -20,13 +20,11 @@
       prepend-icon="mdi-lock"
     ></v-text-field>
 
-    <v-layout class="mt-4 mx-0">
-      <v-spacer></v-spacer>
-
-      <v-btn type="submit" :loading="loading" color="primary" class="ml-4">
+    <div class="d-flex">
+      <v-btn type="submit" :loading="loading" color="primary" class="ms-auto">
         Login
       </v-btn>
-    </v-layout>
+    </div>
   </v-form>
 </template>
 
