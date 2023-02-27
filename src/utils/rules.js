@@ -13,5 +13,7 @@ export function password() {
     if (!v) return "La contraseña es requerida";
 
     if (v.length < 8) return "La contraseña debe tener 8 caracteres o más";
+
+    return true;
   };
 }
