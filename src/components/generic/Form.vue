@@ -1,10 +1,10 @@
 <template>
   <v-card :elevation="0">
-    <v-card-title class="pb-0 pl-5 pr-5">
+    <v-card-title class="py-3 pt-1">
       {{ title }}
+      <v-divider class="primary mb-2" />
     </v-card-title>
-    <v-divider class="primary" />
-    <v-card-text class="pb-0 pl-3 pr-3">
+    <v-card-text class="pb-0">
       <slot>
         <gen-form-actions
           class="pl-0 pr-0"
