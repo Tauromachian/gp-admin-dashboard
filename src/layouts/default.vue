@@ -1,6 +1,6 @@
 <template>
   <div>
-    <material-notification
+    <gen-notification
       v-model="notificationComputed.notification"
       :text="notificationComputed.message"
       :color="notificationComputed.color"
