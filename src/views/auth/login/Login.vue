@@ -24,18 +24,6 @@ export default {
   components: {
     LoginForm,
   },
-
-  methods: {
-    async success(data, remember = false) {
-      // Save the token.
-      this.$store.dispatch("auth/saveToken", {
-        token: data.token,
-        remember: remember,
-      });
-      await this.$store.dispatch("auth/setUser");
-      this.$router.push({ path: "/" });
-    },
-  },
 };
 </script>
 
