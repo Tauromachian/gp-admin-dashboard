@@ -5,7 +5,7 @@
       <v-divider class="primary mb-2" />
     </v-card-title>
     <v-card-text class="pb-0">
-      <v-form @submit.prevent="onSubmit">
+      <v-form ref="form" @submit.prevent="onSubmit">
         <slot>
           <gen-form-actions
             class="pl-0 pr-0"
@@ -38,6 +38,9 @@ export default {
     },
     onCancel() {
       this.$emit("cancel");
+    },
+    async validate() {
+      await this.$refs.form.validate();
     },
   },
 };
