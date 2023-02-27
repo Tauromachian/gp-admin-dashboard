@@ -1,11 +1,13 @@
 <template>
-  <v-container fluid fill-height justify-center align-center>
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
-  </v-container>
+  <v-main>
+    <v-container fluid fill-height justify-center align-center>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
