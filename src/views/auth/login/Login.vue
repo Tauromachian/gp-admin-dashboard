@@ -64,17 +64,13 @@ export default {
     remember: false,
   }),
 
-  created() {
-    this.form.username = this.$route.query.username || null;
-  },
-
   methods: {
     async submit() {
-      if (!(await this.$refs.form.validate().valid)) return;
+      if (!(await this.$refs.form.validate()).valid) return;
 
       this.loading = true;
 
-      await authStore.login();
+      await authStore.login(this.form);
 
       this.loading = false;
     },
