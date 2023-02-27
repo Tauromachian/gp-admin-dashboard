@@ -5,14 +5,16 @@
       <v-divider class="primary mb-2" />
     </v-card-title>
     <v-card-text class="pb-0">
-      <slot>
-        <gen-form-actions
-          class="pl-0 pr-0"
-          :enable-cancel="enableCancelAction"
-          @on-submit="submitClick"
-          @on-cancel="cancelClick"
-        />
-      </slot>
+      <v-form @submit.prevent="onSubmit">
+        <slot>
+          <gen-form-actions
+            class="pl-0 pr-0"
+            :enable-cancel="enableCancelAction"
+            @on-submit="onSubmit"
+            @on-cancel="onCancel"
+          />
+        </slot>
+      </v-form>
     </v-card-text>
   </v-card>
 </template>
