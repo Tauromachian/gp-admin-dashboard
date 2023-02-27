@@ -1,10 +1,7 @@
 <template>
   <v-card class="login-form">
-    <v-toolbar dark color="primary" flat>
-      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
-    </v-toolbar>
     <v-card-text>
-      <v-form ref="form" @submit.prevent="submit">
+      <gen-form title="Login" ref="form" @submit.prevent="submit">
         <v-text-field
           label="Nombre de usuario"
           v-model="form.username"
@@ -37,7 +34,7 @@
             Login
           </v-btn>
         </div>
-      </v-form>
+      </gen-form>
     </v-card-text>
   </v-card>
 </template>
