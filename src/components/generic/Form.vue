@@ -6,7 +6,7 @@
     <v-divider class="primary" />
     <v-card-text class="pb-0 pl-3 pr-3">
       <slot>
-        <material-form-actions
+        <gen-form-actions
           class="pl-0 pr-0"
           :enable-cancel="enableCancelAction"
           @on-submit="submitClick"
@@ -19,29 +19,26 @@
 
 <script>
 export default {
-  name: 'Form',
+  name: "Form",
   props: {
     title: {
       type: String,
-      default: 'Form'
+      default: "Form",
     },
     enableCancelAction: {
       type: Boolean,
-      default: false
-    }
-
+      default: false,
+    },
   },
   methods: {
-    submitClick () {
-      this.$emit('submit-click')
+    submitClick() {
+      this.$emit("submit-click");
     },
-    cancelClick () {
-      this.$emit('cancel-click')
-    }
-  }
-}
+    cancelClick() {
+      this.$emit("cancel-click");
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
