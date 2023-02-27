@@ -1,28 +1,85 @@
 <template>
-  <v-main>
-    <v-container fluid fill-height justify-center align-center>
-      <transition name="fade" mode="out-in">
-        <v-col sm8 md6 lg4>
-          <v-card class="login-form">
-            <v-toolbar dark color="primary" flat>
-              <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
-            </v-toolbar>
-            <v-card-text>
-              <login-form @success="success"></login-form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </transition>
-    </v-container>
-  </v-main>
+  <v-card class="login-form">
+    <v-toolbar dark color="primary" flat>
+      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
+    </v-toolbar>
+    <v-card-text>
+      <v-form ref="form" @submit.prevent="submit">
+        <v-text-field
+          label="Nombre de usuario"
+          v-model="form.username"
+          type="email"
+          :rules="[rules.required()]"
+          :disabled="loading"
+          prepend-icon="mdi-account"
+        ></v-text-field>
+
+        <v-text-field
+          label="Contraseña"
+          v-model="form.password"
+          :append-icon="
+            passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'
+          "
+          @click:append="() => (passwordHidden = !passwordHidden)"
+          :type="passwordHidden ? 'password' : 'text'"
+          :disabled="loading"
+          :rules="[rules.password()]"
+          prepend-icon="mdi-lock"
+        ></v-text-field>
+
+        <div class="d-flex">
+          <v-btn
+            type="submit"
+            :loading="loading"
+            color="primary"
+            class="ms-auto"
+          >
+            Login
+          </v-btn>
+        </div>
+      </v-form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
-import LoginForm from "./LoginForm";
+import { required, password } from "@/utils/rules";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 export default {
-  components: {
-    LoginForm,
+  data: () => ({
+    loading: false,
+    passwordHidden: true,
+
+    rules: {
+      required,
+      password,
+    },
+
+    form: {
+      username: null,
+      password: null,
+    },
+
+    remember: false,
+  }),
+
+  created() {
+    this.form.username = this.$route.query.username || null;
+  },
+
+  methods: {
+    async submit() {
+      if (!(await this.$refs.form.validate().valid)) return;
+
+      this.loading = true;
+
+      await authStore.login();
+
+      this.loading = false;
+    },
   },
 };
 </script>
