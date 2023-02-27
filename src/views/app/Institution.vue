@@ -80,7 +80,11 @@
 
 <script>
 import axios from "axios";
-import { mapActions, mapState, mapGetters } from "vuex";
+
+import { useAppStore } from "@/stores/app";
+import { useInstitutionStore } from "@/stores/institution";
+import { mapActions, mapState } from "pinia";
+
 import debounce from "~/helpers/debouncer";
 
 export default {
@@ -100,9 +104,9 @@ export default {
     };
   },
   computed: {
-    ...mapState("institution", ["institutions", "institutionForm"]),
-    ...mapState("app", ["notification", "isScreenSmall"]),
-    ...mapGetters("institution", ["institutionsById"]),
+    ...mapState(useInstitutionStore, ["institutions", "institutionForm"]),
+    ...mapState(useAppStore, ["notification", "isScreenSmall"]),
+    ...mapState(useInstitutionStore, ["institutionsById"]),
     institutionFormComputed: {
       get() {
         return this.institutionForm;
@@ -123,7 +127,7 @@ export default {
     this.loadData();
   },
   methods: {
-    ...mapActions("institution", [
+    ...mapActions(useInstitutionStore, [
       "setInstitutions",
       "deleteInstitution",
       "addInstitution",
@@ -131,7 +135,7 @@ export default {
       "setFormData",
       "clearFormData",
     ]),
-    ...mapActions("app", ["addNotification", "setDrawerSubtitle"]),
+    ...mapActions(useAppStore, ["addNotification", "setDrawerSubtitle"]),
 
     showInstitutionDetails(institutionId) {
       this.selectedInstitutionId = institutionId;
