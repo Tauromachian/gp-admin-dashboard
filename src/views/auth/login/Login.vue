@@ -46,6 +46,7 @@ import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 
 export default {
+  name: "Login",
   data: () => ({
     loading: false,
     passwordHidden: true,
