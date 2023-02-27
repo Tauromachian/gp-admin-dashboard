@@ -1,4 +1,4 @@
-const modules = import.meta.glob("@/components/generic/*.vue");
+const modules = import.meta.glob("@/components/generic/*.vue", { eager: true });
 
 export default function loadComponents(app) {
   for (const path in modules) {
