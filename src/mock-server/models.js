@@ -1,6 +1,6 @@
 import { Model, hasMany, belongsTo } from "miragejs";
 
-export default models = {
+export default {
   user: Model.extend(),
   institution: Model.extend({
     coordinators: hasMany(),

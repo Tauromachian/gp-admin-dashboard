@@ -1,6 +1,6 @@
 import { Factory } from "miragejs";
 
-export default factories = {
+export default {
   user: Factory.extend({
     username(i) {
       return `User ${i + 1}`;
