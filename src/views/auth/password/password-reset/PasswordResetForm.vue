@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios/index";
+import axios from "axios";
 import { api } from "~/config";
 import Form from "~/mixins/form";
 
