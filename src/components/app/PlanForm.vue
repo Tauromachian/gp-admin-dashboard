@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "pinia";
 import { isNumber } from "~/helpers/regex";
 
 export default {

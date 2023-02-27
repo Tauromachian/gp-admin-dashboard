@@ -39,36 +39,43 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions } from 'vuex'
-import { api } from '~/config'
+import axios from "axios";
+import { mapActions } from "pinia";
+import { api } from "~/config";
 
 export default {
-  name: 'UserManagement',
-  data () {
+  name: "UserManagement",
+  data() {
     return {
       loading: false,
-      formDialog: false }
+      formDialog: false,
+    };
   },
   methods: {
-    ...mapActions('app', ['addNotification']),
+    ...mapActions("app", ["addNotification"]),
 
-    createService (form) {
-      this.loading = true
+    createService(form) {
+      this.loading = true;
       axios
-        .post(api.path('user'), form)
-        .then(res => {
-          this.addNotification(this.$t('notifications.succesfull_insert'), 'success')
-          this.$refs.table.addRow(form)
-          this.formDialog = false
-          this.loading = false
+        .post(api.path("user"), form)
+        .then((res) => {
+          this.addNotification(
+            this.$t("notifications.succesfull_insert"),
+            "success"
+          );
+          this.$refs.table.addRow(form);
+          this.formDialog = false;
+          this.loading = false;
         })
-        .catch(err => {
-          this.addNotification(this.$t('notifications.unsuccesfull_insert'), 'error')
-          console.log(err)
-          this.loading = false
-        })
-    }
-  }
-}
+        .catch((err) => {
+          this.addNotification(
+            this.$t("notifications.unsuccesfull_insert"),
+            "error"
+          );
+          console.log(err);
+          this.loading = false;
+        });
+    },
+  },
+};
 </script>

@@ -14,7 +14,10 @@
       elevation="0"
     >
       <v-card-text class="mt-0 mb-0">
-        <h3 class="pb-2 mt-0 word-break-normal" :class="{ 'pt-10': isScreenSmall }">
+        <h3
+          class="pb-2 mt-0 word-break-normal"
+          :class="{ 'pt-10': isScreenSmall }"
+        >
           {{ selectedInstitution.name }}
         </h3>
         <div class="blue--text mb-2">
@@ -44,9 +47,7 @@
         <h4 class="headline mb-2">
           {{ $t("institutions.fields.coordinators") }}
           <v-btn icon @click="coordinatorFormDialog = true">
-            <v-icon color="primary">
-              mdi-plus
-            </v-icon>
+            <v-icon color="primary"> mdi-plus </v-icon>
           </v-btn>
         </h4>
       </v-card-text>
@@ -61,19 +62,13 @@
         >
           {{ coordinator.name }}, {{ coordinator.charge }}
           <v-btn icon @click="openCoordinatorDetails(coordinator)">
-            <v-icon color="primary">
-              mdi-eye
-            </v-icon>
+            <v-icon color="primary"> mdi-eye </v-icon>
           </v-btn>
           <v-btn icon @click="openCoordinatorDetailsForm(coordinator)">
-            <v-icon color="primary">
-              mdi-pencil
-            </v-icon>
+            <v-icon color="primary"> mdi-pencil </v-icon>
           </v-btn>
           <v-btn icon @click="coordinatorDeleteDialog = true">
-            <v-icon color="primary">
-              mdi-delete
-            </v-icon>
+            <v-icon color="primary"> mdi-delete </v-icon>
           </v-btn>
           <!-- This dialog needs to be here, so it can use the key -->
           <material-delete-dialog
@@ -83,7 +78,9 @@
         </v-col>
       </v-row>
       <v-dialog v-model="coordinatorDetailsDialog" width="500">
-        <app-institution-coordinator-details :coordinator="selectedCoordinator" />
+        <app-institution-coordinator-details
+          :coordinator="selectedCoordinator"
+        />
       </v-dialog>
       <v-dialog v-model="coordinatorFormDialog" width="500">
         <app-institution-coordinator-form
@@ -110,71 +107,73 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from "pinia";
+import { useInstitutionStore } from "@/stores/institution";
 
 export default {
-  name: 'InstitutionDetails',
+  name: "InstitutionDetails",
   props: {
     id: {
       type: [Number, String],
-      required: true
+      required: true,
     },
     isScreenSmall: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
       reRenderKey: 0,
       coordinatorForm: {
-        name: '',
-        charge: ''
+        name: "",
+        charge: "",
       },
       selectedCoordinator: {},
       coordinatorDetailsDialog: false,
       coordinatorDeleteDialog: false,
       coordinatorFormDialog: false,
-      coordinatorFormDetailsDialog: false
-    }
+      coordinatorFormDetailsDialog: false,
+    };
   },
   computed: {
-    ...mapGetters('institution', ['institutionsById']),
-    selectedInstitution () {
-      return this.institutionsById.get(this.id)[0]
-    }
+    ...mapState(useInstitutionStore, ["institutionsById"]),
+    selectedInstitution() {
+      return this.institutionsById.get(this.id)[0];
+    },
   },
   methods: {
-    ...mapActions('institution', { addCoordinatorToStore: 'addCoordinator' }),
-    openCoordinatorDetails (coordinator) {
-      this.selectedCoordinator = coordinator
-      this.coordinatorDetailsDialog = true
+    ...mapActions(useInstitutionStore, {
+      addCoordinatorToStore: "addCoordinator",
+    }),
+    openCoordinatorDetails(coordinator) {
+      this.selectedCoordinator = coordinator;
+      this.coordinatorDetailsDialog = true;
     },
-    openCoordinatorDetailsForm (coordinator) {
-      this.reRenderKey++
-      this.selectedCoordinator = coordinator
-      this.coordinatorFormDetailsDialog = true
+    openCoordinatorDetailsForm(coordinator) {
+      this.reRenderKey++;
+      this.selectedCoordinator = coordinator;
+      this.coordinatorFormDetailsDialog = true;
     },
-    addCoordinator () {
-      this.selectedInstitution.coordinators.push(this.coordinatorForm)
-      this.submitDetails()
-      this.coordinatorFormDialog = false
+    addCoordinator() {
+      this.selectedInstitution.coordinators.push(this.coordinatorForm);
+      this.submitDetails();
+      this.coordinatorFormDialog = false;
     },
-    addCoordinatorDetails () {
-      this.submitDetails()
-      this.coordinatorFormDetailsDialog = false
+    addCoordinatorDetails() {
+      this.submitDetails();
+      this.coordinatorFormDetailsDialog = false;
     },
-    deleteCoordinator (index) {
-      this.selectedInstitution.coordinators.splice(index - 1, 1)
-      this.coordinatorDeleteDialog = false
-      this.$emit('coordinator-delete')
+    deleteCoordinator(index) {
+      this.selectedInstitution.coordinators.splice(index - 1, 1);
+      this.coordinatorDeleteDialog = false;
+      this.$emit("coordinator-delete");
     },
-    submitDetails () {
-      this.$emit('submit-details')
-    }
-  }
-}
+    submitDetails() {
+      this.$emit("submit-details");
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

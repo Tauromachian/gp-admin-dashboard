@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "pinia";
 
 export default {
-  name: 'OneRead',
-  middleware: 'auth',
+  name: "OneRead",
+  middleware: "auth",
 
-  data () {
+  data() {
     return {
       selection: [],
       formDialog: false,
@@ -41,30 +41,28 @@ export default {
       pagination: true,
       codcli: {},
       serviceId: null,
-      serviceName: ''
-    }
+      serviceName: "",
+    };
   },
   computed: {
-    ...mapState('service', ['services'])
+    ...mapState("service", ["services"]),
   },
   watch: {
-    serviceId (id) {
-      console.log(id)
-      console.log(this.services)
+    serviceId(id) {
+      console.log(id);
+      console.log(this.services);
 
-      const service = this.services.find(
-        service => service.id === id
-      )
-      this.serviceName = service.name
-    }
+      const service = this.services.find((service) => service.id === id);
+      this.serviceName = service.name;
+    },
   },
-  mounted () {
-    this.loadData()
+  mounted() {
+    this.loadData();
   },
   methods: {
-    loadData () {
-      this.serviceId = Number(this.$route.params.idService)
-    }
-  }
-}
+    loadData() {
+      this.serviceId = Number(this.$route.params.idService);
+    },
+  },
+};
 </script>

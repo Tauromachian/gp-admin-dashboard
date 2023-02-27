@@ -4,7 +4,7 @@
       v-if="!service"
       class="title grey--text text--lighten-1 font-weight-light"
     >
-      {{ $t('services.select_service_text') }}
+      {{ $t("services.select_service_text") }}
     </div>
     <material-details-card
       v-if="selectedService"
@@ -17,62 +17,62 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "pinia";
 
 export default {
-  name: 'ServiceDetails',
+  name: "ServiceDetails",
   props: {
     service: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
-    ...mapGetters('service', { services: 'tableData' }),
-    selectedService () {
-      const index = this.services.indexOf(this.service)
-      const service = Object.assign({}, this.services[index])
-      service.exclusivo = this.$t(service.exclusivo)
-      return service
+    ...mapGetters("service", { services: "tableData" }),
+    selectedService() {
+      const index = this.services.indexOf(this.service);
+      const service = Object.assign({}, this.services[index]);
+      service.exclusivo = this.$t(service.exclusivo);
+      return service;
     },
-    headers () {
+    headers() {
       return [
         {
-          text: this.$t('services.table.headers.service_name'),
-          value: 'name'
+          text: this.$t("services.table.headers.service_name"),
+          value: "name",
         },
         {
-          text: this.$t('services.table.headers.client_code'),
-          value: 'codcli'
+          text: this.$t("services.table.headers.client_code"),
+          value: "codcli",
         },
         {
-          text: this.$t('services.table.headers.meter_number'),
-          value: 'meter_no'
+          text: this.$t("services.table.headers.meter_number"),
+          value: "meter_no",
         },
         {
-          text: this.$t('services.table.headers.crf'),
-          value: 'crf'
+          text: this.$t("services.table.headers.crf"),
+          value: "crf",
         },
         {
-          text: this.$t('services.table.headers.hired_demand'),
-          value: 'demanda'
+          text: this.$t("services.table.headers.hired_demand"),
+          value: "demanda",
         },
         {
-          text: this.$t('services.table.headers.exclusive'),
-          value: 'exclusivo'
+          text: this.$t("services.table.headers.exclusive"),
+          value: "exclusivo",
         },
         {
-          text: this.$t('services.table.headers.metraje'),
-          value: 'metraje'
+          text: this.$t("services.table.headers.metraje"),
+          value: "metraje",
         },
         {
-          text: this.$t('services.table.headers.capacity'),
-          value: 'capacidad'
-        }
-      ]
-    }
-  }
-}
+          text: this.$t("services.table.headers.capacity"),
+          value: "capacidad",
+        },
+      ];
+    },
+  },
+};
 </script>
 
 <style></style>

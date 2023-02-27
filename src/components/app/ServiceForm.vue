@@ -163,7 +163,7 @@
 <script>
 import { isNumber, isSentence } from "~/helpers/regex";
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapActions } from "pinia";
 import { api } from "~/config";
 
 export default {

@@ -147,7 +147,7 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "pinia";
 
 import { api } from "~/config";
 

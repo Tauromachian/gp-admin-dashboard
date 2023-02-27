@@ -5,11 +5,7 @@
         <v-card elevation="0" class="mt-4 hidden-sm-and-down">
           <v-row>
             <v-col cols="12" md="8" lg="8">
-              <v-card
-                max-height="600"
-                class="overflow-y-auto"
-                elevation="0"
-              >
+              <v-card max-height="600" class="overflow-y-auto" elevation="0">
                 <app-read-table
                   v-for="serviceSelected in selection"
                   :key="serviceSelected.id"
@@ -28,14 +24,14 @@
             </v-col>
           </v-row>
         </v-card>
-        <v-card v-if="selection.length" elevation="0" class="mt-4 hidden-md-and-up">
+        <v-card
+          v-if="selection.length"
+          elevation="0"
+          class="mt-4 hidden-md-and-up"
+        >
           <v-row>
             <v-col cols="12" md="8" lg="8">
-              <v-card
-                max-height="600"
-                class="overflow-y-auto"
-                elevation="0"
-              >
+              <v-card max-height="600" class="overflow-y-auto" elevation="0">
                 <app-read-table
                   v-for="serviceSelected in selection"
                   :key="serviceSelected.id"
@@ -63,9 +59,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          <v-icon>
-            mdi-filter
-          </v-icon>
+          <v-icon> mdi-filter </v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -78,13 +72,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapActions, mapState } from 'vuex'
+import axios from "axios";
+import { mapActions, mapState } from "pinia";
 
 export default {
-  name: 'Read',
-  middleware: 'auth',
-  data () {
+  name: "Read",
+  middleware: "auth",
+  data() {
     return {
       selection: [],
       formDialog: false,
@@ -94,28 +88,29 @@ export default {
       defaultColDef: null,
       dialog: false,
       pagination: true,
-      codcli: {}
-    }
+      codcli: {},
+    };
   },
   computed: {
-    ...mapState('read', ['servicesImportantData'])
+    ...mapState("read", ["servicesImportantData"]),
   },
-  mounted () {
-    this.loadData()
+  mounted() {
+    this.loadData();
   },
   methods: {
-    ...mapActions('read', ['setServicesImportantData']),
-    loadData () {
-      const id = this.$route.params.id
-      this.fetchServicesImportantData(id)
+    ...mapActions("read", ["setServicesImportantData"]),
+    loadData() {
+      const id = this.$route.params.id;
+      this.fetchServicesImportantData(id);
     },
-    fetchServicesImportantData (id) {
-      axios.get(`/api/v1/service?institution=${id},select=id,codcli,name&limit=10`)
+    fetchServicesImportantData(id) {
+      axios
+        .get(`/api/v1/service?institution=${id},select=id,codcli,name&limit=10`)
         .then(({ data }) => {
-          this.setServicesImportantData(data.data)
+          this.setServicesImportantData(data.data);
         })
-        .catch(err => console.log(err))
-    }
-  }
-}
+        .catch((err) => console.log(err));
+    },
+  },
+};
 </script>

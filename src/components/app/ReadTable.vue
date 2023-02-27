@@ -45,7 +45,7 @@
 import axios from "axios";
 import qs from "query-string";
 
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from "pinia";
 
 export default {
   name: "ReadTable",

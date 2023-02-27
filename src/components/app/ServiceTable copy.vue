@@ -61,7 +61,7 @@
 <script>
 import { api } from "~/config";
 import axios from "axios";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "pinia";
 
 export default {
   name: "ServiceTable",

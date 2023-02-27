@@ -1,7 +1,15 @@
 <template>
   <v-container py-0>
     <v-row wrap>
-      <v-col v-if="!hasSensitiveData" xs="12" sm="12" md="4" lg="4" xl="4" cols="12">
+      <v-col
+        v-if="!hasSensitiveData"
+        xs="12"
+        sm="12"
+        md="4"
+        lg="4"
+        xl="4"
+        cols="12"
+      >
         <v-text-field
           v-model="username"
           :disabled="disabled"
@@ -9,7 +17,15 @@
           :rules="nameRules"
         />
       </v-col>
-      <v-col v-if="!hasSensitiveData" xs="12" sm="12" md="4" lg="4" xl="4" cols="12">
+      <v-col
+        v-if="!hasSensitiveData"
+        xs="12"
+        sm="12"
+        md="4"
+        lg="4"
+        xl="4"
+        cols="12"
+      >
         <v-text-field
           v-model="password"
           :disabled="disabled"
@@ -20,7 +36,15 @@
           @click:append="showPasswordText = !showPasswordText"
         />
       </v-col>
-      <v-col v-if="!hasSensitiveData" xs="12" sm="12" md="4" lg="4" xl="4" cols="12">
+      <v-col
+        v-if="!hasSensitiveData"
+        xs="12"
+        sm="12"
+        md="4"
+        lg="4"
+        xl="4"
+        cols="12"
+      >
         <v-text-field
           v-model="passwordConfirmation"
           :disabled="disabled"
@@ -41,10 +65,7 @@
         <v-text-field
           v-model="acceptedIpComputed"
           :disabled="disabled"
-          :label="
-            $t('services.fields.required_ip') +
-              ` (${$t('optional')})`
-          "
+          :label="$t('services.fields.required_ip') + ` (${$t('optional')})`"
           :rules="ipRules"
         />
       </v-col>
@@ -53,128 +74,128 @@
 </template>
 
 <script>
-import { isSentence, isIpNumber, isIpMask } from '~/helpers/regex'
-import { mapState } from 'vuex'
+import { isSentence, isIpNumber, isIpMask } from "~/helpers/regex";
+import { mapState } from "pinia";
 
 export default {
-  name: 'ServiceUserFormFields',
-  data () {
+  name: "ServiceUserFormFields",
+  data() {
     return {
-      username: '',
-      password: '',
-      passwordConfirmation: '',
-      deviceToken: '',
-      acceptedIp: '',
+      username: "",
+      password: "",
+      passwordConfirmation: "",
+      deviceToken: "",
+      acceptedIp: "",
       disabled: false,
       showPasswordText: false,
-      ipRules: [v => this.ipRulesFunction(v) || 'Introduzca un ip valido'],
+      ipRules: [(v) => this.ipRulesFunction(v) || "Introduzca un ip valido"],
       nameRules: [
-        v =>
+        (v) =>
           v.length > 6 ||
-          'Las credenciales deben tener un largo de 6 letras o más',
-        v => isSentence(v) || 'Ha introducido caracteres no permitidos'
+          "Las credenciales deben tener un largo de 6 letras o más",
+        (v) => isSentence(v) || "Ha introducido caracteres no permitidos",
       ],
-      passwordRules: [v => !!v || 'El password es requerido']
-    }
+      passwordRules: [(v) => !!v || "El password es requerido"],
+    };
   },
   computed: {
-    ...mapState('service', ['credentialsForm', 'hasSensitiveData']),
+    ...mapState("service", ["credentialsForm", "hasSensitiveData"]),
     deviceTokenComputed: {
-      get () {
-        return this.credentialsForm.device_token
+      get() {
+        return this.credentialsForm.device_token;
       },
-      set (val) {
-        this.deviceToken = val
-      }
+      set(val) {
+        this.deviceToken = val;
+      },
     },
     acceptedIpComputed: {
-      get () {
-        return this.credentialsForm.accepted_ip
+      get() {
+        return this.credentialsForm.accepted_ip;
       },
-      set (val) {
-        this.acceptedIp = val
-      }
+      set(val) {
+        this.acceptedIp = val;
+      },
     },
-    formComputed () {
+    formComputed() {
       const form = {
         username: this.username,
         password: this.password,
         password_confirmation: this.passwordConfirmation,
         device_token: this.deviceToken,
-        accepted_ip: this.acceptedIp
-      }
+        accepted_ip: this.acceptedIp,
+      };
 
-      return form
-    }
+      return form;
+    },
   },
   watch: {
-    formComputed (form) {
-      this.$emit('update:form', form)
-    }
+    formComputed(form) {
+      this.$emit("update:form", form);
+    },
   },
-  mounted () {
-    this.fillForm()
+  mounted() {
+    this.fillForm();
   },
   methods: {
-    fillForm () {
-      this.deviceToken = this.$store.state.service.credentialsForm.device_token
-      this.acceptedIp = this.$store.state.service.credentialsForm.accepted_ip
+    fillForm() {
+      this.deviceToken = this.$store.state.service.credentialsForm.device_token;
+      this.acceptedIp = this.$store.state.service.credentialsForm.accepted_ip;
     },
-    ipRulesFunction (v) {
+    ipRulesFunction(v) {
       if (!v) {
-        return true
+        return true;
       }
 
-      const { ip, mask } = this.splitIpFromMask(v)
+      const { ip, mask } = this.splitIpFromMask(v);
 
-      if (mask === '') {
-        return false
+      if (mask === "") {
+        return false;
       }
 
       if (!this.isMask(mask)) {
-        return false
+        return false;
       }
 
       if (!this.isIp(ip)) {
-        return false
+        return false;
       }
 
-      return true
+      return true;
     },
-    splitIpFromMask (completeIp) {
-      let ipNumberAndMask = []
-      ipNumberAndMask = completeIp.split('/')
+    splitIpFromMask(completeIp) {
+      let ipNumberAndMask = [];
+      ipNumberAndMask = completeIp.split("/");
 
       return {
         ip: ipNumberAndMask[0],
-        mask: ipNumberAndMask[1]
-      }
+        mask: ipNumberAndMask[1],
+      };
     },
-    isMask (maskNumber) {
+    isMask(maskNumber) {
       if (!maskNumber) {
-        return true
+        return true;
       }
-      return isIpMask(maskNumber)
+      return isIpMask(maskNumber);
     },
-    isIp (ipNumber) {
-      if (!ipNumber.includes('.')) {
-        return false
+    isIp(ipNumber) {
+      if (!ipNumber.includes(".")) {
+        return false;
       }
 
-      const ipNumbers = ipNumber.split('.')
+      const ipNumbers = ipNumber.split(".");
 
       if (ipNumbers.length !== 4) {
-        return false
+        return false;
       }
 
       for (const ipNumber of ipNumbers) {
         if (!isIpNumber(ipNumber)) {
-          return false
+          return false;
         }
       }
 
-      return true
-    }
-  }
-}
+      return true;
+    },
+  },
+};
 </script>

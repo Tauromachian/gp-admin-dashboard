@@ -8,170 +8,278 @@
           </v-col>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.january') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.january") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.february') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.february") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.march') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.march") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.april') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.april") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.may') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.may") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.june') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.june") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.jule') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.jule") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.august') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.august") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.september') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.september") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.october') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.october") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.november') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.november") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
           <v-row>
             <v-col md="12" sm="12" xs="12" class="pb-0">
-              <v-subheader>{{ $t('plans.months.december') }}</v-subheader>
+              <v-subheader>{{ $t("plans.months.december") }}</v-subheader>
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.total_plan') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.total_plan') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.night') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.night') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="planRules" :label="$t('plans.day') + '  (kWh)'" />
+              <v-text-field
+                :rules="planRules"
+                :label="$t('plans.day') + '  (kWh)'"
+              />
             </v-col>
           </v-row>
 
@@ -183,34 +291,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { isNumber } from '~/helpers/regex'
-import axios from 'axios'
-import { api } from '~/config'
+import { mapState } from "pinia";
+import { isNumber } from "~/helpers/regex";
+import axios from "axios";
+import { api } from "~/config";
 
 export default {
-  name: 'ServiceForm',
+  name: "ServiceForm",
   data: function () {
     return {
       planRules: [
-        v => !!v || 'Entre el total para el mes',
-        v => isNumber(v) || 'Por favor entre un numero aqui'
-      ]
-    }
+        (v) => !!v || "Entre el total para el mes",
+        (v) => isNumber(v) || "Por favor entre un numero aqui",
+      ],
+    };
   },
   methods: {
     validate: function () {
-      this.$refs.form.validate()
+      this.$refs.form.validate();
     },
     cancel: function () {
-      this.$emit('on-cancel')
+      this.$emit("on-cancel");
     },
     createPlan: function () {
       if (!this.validate()) {
-        return
+        return;
       }
-      this.$emit('plan-submit', this.form)
-    }
-  }
-}
+      this.$emit("plan-submit", this.form);
+    },
+  },
+};
 </script>

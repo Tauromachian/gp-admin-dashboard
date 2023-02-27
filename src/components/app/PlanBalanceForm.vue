@@ -8,20 +8,32 @@
           </v-col>
 
           <v-col xs="12" sm="12" md="6">
-            <v-text-field :rules="yearPlanRules" :label="$t('plans.year_total') + '    (kWh)'" />
+            <v-text-field
+              :rules="yearPlanRules"
+              :label="$t('plans.year_total') + '    (kWh)'"
+            />
           </v-col>
 
           <v-col md="6"></v-col>
 
           <div v-for="(field, index) in visibleFields" :key="index">
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="generalRules" :label="$t('plans.months.january') + '  (kWh)'" />
+              <v-text-field
+                :rules="generalRules"
+                :label="$t('plans.months.january') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="generalRules" :label="$t('plans.months.january') + '  (kWh)'" />
+              <v-text-field
+                :rules="generalRules"
+                :label="$t('plans.months.january') + '  (kWh)'"
+              />
             </v-col>
             <v-col xs="12" sm="12" md="4">
-              <v-text-field :rules="generalRules" :label="$t('plans.months.january') + '  (kWh)'" />
+              <v-text-field
+                :rules="generalRules"
+                :label="$t('plans.months.january') + '  (kWh)'"
+              />
             </v-col>
           </div>
         </v-row>
@@ -32,43 +44,41 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { isNumber } from '~/helpers/regex'
-import axios from 'axios'
-import { api } from '~/config'
+import { mapState } from "pinia";
+import { isNumber } from "~/helpers/regex";
 
 export default {
-  name: 'ServiceForm',
+  name: "ServiceForm",
   props: {
     visibleFields: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data: function () {
     return {
       generalRules: [
-        v => !!v || 'Llene este campo por favor',
-        v => isNumber(v) || 'Solo valores númericos permitidos aqui'
-      ]
-    }
+        (v) => !!v || "Llene este campo por favor",
+        (v) => isNumber(v) || "Solo valores númericos permitidos aqui",
+      ],
+    };
   },
   computed: {
-    ...mapState('app', ['services'])
+    ...mapState("app", ["services"]),
   },
   methods: {
     validate: function () {
-      this.$refs.form.validate()
+      this.$refs.form.validate();
     },
     cancel: function () {
-      this.$emit('cancel')
+      this.$emit("cancel");
     },
     createPlan: function () {
       if (!this.validate()) {
-        return
+        return;
       }
-      this.$emit('plan-submit', this.form)
-    }
-  }
-}
+      this.$emit("plan-submit", this.form);
+    },
+  },
+};
 </script>
