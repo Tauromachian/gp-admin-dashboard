@@ -5,7 +5,7 @@ import { useNotificationsStore } from "./notifications";
 
 const notificationsStore = useNotificationsStore();
 
-export const useAuthStore = defineStore("app", {
+export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null,
     token: "",
