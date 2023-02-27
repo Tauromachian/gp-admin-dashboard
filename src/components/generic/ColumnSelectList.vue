@@ -1,27 +1,16 @@
 <script>
 import {
   VList,
-  VSubheader,
-  VListItemGroup,
+  VListGroup,
   VListItem,
-  VListItemContent,
   VListItemTitle,
   VCheckbox,
   VListItemAction,
-} from "vuetify";
+} from "vuetify/components";
 
 export default {
   name: "ColumnSelectList",
-  components: {
-    "v-list": VList,
-    "v-subheader": VSubheader,
-    "v-list-item-group": VListItemGroup,
-    "v-list-item": VListItem,
-    "v-list-item-action": VListItemAction,
-    "v-list-item-content": VListItemContent,
-    "v-list-item-title": VListItemTitle,
-    "v-checkbox": VCheckbox,
-  },
+
   props: {
     value: {
       type: Array,
@@ -73,7 +62,7 @@ export default {
       return vListItems;
     },
     makeListItem(h, column, value) {
-      return h("v-list-item", {
+      return h(VListItem, {
         attrs: { value },
         scopedSlots: {
           default: (scope) => {
@@ -89,13 +78,13 @@ export default {
     },
     makeListItemContent(h, active, toggle, column) {
       return [
-        h("v-list-item-action", [
-          h("v-checkbox", {
+        h(VListItemAction, [
+          h(VCheckbox, {
             attrs: { color: "primary", inputValue: active },
             on: { click: toggle },
           }),
         ]),
-        h("v-list-item-content", [h("v-list-item-title", column.text)]),
+        h(VListItem, [h(VListItemTitle, column.text)]),
       ];
     },
     getChildrenFields(parent) {
@@ -111,10 +100,10 @@ export default {
   render: function (h) {
     const vListItems = this.makeList(h);
 
-    return h("v-list", { attrs: { flat: true } }, [
-      h("v-subheader", "Selecciona las columnas a mostrar"),
+    return h(VList, { attrs: { flat: true } }, [
+      h("div", "Selecciona las columnas a mostrar"),
       h(
-        "v-list-item-group",
+        VListGroup,
         {
           attrs: { multiple: true, value: this.visibleColumns },
           on: { change: this.setTableVisibleColumns },
