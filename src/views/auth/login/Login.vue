@@ -1,7 +1,7 @@
 <template>
   <v-card class="login-form">
     <v-card-text>
-      <gen-form title="Login" ref="form" @submit.prevent="submit">
+      <gen-form title="Login" ref="form" @submit="submit">
         <v-text-field
           label="Nombre de usuario"
           v-model="form.username"
