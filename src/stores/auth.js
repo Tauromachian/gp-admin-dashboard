@@ -21,6 +21,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const { data } = await login(form);
         this.token = data.token;
+        this.router.push({ name: "institutions" });
       } catch (error) {
         notificationsStore.addNotification({
           message: error.response.data.message,
