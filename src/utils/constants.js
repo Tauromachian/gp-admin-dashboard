@@ -1,3 +1,3 @@
-export const HOST_DIR = process.env.VUE_APP_BE_HOST;
-export const AUTH_DIR = process.env.VUE_APP_AUTH_SERVICE;
+export const HOST_DIR = import.meta.env.VITE_HOST_DIR;
+export const AUTH_DIR = import.meta.env.VITE_AUTH_DIR;
 export const API_DIR = `${HOST_DIR}`;
