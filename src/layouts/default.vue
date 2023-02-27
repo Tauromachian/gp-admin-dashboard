@@ -6,9 +6,9 @@
       :color="notificationComputed.color"
     />
 
-    <core-toolbar />
+    <default-toolbar></default-toolbar>
 
-    <core-view />
+    <default-view></default-view>
   </div>
 </template>
 
@@ -16,8 +16,15 @@
 import { mapState, mapActions } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
+import DefaultToolbar from "./Toolbar.vue";
+import DefaultView from "./View.vue";
+
 export default {
   name: "Default",
+  components: {
+    DefaultToolbar,
+    DefaultView,
+  },
   computed: {
     ...mapState(useNotificationsStore, ["notification"]),
     notificationComputed: {
