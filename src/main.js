@@ -1,20 +1,14 @@
-/**
- * main.js
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+import App from "./App.vue";
+import { createApp } from "vue";
+import { registerPlugins } from "@/plugins";
+import { makeServer } from "./mock-server";
 
-// Components
-import App from './App.vue'
+const app = createApp(App);
 
-// Composables
-import { createApp } from 'vue'
+registerPlugins(app);
 
-// Plugins
-import { registerPlugins } from '@/plugins'
+if (process.env.NODE_ENV !== "production") {
+  makeServer();
+}
 
-const app = createApp(App)
-
-registerPlugins(app)
-
-app.mount('#app')
+app.mount("#app");
