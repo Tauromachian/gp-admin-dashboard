@@ -2,7 +2,7 @@ export default [
   {
     path: "/",
     redirect: { name: "institutions" },
-    component: () => import("@/views/default"),
+    component: () => import("@/layouts/default"),
     children: [
       {
         path: "institutions",
