@@ -40,7 +40,7 @@ export default {
       this.$emit("cancel");
     },
     async validate() {
-      await this.$refs.form.validate();
+      return await this.$refs.form.validate();
     },
   },
 };
