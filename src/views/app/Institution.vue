@@ -80,12 +80,11 @@
 
 <script>
 import axios from "axios";
+import debounce from "basic-debouncer";
 
 import { useAppStore } from "@/stores/app";
 import { useInstitutionStore } from "@/stores/institution";
 import { mapActions, mapState } from "pinia";
-
-import debounce from "~/helpers/debouncer";
 
 export default {
   name: "Institution",
