@@ -31,11 +31,11 @@ export default {
     },
   },
   methods: {
-    submitClick() {
-      this.$emit("submit-click");
+    onSubmit() {
+      this.$emit("submit");
     },
-    cancelClick() {
-      this.$emit("cancel-click");
+    onCancel() {
+      this.$emit("cancel");
     },
   },
 };
