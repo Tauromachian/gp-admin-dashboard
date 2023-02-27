@@ -13,23 +13,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
 
 export default {
-  name: 'Default',
+  name: "Default",
   computed: {
-    ...mapState('app', ['notification']),
+    ...mapState(useNotificationsStore, ["notification"]),
     notificationComputed: {
-      get () {
-        return this.notification
+      get() {
+        return this.notification;
       },
-      set (val) {
-        this.setNotification(val)
-      }
-    }
+      set(val) {
+        this.setNotification(val);
+      },
+    },
   },
   methods: {
-    ...mapActions('app', ['setNotification'])
-  }
-}
+    ...mapActions(useNotificationsStore, ["setNotification"]),
+  },
+};
 </script>
