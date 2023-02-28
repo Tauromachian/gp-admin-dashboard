@@ -7,9 +7,9 @@
     </template>
     <v-list>
       <v-list-item
-        v-for="(value, key) in locales"
+        v-for="(value, key) in $i18n.availableLocales"
         :key="key"
-        @click="setLocale(key)"
+        @click="setLocale(value)"
       >
         <v-list-item-title>{{ $t(value) }}</v-list-item-title>
       </v-list-item>
@@ -18,24 +18,12 @@
 </template>
 
 <script>
-import { mapGetters } from "pinia";
-import { loadMessages } from "~/plugins/i18n";
-
 export default {
   name: "LocaleDropdown",
 
-  computed: mapGetters({
-    locale: "lang/locale",
-    locales: "lang/locales",
-  }),
-
   methods: {
     setLocale(locale) {
-      if (this.$i18n.locale !== locale) {
-        loadMessages(locale);
-
-        this.$store.dispatch("lang/setLocale", { locale });
-      }
+      this.$i18n.locale = locale;
     },
   },
 };
