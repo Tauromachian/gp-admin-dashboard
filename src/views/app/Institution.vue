@@ -185,7 +185,7 @@ export default {
         return data;
       } catch (err) {
         this.addNotification({
-          message: this.$t("notifications.unsuccesfull_update"),
+          message: this.$t("notifications.unsuccesfull_get"),
           color: "error",
         });
       }
