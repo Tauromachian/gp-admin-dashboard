@@ -147,9 +147,11 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions, mapGetters } from "pinia";
 
-import { api } from "~/config";
+import { mapState, mapActions } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
+
+import { getService, getServices } from "@/services/app/service";
 
 import debounce from "~/helpers/debouncer";
 
@@ -177,7 +179,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("service", { services: "tableData" }),
+    ...mapState("service", { services: "tableData" }),
     ...mapState("app", ["notification", "isScreenSmall"]),
   },
 
@@ -201,7 +203,7 @@ export default {
       editServiceInStore: "editService",
       clearCredentialsFormData: "clearCredentialsFormData",
     }),
-    ...mapActions("app", ["addNotification", "setDrawerSubtitle"]),
+    ...mapActions(useNotificationsStore, ["addNotification"]),
 
     async loadData(val = "") {
       const id = this.$route.params.id;
@@ -254,16 +256,15 @@ export default {
       this.codcli = codcli;
     },
 
-    async getServices(id, val) {
-      const url = `${this.$urlBuilder.getRoute(
-        "service"
-      )}?institution=${id},q=name:${val}`;
-      let data;
+    async getServices() {
       try {
-        const response = await axios.get(url);
-        data = response.data;
+        const data = await getServices();
+        return data;
       } catch (err) {
-        console.error(err);
+        this.addNotification({
+          message: this.$t("notifications.unsuccesfull_get"),
+          color: "error",
+        });
       }
       return data;
     },
