@@ -1,6 +1,11 @@
 <template>
   <div class="w-100 mt-10 notifications-handler">
-    <gen-notification class="notification"></gen-notification>
+    <gen-notification
+      v-for="(notification, key) in messagesDirectory"
+      class="notification"
+      :key="key"
+      :notification="notification"
+    ></gen-notification>
   </div>
 </template>
 
