@@ -18,21 +18,12 @@
     </v-btn>
 
     <v-menu left bottom offset-x offset-y>
-      <!-- <template v-slot:activator="{ on }">
-            <v-btn icon class="toolbar-items" v-on="on">
-              <v-badge color="error" :content="notifications.length" overlap>
-                <v-icon>
-                  mdi-bell
-                </v-icon>
-              </v-badge>
-            </v-btn>
-          </template> -->
       <v-list dense>
         <v-list-item
           v-for="(notification, index) in notifications"
           :key="index"
         >
-          <v-list-item-title v-text="notification" />
+          <v-list-item-title>{{ notification }}</v-list-item-title>
         </v-list-item>
         <v-divider />
         <v-list-item
@@ -40,7 +31,9 @@
           align="center"
           :to="{ name: 'notifications' }"
         >
-          <v-list-item-title v-text="$t('button.view_all')" />
+          <v-list-item-title>
+            {{ $t("button.view_all") }}
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -93,21 +86,18 @@ export default {
   text-decoration: none;
   background: #eee;
 }
-/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .dinamic-margin-left {
     margin-left: 0px;
   }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .dinamic-margin-left {
     margin-left: 0px;
   }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .dinamic-margin-left {
     margin-left: 100px;
