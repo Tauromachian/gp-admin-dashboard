@@ -9,7 +9,7 @@
         <slot> </slot>
         <gen-form-actions
           class="pl-0 pr-0"
-          :enable-cancel="enableCancelAction"
+          :enable-cancel="enableCancel"
           @click:submit="onSubmit"
           @click:cancel="onCancel"
         />
@@ -26,7 +26,7 @@ export default {
       type: String,
       default: "Form",
     },
-    enableCancelAction: {
+    enableCancel: {
       type: Boolean,
       default: false,
     },
