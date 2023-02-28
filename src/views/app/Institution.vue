@@ -79,12 +79,18 @@
 </template>
 
 <script>
-import axios from "axios";
 import debounce from "basic-debouncer";
 
 import { useAppStore } from "@/stores/app";
 import { useInstitutionStore } from "@/stores/institution";
 import { mapActions, mapState } from "pinia";
+
+import {
+  getInstitutions,
+  addInstitution,
+  updateInstitution,
+  deleteInstitution,
+} from "@/services/app/institution";
 
 export default {
   name: "Institution",
@@ -104,7 +110,7 @@ export default {
   },
   computed: {
     ...mapState(useInstitutionStore, ["institutions", "institutionForm"]),
-    ...mapState(useAppStore, ["notification", "isScreenSmall"]),
+    ...mapState(useAppStore, ["isScreenSmall"]),
     ...mapState(useInstitutionStore, ["institutionsById"]),
     institutionFormComputed: {
       get() {
@@ -173,18 +179,15 @@ export default {
       this.selectedInstitutionId = this.institutions[0].id;
     },
     async getInstitutions(filter) {
-      let url = this.$urlBuilder.getRoute("institution");
-      if (filter) {
-        url += `?q=name:${filter}`;
-      }
-      let data;
       try {
-        const response = await axios.get(url);
-        data = response.data;
+        const { data } = await getInstitutions(filter);
+        return data;
       } catch (err) {
-        console.error(err);
+        this.addNotification({
+          message: this.$t("notifications.unsuccesfull_update"),
+          color: "error",
+        });
       }
-      return data;
     },
     openUpdateForm(id) {
       this.loadDataForUpdate(id);
@@ -202,91 +205,73 @@ export default {
       this.loadDataForUpdate(this.selectedInstitutionId);
       this.patchInstitution();
     },
-    // axios call methods
+
     async patchInstitution() {
-      const url = `/api/v1/institution/${this.institutionToUpdateId}`;
+      if (!(await this.$refs.institutionForm.validate()).valid) return;
+
       this.loading = true;
-      let notification;
-      let data;
+
       try {
-        const response = await axios.patch(url, this.institutionFormComputed);
-        data = response.data;
+        const { data } = await updateInstitution(this.institutionFormComputed);
+
+        this.addNotification({
+          message: this.$t("notifications.succesfull_update"),
+          color: "success",
+        });
+
+        this.updateInstitution({
+          institutionId: this.institutionToUpdateId,
+          institution: data,
+        });
+
+        this.institutionFormDialog = false;
       } catch (err) {
-        notification = {
+        this.addNotification({
           message: this.$t("notifications.unsuccesfull_update"),
           color: "error",
-        };
-        this.addNotification(notification);
-        this.loading = false;
-        console.log(err);
-        return;
+        });
       }
-      notification = {
-        message: this.$t("notifications.succesfull_update"),
-        color: "success",
-      };
-      this.addNotification(notification);
-      this.updateInstitution({
-        institutionId: this.institutionToUpdateId,
-        institution: data,
-      });
+
       this.loading = false;
-      this.institutionFormDialog = false;
     },
 
-    async createInstitution(form) {
-      if (!this.$refs.institutionForm.validate()) {
-        return;
-      }
+    async createInstitution() {
+      if (!(await this.$refs.institutionForm.validate()).valid) return;
 
-      const url = "/api/v1/institution";
       this.loading = true;
-      let data;
-      let notification;
 
       try {
-        const response = await axios.post(url, this.institutionFormComputed);
-        data = response.data;
+        const { data } = await addInstitution(this.institutionFormComputed);
+        this.addNotification({
+          message: this.$t("notifications.succesfull_insert"),
+          color: "success",
+        });
+        this.addInstitution(data);
+        this.institutionFormDialog = false;
       } catch (err) {
-        notification = {
+        this.addNotification({
           message: this.$t("notifications.unsuccesfull_insert"),
           color: "error",
-        };
-        this.addNotification(notification);
-        this.loading = false;
-        console.log(err);
-        return;
+        });
       }
-      notification = {
-        message: this.$t("notifications.succesfull_insert"),
-        color: "success",
-      };
-      this.addNotification(notification);
-      this.addInstitution(data);
+
       this.loading = false;
-      this.institutionFormDialog = false;
     },
 
     async removeInstitution(id) {
-      const url = `/api/v1/institution/${id}`;
-      let notification;
       try {
-        await axios.delete(url);
+        await deleteInstitution(id);
+        this.deleteInstitution(id);
+        this.addNotification({
+          message: this.$t("notifications.successful_delete"),
+          color: "success",
+        });
       } catch (err) {
-        console.error(err);
-        notification = {
+        this.addNotification({
           message: this.$t("notifications.error_at_delete"),
           color: "success",
-        };
-        this.addNotification(notification);
-        console.error(err);
+        });
       }
-      this.deleteInstitution(id);
-      notification = {
-        message: this.$t("notifications.successful_delete"),
-        color: "success",
-      };
-      this.addNotification(notification);
     },
   },
 };
