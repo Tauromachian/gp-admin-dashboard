@@ -4,6 +4,7 @@
       v-for="(notification, key) in messagesDirectory"
       class="notification"
       :key="key"
+      :style="{ 'margin-top': `${index * 6}em` }"
       :notification="notification"
     ></gen-notification>
   </div>
