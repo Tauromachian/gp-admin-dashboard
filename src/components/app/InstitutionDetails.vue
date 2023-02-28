@@ -16,7 +16,7 @@
       <v-card-text class="mt-0 mb-0">
         <h3
           class="pb-2 mt-0 word-break-normal"
-          :class="{ 'pt-10': isScreenSmall }"
+          :class="{ 'pt-10': $vuetify.display.mdAndDown }"
         >
           {{ selectedInstitution.name }}
         </h3>
@@ -123,10 +123,6 @@ export default {
     id: {
       type: [Number, String],
       required: true,
-    },
-    isScreenSmall: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
