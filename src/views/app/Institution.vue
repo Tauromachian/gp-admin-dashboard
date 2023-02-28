@@ -242,7 +242,7 @@ export default {
       this.loading = true;
 
       try {
-        const { data } = await addInstitution(this.institutionFormComputed);
+        const data = await addInstitution(this.institutionFormComputed);
         this.addNotification({
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
