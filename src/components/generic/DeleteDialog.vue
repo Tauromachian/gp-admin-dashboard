@@ -7,6 +7,7 @@
         <v-spacer />
 
         <gen-form-actions
+          enable-cancel
           @click:submit="acceptClicked"
           @click:cancel="dialogComputed = false"
         ></gen-form-actions>
