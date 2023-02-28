@@ -30,7 +30,7 @@
       <!-- Institution details -->
       <v-col sm="4" md="4" cols="12">
         <gen-details-sidebar
-          :allow-dialog="isScreenSmall"
+          :allow-dialog="$vuetify.display.mdAndDown"
           v-model:dialog="institutionDetailsDialog"
           toolbar-title="Institution details"
         >
@@ -114,7 +114,6 @@ export default {
   },
   computed: {
     ...mapState(useInstitutionStore, ["institutions", "institutionForm"]),
-    ...mapState(useAppStore, ["isScreenSmall"]),
     ...mapState(useInstitutionStore, ["institutionsById"]),
     institutionFormComputed: {
       get() {
@@ -156,7 +155,7 @@ export default {
 
     showInstitutionDetails(institutionId) {
       this.selectedInstitutionId = institutionId;
-      if (this.isScreenSmall) {
+      if (this.$vuetify.display.mdAndDown) {
         this.institutionDetailsDialog = true;
       }
     },
