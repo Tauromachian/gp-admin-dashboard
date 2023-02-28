@@ -1,36 +1,6 @@
 <template>
   <v-container fluid class="mx-0 px-0">
     <v-row>
-      <!-- Action button -->
-      <v-btn
-        fixed
-        bottom
-        right
-        class="mb-9 perfectly-round-button"
-        fab
-        dark
-        color="primary"
-        large
-        @click="openInsertForm"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-
-      <!-- Institution form -->
-      <v-dialog v-model="institutionFormDialog" width="500">
-        <institution-form
-          ref="institutionForm"
-          v-model="institutionFormComputed"
-        >
-          <gen-form-actions
-            :loading-buttons="loading"
-            :enable-cancel="true"
-            @on-submit="submitInstitution"
-            @on-cancel="institutionFormDialog = false"
-          />
-        </institution-form>
-      </v-dialog>
-
       <!-- Institution content -->
       <v-col sm="8" md="8" cols="12">
         <div class="mt-2 mx-8">
@@ -75,6 +45,29 @@
     <gen-filter left>
       <institution-filter v-model:name="institutionName" />
     </gen-filter>
+
+    <!-- Action button -->
+    <v-btn
+      class="mb-9 addition-button"
+      dark
+      color="primary"
+      size="x-large"
+      icon="mdi-plus"
+      @click="openInsertForm"
+    >
+    </v-btn>
+
+    <!-- Institution form -->
+    <v-dialog v-model="institutionFormDialog" width="500">
+      <institution-form ref="institutionForm" v-model="institutionFormComputed">
+        <gen-form-actions
+          :loading-buttons="loading"
+          :enable-cancel="true"
+          @on-submit="submitInstitution"
+          @on-cancel="institutionFormDialog = false"
+        />
+      </institution-form>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -285,3 +278,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.addition-button {
+  position: fixed;
+  bottom: 3em;
+  right: 3em;
+}
+</style>
