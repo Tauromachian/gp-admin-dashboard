@@ -1,24 +1,23 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex flex-row-reverse w-100">
     <v-btn
-      v-if="enableCancel"
-      class="mx-0 font-weight-light btn-test ml-1"
-      color="primary"
-      text
-      :loading="loadingButtons"
-      :disabled="loadingButtons"
-      @click="cancelEvent"
-    >
-      {{ $t("button.actions.cancel") }}
-    </v-btn>
-    <v-btn
-      class="mx-0 font-weight-light btn-test"
+      class="ml-1"
       color="primary"
       :loading="loadingButtons"
       :disabled="loadingButtons"
       @click="submitEvent"
     >
       {{ submitButtonTitle }}
+    </v-btn>
+    <v-btn
+      v-if="enableCancel"
+      color="primary"
+      variant="text"
+      :loading="loadingButtons"
+      :disabled="loadingButtons"
+      @click="cancelEvent"
+    >
+      {{ $t("button.actions.cancel") }}
     </v-btn>
   </div>
 </template>
