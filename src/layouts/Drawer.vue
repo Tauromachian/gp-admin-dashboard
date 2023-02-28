@@ -21,9 +21,9 @@
         class="mt-3"
         :to="link.to"
       >
-        <v-list-item-icon>
+        <template #prepend>
           <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-icon>
+        </template>
         <v-list-item-content>
           <v-list-item-title>{{ $t(link.text) }} </v-list-item-title>
         </v-list-item-content>
