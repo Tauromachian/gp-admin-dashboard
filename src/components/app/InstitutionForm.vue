@@ -1,47 +1,26 @@
 <template>
-  <gen-form :title="$t('institutions.form_name')">
-    <v-form ref="form">
-      <v-container py-0>
-        <v-row wrap>
-          <v-col xs="12" sm="12" md="12" lg="12" xl="12" cols="12">
-            <v-text-field
-              v-model="form.name"
-              :label="$t('institutions.fields.name')"
-              :rules="[
-                rules.required('El nombre de la institución es requerido'),
-              ]"
-            />
-          </v-col>
-
-          <v-col xs="12" sm="12" md="12" lg="12" xl="12" cols="12">
-            <v-autocomplete
-              v-model="form.province"
-              :items="provinces"
-              :label="$t('institutions.fields.province')"
-            />
-          </v-col>
-
-          <v-col xs="12" sm="12" md="12" lg="12" xl="12" cols="12">
-            <v-text-field
-              v-model="form.organism"
-              :label="$t('institutions.fields.organism')"
-              :rules="[rules.required('El nombre del organismo es requerido')]"
-            />
-          </v-col>
-
-          <v-col xs="12" sm="12" md="12" lg="12" xl="12" cols="12">
-            <v-textarea
-              v-model="form.description"
-              :label="`${$t('institutions.fields.description')} (opcional)`"
-              outlined
-              auto-grow
-            />
-          </v-col>
-
-          <slot />
-        </v-row>
-      </v-container>
-    </v-form>
+  <gen-form ref="form" :title="$t('institutions.form_name')" v-bind="$attrs">
+    <v-text-field
+      v-model="form.name"
+      :label="$t('institutions.fields.name')"
+      :rules="[rules.required('El nombre de la institución es requerido')]"
+    />
+    <v-autocomplete
+      v-model="form.province"
+      :items="provinces"
+      :label="$t('institutions.fields.province')"
+    />
+    <v-text-field
+      v-model="form.organism"
+      :label="$t('institutions.fields.organism')"
+      :rules="[rules.required('El nombre del organismo es requerido')]"
+    />
+    <v-textarea
+      v-model="form.description"
+      :label="`${$t('institutions.fields.description')} (opcional)`"
+      outlined
+      auto-grow
+    />
   </gen-form>
 </template>
 
