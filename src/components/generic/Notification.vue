@@ -17,7 +17,7 @@ export default {
 
   methods: {
     onClick() {
-      this.$emit("delete");
+      this.$emit("click:delete");
     },
   },
 };
