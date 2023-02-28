@@ -21,8 +21,12 @@ export const useInstitutionStore = defineStore("institution", {
   },
 
   actions: {
-    setInstitutions: (institutions) => (this.institutions = institutions),
-    addInstitution: (institution) => this.institutions.push(institution),
+    setInstitutions(institutions) {
+      this.institutions = institutions;
+    },
+    addInstitution(institution) {
+      this.institutions.push(institution);
+    },
     updateInstitution(id, newInstitutionData) {
       const index = this.institutions.findIndex(
         (institution) => institution.id === id
