@@ -60,12 +60,14 @@
     <!-- Institution form -->
     <v-dialog v-model="institutionFormDialog" width="500">
       <institution-form ref="institutionForm" v-model="institutionFormComputed">
-        <gen-form-actions
-          :loading-buttons="loading"
-          :enable-cancel="true"
-          @on-submit="submitInstitution"
-          @on-cancel="institutionFormDialog = false"
-        />
+        <div class="d-flex flex-reverse">
+          <gen-form-actions
+            :loading-buttons="loading"
+            :enable-cancel="true"
+            @on-submit="submitInstitution"
+            @on-cancel="institutionFormDialog = false"
+          />
+        </div>
       </institution-form>
     </v-dialog>
   </v-container>
@@ -141,7 +143,7 @@ export default {
       "addInstitution",
       "updateInstitution",
       "setFormData",
-      "clearFormData",
+      "clearForm",
     ]),
     ...mapActions(useAppStore, ["addNotification", "setDrawerSubtitle"]),
     async loadData(val = "") {
@@ -168,7 +170,7 @@ export default {
       }
     },
     openInsertForm() {
-      this.clearFormData();
+      this.clearForm();
       this.isUpdating = false;
       if (this.$refs.institutionForm) {
         this.$refs.institutionForm.resetValidation();
