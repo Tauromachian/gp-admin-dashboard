@@ -153,13 +153,8 @@ export default {
     ]),
     ...mapActions(useAppStore, ["addNotification", "setDrawerSubtitle"]),
     async loadData(val = "") {
-      if (val) {
-        const data = await this.getInstitutions(val);
-        this.setInstitutions(data);
-      } else {
-        const data = await this.getInstitutions();
-        this.setInstitutions(data);
-      }
+      const data = await getInstitutions(val);
+      this.setInstitutions(data);
 
       if (this.institutions) {
         this.selectedInstitutionId = this.institutions[0].id;
