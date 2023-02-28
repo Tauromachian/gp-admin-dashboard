@@ -47,7 +47,9 @@ export const useInstitutionStore = defineStore("institution", {
         this.institutionForm[key] = form[key];
       }
     },
-    clearForm: () => (this.institutionForm = { ...INSTITUTION_FORM_TEMPLATE }),
+    clearForm() {
+      this.institutionForm = { ...INSTITUTION_FORM_TEMPLATE };
+    },
     addCoordinator(id, newCoordinator) {
       const index = this.institutions.findIndex((institution) => {
         return institution.id === id;
