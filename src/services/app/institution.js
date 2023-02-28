@@ -17,7 +17,7 @@ export async function getInstitution(id) {
 }
 
 export async function addInstitution(form) {
-  const { data } = await appApi.post(`institution`, form);
+  const { data } = await appApi.post(`institutions`, form);
   return data;
 }
 
