@@ -21,8 +21,8 @@ export async function addInstitution(form) {
   return data;
 }
 
-export async function updateInstitution(form) {
-  const { data } = await appApi.patch(`institution`, form);
+export async function updateInstitution(id, form) {
+  const { data } = await appApi.patch(`institutions/${id}`, form);
   return data;
 }
 
