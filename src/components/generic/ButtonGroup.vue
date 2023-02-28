@@ -13,7 +13,7 @@
 export default {
   name: "ButtonGroup",
   props: {
-    value: { type: String, default: "" },
+    modelValue: { type: String, default: "" },
     label: { type: String, default: "" },
   },
   computed: {
@@ -22,7 +22,7 @@ export default {
         return this.value;
       },
       set(selection) {
-        this.$emit("input", selection);
+        this.$emit("update:modelValue", selection);
       },
     },
   },

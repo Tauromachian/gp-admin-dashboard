@@ -9,7 +9,11 @@
       >
         <template v-slot:default="{ active, toggle }">
           <v-list-item-action>
-            <v-checkbox color="primary" @click="toggle" v-model="active"></v-checkbox>
+            <v-checkbox
+              color="primary"
+              @click="toggle"
+              v-model="active"
+            ></v-checkbox>
           </v-list-item-action>
 
           <v-list-item-content>
@@ -24,27 +28,27 @@
 <script>
 export default {
   name: "ColumnSelectForm",
-  data: function() {
+  data: function () {
     return {};
   },
   props: {
     value: Array,
-    columns: Array
+    columns: Array,
   },
   computed: {
     hide: {
       get() {
         return this.column;
-      }
+      },
     },
     visibleColumn: {
       get() {
         return this.value;
       },
       set(selection) {
-        this.$emit("input", selection);
-      }
-    }
-  }
+        this.$emit("update:modelValue", selection);
+      },
+    },
+  },
 };
 </script>

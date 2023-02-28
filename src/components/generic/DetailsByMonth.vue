@@ -18,37 +18,36 @@
 // Muestra datos segun el mes
 // Los headers funcionan de igual manera que los de vuetify
 export default {
-  name: 'DetailsByMonth',
+  name: "DetailsByMonth",
   props: {
-    value: {
+    modelValue: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     headers: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     item: {
       type: Object,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   computed: {
     month: {
-      get () {
-        return this.value
+      get() {
+        return this.modelValue;
       },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
-  }
-}
+      set(val) {
+        this.$emit("update:modelValue", val);
+      },
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

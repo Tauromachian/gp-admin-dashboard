@@ -83,7 +83,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    value: {
+    modelValue: {
       type: Object,
       required: true,
     },
@@ -103,7 +103,7 @@ export default {
         return this.value;
       },
       set(val) {
-        this.$emit("input", val);
+        this.$emit("update:modelValue", val);
       },
     },
   },

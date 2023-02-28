@@ -12,7 +12,7 @@ export default {
   name: "ColumnSelectList",
 
   props: {
-    value: {
+    modelValue: {
       type: Array,
       default: () => [],
     },
@@ -47,7 +47,7 @@ export default {
         }
       );
 
-      this.$emit("input", tableSelectedColumns);
+      this.$emit("update:modelValue", tableSelectedColumns);
     },
     makeList: function (h) {
       const vListItems = this.columns.map((column) => {

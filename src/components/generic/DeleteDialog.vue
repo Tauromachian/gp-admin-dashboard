@@ -6,13 +6,10 @@
       <v-card-actions>
         <v-spacer />
 
-        <v-btn color="primary" text @click="acceptClicked">
-          Aceptar
-        </v-btn>
-
-        <v-btn color="primary" text @click="dialogComputed = false">
-          Cancelar
-        </v-btn>
+        <gen-form-actions
+          @click:submit="acceptClicked"
+          @click:cancel="dialogComputed = false"
+        ></gen-form-actions>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -20,27 +17,27 @@
 
 <script>
 export default {
-  name: 'DeleteDialog',
+  name: "DeleteDialog",
   props: {
-    value: {
+    modelValue: {
       type: [Boolean, String],
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     dialogComputed: {
-      get () {
-        return this.value
+      get() {
+        return this.modelValue;
       },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
+      set(val) {
+        this.$emit("update:modelValue", val);
+      },
+    },
   },
   methods: {
-    acceptClicked () {
-      this.$emit('accept-click')
-    }
-  }
-}
+    acceptClicked() {
+      this.$emit("accept-click");
+    },
+  },
+};
 </script>

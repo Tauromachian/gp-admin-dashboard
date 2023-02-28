@@ -61,7 +61,7 @@ import { required, email, phone } from "@/utils/rules";
 export default {
   name: "InstitutionCoordinatorDetailsForm",
   props: {
-    value: {
+    modelValue: {
       type: Object,
       required: true,
     },
@@ -81,7 +81,7 @@ export default {
         return this.value;
       },
       set(val) {
-        this.$emit("input", val);
+        this.$emit("update:modelValue", val);
       },
     },
   },

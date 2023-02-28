@@ -18,7 +18,7 @@ const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export default {
   name: "ReadServiceFilter",
   props: {
-    value: {
+    modelValue: {
       type: Array,
       required: true,
     },
@@ -44,7 +44,7 @@ export default {
         return this.value;
       },
       set(val) {
-        this.$emit("input", val);
+        this.$emit("update:modelValue", val);
       },
     },
   },

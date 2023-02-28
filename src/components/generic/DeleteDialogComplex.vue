@@ -3,9 +3,7 @@
     <v-card>
       <v-card-title>¿Esta seguro de que desea borrar?</v-card-title>
       <v-card-subtitle>
-        <div>
-          Para borrar introduzca el siguiente texto:
-        </div>
+        <div>Para borrar introduzca el siguiente texto:</div>
         <div>
           <span class="font-italic indigo lighten-5">
             {{ confirmationText }}
@@ -23,13 +21,10 @@
       <v-card-actions>
         <v-spacer />
 
-        <v-btn color="primary" text @click="acceptClicked">
-          Aceptar
-        </v-btn>
-
-        <v-btn color="primary" text @click="dialogComputed = false">
-          Cancelar
-        </v-btn>
+        <gen-form-actions
+          @click:submit="acceptClicked"
+          @click:cancel="dialogComputed = false"
+        ></gen-form-actions>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -37,44 +32,45 @@
 
 <script>
 export default {
-  name: 'DeleteDialogComplex',
+  name: "DeleteDialogComplex",
   props: {
-    value: {
+    modelValue: {
       type: [Boolean, String],
-      required: true
+      required: true,
     },
     confirmationText: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      enteredConfirmationtext: '',
+      enteredConfirmationtext: "",
       isTextBadTyped: false,
-      errorMessage: '',
+      errorMessage: "",
       confirmationRules: [
-        v => v === this.confirmationText || this.$t('delete_dialog_error_message')
-      ]
-    }
+        (v) =>
+          v === this.confirmationText || this.$t("delete_dialog_error_message"),
+      ],
+    };
   },
   computed: {
     dialogComputed: {
-      get () {
-        return this.value
+      get() {
+        return this.modelValue;
       },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
+      set(val) {
+        this.$emit("update:modelValue", val);
+      },
+    },
   },
   methods: {
-    acceptClicked () {
+    acceptClicked() {
       if (this.confirmationText !== this.enteredConfirmationtext) {
-        return
+        return;
       }
-      this.$emit('accept-click')
-    }
-  }
-}
+      this.$emit("accept-click");
+    },
+  },
+};
 </script>

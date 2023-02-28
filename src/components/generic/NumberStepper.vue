@@ -28,75 +28,75 @@
 
 <script>
 export default {
-  name: 'NumberStepper',
+  name: "NumberStepper",
   props: {
-    value: { type: [String, Number], default: 0 },
-    label: { type: String, default: '' },
+    modelValue: { type: [String, Number], default: 0 },
+    label: { type: String, default: "" },
     showNumber: Boolean,
     allowNumberEditing: Boolean,
     min: {
       type: Number,
-      default: 0
+      default: 0,
     },
     max: {
       type: Number,
-      default: 10
-    }
+      default: 10,
+    },
   },
-  data () {
+  data() {
     return {
-      selection: this.min
-    }
+      selection: this.min,
+    };
   },
   computed: {
-    selectionComputed () {
+    selectionComputed() {
       if (this.notNumber(this.value)) {
-        return this.min
+        return this.min;
       }
       if (this.value > this.max) {
-        return this.max
+        return this.max;
       }
       if (this.value < this.min) {
-        return this.min
+        return this.min;
       }
-      return this.value
-    }
+      return this.value;
+    },
   },
   watch: {
-    selectionComputed (value) {
-      this.selection = value
+    selectionComputed(value) {
+      this.selection = value;
     },
-    selection (value) {
-      this.$emit('input', value)
-    }
+    selection(value) {
+      this.$emit("update:modelValue", value);
+    },
   },
   methods: {
     decreaseValue: function () {
       if (this.selection > this.min) {
-        this.selection = this.selection - 1
+        this.selection = this.selection - 1;
       }
     },
     increaseValue: function () {
       if (this.selection < this.max) {
-        this.selection = this.selection + 1
+        this.selection = this.selection + 1;
       }
     },
-    notNumber (val) {
-      return typeof val !== 'number'
+    notNumber(val) {
+      return typeof val !== "number";
     },
-    checkNumber () {
+    checkNumber() {
       if (this.value > this.max) {
-        this.selection = this.max
+        this.selection = this.max;
       }
       if (this.value < this.min) {
-        this.selection = this.min
+        this.selection = this.min;
       }
       if (this.notNumber(this.selection)) {
-        this.selection = this.min
+        this.selection = this.min;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

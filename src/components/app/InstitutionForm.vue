@@ -51,7 +51,7 @@ import { required } from "@/utils/rules";
 export default {
   name: "InstitutionForm",
   props: {
-    value: {
+    modelValue: {
       type: Object,
       required: true,
     },
@@ -87,7 +87,7 @@ export default {
         return this.value;
       },
       set(form) {
-        this.$emit("input", form);
+        this.$emit("update:modelValue", form);
       },
     },
   },
