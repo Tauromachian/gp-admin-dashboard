@@ -21,7 +21,7 @@ export default [
 
           {
             path: "service/:idService",
-            name: "services",
+            name: "service",
             component: () => import("@/views/serviceContent"),
 
             children: [
