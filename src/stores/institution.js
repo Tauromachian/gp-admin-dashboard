@@ -18,7 +18,7 @@ export const useInstitutionStore = defineStore("institution", {
   getters: {
     isLogged: (state) => !!state.token,
     institutionsById() {
-      new Indexer(this.institutions ?? [], "id", true);
+      return new Indexer(this.institutions ?? [], "id", true);
     },
   },
 
