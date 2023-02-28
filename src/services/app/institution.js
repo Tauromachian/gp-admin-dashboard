@@ -7,12 +7,12 @@ import appApi from "../appApi";
 export async function getInstitutions(filters) {
   const stringifiedFilters = qs.stringify(filters);
 
-  const { data } = await appApi.get(`Institution?${stringifiedFilters}`);
+  const { data } = await appApi.get(`institutions?${stringifiedFilters}`);
   return data;
 }
 
 export async function getInstitution(id) {
-  const { data } = await appApi.get(`Institution/${id}/details`);
+  const { data } = await appApi.get(`institutions/${id}/details`);
   return data;
 }
 
