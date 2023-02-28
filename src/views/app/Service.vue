@@ -146,12 +146,17 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import { mapState, mapActions } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
-import { getService, getServices } from "@/services/app/service";
+import {
+  getServices,
+  updateService,
+  addService,
+  addServiceCredentials,
+  getService,
+  deleteService,
+} from "@/services/app/service";
 
 import debounce from "basic-debouncer";
 
@@ -291,7 +296,7 @@ export default {
           return;
         }
 
-        const newService = await this.getServiceByCodCli(form.codcli);
+        const newService = await getService(form.codcli);
         this.addServiceToStore(newService);
         this.closeFormDialog();
         this.insertedSuccesfully = true;
@@ -339,10 +344,8 @@ export default {
     },
 
     async patchService(form, id) {
-      const url = `${api.path("service")}/${id}`;
-
       try {
-        await axios.patch(url, form);
+        await updateService(id, form);
         return true;
       } catch (error) {
         this.addNotification({
@@ -353,19 +356,10 @@ export default {
       }
     },
 
-    getServiceByCodCli: async function (codcli) {
-      const url = `${api.path("service")}/${codcli}`;
-
-      const res = await axios.get(url);
-      const service = res.data;
-
-      return service;
-    },
-
     async insertService(form) {
       try {
         form.institution_id = this.$route.params.id;
-        await axios.post(api.path("service"), form);
+        await addService(form);
         return true;
       } catch (err) {
         this.addNotification({
@@ -381,11 +375,10 @@ export default {
       }
 
       try {
-        const urlForService = `${api.path("service")}/${codcli}`;
-        const { data } = await axios.get(urlForService);
+        const data = await getService(codcli);
         const id = data.id;
-        const urlForServiceCredentials = `${api.path("service")}/${id}/user`;
-        await axios.post(urlForServiceCredentials, serviceFormCredentials);
+
+        await addServiceCredentials(id, serviceFormCredentials);
         return true;
       } catch (error) {
         this.addNotification({
@@ -400,10 +393,8 @@ export default {
     },
 
     async removeService(serviceId) {
-      const url = `${api.path("service")}/${serviceId}`;
-
       try {
-        axios.delete(url);
+        await deleteService(serviceId);
         this.removeServiceFromStore(serviceId);
         this.addNotification({
           messsage: this.$t("notifications.successful_delete"),
