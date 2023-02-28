@@ -7,7 +7,9 @@
             <v-text-field
               v-model="form.name"
               :label="$t('institutions.fields.name')"
-              :rules="genericRequiredRule(null, 'El nombre de la institucion es requerido')"
+              :rules="
+                rules.required('El nombre de la institución es requerido')
+              "
             />
           </v-col>
 
@@ -23,7 +25,7 @@
             <v-text-field
               v-model="form.organism"
               :label="$t('institutions.fields.organism')"
-              :rules="genericRequiredRule(null, 'El organismo es requerido')"
+              :rules="rules.required('El nombre del organismo es requerido')"
             />
           </v-col>
 
@@ -44,65 +46,58 @@
 </template>
 
 <script>
-import { isEmail, isPhone } from '~/helpers/regex'
-import genericRequiredRule from '~/mixins/genericRequiredRule'
+import { required } from "@/utils/rules";
 
 export default {
-  name: 'InstitutionForm',
-  mixins: [genericRequiredRule],
+  name: "InstitutionForm",
   props: {
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       provinces: [
-        'Pinar del Río',
-        'Artemisa',
-        'La Habana',
-        'Mayabeque',
-        'Matanzas',
-        'Cienfuegos',
-        'Villa Clara',
-        'Sancti Spíritus',
-        'Ciego de Ávila',
-        'Camagüey',
-        'Las Tunas',
-        'Granma',
-        'Holguín',
-        'Santiago de Cuba',
-        'Guantánamo',
-        'Isla de la Juventud'
+        "Pinar del Río",
+        "Artemisa",
+        "La Habana",
+        "Mayabeque",
+        "Matanzas",
+        "Cienfuegos",
+        "Villa Clara",
+        "Sancti Spíritus",
+        "Ciego de Ávila",
+        "Camagüey",
+        "Las Tunas",
+        "Granma",
+        "Holguín",
+        "Santiago de Cuba",
+        "Guantánamo",
+        "Isla de la Juventud",
       ],
-      mailRules: [
-        v => !!v || 'El nombre del servicio falta',
-        v => isEmail(v) || 'Caracteres no permitidos'
-      ],
-      phoneRules: [
-        v => !!v || 'La demanda contratada falta',
-        v => isPhone(v) || 'La Demanda contratada es un numero'
-      ]
-    }
+      rules: {
+        required,
+      },
+    };
   },
   computed: {
     form: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (form) {
-        this.$emit('input', form)
-      }
-    }
+      set(form) {
+        this.$emit("input", form);
+      },
+    },
   },
   methods: {
-    validate () {
-      return this.$refs.form.validate()
+    validate() {
+      return this.$refs.form.validate();
     },
-    resetValidation () {
-      this.$refs.form.resetValidation()
-    }
-  }
-}
+    resetValidation() {
+      this.$refs.form.resetValidation();
+    },
+  },
+};
 </script>

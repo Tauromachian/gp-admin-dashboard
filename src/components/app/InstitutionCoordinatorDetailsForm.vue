@@ -4,12 +4,12 @@
       <v-text-field
         v-model="name"
         :label="$t('institutions.fields.name')"
-        :rules="noEmptyRule"
+        :rules="rules.required()"
       />
       <v-text-field
         v-model="charge"
         :label="$t('institutions.fields.charge')"
-        :rules="noEmptyRule"
+        :rules="rules.required()"
       />
       <v-btn icon color="primary" @click="addPhone">
         <v-icon> mdi-plus </v-icon>
@@ -20,13 +20,11 @@
         :key="'phone' + key"
         v-model="phones[key]"
         :label="$t('institutions.fields.phone')"
-        :rules="phoneRules"
+        :rules="[rules.required(), rules.phone()]"
       >
         <template #append-outer>
           <v-btn class="mt-0 mb-0" icon @click="deletePhone(key)">
-            <v-icon color="primary">
-              mdi-delete
-            </v-icon>
+            <v-icon color="primary"> mdi-delete </v-icon>
           </v-btn>
         </template>
       </v-text-field>
@@ -39,13 +37,11 @@
         :key="'mail' + key"
         v-model="emails[key]"
         :label="$t('institutions.fields.mail')"
-        :rules="mailRules"
+        :rules="[rules.required(), rules.email()]"
       >
         <template #append-outer>
           <v-btn class="mt-0 mb-0" icon @click="deleteMail(key)">
-            <v-icon color="primary">
-              mdi-delete
-            </v-icon>
+            <v-icon color="primary"> mdi-delete </v-icon>
           </v-btn>
         </template>
       </v-text-field>
@@ -60,90 +56,81 @@
 </template>
 
 <script>
-import { isPhone, isEmail } from '~/helpers/regex'
+import { required, email, phone } from "@/utils/rules";
 
 export default {
-  name: 'InstitutionCoordinatorDetailsForm',
+  name: "InstitutionCoordinatorDetailsForm",
   props: {
     value: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       name: this.value.name,
       charge: this.value.charge,
       phones: this.value.phones,
       emails: this.value.emails,
-      phoneRules: [
-        (v) => !!v || 'This field is not optional',
-        (v) => isPhone(v) || 'Please enter a correct phone number'
-      ],
-      mailRules: [
-        (v) => !!v || 'This field is not optional',
-        (v) => isEmail(v) || 'Please enter a correct mail address'
-      ],
-      noEmptyRule: [(v) => !!v || 'Este campo no es opcional']
-    }
+      rules: { required, email, phone },
+    };
   },
   computed: {
     coordinator: {
-      get () {
-        return this.value
+      get() {
+        return this.value;
       },
-      set (val) {
-        this.$emit('input', val)
-      }
-    }
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
   },
   methods: {
-    addPhone () {
+    addPhone() {
       if (!this.phones) {
-        this.phones = []
+        this.phones = [];
       }
-      this.phones.push('')
+      this.phones.push("");
     },
-    addMail () {
+    addMail() {
       if (!this.emails) {
-        this.emails = []
+        this.emails = [];
       }
-      this.emails.push('')
+      this.emails.push("");
     },
-    deletePhone (key) {
-      this.phones.splice(key, 1)
+    deletePhone(key) {
+      this.phones.splice(key, 1);
     },
-    deleteMail (key) {
-      this.emails.splice(key, 1)
+    deleteMail(key) {
+      this.emails.splice(key, 1);
     },
-    purgeEmptyFields (array) {
+    purgeEmptyFields(array) {
       if (!array || !array.length) {
-        return
+        return;
       }
       for (let i = 0; i < array.length; i++) {
         if (!array[i]) {
-          array.splice(i, 1)
+          array.splice(i, 1);
         }
       }
     },
-    submitClick () {
+    submitClick() {
       if (!this.$refs.form.validate()) {
-        return
+        return;
       }
-      this.purgeEmptyFields(this.phones)
-      this.purgeEmptyFields(this.emails)
-      this.coordinator.phones = this.phones
-      this.coordinator.emails = this.emails
-      this.coordinator.name = this.name
-      this.coordinator.charge = this.charge
-      this.$emit('submit-click')
+      this.purgeEmptyFields(this.phones);
+      this.purgeEmptyFields(this.emails);
+      this.coordinator.phones = this.phones;
+      this.coordinator.emails = this.emails;
+      this.coordinator.name = this.name;
+      this.coordinator.charge = this.charge;
+      this.$emit("submit-click");
     },
-    cancelClick () {
-      this.$emit('cancel-click')
-    }
-  }
-}
+    cancelClick() {
+      this.$emit("cancel-click");
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
