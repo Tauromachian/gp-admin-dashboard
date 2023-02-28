@@ -18,7 +18,7 @@
                   xl="6"
                   cols="12"
                 >
-                  <app-service-card
+                  <service-card
                     :service="service"
                     @click:see="showServiceDetails(service)"
                     @click:edit="openFormForEdit(service.codcli)"
@@ -38,7 +38,7 @@
               :allow-dialog="isScreenSmall"
               v-model:dialog="serviceDetailsDialog"
             >
-              <app-service-details :service="selectedService" elevation="0" />
+              <service-details :service="selectedService" elevation="0" />
             </gen-details-sidebar>
           </v-col>
         </v-row>
@@ -47,7 +47,7 @@
         <v-row v-else>
           <v-col cols="12">
             <v-card elevation="0" class="mt-4">
-              <app-service-table ref="table" class="pt-0 pb-0" />
+              <service-table ref="table" class="pt-0 pb-0" />
             </v-card>
           </v-col>
         </v-row>
@@ -132,7 +132,7 @@
 
     <!-- Services dialog-form -->
     <v-dialog v-model="formDialog" width="400">
-      <app-service-form
+      <service-form
         ref="form"
         v-model:inserted-succesfully="insertedSuccesfully"
         :codcli="codcli"
@@ -149,6 +149,11 @@
 import { mapState, mapActions } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
+import ServiceForm from "@/components/app/ServiceForm.vue";
+import ServiceTable from "@/components/app/ServiceTable.vue";
+import ServiceCard from "@/components/app/ServiceCard.vue";
+import ServiceDetails from "@/components/app/ServiceDetails.vue";
+
 import {
   getServices,
   updateService,
@@ -163,6 +168,13 @@ import debounce from "basic-debouncer";
 export default {
   name: "Service",
   middleware: "auth",
+
+  components: {
+    ServiceForm,
+    ServiceTable,
+    ServiceCard,
+    ServiceDetails,
+  },
 
   data() {
     return {
