@@ -1,10 +1,6 @@
 <template>
   <div>
-    <gen-notification
-      v-model="notificationComputed.notification"
-      :text="notificationComputed.message"
-      :color="notificationComputed.color"
-    />
+    <notifications-handler ref="notificationsHandler"></notifications-handler>
 
     <default-toolbar></default-toolbar>
 
@@ -13,31 +9,35 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "pinia";
+import { mapState } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
 import DefaultToolbar from "./Toolbar.vue";
 import DefaultView from "./View.vue";
+import NotificationsHandler from "@/components/generic/NotificationsHandler.vue";
 
 export default {
   name: "Default",
   components: {
     DefaultToolbar,
     DefaultView,
+    NotificationsHandler,
   },
+
   computed: {
-    ...mapState(useNotificationsStore, ["notification"]),
-    notificationComputed: {
-      get() {
-        return this.notification;
-      },
-      set(val) {
-        this.setNotification(val);
-      },
-    },
+    ...mapState(useNotificationsStore, ["notifications"]),
   },
-  methods: {
-    ...mapActions(useNotificationsStore, ["setNotification"]),
+
+  watch: {
+    notifications(notifications) {
+      if (!notifications) return;
+
+      const lastNotification = notifications.at(-1);
+
+      if (!lastNotification) return;
+
+      this.$refs.notificationsHandler.addNotification(notification);
+    },
   },
 };
 </script>
