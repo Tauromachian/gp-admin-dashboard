@@ -146,6 +146,7 @@ export default {
   computed: {
     ...mapState(useInstitutionStore, ["institutionsById"]),
     selectedInstitution() {
+      if (!this.institutionsById) return null;
       return this.institutionsById.get(this.id)[0];
     },
   },

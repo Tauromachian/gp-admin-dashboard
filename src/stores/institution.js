@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import Indexer from "basic-indexer";
+import { Indexer } from "basic-indexer";
 
 const INSTITUTION_FORM_TEMPLATE = {
   name: "",
