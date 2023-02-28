@@ -143,7 +143,7 @@ export default {
       "setFormData",
       "clearForm",
     ]),
-    ...mapActions(useAppStore, ["addNotification", "setDrawerSubtitle"]),
+    ...mapActions(useAppStore, ["addNotification"]),
     async loadData(val = "") {
       const data = await getInstitutions(val);
       this.setInstitutions(data);
@@ -175,8 +175,7 @@ export default {
       }
       this.institutionFormDialog = true;
     },
-    goToServices(id, name) {
-      this.setDrawerSubtitle(name);
+    goToServices(id) {
       this.$router.push({ name: "services", params: { id } });
     },
     async getInstitutions(filter) {

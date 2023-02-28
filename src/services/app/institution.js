@@ -27,7 +27,7 @@ export async function updateInstitution(id, form) {
 }
 
 export async function deleteInstitution(id) {
-  const response = await appApi.delete(`Institution/${id}`);
+  const response = await appApi.delete(`institution/${id}`);
 
   return response.data.name;
 }
