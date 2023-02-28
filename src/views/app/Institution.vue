@@ -63,6 +63,7 @@
         ref="institutionForm"
         enable-cancel
         v-model="institutionFormComputed"
+        @submit="submitInstitution"
       >
       </institution-form>
     </v-dialog>
