@@ -10,8 +10,8 @@
           <gen-form-actions
             class="pl-0 pr-0"
             :enable-cancel="enableCancelAction"
-            @on-submit="onSubmit"
-            @on-cancel="onCancel"
+            @click:submit="onSubmit"
+            @click:cancel="onCancel"
           />
         </slot>
       </v-form>
