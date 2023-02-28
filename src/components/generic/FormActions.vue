@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     submitEvent() {
-      this.$emit("on-submit");
+      this.$emit("click:submit");
     },
     cancelEvent() {
-      this.$emit("on-cancel");
+      this.$emit("click:cancel");
     },
   },
 };
