@@ -139,7 +139,7 @@ export default {
       });
     },
   },
-  mounted() {
+  created() {
     this.loadData();
   },
   methods: {
@@ -152,6 +152,19 @@ export default {
       "clearFormData",
     ]),
     ...mapActions(useAppStore, ["addNotification", "setDrawerSubtitle"]),
+    async loadData(val = "") {
+      if (val) {
+        const data = await this.getInstitutions(val);
+        this.setInstitutions(data);
+      } else {
+        const data = await this.getInstitutions();
+        this.setInstitutions(data);
+      }
+
+      if (this.institutions) {
+        this.selectedInstitutionId = this.institutions[0].id;
+      }
+    },
 
     showInstitutionDetails(institutionId) {
       this.selectedInstitutionId = institutionId;
@@ -178,19 +191,6 @@ export default {
     goToServices(id, name) {
       this.setDrawerSubtitle(name);
       this.$router.push({ name: "services", params: { id } });
-    },
-    async loadData(val = "") {
-      if (val) {
-        const data = await this.getInstitutions(val);
-        this.setInstitutions(data);
-      } else {
-        const data = await this.getInstitutions();
-        this.setInstitutions(data);
-      }
-
-      if (this.institutions) {
-        this.selectedInstitutionId = this.institutions[0].id;
-      }
     },
     async getInstitutions(filter) {
       try {
