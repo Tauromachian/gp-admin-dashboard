@@ -42,7 +42,7 @@
               "
             >
               <template #form-actions="{ serviceSubmit }">
-                <material-form-actions
+                <gen-form-actions
                   :submit-button-title="$t('button.actions.update')"
                   :loading-buttons="loading"
                   :enable-cancel="true"
@@ -59,8 +59,13 @@
 </template>
 
 <script>
-import { api } from "~/config";
-import axios from "axios";
+import {
+  deleteService,
+  updateService,
+  getService,
+  addServiceCredentials,
+} from "@/services/app/service";
+
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -159,10 +164,9 @@ export default {
 
     async deleteRow() {
       const id = this.selectedRow[0].id;
-      const url = `${api.path("service")}/${id}`;
 
       try {
-        await axios.delete(url);
+        await deleteService(id);
         const index = this.services.indexOf(this.selectedRow[0]);
         this.services.splice(index, 1);
         this.addNotification({
@@ -226,10 +230,8 @@ export default {
       closeUpdateDialog();
     },
     async patchService(form, id) {
-      const url = `${api.path("service")}/${id}`;
-
       try {
-        await axios.patch(url, form);
+        await updateService(id, form);
         return true;
       } catch (error) {
         this.addNotification({
@@ -245,11 +247,8 @@ export default {
       }
 
       try {
-        const urlForService = `${api.path("service")}/${codcli}`;
-        const { data } = await axios.get(urlForService);
-        const id = data.id;
-        const urlForServiceCredentials = `${api.path("service")}/${id}/user`;
-        await axios.post(urlForServiceCredentials, serviceFormCredentials);
+        const data = await getService(codcli);
+        await addServiceCredentials(data.id, serviceFormCredentials);
         return true;
       } catch (error) {
         this.addNotification({
@@ -258,15 +257,6 @@ export default {
         });
         return false;
       }
-    },
-    addRow: async function (codcli) {
-      const url = `${api.path("service")}/${codcli}`;
-
-      const res = await axios.get(url);
-      const row = res.data;
-
-      this.gridOptions.rowData.push(row);
-      this.gridApi.setRowData(this.gridOptions.rowData);
     },
   },
 };
