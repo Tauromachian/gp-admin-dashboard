@@ -1,6 +1,6 @@
 <template>
   <v-card :elevation="0">
-    <v-card-title class="py-3 pt-1">
+    <v-card-title class="pt-1">
       {{ title }}
       <v-divider class="primary mb-2" />
     </v-card-title>
