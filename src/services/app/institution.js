@@ -1,7 +1,5 @@
 import qs from "query-string";
 
-import { RequestHeader } from "@/services/requestHeader";
-
 import appApi from "../appApi";
 
 export async function getInstitutions(filters) {
