@@ -59,15 +59,11 @@
 
     <!-- Institution form -->
     <v-dialog v-model="institutionFormDialog" width="500">
-      <institution-form ref="institutionForm" v-model="institutionFormComputed">
-        <div class="d-flex flex-reverse">
-          <gen-form-actions
-            :loading-buttons="loading"
-            :enable-cancel="true"
-            @on-submit="submitInstitution"
-            @on-cancel="institutionFormDialog = false"
-          />
-        </div>
+      <institution-form
+        ref="institutionForm"
+        enable-cancel
+        v-model="institutionFormComputed"
+      >
       </institution-form>
     </v-dialog>
   </v-container>
