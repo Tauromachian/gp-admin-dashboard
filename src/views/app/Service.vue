@@ -191,7 +191,7 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.loadData();
   },
 
