@@ -1,7 +1,18 @@
 <template>
-  <v-menu absolute close-on-click close-on-content-click offset-y>
-    <template v-slot:activator="{ on }">
-      <v-btn icon dark class="toolbar-items btn-toolbar-color" v-on="on">
+  <v-menu
+    absolute
+    close-on-click
+    close-on-content-click
+    offset-y
+    v-model="menu"
+  >
+    <template #activator>
+      <v-btn
+        icon
+        dark
+        class="toolbar-items btn-toolbar-color"
+        @click="menu = !menu"
+      >
         <v-icon>mdi-translate</v-icon>
       </v-btn>
     </template>
@@ -20,6 +31,11 @@
 <script>
 export default {
   name: "LocaleDropdown",
+  data() {
+    return {
+      menu: false,
+    };
+  },
 
   methods: {
     setLocale(locale) {

@@ -8,8 +8,9 @@
     nudge-left="12"
     offset-x
     transition="slide-y-transition"
+    v-model="menu"
   >
-    <template #activator="{ on }">
+    <template #activator>
       <v-btn
         class="elevation-0"
         :class="{ 'position-right': right, 'position-left': left }"
@@ -20,7 +21,7 @@
         style="top: 96px"
         top
         left
-        v-on="on"
+        @click="menu = !menu"
       >
         <v-icon>mdi-filter</v-icon>
       </v-btn>
@@ -35,6 +36,12 @@
 
 <script>
 export default {
+  name: "Filter",
+  data() {
+    return {
+      menu: false,
+    };
+  },
   props: {
     left: {
       type: Boolean,

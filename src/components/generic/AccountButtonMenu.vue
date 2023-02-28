@@ -1,7 +1,13 @@
 <template>
-  <v-menu absolute close-on-click close-on-content-click offset-y>
-    <template v-slot:activator="{ on }">
-      <v-btn icon class="toolbar-items" v-on="on">
+  <v-menu
+    absolute
+    close-on-click
+    close-on-content-click
+    offset-y
+    v-model="menu"
+  >
+    <template #activator>
+      <v-btn icon class="toolbar-items" @click="menu = !menu">
         <v-icon> mdi-account </v-icon>
       </v-btn>
     </template>
@@ -28,6 +34,11 @@
 <script>
 export default {
   name: "AccountButtonMenu",
+  data() {
+    return {
+      menu: false,
+    };
+  },
   methods: {
     async logout() {
       // Log out the user.

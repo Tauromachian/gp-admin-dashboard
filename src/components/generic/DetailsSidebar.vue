@@ -46,46 +46,46 @@
 
 <script>
 export default {
-  name: 'DetailsSidebar',
+  name: "DetailsSidebar",
   props: {
     allowDialog: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dialog: {
       type: Boolean,
-      default: false
+      default: false,
     },
     toolbarTitle: {
       type: String,
-      default: ''
+      default: "",
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     height: {
       type: String,
-      default: '100%'
-    }
+      default: "100%",
+    },
   },
   computed: {
     dialogComputed: {
-      get () {
-        if (!this.allowDialog) return false
-        return this.dialog
+      get() {
+        if (!this.allowDialog) return false;
+        return this.dialog;
       },
-      set (val) {
-        this.$emit('update:dialog', val)
-      }
-    }
+      set(val) {
+        this.$emit("update:dialog", val);
+      },
+    },
   },
   methods: {
-    onResize () {
-      this.isScreenSmall = window.innerWidth < 800
-    }
-  }
-}
+    onResize() {
+      this.isScreenSmall = window.innerWidth < 800;
+    },
+  },
+};
 </script>
 
 <style scoped>
