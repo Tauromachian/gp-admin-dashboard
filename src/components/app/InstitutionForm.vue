@@ -7,9 +7,9 @@
             <v-text-field
               v-model="form.name"
               :label="$t('institutions.fields.name')"
-              :rules="
-                rules.required('El nombre de la institución es requerido')
-              "
+              :rules="[
+                rules.required('El nombre de la institución es requerido'),
+              ]"
             />
           </v-col>
 
@@ -25,7 +25,7 @@
             <v-text-field
               v-model="form.organism"
               :label="$t('institutions.fields.organism')"
-              :rules="rules.required('El nombre del organismo es requerido')"
+              :rules="[rules.required('El nombre del organismo es requerido')]"
             />
           </v-col>
 
@@ -84,7 +84,7 @@ export default {
   computed: {
     form: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(form) {
         this.$emit("update:modelValue", form);
