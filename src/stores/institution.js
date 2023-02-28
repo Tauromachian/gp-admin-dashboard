@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Indexer from "basic-indexer";
 
 const INSTITUTION_FORM_TEMPLATE = {
   name: "",
@@ -16,6 +17,7 @@ export const useInstitutionStore = defineStore("institution", {
 
   getters: {
     isLogged: (state) => !!state.token,
+    institutionsById: (state) => new Indexer(state.institutions, "id", true),
   },
 
   actions: {
