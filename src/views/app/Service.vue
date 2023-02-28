@@ -33,13 +33,13 @@
           </v-col>
           <!-- Details sidebar -->
           <v-col sm="4" md="4" cols="12">
-            <material-details-sidebar
+            <gen-details-sidebar
               class="mt-2"
               :allow-dialog="isScreenSmall"
               v-model:dialog="serviceDetailsDialog"
             >
               <app-service-details :service="selectedService" elevation="0" />
-            </material-details-sidebar>
+            </gen-details-sidebar>
           </v-col>
         </v-row>
 
@@ -120,12 +120,12 @@
           </v-btn>
         </template>
         <v-card>
-          <material-form :title="$t('services.service_filter')">
+          <gen-form :title="$t('services.service_filter')">
             <v-text-field
               v-model="serviceName"
               :label="$t('institutions.fields.name')"
             />
-          </material-form>
+          </gen-form>
         </v-card>
       </v-menu>
     </v-speed-dial>

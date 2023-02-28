@@ -11,7 +11,7 @@
       :setRowAmount="setRowAmount"
       :doSearch="doSearch"
     >
-      <material-toolbar
+      <gen-toolbar
         v-model:search="search"
         v-model:row-amount="rowAmount"
         v-model:visible-columns="visibleColumns"
@@ -20,7 +20,7 @@
         @update:rowHeight="setRowHeight"
         @deleteRow="deleteRow"
       >
-      </material-toolbar>
+      </gen-toolbar>
     </slot>
 
     <ag-grid-vue

@@ -14,7 +14,7 @@
         </template>
 
         <v-card>
-          <material-column-select-list
+          <gen-column-select-list
             v-model="visibleColumnsComputed"
             :columns="columnDefs"
           />
@@ -31,7 +31,7 @@
         <v-icon dark> mdi-pencil </v-icon>
       </v-btn>
 
-      <material-delete-confirmation-dialog
+      <gen-delete-confirmation-dialog
         v-if="!disableDelete"
         v-model:delete-dialog-button="deleteDialogButtonComputed"
         @on-delete-button-clicked="deleteButtonClicked"

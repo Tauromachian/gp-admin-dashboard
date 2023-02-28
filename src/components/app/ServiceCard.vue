@@ -12,22 +12,16 @@
         {{ $t("services.manage") }}
       </v-btn>
       <v-btn icon color="primary" @click="seeClicked">
-        <v-icon>
-          mdi-eye
-        </v-icon>
+        <v-icon> mdi-eye </v-icon>
       </v-btn>
       <v-btn icon color="primary" @click="editClicked">
-        <v-icon>
-          mdi-pencil
-        </v-icon>
+        <v-icon> mdi-pencil </v-icon>
       </v-btn>
       <v-btn icon color="primary" @click="dialog = true">
-        <v-icon>
-          mdi-delete
-        </v-icon>
+        <v-icon> mdi-delete </v-icon>
       </v-btn>
     </v-card-actions>
-    <material-delete-dialog-complex
+    <gen-delete-dialog-complex
       v-model="dialog"
       :confirmation-text="service.name"
       @accept-click="deleteClicked"
@@ -37,43 +31,43 @@
 
 <script>
 export default {
-  name: 'ServiceCard',
+  name: "ServiceCard",
   props: {
     service: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: function () {
     return {
-      dialog: false
-    }
+      dialog: false,
+    };
   },
   methods: {
-    manageClicked () {
-      this.$emit('click:manage')
+    manageClicked() {
+      this.$emit("click:manage");
     },
-    seeClicked () {
-      this.$emit('click:see')
+    seeClicked() {
+      this.$emit("click:see");
     },
-    editClicked () {
-      this.$emit('click:edit')
+    editClicked() {
+      this.$emit("click:edit");
     },
-    deleteClicked () {
-      this.$emit('click:delete')
-      this.dialog = false
-    }
-  }
-}
+    deleteClicked() {
+      this.$emit("click:delete");
+      this.dialog = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
 .height {
-    height: 220px;
+  height: 220px;
 }
-.actions-styles{
-    position: absolute !important;
-    bottom: 0;
-    right: 0;
+.actions-styles {
+  position: absolute !important;
+  bottom: 0;
+  right: 0;
 }
 </style>

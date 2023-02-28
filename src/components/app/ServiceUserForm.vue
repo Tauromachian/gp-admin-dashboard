@@ -1,9 +1,9 @@
 <template>
   <v-form ref="form">
-    <material-form :title="$t('services.user.form_name')">
+    <gen-form :title="$t('services.user.form_name')">
       <app-service-user-form-fields @update:form="updateForm" />
       <v-col v-if="hasSensitiveData" xs="12" sm="12" md="4" cols="12">
-        <material-delete-confirmation-dialog
+        <gen-delete-confirmation-dialog
           :text="$t('services.fields.delete_credentials_button')"
           color="danger"
           v-model:delete-dialog-button="deleteCredentialsDialog"
@@ -17,14 +17,14 @@
         name="form-actions"
         :createServiceCredentials="createServiceCredentials"
       >
-        <material-form-actions
+        <gen-form-actions
           :loading-buttons="loading"
           :enable-cancel="true"
           @on-submit="createServiceCredentials"
           @on-cancel="closeClick"
         />
       </slot>
-    </material-form>
+    </gen-form>
   </v-form>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <material-toolbar
+  <gen-toolbar
     v-model:row-amount="rowAmount"
     v-model:visible-columns="visibleColumnsComputed"
     :column-defs="columnDefs"
@@ -13,12 +13,12 @@
       </v-btn>
     </template>
     <template #actions-append>
-      <material-time-period-filter-menu
+      <gen-time-period-filter-menu
         v-model:start-date="startDate"
         v-model:finish-date="finishDate"
       />
     </template>
-  </material-toolbar>
+  </gen-toolbar>
 </template>
 
 <script>

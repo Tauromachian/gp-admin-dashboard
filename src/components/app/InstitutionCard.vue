@@ -12,25 +12,19 @@
     <v-card-actions class="actions-styles">
       <v-spacer />
       <v-btn color="primary" text @click="servicesClicked">
-        {{ $t('institutions.fields.services') }}
+        {{ $t("institutions.fields.services") }}
       </v-btn>
       <v-btn icon color="primary" @click="seeClicked">
-        <v-icon>
-          mdi-eye
-        </v-icon>
+        <v-icon> mdi-eye </v-icon>
       </v-btn>
       <v-btn icon color="primary" @click="editClicked">
-        <v-icon>
-          mdi-pencil
-        </v-icon>
+        <v-icon> mdi-pencil </v-icon>
       </v-btn>
       <v-btn icon color="primary" @click="dialog = true">
-        <v-icon>
-          mdi-delete
-        </v-icon>
+        <v-icon> mdi-delete </v-icon>
       </v-btn>
     </v-card-actions>
-    <material-delete-dialog-complex
+    <gen-delete-dialog-complex
       v-model="dialog"
       :confirmation-text="institution.name"
       @accept-click="deleteClicked"
@@ -40,34 +34,34 @@
 
 <script>
 export default {
-  name: 'InstitutionCard',
+  name: "InstitutionCard",
   props: {
     institution: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: function () {
     return {
-      dialog: false
-    }
+      dialog: false,
+    };
   },
   methods: {
-    servicesClicked () {
-      this.$emit('services-click')
+    servicesClicked() {
+      this.$emit("services-click");
     },
-    seeClicked () {
-      this.$emit('see-click')
+    seeClicked() {
+      this.$emit("see-click");
     },
-    editClicked () {
-      this.$emit('edit-click')
+    editClicked() {
+      this.$emit("edit-click");
     },
-    deleteClicked () {
-      this.$emit('delete-click')
-      this.dialog = false
-    }
-  }
-}
+    deleteClicked() {
+      this.$emit("delete-click");
+      this.dialog = false;
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <material-form :title="$t('institutions.coordinator_details_form_name')">
+  <gen-form :title="$t('institutions.coordinator_details_form_name')">
     <v-form ref="form" class="pl-3 pr-3">
       <v-text-field
         v-model="name"
@@ -45,14 +45,14 @@
           </v-btn>
         </template>
       </v-text-field>
-      <material-form-actions
+      <gen-form-actions
         class="pl-0 pr-0"
         enable-cancel
         @on-submit="submitClick"
         @on-cancel="cancelClick"
       />
     </v-form>
-  </material-form>
+  </gen-form>
 </template>
 
 <script>

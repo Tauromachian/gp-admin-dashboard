@@ -6,7 +6,7 @@
     >
       {{ $t("services.select_service_text") }}
     </div>
-    <material-details-card
+    <gen-details-card
       v-if="selectedService"
       :headers="headers"
       :item="selectedService"

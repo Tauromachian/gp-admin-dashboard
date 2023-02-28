@@ -24,7 +24,7 @@
       "
     >
       <template #top>
-        <material-toolbar
+        <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
           v-model:dense="isDense"
@@ -42,7 +42,7 @@
               "
             >
               <template #form-actions="{ serviceSubmit }">
-                <material-form-actions
+                <gen-form-actions
                   :submit-button-title="$t('button.actions.update')"
                   :loading-buttons="loading"
                   :enable-cancel="true"
@@ -52,7 +52,7 @@
               </template>
             </app-service-form>
           </template>
-        </material-toolbar>
+        </gen-toolbar>
       </template>
     </v-data-table>
   </v-container>

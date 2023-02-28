@@ -1,13 +1,13 @@
 <template>
   <v-row>
     <v-col xs="12" md="2">
-      <material-button-group
+      <gen-button-group
         v-model="metrajeComputed"
         :label="$t('services.fields.metraje')"
       >
         <v-btn class="ml-0" value="Alta"> Alta </v-btn>
         <v-btn value="Baja"> Baja </v-btn>
-      </material-button-group>
+      </gen-button-group>
     </v-col>
     <v-col xs="12" md="2">
       <v-text-field

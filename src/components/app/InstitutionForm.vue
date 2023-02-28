@@ -1,5 +1,5 @@
 <template>
-  <material-form :title="$t('institutions.form_name')">
+  <gen-form :title="$t('institutions.form_name')">
     <v-form ref="form">
       <v-container py-0>
         <v-row wrap>
@@ -42,7 +42,7 @@
         </v-row>
       </v-container>
     </v-form>
-  </material-form>
+  </gen-form>
 </template>
 
 <script>

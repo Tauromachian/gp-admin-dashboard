@@ -20,21 +20,21 @@
                   Notifications Style
                 </h2>
 
-                <material-notification class="mb-3" color="info">
+                <gen-notification class="mb-3" color="info">
                   This is a plain notification
-                </material-notification>
-                <material-notification class="mb-3" color="info" dismissible>
+                </gen-notification>
+                <gen-notification class="mb-3" color="info" dismissible>
                   This is a notification with close button.
-                </material-notification>
-                <material-notification
+                </gen-notification>
+                <gen-notification
                   class="mb-3"
                   color="info"
                   dismissible
                   icon="mdi-bell-plus"
                 >
                   This is a notification with close button and icon.
-                </material-notification>
-                <material-notification
+                </gen-notification>
+                <gen-notification
                   class="mb-3"
                   color="info"
                   dismissible
@@ -44,36 +44,36 @@
                   many lines. You can see that the icon and the close button are
                   always vertically aligned. This is a beautiful notification.
                   So you don't have to worry about the style.
-                </material-notification>
+                </gen-notification>
               </v-col>
 
               <v-col md6 sm12>
                 <h2 class="title font-weight-light">Notifcation States</h2>
 
-                <material-notification class="mb-3" color="info" dismissible>
+                <gen-notification class="mb-3" color="info" dismissible>
                   <strong>INFO</strong> - This is a regular notification made
                   with `color="info"`
-                </material-notification>
+                </gen-notification>
 
-                <material-notification class="mb-3" color="success" dismissible>
+                <gen-notification class="mb-3" color="success" dismissible>
                   <strong>SUCCESS</strong> - This is a regular notification made
                   with `color="success"`
-                </material-notification>
+                </gen-notification>
 
-                <material-notification class="mb-3" color="warning" dismissible>
+                <gen-notification class="mb-3" color="warning" dismissible>
                   <strong>WARNING</strong> - This is a regular notification made
                   with `color="warning"`
-                </material-notification>
+                </gen-notification>
 
-                <material-notification class="mb-3" color="error" dismissible>
+                <gen-notification class="mb-3" color="error" dismissible>
                   <strong>DANGER</strong> - This is a regular notification made
                   with `color="error"`
-                </material-notification>
+                </gen-notification>
 
-                <material-notification class="mb-3" color="purple" dismissible>
+                <gen-notification class="mb-3" color="purple" dismissible>
                   <strong>PRIMARY</strong> - This is a regular notification made
                   with `color="purple"`
-                </material-notification>
+                </gen-notification>
               </v-col>
             </v-layout>
             <div class="text-xs-center">

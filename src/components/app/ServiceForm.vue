@@ -1,5 +1,5 @@
 <template>
-  <material-form :title="$t('services.form_name')">
+  <gen-form :title="$t('services.form_name')">
     <v-form ref="form">
       <v-container py-0>
         <v-text-field
@@ -13,7 +13,7 @@
           :rules="serviceNameRules"
         />
 
-        <material-button-group
+        <gen-button-group
           v-model="form.serviceTypePay"
           :label="$t('services.fields.service_type_by_payment_type')"
         >
@@ -23,7 +23,7 @@
           <v-btn class="ml-0" value="Prepago">
             {{ $t("services.fields.prepay") }}
           </v-btn>
-        </material-button-group>
+        </gen-button-group>
 
         <v-text-field
           v-model="form.codcli"
@@ -52,7 +52,7 @@
           hide-details
         />
 
-        <material-button-group
+        <gen-button-group
           v-model="form.alimentacion"
           :label="$t('services.fields.alimentation')"
         >
@@ -62,9 +62,9 @@
           <v-btn value="Doble">
             {{ $t("services.fields.alimentation_double") }}
           </v-btn>
-        </material-button-group>
+        </gen-button-group>
 
-        <material-number-stepper
+        <gen-number-stepper
           v-model="form.turnos"
           show-number
           :min="1"
@@ -75,13 +75,13 @@
 
         <v-col md="12" />
 
-        <material-button-group
+        <gen-button-group
           v-model="form.metraje"
           :label="$t('services.fields.metraje')"
         >
           <v-btn class="ml-0" value="Alta"> Alta </v-btn>
           <v-btn value="Baja"> Baja </v-btn>
-        </material-button-group>
+        </gen-button-group>
         <v-text-field
           v-model="capacityComputed"
           :label="$t('services.fields.capacity') + ' (kVA)'"
@@ -148,7 +148,7 @@
         </v-dialog>
 
         <slot name="form-actions" :serviceSubmit="createService">
-          <material-form-actions
+          <gen-form-actions
             :loading-buttons="loading"
             :enable-cancel="true"
             @on-submit="createService"
@@ -157,7 +157,7 @@
         </slot>
       </v-container>
     </v-form>
-  </material-form>
+  </gen-form>
 </template>
 
 <script>
