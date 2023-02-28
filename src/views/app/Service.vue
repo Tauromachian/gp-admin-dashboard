@@ -184,8 +184,6 @@ export default {
   watch: {
     serviceName(val) {
       debounce(() => {
-        console.log("lol");
-        console.log(this.loadData);
         this.loadData(val);
       });
     },
