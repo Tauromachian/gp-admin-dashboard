@@ -213,17 +213,17 @@ export default {
       this.loading = true;
 
       try {
-        const { data } = await updateInstitution(this.institutionFormComputed);
+        const data = await updateInstitution(
+          this.institutionToUpdateId,
+          this.institutionFormComputed
+        );
 
         this.addNotification({
           message: this.$t("notifications.succesfull_update"),
           color: "success",
         });
 
-        this.updateInstitution({
-          institutionId: this.institutionToUpdateId,
-          institution: data,
-        });
+        this.updateInstitution(this.institutionToUpdateId, data);
 
         this.institutionFormDialog = false;
       } catch (err) {
