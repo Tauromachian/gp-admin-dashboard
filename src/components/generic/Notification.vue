@@ -1,6 +1,6 @@
 <template>
-  <v-snackbar v-model="snackbar" :color="color" right>
-    {{ text }}
+  <v-snackbar v-model="snackbar" :color="notification.color" right>
+    {{ notification.text }}
     <v-icon size="16" @click="snackbar = false"> mdi-close-circle </v-icon>
   </v-snackbar>
 </template>
@@ -13,13 +13,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    color: {
-      type: String,
-      default: "primary",
-    },
-    text: {
-      type: String,
-      required: true,
+    notification: {
+      type: Object,
+      default: () => ({ color: "primary", text: "" }),
     },
   },
   computed: {
