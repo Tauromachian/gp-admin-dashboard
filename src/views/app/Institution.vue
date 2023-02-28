@@ -187,7 +187,10 @@ export default {
         const data = await this.getInstitutions();
         this.setInstitutions(data);
       }
-      this.selectedInstitutionId = this.institutions[0].id;
+
+      if (this.institutions) {
+        this.selectedInstitutionId = this.institutions[0].id;
+      }
     },
     async getInstitutions(filter) {
       try {
