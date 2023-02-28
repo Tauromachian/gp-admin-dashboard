@@ -1,15 +1,6 @@
 <template>
   <div class="d-flex">
     <v-btn
-      class="mx-0 font-weight-light btn-test"
-      color="primary"
-      :loading="loadingButtons"
-      :disabled="loadingButtons"
-      @click="submitEvent"
-    >
-      {{ submitButtonTitle }}
-    </v-btn>
-    <v-btn
       v-if="enableCancel"
       class="mx-0 font-weight-light btn-test ml-1"
       color="primary"
@@ -20,43 +11,52 @@
     >
       {{ $t("button.actions.cancel") }}
     </v-btn>
+    <v-btn
+      class="mx-0 font-weight-light btn-test"
+      color="primary"
+      :loading="loadingButtons"
+      :disabled="loadingButtons"
+      @click="submitEvent"
+    >
+      {{ submitButtonTitle }}
+    </v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FormActions',
+  name: "FormActions",
   props: {
     submitButtonTitle: {
       type: String,
-      default: 'Submit'
+      default: "Submit",
     },
     enableCancel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     loadingButtons: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  mounted () {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        this.submitEvent()
+  mounted() {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        this.submitEvent();
       }
-    })
+    });
   },
-  destroyed () {
-    document.removeEventListener('keydown', this._keyListener)
+  destroyed() {
+    document.removeEventListener("keydown", this._keyListener);
   },
   methods: {
-    submitEvent () {
-      this.$emit('on-submit')
+    submitEvent() {
+      this.$emit("on-submit");
     },
-    cancelEvent () {
-      this.$emit('on-cancel')
-    }
-  }
-}
+    cancelEvent() {
+      this.$emit("on-cancel");
+    },
+  },
+};
 </script>
