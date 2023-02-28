@@ -6,6 +6,7 @@
       :key="key"
       :style="{ 'margin-top': `${index * 6}em` }"
       :notification="notification"
+      @click:delete="deleteMessage(key)"
     ></gen-notification>
   </div>
 </template>
