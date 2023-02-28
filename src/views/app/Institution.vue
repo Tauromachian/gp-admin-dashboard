@@ -76,6 +76,7 @@ import debounce from "basic-debouncer";
 
 import { useAppStore } from "@/stores/app";
 import { useInstitutionStore } from "@/stores/institution";
+import { useNotificationsStore } from "@/stores/notifications";
 import { mapActions, mapState } from "pinia";
 
 import InstitutionDetails from "@/components/app/InstitutionDetails.vue";
@@ -143,7 +144,7 @@ export default {
       "setFormData",
       "clearForm",
     ]),
-    ...mapActions(useAppStore, ["addNotification"]),
+    ...mapActions(useNotificationsStore, ["addNotification"]),
     async loadData(val = "") {
       const data = await getInstitutions(val);
       this.setInstitutions(data);
