@@ -71,8 +71,8 @@ export default {
     },
   },
   methods: {
-    validate() {
-      return this.$refs.form.validate();
+    async validate() {
+      return await this.$refs.form.validate();
     },
     resetValidation() {
       this.$refs.form.resetValidation();
