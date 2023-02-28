@@ -153,7 +153,7 @@ import { useNotificationsStore } from "@/stores/notifications";
 
 import { getService, getServices } from "@/services/app/service";
 
-import debounce from "~/helpers/debouncer";
+import debounce from "basic-debouncer";
 
 export default {
   name: "Service",
