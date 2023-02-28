@@ -71,19 +71,17 @@
             <v-icon color="primary"> mdi-delete </v-icon>
           </v-btn>
           <!-- This dialog needs to be here, so it can use the key -->
-          <material-delete-dialog
+          <gen-delete-dialog
             v-model="coordinatorDeleteDialog"
             @accept-click="deleteCoordinator(key)"
           />
         </v-col>
       </v-row>
       <v-dialog v-model="coordinatorDetailsDialog" width="500">
-        <app-institution-coordinator-details
-          :coordinator="selectedCoordinator"
-        />
+        <institution-coordinator-details :coordinator="selectedCoordinator" />
       </v-dialog>
       <v-dialog v-model="coordinatorFormDialog" width="500">
-        <app-institution-coordinator-form
+        <institution-coordinator-form
           :key="'coordinator' + selectedInstitution.id"
           v-model="coordinatorForm"
           @submit-click="addCoordinator"
@@ -95,7 +93,7 @@
         v-model="coordinatorFormDetailsDialog"
         width="500"
       >
-        <app-institution-coordinator-details-form
+        <institution-coordinator-details-form
           v-model="selectedCoordinator"
           :coordinator="selectedCoordinator"
           @submit-click="addCoordinatorDetails"
@@ -110,8 +108,17 @@
 import { mapState, mapActions } from "pinia";
 import { useInstitutionStore } from "@/stores/institution";
 
+import InstitutionCoordinatorForm from "@/components/app/InstitutionCoordinatorForm.vue";
+import InstitutionCoordinatorDetails from "@/components/app/InstitutionCoordinatorDetails.vue";
+import InstitutionCoordinatorDetailsForm from "@/components/app/InstitutionCoordinatorDetailsForm.vue";
+
 export default {
   name: "InstitutionDetails",
+  components: {
+    InstitutionCoordinatorForm,
+    InstitutionCoordinatorDetails,
+    InstitutionCoordinatorDetailsForm,
+  },
   props: {
     id: {
       type: [Number, String],

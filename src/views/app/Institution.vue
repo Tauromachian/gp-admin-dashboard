@@ -18,17 +18,17 @@
 
       <!-- Institution form -->
       <v-dialog v-model="institutionFormDialog" width="500">
-        <app-institution-form
+        <institution-form
           ref="institutionForm"
           v-model="institutionFormComputed"
         >
-          <material-form-actions
+          <gen-form-actions
             :loading-buttons="loading"
             :enable-cancel="true"
             @on-submit="submitInstitution"
             @on-cancel="institutionFormDialog = false"
           />
-        </app-institution-form>
+        </institution-form>
       </v-dialog>
 
       <!-- Institution content -->
@@ -45,7 +45,7 @@
               xl="6"
               cols="12"
             >
-              <app-institution-card
+              <institution-card
                 :institution="institution"
                 @see-click="showInstitutionDetails(institution.id)"
                 @edit-click="openUpdateForm(institution.id)"
@@ -59,22 +59,22 @@
 
       <!-- Institution details -->
       <v-col sm="4" md="4" cols="12">
-        <material-details-sidebar
+        <gen-details-sidebar
           :allow-dialog="isScreenSmall"
           v-model:dialog="institutionDetailsDialog"
           toolbar-title="Institution details"
         >
-          <app-institution-details
+          <institution-details
             :id="selectedInstitutionId"
             @submit-details="fillAndPatch"
             @coordinator-delete="fillAndPatch"
           />
-        </material-details-sidebar>
+        </gen-details-sidebar>
       </v-col>
     </v-row>
-    <material-filter left>
-      <app-institution-filter v-model:name="institutionName" />
-    </material-filter>
+    <gen-filter left>
+      <institution-filter v-model:name="institutionName" />
+    </gen-filter>
   </v-container>
 </template>
 
@@ -84,6 +84,11 @@ import debounce from "basic-debouncer";
 import { useAppStore } from "@/stores/app";
 import { useInstitutionStore } from "@/stores/institution";
 import { mapActions, mapState } from "pinia";
+
+import InstitutionDetails from "@/components/app/InstitutionDetails.vue";
+import InstitutionForm from "@/components/app/InstitutionForm.vue";
+import InstitutionCard from "@/components/app/InstitutionCard.vue";
+import InstitutionFilter from "@/components/app/InstitutionFilter.vue";
 
 import {
   getInstitutions,
@@ -95,6 +100,12 @@ import {
 export default {
   name: "Institution",
   middleware: "auth",
+  components: {
+    InstitutionDetails,
+    InstitutionForm,
+    InstitutionCard,
+    InstitutionFilter,
+  },
   data: function () {
     return {
       selectedInstitutionId: "",
