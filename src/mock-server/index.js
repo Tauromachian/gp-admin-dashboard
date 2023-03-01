@@ -9,6 +9,7 @@ export function makeServer({ environment = "development" } = {}) {
     factories,
     seeds(server) {
       server.createList("institution", 5);
+      server.createList("service", 20);
     },
     routes() {
       this.post("/auth/login", () => {
@@ -51,6 +52,10 @@ export function makeServer({ environment = "development" } = {}) {
         const institutionId = request.params.id;
         const institution = schema.institutions.find(institutionId);
         return new Response(200, {}, institution.services.models);
+      });
+
+      this.get("/services", (schema) => {
+        return new Response(200, {}, schema.services.all().models);
       });
       this.get("/coordinator/:id/mails", (schema, request) => {
         const coordinatorId = request.params.id;
