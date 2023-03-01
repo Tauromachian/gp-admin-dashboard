@@ -1,46 +1,38 @@
 <template>
-  <v-container :fluid="true">
-    <v-data-table
-      v-model="selectedRow"
-      :headers="visibleHeaders"
-      :items="tableData"
-      :loading="false"
-      :dense="isDense"
-      v-model:items-per-page="itemsPerPage"
-      :footer-props="{
-        'items-per-page-text': 'Servicios por páginas',
-        'items-per-page-all-text': 'Todos',
-        'disable-items-per-page': false,
-      }"
-      loading-text="Cargando Servicios..."
-      v-model:page="filters.page"
-      single-select
-      show-select
-      @click:row="
-        (item, row) => {
-          seeDetails(item, true);
-          setActiveRow(row);
-        }
-      "
-    >
-      <template #top>
-        <gen-toolbar
-          v-model:visible-columns="visibleColumns"
-          :column-defs="headers"
-          v-model:dense="isDense"
-          v-model:delete-dialog-button="deleteDialogButton"
-          @delete-row="deleteRow"
-          @on-open-update-dialog="fillForm"
-          @on-delete-button-clicked="openDeleteConfirmationDialog"
-        >
-          <template #default>
-            <service-form :codcli="codcli" @submit="serviceSubmit">
-            </service-form>
-          </template>
-        </gen-toolbar>
-      </template>
-    </v-data-table>
-  </v-container>
+  <v-card>
+    <v-card-text>
+      <gen-toolbar
+        v-model:visible-columns="visibleColumns"
+        :column-defs="headers"
+        v-model:delete-dialog-button="deleteDialogButton"
+        @delete-row="deleteRow"
+        @on-open-update-dialog="fillForm"
+        @on-delete-button-clicked="openDeleteConfirmationDialog"
+      >
+        <service-form :codcli="codcli" @submit="serviceSubmit"> </service-form>
+      </gen-toolbar>
+      <easy-data-table
+        class="mt-4"
+        v-model="selectedRow"
+        :headers="visibleHeaders"
+        :items="tableData"
+        :loading="false"
+        :dense="isDense"
+        v-model:items-per-page="itemsPerPage"
+        loading-text="Cargando Servicios..."
+        v-model:page="filters.page"
+        single-select
+        show-select
+        @click:row="
+          (item, row) => {
+            seeDetails(item, true);
+            setActiveRow(row);
+          }
+        "
+      >
+      </easy-data-table>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
