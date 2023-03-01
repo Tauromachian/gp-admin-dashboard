@@ -1,5 +1,5 @@
 <template>
-  <v-scroll-y-transition mode="out-in">
+  <div>
     <div
       v-if="!service"
       class="title grey--text text--lighten-1 font-weight-light"
@@ -13,7 +13,7 @@
       :title="$t('services.detail')"
       v-bind="$attrs"
     />
-  </v-scroll-y-transition>
+  </div>
 </template>
 
 <script>
