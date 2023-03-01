@@ -126,7 +126,7 @@ export default {
   },
 
   metaInfo() {
-    return { title: this.$t("route." + this.$route.name) };
+    return { title: this.$t(`route.${this.$route.name}`) };
   },
 
   computed: {
