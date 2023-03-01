@@ -1,75 +1,16 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <!-- Services displayer -->
-    <v-row wrap>
-      <v-col>
-        <!-- Cards display -->
-        <v-row v-if="!isTableActive">
-          <v-col sm="12" md="8" cols="12">
-            <div class="mt-2 mx-8">
-              <v-row>
-                <v-col
-                  v-for="(service, key) in services"
-                  :key="service.name + key"
-                  xs="12"
-                  sm="12"
-                  md="6"
-                  lg="6"
-                  xl="6"
-                  cols="12"
-                >
-                  <service-card
-                    :service="service"
-                    @click:see="showServiceDetails(service)"
-                    @click:edit="openFormForEdit(service.codcli)"
-                    @click:delete="removeService(service.id)"
-                    @click:manage="
-                      goToManageServiceSubdata(service.id, service.name)
-                    "
-                  />
-                </v-col>
-              </v-row>
-            </div>
-          </v-col>
-          <!-- Details sidebar -->
-          <v-col sm="4" md="4" cols="12">
-            <gen-details-sidebar
-              class="mt-2"
-              :allow-dialog="$vuetify.display.mdAndDown"
-              v-model:dialog="serviceDetailsDialog"
-            >
-              <service-details :service="selectedService" elevation="0" />
-            </gen-details-sidebar>
-          </v-col>
-        </v-row>
-
-        <!-- Table display -->
-        <v-row v-else>
-          <v-col cols="12">
-            <v-card elevation="0" class="mt-4">
-              <service-table ref="table" class="pt-0 pb-0" />
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <!-- Service view actions   -->
-    <service-speed-dial
-      v-model:serviceName="serviceName"
-      v-model:isTableActive="isTableActive"
-      @click:plus="openFormForInsert"
-    ></service-speed-dial>
+    <v-card class="mt-4">
+      <service-table ref="table" class="pt-0 pb-0" />
+    </v-card>
 
     <!-- Services dialog-form -->
     <v-dialog v-model="formDialog" width="400">
       <service-form
         ref="form"
-        v-model:inserted-succesfully="insertedSuccesfully"
         :codcli="codcli"
         @service-submit="submitService"
-        @delete-succesful="deleteSuccesful"
-        @delete-unsuccesful="deleteUnsuccesful"
         @click:cancel="closeFormDialog"
       />
     </v-dialog>
@@ -117,7 +58,6 @@ export default {
       isTableActive: false,
       loading: false,
       formDialog: false,
-      insertedSuccesfully: false,
       isFormUpdating: false,
       codcli: {},
       selectedService: {},
@@ -180,17 +120,6 @@ export default {
         : this.addService(form, credentialsForm);
     },
 
-    deleteSuccesful() {
-      this.addNotification({
-        message: this.$t("notifications.successful_delete"),
-        color: "success",
-      });
-    },
-
-    deleteUnsuccesful(err) {
-      this.addNotification({ message: err, color: "error" });
-    },
-
     openFormForInsert() {
       if (this.isFormUpdating) {
         this.$refs.form.reset();
@@ -243,7 +172,6 @@ export default {
         const newService = await getService(form.codcli);
         this.addServiceToStore(newService);
         this.closeFormDialog();
-        this.insertedSuccesfully = true;
         this.addNotification({
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
