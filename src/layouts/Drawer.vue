@@ -9,7 +9,7 @@
 
     <v-divider />
 
-    <v-list nav :color="color">
+    <v-list nav color="primary">
       <v-list-item
         v-for="(link, i) in links"
         :key="i"
