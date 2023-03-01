@@ -101,7 +101,7 @@ export default {
   computed: {
     ...mapState(useServiceStore, ["tableData"]),
     institutionId() {
-      return this.$routes.params.id;
+      return this.$route.params.id;
     },
     headers() {
       return [
