@@ -1,8 +1,39 @@
 <template>
-  <v-container fill-height fluid grid-list-xl>
+  <v-container fluid>
     <!-- Services displayer -->
     <v-card class="mt-4">
-      <service-table ref="table" class="pt-0 pb-0" />
+      <v-card-text>
+        <gen-toolbar
+          v-model:visible-columns="visibleColumns"
+          :column-defs="headers"
+          v-model:delete-dialog-button="deleteDialogButton"
+          @delete-row="deleteRow"
+          @on-open-update-dialog="fillForm"
+          @on-delete-button-clicked="openDeleteConfirmationDialog"
+        >
+          <service-form :codcli="codcli" @submit="serviceSubmit">
+          </service-form>
+        </gen-toolbar>
+        <easy-data-table
+          v-model="selectedRow"
+          :headers="visibleHeaders"
+          :items="tableData"
+          :loading="false"
+          :dense="isDense"
+          v-model:items-per-page="itemsPerPage"
+          loading-text="Cargando Servicios..."
+          v-model:page="filters.page"
+          single-select
+          show-select
+          @click:row="
+            (item, row) => {
+              seeDetails(item, true);
+              setActiveRow(row);
+            }
+          "
+        >
+        </easy-data-table>
+      </v-card-text>
     </v-card>
 
     <!-- Services dialog-form -->
@@ -53,8 +84,6 @@ export default {
 
   data() {
     return {
-      fab: false,
-      serviceName: "",
       isTableActive: false,
       loading: false,
       formDialog: false,
@@ -70,14 +99,45 @@ export default {
   },
 
   computed: {
-    ...mapState(useServiceStore, { services: "tableData" }),
-  },
-
-  watch: {
-    serviceName(val) {
-      debounce(() => {
-        this.loadData(val);
-      });
+    ...mapState(useServiceStore, ["tableData"]),
+    institutionId() {
+      return this.$routes.params.id;
+    },
+    headers() {
+      return [
+        {
+          text: this.$t("services.table.headers.service_name"),
+          value: "name",
+        },
+        {
+          text: this.$t("services.table.headers.client_code"),
+          value: "codcli",
+        },
+        {
+          text: this.$t("services.table.headers.meter_number"),
+          value: "meter_no",
+        },
+        {
+          text: this.$t("services.table.headers.crf"),
+          value: "crf",
+        },
+        {
+          text: this.$t("services.table.headers.hired_demand"),
+          value: "demanda",
+        },
+        {
+          text: this.$t("services.table.headers.exclusive"),
+          value: "exclusivo",
+        },
+        {
+          text: this.$t("services.table.headers.metraje"),
+          value: "metraje",
+        },
+        {
+          text: this.$t("services.table.headers.capacity"),
+          value: "capacidad",
+        },
+      ];
     },
   },
 
@@ -96,8 +156,7 @@ export default {
     ...mapActions(useNotificationsStore, ["addNotification"]),
 
     async loadData(val = "") {
-      const id = this.$route.params.id;
-      const services = await this.getServices(id, val);
+      const services = await this.getServices(this.institutionId, val);
       this.setServices(services);
       this.selectedService = this.services[0];
     },
@@ -230,7 +289,7 @@ export default {
 
     async insertService(form) {
       try {
-        form.institution_id = this.$route.params.id;
+        form.institution_id = this.institutionId;
         await addService(form);
         return true;
       } catch (err) {
