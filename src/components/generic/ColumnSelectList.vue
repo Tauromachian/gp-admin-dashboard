@@ -93,7 +93,7 @@ export default {
 
     return h(
       VList,
-      { flat: true },
+      { flat: true, selectStrategy: "classic" },
       {
         default: () => [
           h(VListSubheader, () => "Seleccione las columnas a mostrar"),
