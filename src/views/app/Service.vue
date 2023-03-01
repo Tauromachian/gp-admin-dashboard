@@ -13,7 +13,8 @@
           </service-form>
         </gen-toolbar>
         <easy-data-table
-          v-model="selectedRow"
+          class="mt-3"
+          v-model:items-selected="selectedRow"
           :headers="headers"
           :items="services"
           :loading="false"
