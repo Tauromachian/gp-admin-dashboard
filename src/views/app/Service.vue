@@ -158,7 +158,7 @@ export default {
     async loadData(val = "") {
       const services = await this.getServices(this.institutionId, val);
       this.setServices(services);
-      this.selectedService = this.services[0];
+      this.selectedService = this.tableData[0];
     },
 
     goToManageServiceSubdata(id, name) {
