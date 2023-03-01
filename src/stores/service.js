@@ -9,7 +9,7 @@ const CREDENTIALS_FORM_TEMPLATE = {
   accepted_ip: "",
 };
 
-export const useInstitutionStore = defineStore("service", {
+export const useServiceStore = defineStore("service", {
   state: () => ({
     hasSensitiveData: false,
     credentialsForm: Object.assign({}, CREDENTIALS_FORM_TEMPLATE),
