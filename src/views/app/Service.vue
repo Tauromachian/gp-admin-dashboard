@@ -6,8 +6,7 @@
         <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
-          v-model:delete-dialog-button="deleteDialogButton"
-          @click:delete="deleteRow"
+          @click:delete="removeService"
           @click:update="openFormForEdit"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
@@ -18,7 +17,6 @@
           :headers="headers"
           :items="tableData"
           :loading="false"
-          :dense="isDense"
           v-model:items-per-page="itemsPerPage"
           loading-text="Cargando Servicios..."
           single-select
@@ -80,9 +78,14 @@ export default {
       loading: false,
       formDialog: false,
       isFormUpdating: false,
+      serviceDetailsDialog: false,
+
+      selectedRow: [],
+      visibleColumns: [],
+      itemsPerPage: 25,
+
       codcli: {},
       selectedService: {},
-      serviceDetailsDialog: false,
     };
   },
 
