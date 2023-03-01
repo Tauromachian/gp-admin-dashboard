@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar id="core-toolbar" app flat>
+  <v-app-bar id="core-toolbar" app flat :order="1">
     <div class="ml-2" v-if="!isViewInstitution" />
 
     <div v-if="isViewInstitution" class="dinamic-margin-left" />
