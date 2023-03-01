@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form">
     <gen-form :title="$t('services.user.form_name')">
-      <app-service-user-form-fields @update:form="updateForm" />
+      <service-user-form-fields @update:form="updateForm" />
       <v-col v-if="hasSensitiveData" xs="12" sm="12" md="4" cols="12">
         <gen-delete-confirmation-dialog
           :text="$t('services.fields.delete_credentials_button')"
@@ -31,8 +31,13 @@
 <script>
 import { mapState, mapActions } from "pinia";
 
+import ServiceUserFormFields from "@/components/app/ServiceUserFormFields.vue";
+
 export default {
   name: "ServiceUserForm",
+  components: {
+    ServiceUserFormFields,
+  },
   data() {
     return {
       form: {},
