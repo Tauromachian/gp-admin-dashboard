@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { computed } from "vue";
+
 import { mapState } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
@@ -32,7 +34,7 @@ export default {
 
   provide() {
     return {
-      drawer: this.drawer,
+      drawer: computed(() => this.drawer),
     };
   },
 
