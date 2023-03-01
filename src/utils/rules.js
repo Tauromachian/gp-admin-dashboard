@@ -20,6 +20,15 @@ export function sentence(message = "El formato no es válido") {
   return (v) => isSentence(v) || message;
 }
 
+export function min(
+  message = "Este campo debe tener un número de caracteres mayor a",
+  min = 6
+) {
+  const finalMessage = message ? message : `${message} ${min} letras`;
+
+  return (v) => v.length >= min || finalMessage;
+}
+
 export function password() {
   return (v) => {
     if (!v) return "La contraseña es requerida";
