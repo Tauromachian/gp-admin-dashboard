@@ -3,12 +3,9 @@ import { h } from "vue";
 
 import {
   VList,
-  VListGroup,
   VListItem,
   VListItemTitle,
   VListSubheader,
-  VCheckbox,
-  VListItemAction,
   VCheckboxBtn,
 } from "vuetify/components";
 
