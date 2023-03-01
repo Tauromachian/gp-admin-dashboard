@@ -147,16 +147,16 @@ export default {
     }),
     ...mapActions(useNotificationsStore, ["addNotification"]),
 
-    async loadData(val = "") {
-      const services = await this.getServices(this.institutionId, val);
-      this.setServices(services);
-      this.selectedService = this.tableData[0];
-    },
-
-    showServiceDetails(service) {
-      this.selectedService = service;
-      if (this.$vuetify.display.mdAndDown) {
-        this.serviceDetailsDialog = true;
+    async loadData() {
+      try {
+        const services = await getServices({ id: this.institutionId });
+        this.setServices(services);
+        this.selectedService = this.tableData[0];
+      } catch (err) {
+        this.addNotification({
+          message: this.$t("notifications.unsuccesfull_get"),
+          color: "error",
+        });
       }
     },
 
@@ -179,18 +179,6 @@ export default {
       this.isFormUpdating = true;
       this.formDialog = true;
       this.codcli = codcli;
-    },
-
-    async getServices() {
-      try {
-        const data = await getServices();
-        return data;
-      } catch (err) {
-        this.addNotification({
-          message: this.$t("notifications.unsuccesfull_get"),
-          color: "error",
-        });
-      }
     },
 
     async addService(form, serviceFormCredentials) {
