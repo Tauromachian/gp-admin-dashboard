@@ -51,10 +51,6 @@
 
       <slot name="actions-append" />
     </v-col>
-
-    <v-dialog v-model="formDialog" width="900">
-      <slot :closeUpdateDialog="closeUpdateDialog" />
-    </v-dialog>
   </v-row>
 </template>
 
@@ -113,12 +109,6 @@ export default {
     },
     updateService() {
       this.$emit("update:service");
-    },
-    closeUpdateDialog() {
-      this.formDialog = false;
-    },
-    openUpdateDialog() {
-      this.formDialog = true;
     },
     onOpenUpdateDialog() {
       this.$emit("click:update");
