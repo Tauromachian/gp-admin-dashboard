@@ -7,12 +7,14 @@
     <v-card-text>
       <v-form ref="form" @submit.prevent="onSubmit">
         <slot> </slot>
-        <gen-form-actions
-          class="pl-0 pr-0"
-          :enable-cancel="enableCancel"
-          @click:submit="onSubmit"
-          @click:cancel="onCancel"
-        />
+        <slot name="actions">
+          <gen-form-actions
+            class="pl-0 pr-0"
+            :enable-cancel="enableCancel"
+            @click:submit="onSubmit"
+            @click:cancel="onCancel"
+          />
+        </slot>
       </v-form>
     </v-card-text>
   </v-card>
