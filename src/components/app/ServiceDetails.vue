@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import { mapGetters } from "pinia";
+import { mapState } from "pinia";
+import { useServiceStore } from "@/stores/service";
 
 export default {
   name: "ServiceDetails",
@@ -28,7 +29,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("service", { services: "tableData" }),
+    ...mapState(useServiceStore, { services: "tableData" }),
     selectedService() {
       const index = this.services.indexOf(this.service);
       const service = Object.assign({}, this.services[index]);
