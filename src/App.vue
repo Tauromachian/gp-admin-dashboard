@@ -9,7 +9,7 @@
 </script>
 
 <style>
-.root {
+main {
   background: #f7f9ff;
 }
 
