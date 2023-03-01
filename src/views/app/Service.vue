@@ -7,9 +7,8 @@
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
           v-model:delete-dialog-button="deleteDialogButton"
-          @delete-row="deleteRow"
-          @on-open-update-dialog="fillForm"
-          @on-delete-button-clicked="openDeleteConfirmationDialog"
+          @click:delete="deleteRow"
+          @click:update="fillForm"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
           </service-form>
