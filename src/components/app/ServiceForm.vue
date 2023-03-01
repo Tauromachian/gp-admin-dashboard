@@ -114,7 +114,7 @@
 
     <v-col sm="12" md="12" class="pt-0 pb-0" />
 
-    <app-transformer-form
+    <transformer-form
       v-for="(transformer, i) in transformers"
       :key="i"
       :mono-phase="transformerCapacitiesMonoPhase.capacities"
@@ -152,6 +152,7 @@ import { required, number, sentence } from "@/utils/rules";
 import { deleteService, getService } from "@/services/app/service";
 
 import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
+import TransformerForm from "@/components/app/TransformerForm.vue";
 
 import { mapActions } from "pinia";
 
@@ -159,6 +160,7 @@ export default {
   name: "ServiceForm",
   components: {
     ServiceUserForm,
+    TransformerForm,
   },
   props: {
     codcli: {
