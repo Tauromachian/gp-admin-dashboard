@@ -14,7 +14,7 @@
           v-model="username"
           :disabled="disabled"
           :label="$t('services.user.username')"
-          :rules="nameRules"
+          :rules="[rules.required(), rules.sentence(), rules.min(6)]"
         />
       </v-col>
       <v-col
@@ -50,7 +50,7 @@
           :disabled="disabled"
           :type="showPasswordText ? 'text' : 'password'"
           :label="$t('services.user.password_confirmation')"
-          :rules="passwordRules"
+          :rules="[rules.required(), rules.password()]"
           :append-icon="showPasswordText ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="showPasswordText = !showPasswordText"
         />
@@ -66,7 +66,7 @@
           v-model="acceptedIpComputed"
           :disabled="disabled"
           :label="$t('services.fields.required_ip') + ` (${$t('optional')})`"
-          :rules="ipRules"
+          :rules="[rules.required(), rules.ip()]"
         />
       </v-col>
     </v-row>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { required, min, sentence, password, ip } from "@/utils/rules";
 import { isSentence, isIpNumber, isIpMask } from "~/helpers/regex";
 import { mapState } from "pinia";
 
@@ -88,14 +89,7 @@ export default {
       acceptedIp: "",
       disabled: false,
       showPasswordText: false,
-      ipRules: [(v) => this.ipRulesFunction(v) || "Introduzca un ip valido"],
-      nameRules: [
-        (v) =>
-          v.length > 6 ||
-          "Las credenciales deben tener un largo de 6 letras o más",
-        (v) => isSentence(v) || "Ha introducido caracteres no permitidos",
-      ],
-      passwordRules: [(v) => !!v || "El password es requerido"],
+      rules: { required, min, sentence, password, ip },
     };
   },
   computed: {
@@ -140,61 +134,6 @@ export default {
     fillForm() {
       this.deviceToken = this.$store.state.service.credentialsForm.device_token;
       this.acceptedIp = this.$store.state.service.credentialsForm.accepted_ip;
-    },
-    ipRulesFunction(v) {
-      if (!v) {
-        return true;
-      }
-
-      const { ip, mask } = this.splitIpFromMask(v);
-
-      if (mask === "") {
-        return false;
-      }
-
-      if (!this.isMask(mask)) {
-        return false;
-      }
-
-      if (!this.isIp(ip)) {
-        return false;
-      }
-
-      return true;
-    },
-    splitIpFromMask(completeIp) {
-      let ipNumberAndMask = [];
-      ipNumberAndMask = completeIp.split("/");
-
-      return {
-        ip: ipNumberAndMask[0],
-        mask: ipNumberAndMask[1],
-      };
-    },
-    isMask(maskNumber) {
-      if (!maskNumber) {
-        return true;
-      }
-      return isIpMask(maskNumber);
-    },
-    isIp(ipNumber) {
-      if (!ipNumber.includes(".")) {
-        return false;
-      }
-
-      const ipNumbers = ipNumber.split(".");
-
-      if (ipNumbers.length !== 4) {
-        return false;
-      }
-
-      for (const ipNumber of ipNumbers) {
-        if (!isIpNumber(ipNumber)) {
-          return false;
-        }
-      }
-
-      return true;
     },
   },
 };

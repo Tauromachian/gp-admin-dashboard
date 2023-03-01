@@ -1,5 +1,7 @@
 import { isNumber, isPhone, isEmail, isSentence } from "./regex";
 
+export { ip } from "./rules-ip";
+
 export function required(message = "Este valor es requerido.") {
   return (v) => !!v || message;
 }
