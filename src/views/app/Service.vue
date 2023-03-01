@@ -8,7 +8,7 @@
           :column-defs="headers"
           v-model:delete-dialog-button="deleteDialogButton"
           @click:delete="deleteRow"
-          @click:update="fillForm"
+          @click:update="openFormForEdit"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
           </service-form>
