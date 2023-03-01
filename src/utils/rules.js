@@ -21,8 +21,8 @@ export function sentence(message = "El formato no es válido") {
 }
 
 export function min(
-  message = "Este campo debe tener un número de caracteres mayor a",
-  min = 6
+  min = 6,
+  message = "Este campo debe tener un número de caracteres mayor a"
 ) {
   const finalMessage = message ? message : `${message} ${min} letras`;
 
