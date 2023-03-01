@@ -140,7 +140,7 @@
       "delete_credentials_button": "Eliminar credenciales",
       "service_type_by_payment_type": "Tipo de servicio segun pago",
       "service_name": "Nombre del servicio",
-      "client_code": "Codigo del cliente",
+      "client_code": "Código del cliente",
       "meter_number": "Número del metro",
       "crf": "crf",
       "service_type": "Tipo de servicio",
@@ -162,7 +162,7 @@
     "table": {
       "headers": {
         "service_name": "Nombre del servicio",
-        "client_code": "Codigo del cliente",
+        "client_code": "Código del cliente",
         "meter_number": "Número del metro",
         "crf": "crf",
         "service_type": "Tipo de servicio",
