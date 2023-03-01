@@ -68,8 +68,6 @@ export {
   isNumberAndLettersHyphenWithWhiteSpaces,
   isSentence,
   isEmail,
-  isIpNumber,
-  isIpMask,
   isMonthInSpanish,
   isPhone,
 };
