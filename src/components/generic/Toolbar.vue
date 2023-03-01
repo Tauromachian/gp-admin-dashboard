@@ -8,8 +8,13 @@
         v-model="columnSelectListDialog"
         width="500"
       >
-        <template #activator="{ on }">
-          <v-btn icon="mdi-eye" variant="text" color="primary" v-on="on">
+        <template #activator>
+          <v-btn
+            icon="mdi-eye"
+            @click="columnSelectListDialog = true"
+            variant="text"
+            color="primary"
+          >
           </v-btn>
         </template>
 
