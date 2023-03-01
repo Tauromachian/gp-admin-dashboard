@@ -74,7 +74,6 @@
 <script>
 import debounce from "basic-debouncer";
 
-import { useAppStore } from "@/stores/app";
 import { useInstitutionStore } from "@/stores/institution";
 import { useNotificationsStore } from "@/stores/notifications";
 import { mapActions, mapState } from "pinia";
