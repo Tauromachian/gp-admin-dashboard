@@ -1,18 +1,18 @@
 <template>
   <v-app-bar id="core-toolbar" app flat>
-    <div class="ml-2" />
+    <div class="ml-2" v-if="!isViewInstitution" />
+
     <div v-if="isViewInstitution" class="dinamic-margin-left" />
+
     <v-app-bar-nav-icon v-else @click="toggleDrawer" />
-    <v-toolbar-title v-if="windowWidth > 580">
+
+    <v-toolbar-title v-if="$vuetify.display.mdAndUp">
       {{ $t("route." + $route.name) }}
     </v-toolbar-title>
 
     <v-spacer />
 
-    <!-- <gen-route-wide-search /> -->
-
-    <div class="mx-3" />
-
+    <!-- Right side icons -->
     <v-btn icon to="/">
       <v-icon> mdi-home </v-icon>
     </v-btn>
@@ -67,13 +67,8 @@ export default {
       return this.$route.name === "institutions";
     },
   },
-  mounted() {
-    window.onresize = this.setWindowWidth;
-  },
+
   methods: {
-    setWindowWidth() {
-      this.windowWidth = window.innerWidth;
-    },
     toggleDrawer() {
       this.$emit("toggle-drawer");
     },
