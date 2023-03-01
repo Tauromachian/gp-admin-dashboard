@@ -1,4 +1,6 @@
 <script>
+import { h } from "vue";
+
 import {
   VList,
   VListGroup,
@@ -31,7 +33,7 @@ export default {
       if (column.children) {
         let children = this.getChildrenFields(column);
         return children;
-      } else if (this.value.includes(column.value)) {
+      } else if (this.modelValue.includes(column.value)) {
         return column.value;
       }
     });
@@ -97,7 +99,7 @@ export default {
       return fieldString;
     },
   },
-  render: function (h) {
+  render() {
     const vListItems = this.makeList(h);
 
     return h(VList, { attrs: { flat: true } }, [
