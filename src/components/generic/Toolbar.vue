@@ -106,10 +106,10 @@ export default {
 
   methods: {
     deleteButtonClicked() {
-      this.$emit("on-delete-button-clicked");
+      this.$emit("click:delete-button");
     },
     deleteRow() {
-      this.$emit("delete-row");
+      this.$emit("click:delete");
     },
     updateService() {
       this.$emit("update:service");
@@ -121,7 +121,7 @@ export default {
       this.formDialog = true;
     },
     onOpenUpdateDialog() {
-      this.$emit("on-open-update-dialog", this.openUpdateDialog);
+      this.$emit("click:update");
     },
   },
 };
