@@ -75,7 +75,6 @@
 
 <script>
 import { required, min, sentence, password, ip } from "@/utils/rules";
-import { isSentence, isIpNumber, isIpMask } from "~/helpers/regex";
 import { mapState } from "pinia";
 
 export default {
