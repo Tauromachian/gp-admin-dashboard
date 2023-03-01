@@ -33,7 +33,6 @@ export default {
     selectedService() {
       const index = this.services.indexOf(this.service);
       const service = Object.assign({}, this.services[index]);
-      service.exclusivo = this.$t(service.exclusivo);
       return service;
     },
     headers() {
