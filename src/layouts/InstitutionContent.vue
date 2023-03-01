@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import Drawer from "./Drawer.vue";
+import CoreDrawer from "./Drawer.vue";
 
 export default {
   name: "InstitutionContent",
   components: {
-    Drawer,
+    CoreDrawer,
   },
   data() {
     return {
