@@ -11,7 +11,7 @@ export default [
       },
       {
         path: "/institution/:id",
-        component: () => import("@/views/InstitutionContent"),
+        component: () => import("@/layouts/InstitutionContent"),
         children: [
           {
             path: "services",
