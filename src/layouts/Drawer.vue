@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="navDrawer" app dark :color="color">
+  <v-navigation-drawer v-model="drawer" app dark :color="color">
     <v-list-item :prepend-avatar="logo" title="SGE"> </v-list-item>
     <v-list-item>
       <v-list-item-subtitle class="institution-name-styles">
@@ -27,40 +27,24 @@
 
 <script>
 // Utilities
-import { mapState, mapActions } from "pinia";
+import { mapState } from "pinia";
+import { useAppStore } from "@/stores/app";
 
 export default {
   props: {
-    opened: {
-      type: Boolean,
-      default: false,
-    },
     links: {
       type: Array,
       required: true,
     },
   },
+  inject: ["drawer"],
   data: () => ({
     logo: "/logo.png",
     navDrawer: false,
     mini: false,
   }),
   computed: {
-    ...mapState("app", ["color", "drawer", "subtitle"]),
-  },
-  watch: {
-    async navDrawer(val) {
-      await this.setDrawer({ drawer: val });
-    },
-  },
-  mounted() {
-    this.navDrawer = this.drawer === "true" || this.drawer === true;
-    this.$root.$on("drawer_btn_clicked", () => {
-      this.navDrawer = !this.navDrawer;
-    });
-  },
-  methods: {
-    ...mapActions("app", ["setDrawer"]),
+    ...mapState(useAppStore, ["color", "subtitle"]),
   },
 };
 </script>

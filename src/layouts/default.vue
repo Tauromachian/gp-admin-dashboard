@@ -2,7 +2,7 @@
   <div>
     <notifications-handler ref="notificationsHandler"></notifications-handler>
 
-    <default-toolbar></default-toolbar>
+    <default-toolbar @toggle-drawer="drawer = !drawer"></default-toolbar>
 
     <default-view></default-view>
   </div>
@@ -22,6 +22,18 @@ export default {
     DefaultToolbar,
     DefaultView,
     NotificationsHandler,
+  },
+
+  data() {
+    return {
+      drawer: false,
+    };
+  },
+
+  provide() {
+    return {
+      drawer: this.drawer,
+    };
   },
 
   computed: {

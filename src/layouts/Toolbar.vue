@@ -75,7 +75,7 @@ export default {
       this.windowWidth = window.innerWidth;
     },
     toggleDrawer() {
-      this.$root.$emit("drawer_btn_clicked");
+      this.$emit("toggle-drawer");
     },
   },
 };
