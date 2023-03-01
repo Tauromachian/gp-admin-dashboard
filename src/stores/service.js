@@ -19,6 +19,7 @@ export const useServiceStore = defineStore("service", {
   getters: {
     isLogged: (state) => !!state.token,
     tableData() {
+      if (!this.services) return [];
       return this.services.map((service) => {
         const formatedService = Object.assign({}, service);
         formatedService.exclusivo = numberToString(formatedService.exclusivo);
