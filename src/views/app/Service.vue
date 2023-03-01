@@ -16,13 +16,12 @@
         </gen-toolbar>
         <easy-data-table
           v-model="selectedRow"
-          :headers="visibleHeaders"
+          :headers="headers"
           :items="tableData"
           :loading="false"
           :dense="isDense"
           v-model:items-per-page="itemsPerPage"
           loading-text="Cargando Servicios..."
-          v-model:page="filters.page"
           single-select
           show-select
           @click:row="
