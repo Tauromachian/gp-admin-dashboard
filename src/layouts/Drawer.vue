@@ -1,11 +1,6 @@
 <template>
   <v-navigation-drawer v-model="navDrawer" app dark :color="color">
-    <v-list-item>
-      <v-list-item-avatar color="white">
-        <v-img :src="logo" height="34" contain />
-      </v-list-item-avatar>
-      <v-list-item-title class="title"> SGE </v-list-item-title>
-    </v-list-item>
+    <v-list-item :prepend-avatar="logo" title="SGE"> </v-list-item>
     <v-list-item>
       <v-list-item-subtitle class="institution-name-styles">
         {{ subtitle }}
