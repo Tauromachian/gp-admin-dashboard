@@ -1,31 +1,17 @@
 <template>
-  <v-form ref="form">
-    <gen-form :title="$t('services.user.form_name')">
-      <service-user-form-fields @update:form="updateForm" />
-      <v-col v-if="hasSensitiveData" xs="12" sm="12" md="4" cols="12">
-        <gen-delete-confirmation-dialog
-          :text="$t('services.fields.delete_credentials_button')"
-          color="danger"
-          v-model:delete-dialog-button="deleteCredentialsDialog"
-          @on-delete-button-clicked="
-            deleteCredentialsDialog = !deleteCredentialsDialog
-          "
-          @delete="deleteServiceCredentials"
-        />
-      </v-col>
-      <slot
-        name="form-actions"
-        :createServiceCredentials="createServiceCredentials"
-      >
-        <gen-form-actions
-          :loading-buttons="loading"
-          :enable-cancel="true"
-          @on-submit="createServiceCredentials"
-          @on-cancel="closeClick"
-        />
-      </slot>
-    </gen-form>
-  </v-form>
+  <gen-form :title="$t('services.user.form_name')">
+    <service-user-form-fields @update:form="updateForm" />
+    <gen-delete-confirmation-dialog
+      :text="$t('services.fields.delete_credentials_button')"
+      color="danger"
+      v-if="hasSensitiveData"
+      v-model:delete-dialog-button="deleteCredentialsDialog"
+      @on-delete-button-clicked="
+        deleteCredentialsDialog = !deleteCredentialsDialog
+      "
+      @delete="deleteServiceCredentials"
+    />
+  </gen-form>
 </template>
 
 <script>
