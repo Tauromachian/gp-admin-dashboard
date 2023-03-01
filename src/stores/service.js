@@ -18,15 +18,6 @@ export const useServiceStore = defineStore("service", {
 
   getters: {
     isLogged: (state) => !!state.token,
-    tableData() {
-      if (!this.services) return [];
-
-      return this.services.map((service) => {
-        const formattedService = { ...service };
-        formattedService.exclusivo = `${formatedService.exclusivo}`;
-        return formattedService;
-      });
-    },
   },
 
   actions: {
