@@ -15,7 +15,7 @@
         <easy-data-table
           v-model="selectedRow"
           :headers="headers"
-          :items="tableData"
+          :items="services"
           :loading="false"
           v-model:items-per-page="itemsPerPage"
           loading-text="Cargando Servicios..."
@@ -94,7 +94,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useServiceStore, ["tableData"]),
+    ...mapState(useServiceStore, ["services"]),
     institutionId() {
       return this.$route.params.id;
     },
