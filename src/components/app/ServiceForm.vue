@@ -134,10 +134,7 @@
     </v-btn>
 
     <v-dialog v-model="serviceCredentialsFormDialog" width="400">
-      <app-service-user-form
-        v-model:inserted-succesfully="insertedSuccesfully"
-        :accepted-ip="form.accepted_ip"
-        :device-token="form.device_token"
+      <service-user-form
         class-computed="ml-10 mr-10"
         @on-delete-credentials="deleteServiceCredentials"
         @click:submit="createServiceCredentials"
@@ -154,10 +151,15 @@ import { required, number, sentence } from "@/utils/rules";
 
 import { deleteService, getService } from "@/services/app/service";
 
+import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
+
 import { mapActions } from "pinia";
 
 export default {
   name: "ServiceForm",
+  components: {
+    ServiceUserForm,
+  },
   props: {
     codcli: {
       type: [Number, String],
