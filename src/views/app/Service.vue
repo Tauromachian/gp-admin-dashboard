@@ -53,10 +53,8 @@ import { useServiceStore } from "@/stores/service";
 import { useNotificationsStore } from "@/stores/notifications";
 
 import ServiceForm from "@/components/app/ServiceForm.vue";
-import ServiceTable from "@/components/app/ServiceTable.vue";
 import ServiceCard from "@/components/app/ServiceCard.vue";
 import ServiceDetails from "@/components/app/ServiceDetails.vue";
-import ServiceSpeedDial from "@/components/app/ServiceSpeedDial.vue";
 
 import {
   getServices,
@@ -67,18 +65,14 @@ import {
   deleteService,
 } from "@/services/app/service";
 
-import debounce from "basic-debouncer";
-
 export default {
   name: "Service",
   middleware: "auth",
 
   components: {
     ServiceForm,
-    ServiceTable,
     ServiceCard,
     ServiceDetails,
-    ServiceSpeedDial,
   },
 
   data() {
