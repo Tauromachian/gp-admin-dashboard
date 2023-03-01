@@ -38,7 +38,10 @@ export default {
       return i;
     },
     name(i) {
-      return `Some description ${i + 1}`;
+      return `Some name ${i + 1}`;
+    },
+    meterNumber(i) {
+      return i;
     },
     crf(i) {
       return `Some province ${i + 1}`;
