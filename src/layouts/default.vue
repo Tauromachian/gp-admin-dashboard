@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-main>
     <notifications-handler ref="notificationsHandler"></notifications-handler>
 
     <default-toolbar @toggle-drawer="drawer = !drawer"></default-toolbar>
 
     <default-view></default-view>
-  </div>
+  </v-main>
 </template>
 
 <script>
