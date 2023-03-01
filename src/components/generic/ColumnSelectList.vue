@@ -6,8 +6,10 @@ import {
   VListGroup,
   VListItem,
   VListItemTitle,
+  VListSubheader,
   VCheckbox,
   VListItemAction,
+  VCheckboxBtn,
 } from "vuetify/components";
 
 export default {
@@ -51,7 +53,7 @@ export default {
 
       this.$emit("update:modelValue", tableSelectedColumns);
     },
-    makeList: function (h) {
+    makeList(h) {
       const vListItems = this.columns.map((column) => {
         if (column.children) {
           let fields = this.getChildrenFields(column);
@@ -63,22 +65,19 @@ export default {
 
       return vListItems;
     },
-    makeListItem(h, column, value) {
-      return h(VListItem, {
-        attrs: { value },
-      });
+    makeListItem(h, column) {
+      return h(
+        VListItem,
+        {
+          value: column.value,
+        },
+        {
+          prepend: ({ isActive }) => h(VCheckboxBtn, { modelValue: isActive }),
+          default: () => h(VListItemTitle, {}, { default: () => column.text }),
+        }
+      );
     },
-    makeListItemContent(h, active, toggle, column) {
-      return [
-        h(VListItemAction, [
-          h(VCheckbox, {
-            attrs: { color: "primary", inputValue: active },
-            on: { click: toggle },
-          }),
-        ]),
-        h(VListItem, [h(VListItemTitle, column.text)]),
-      ];
-    },
+
     getChildrenFields(parent) {
       let fieldString = "";
       fieldString += parent.children[0].value;
@@ -92,17 +91,16 @@ export default {
   render() {
     const vListItems = this.makeList(h);
 
-    return h(VList, { attrs: { flat: true } }, [
-      h("div", "Selecciona las columnas a mostrar"),
-      h(
-        VListGroup,
-        {
-          attrs: { multiple: true, value: this.visibleColumns },
-          on: { change: this.setTableVisibleColumns },
-        },
-        vListItems
-      ),
-    ]);
+    return h(
+      VList,
+      { flat: true },
+      {
+        default: () => [
+          h(VListSubheader, () => "Seleccione las columnas a mostrar"),
+          vListItems,
+        ],
+      }
+    );
   },
 };
 </script>
