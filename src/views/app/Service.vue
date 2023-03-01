@@ -55,80 +55,11 @@
     </v-row>
 
     <!-- Service view actions   -->
-    <v-speed-dial v-model="fab" fixed bottom right direction="top">
-      <template #activator>
-        <v-btn
-          v-model="fab"
-          color="blue darken-2"
-          dark
-          class="mb-9 z-index-100 perfectly-round-button"
-          fab
-        >
-          <v-icon v-if="fab"> mdi-close </v-icon>
-          <v-icon v-else> mdi-hand </v-icon>
-        </v-btn>
-      </template>
-      <!-- Insert button -->
-      <v-btn
-        dark
-        fab
-        color="primary"
-        class="perfectly-round-button"
-        @click="openFormForInsert"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-
-      <!-- View menu button -->
-      <v-menu top class="z-index-100" :close-on-content-click="false">
-        <template #activator="{ on, attrs }">
-          <v-btn
-            dark
-            fab
-            color="primary"
-            v-bind="attrs"
-            class="perfectly-round-button"
-            v-on="on"
-          >
-            <v-icon>mdi-cog</v-icon>
-          </v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            {{ $t("options") }}
-          </v-card-title>
-          <v-card-text>
-            <div class="d-flex">
-              <v-switch v-model="isTableActive" label="Table" />
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-menu>
-
-      <!-- View menu button -->
-      <v-menu top class="z-index-100" :close-on-content-click="false">
-        <template #activator="{ on, attrs }">
-          <v-btn
-            dark
-            fab
-            color="primary"
-            v-bind="attrs"
-            class="perfectly-round-button"
-            v-on="on"
-          >
-            <v-icon>mdi-filter</v-icon>
-          </v-btn>
-        </template>
-        <v-card>
-          <gen-form :title="$t('services.service_filter')">
-            <v-text-field
-              v-model="serviceName"
-              :label="$t('institutions.fields.name')"
-            />
-          </gen-form>
-        </v-card>
-      </v-menu>
-    </v-speed-dial>
+    <service-speed-dial
+      v-model:serviceName="serviceName"
+      v-model:isTableActive="isTableActive"
+      @click:plus="openFormForInsert"
+    ></service-speed-dial>
 
     <!-- Services dialog-form -->
     <v-dialog v-model="formDialog" width="400">
@@ -153,6 +84,7 @@ import ServiceForm from "@/components/app/ServiceForm.vue";
 import ServiceTable from "@/components/app/ServiceTable.vue";
 import ServiceCard from "@/components/app/ServiceCard.vue";
 import ServiceDetails from "@/components/app/ServiceDetails.vue";
+import ServiceSpeedDial from "@/components/app/ServiceSpeedDial.vue";
 
 import {
   getServices,
@@ -174,6 +106,7 @@ export default {
     ServiceTable,
     ServiceCard,
     ServiceDetails,
+    ServiceSpeedDial,
   },
 
   data() {
