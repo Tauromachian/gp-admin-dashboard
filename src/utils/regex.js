@@ -9,9 +9,6 @@ const sentenceRegex = /^([0-9a-zA-Z -.:/])+$/;
 const emailRegex =
   /^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
-const ipNumber = /^((([2][0-5][1-5])|([1][0-9]{2})|([1-9][0-9])|([0-9])))$/;
-const maskRegex = /^((([2][0-9])|([1][0-9])|[0-9])|([3][0-2]))?$/;
-
 const monthSpanishRegex =
   /^enero|febrero|marzo|abril|mayo|junio|julio|agosto|octubre|diciembre|septiembre|noviembre$/;
 
@@ -51,14 +48,6 @@ const isSentence = (string) => {
 
 const isEmail = (string) => {
   return emailRegex.test(string);
-};
-
-const isIpNumber = (string) => {
-  return ipNumber.test(string);
-};
-
-const isIpMask = (string) => {
-  return maskRegex.test(string);
 };
 
 const isMonthInSpanish = (string) => {
