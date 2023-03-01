@@ -12,3 +12,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.mount("#app");
+app.config.unwrapInjectedRef = true;
