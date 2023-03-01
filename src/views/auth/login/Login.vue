@@ -24,16 +24,18 @@
           prepend-icon="mdi-lock"
         ></v-text-field>
 
-        <div class="d-flex">
-          <v-btn
-            type="submit"
-            :loading="loading"
-            color="primary"
-            class="ms-auto"
-          >
-            Login
-          </v-btn>
-        </div>
+        <template #actions>
+          <div class="d-flex">
+            <v-btn
+              type="submit"
+              :loading="loading"
+              color="primary"
+              class="ms-auto"
+            >
+              Login
+            </v-btn>
+          </div>
+        </template>
       </gen-form>
     </v-card-text>
   </v-card>
