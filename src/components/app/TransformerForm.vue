@@ -20,13 +20,13 @@
       v-model="capacityComputed"
       :items="capacities"
       label="Capacidad (kVA)"
-      :rules="capacityRules"
+      :rules="[rules.required(), rules.number()]"
     />
   </v-card>
 </template>
 
 <script>
-import { isNumber } from "~/helpers/regex";
+import { required, number } from "@/utils/rules";
 
 export default {
   name: "TransformerForm",
@@ -51,10 +51,7 @@ export default {
   data: function () {
     return {
       capacities: this.type === "mono" ? this.monoPhase : this.threePhase,
-      capacityRules: [
-        (v) => !!v || "La capacidad falta",
-        (v) => isNumber(v) || "Introduzca un numero aqui",
-      ],
+      rules: [required, number],
     };
   },
   computed: {
