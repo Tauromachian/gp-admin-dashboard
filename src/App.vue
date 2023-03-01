@@ -8,8 +8,12 @@
 //
 </script>
 
-<style scoped>
+<style>
 .root {
   background: #f7f9ff;
+}
+
+.vue3-easy-data-table {
+  border: unset !important;
 }
 </style>
