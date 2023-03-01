@@ -2,14 +2,14 @@
   <v-row>
     <v-col cols="auto">
       <slot name="actions-prepend" />
+
       <v-dialog
         v-if="!disableHideColumnsDialog && !disableDetails"
         v-model="columnSelectListDialog"
         width="500"
       >
         <template #activator="{ on }">
-          <v-btn color="primary" v-on="on">
-            <v-icon dark> mdi-eye </v-icon>
+          <v-btn icon="mdi-eye" variant="text" color="primary" v-on="on">
           </v-btn>
         </template>
 
@@ -27,8 +27,14 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-btn v-if="!disableEdit" color="primary" @click="onOpenUpdateDialog">
-        <v-icon dark> mdi-pencil </v-icon>
+
+      <v-btn
+        variant="text"
+        v-if="!disableEdit"
+        color="primary"
+        @click="onOpenUpdateDialog"
+        icon="mdi-pencil"
+      >
       </v-btn>
 
       <gen-delete-confirmation-dialog
@@ -37,18 +43,10 @@
         @on-delete-button-clicked="deleteButtonClicked"
         @delete="deleteRow"
       />
+
       <slot name="actions-append" />
     </v-col>
-    <v-col md="1">
-      <v-btn-toggle v-model="denseComputed" group mandatory>
-        <v-btn :value="false">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-        <v-btn :value="true">
-          <v-icon>mdi-format-align-justify</v-icon>
-        </v-btn>
-      </v-btn-toggle>
-    </v-col>
+
     <v-dialog v-model="formDialog" width="900">
       <slot :closeUpdateDialog="closeUpdateDialog" />
     </v-dialog>
@@ -61,7 +59,6 @@ export default {
   props: {
     disableHideColumnsDialog: { type: Boolean, default: false },
     columnDefs: { type: Array, required: true },
-    dense: { type: Boolean, default: false },
     visibleColumns: { type: Array, required: true },
     selectedRows: { type: Array, default: () => [] },
     deleteDialogButton: { type: Boolean, default: false },
@@ -86,14 +83,7 @@ export default {
         this.$emit("update:delete-dialog-button", val);
       },
     },
-    denseComputed: {
-      get() {
-        return this.dense;
-      },
-      set(val) {
-        this.$emit("update:dense", val);
-      },
-    },
+
     visibleColumnsComputed: {
       get() {
         return this.visibleColumns;
