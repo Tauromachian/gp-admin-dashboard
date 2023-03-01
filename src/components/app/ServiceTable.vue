@@ -33,24 +33,9 @@
           @on-open-update-dialog="fillForm"
           @on-delete-button-clicked="openDeleteConfirmationDialog"
         >
-          <template #default="{ closeUpdateDialog }">
-            <app-service-form
-              :codcli="codcli"
-              @service-submit="
-                (form, serviceCredentialsForm) =>
-                  updateService(form, serviceCredentialsForm, closeUpdateDialog)
-              "
-            >
-              <template #form-actions="{ serviceSubmit }">
-                <gen-form-actions
-                  :submit-button-title="$t('button.actions.update')"
-                  :loading-buttons="loading"
-                  :enable-cancel="true"
-                  @on-submit="serviceSubmit"
-                  @on-cancel="closeUpdateDialog"
-                />
-              </template>
-            </app-service-form>
+          <template #default>
+            <service-form :codcli="codcli" @submit="serviceSubmit">
+            </service-form>
           </template>
         </gen-toolbar>
       </template>
@@ -66,10 +51,16 @@ import {
   addServiceCredentials,
 } from "@/services/app/service";
 
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
+
+import ServiceForm from "@/components/app/ServiceForm.vue";
 
 export default {
   name: "ServiceTable",
+  components: {
+    ServiceForm,
+  },
   data() {
     return {
       selectedRow: [],
@@ -101,7 +92,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("service", { services: "tableData" }),
+    ...mapState("service", { services: "tableData" }),
     tableData() {
       return this.services;
     },
@@ -149,7 +140,7 @@ export default {
   },
   methods: {
     ...mapActions("service", ["clearCredentialsFormData"]),
-    ...mapActions("app", ["addNotification"]),
+    ...mapActions(useNotificationsStore, ["addNotification"]),
 
     openDeleteConfirmationDialog() {
       if (!this.selectedRow.length) {
