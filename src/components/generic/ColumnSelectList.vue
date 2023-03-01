@@ -66,16 +66,6 @@ export default {
     makeListItem(h, column, value) {
       return h(VListItem, {
         attrs: { value },
-        scopedSlots: {
-          default: (scope) => {
-            return this.makeListItemContent(
-              h,
-              scope.active,
-              scope.toggle,
-              column
-            );
-          },
-        },
       });
     },
     makeListItemContent(h, active, toggle, column) {
