@@ -25,14 +25,13 @@
 
     <!-- View menu button -->
     <v-menu top class="z-index-100" :close-on-content-click="false">
-      <template #activator="{ on, attrs }">
+      <template #activator="{ attrs }">
         <v-btn
           dark
           fab
           color="primary"
           v-bind="attrs"
           class="perfectly-round-button"
-          v-on="on"
         >
           <v-icon>mdi-cog</v-icon>
         </v-btn>
@@ -51,14 +50,13 @@
 
     <!-- View menu button -->
     <v-menu top class="z-index-100" :close-on-content-click="false">
-      <template #activator="{ on, attrs }">
+      <template #activator="{ attrs }">
         <v-btn
           dark
           fab
           color="primary"
           v-bind="attrs"
           class="perfectly-round-button"
-          v-on="on"
         >
           <v-icon>mdi-filter</v-icon>
         </v-btn>
