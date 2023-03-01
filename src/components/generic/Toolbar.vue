@@ -4,7 +4,7 @@
       <slot name="actions-prepend" />
 
       <v-dialog
-        v-if="!disableHideColumnsDialog && !disableDetails"
+        v-if="!disable.hideColumns && !disable.details"
         v-model="columnSelectListDialog"
         width="500"
       >
@@ -30,7 +30,7 @@
 
       <v-btn
         variant="text"
-        v-if="!disableEdit"
+        v-if="!disable?.edit"
         color="primary"
         @click="onOpenUpdateDialog"
         icon="mdi-pencil"
@@ -38,7 +38,7 @@
       </v-btn>
 
       <gen-delete-confirmation-dialog
-        v-if="!disableDelete"
+        v-if="!disable?.delete"
         v-model:delete-dialog-button="deleteDialogButtonComputed"
         @on-delete-button-clicked="deleteButtonClicked"
         @delete="deleteRow"
@@ -57,14 +57,19 @@
 export default {
   name: "Toolbar",
   props: {
-    disableHideColumnsDialog: { type: Boolean, default: false },
     columnDefs: { type: Array, required: true },
     visibleColumns: { type: Array, required: true },
     selectedRows: { type: Array, default: () => [] },
     deleteDialogButton: { type: Boolean, default: false },
-    disableEdit: { type: Boolean, default: false },
-    disableDelete: { type: Boolean, default: false },
-    disableDetails: { type: Boolean, default: false },
+    disable: {
+      type: Object,
+      default: () => ({
+        edit: false,
+        delete: false,
+        hideColumns: false,
+        details: false,
+      }),
+    },
   },
   data() {
     return {
