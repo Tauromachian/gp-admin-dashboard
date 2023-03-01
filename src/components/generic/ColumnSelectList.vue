@@ -90,7 +90,13 @@ export default {
 
     return h(
       VList,
-      { flat: true, selectStrategy: "classic" },
+      {
+        flat: true,
+        selectStrategy: "classic",
+        "onUpdate:selected": (visibleColumns) => {
+          this.visibleColumns = visibleColumns;
+        },
+      },
       {
         default: () => [
           h(VListSubheader, () => "Seleccione las columnas a mostrar"),
