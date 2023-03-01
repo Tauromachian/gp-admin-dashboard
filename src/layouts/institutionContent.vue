@@ -7,8 +7,13 @@
 </template>
 
 <script>
+import Drawer from "./Drawer.vue";
+
 export default {
   name: "InstitutionContent",
+  components: {
+    Drawer,
+  },
   data() {
     return {
       links: [
