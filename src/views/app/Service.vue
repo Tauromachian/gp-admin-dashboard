@@ -153,11 +153,6 @@ export default {
       this.selectedService = this.tableData[0];
     },
 
-    goToManageServiceSubdata(id, name) {
-      this.setDrawerSubtitle(name);
-      this.$router.push({ name: "oneRead", params: { idService: id } });
-    },
-
     showServiceDetails(service) {
       this.selectedService = service;
       if (this.$vuetify.display.mdAndDown) {
