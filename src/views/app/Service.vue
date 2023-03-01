@@ -35,7 +35,7 @@
           <v-col sm="4" md="4" cols="12">
             <gen-details-sidebar
               class="mt-2"
-              :allow-dialog="isScreenSmall"
+              :allow-dialog="$vuetify.display.mdAndDown"
               v-model:dialog="serviceDetailsDialog"
             >
               <service-details :service="selectedService" elevation="0" />
@@ -78,6 +78,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
+import { useServiceStore } from "@/stores/service";
 import { useNotificationsStore } from "@/stores/notifications";
 
 import ServiceForm from "@/components/app/ServiceForm.vue";
@@ -129,8 +130,7 @@ export default {
   },
 
   computed: {
-    ...mapState("service", { services: "tableData" }),
-    ...mapState("app", ["notification", "isScreenSmall"]),
+    ...mapState(useServiceStore, { services: "tableData" }),
   },
 
   watch: {
@@ -146,7 +146,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("service", {
+    ...mapActions(useServiceStore, {
       setServices: "setServices",
       removeServiceFromStore: "deleteService",
       addServiceToStore: "addService",
@@ -169,7 +169,7 @@ export default {
 
     showServiceDetails(service) {
       this.selectedService = service;
-      if (this.isScreenSmall) {
+      if (this.$vuetify.display.mdAndDown) {
         this.serviceDetailsDialog = true;
       }
     },

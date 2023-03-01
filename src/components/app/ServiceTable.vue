@@ -52,6 +52,7 @@ import {
 } from "@/services/app/service";
 
 import { mapActions, mapState } from "pinia";
+import { useServiceStore } from "@/stores/service";
 import { useNotificationsStore } from "@/stores/notifications";
 
 import ServiceForm from "@/components/app/ServiceForm.vue";
@@ -92,7 +93,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("service", { services: "tableData" }),
+    ...mapState(useServiceStore, { services: "tableData" }),
     tableData() {
       return this.services;
     },
@@ -139,7 +140,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("service", ["clearCredentialsFormData"]),
+    ...mapActions(useServiceStore, ["clearCredentialsFormData"]),
     ...mapActions(useNotificationsStore, ["addNotification"]),
 
     openDeleteConfirmationDialog() {

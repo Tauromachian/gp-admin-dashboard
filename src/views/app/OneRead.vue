@@ -24,6 +24,7 @@
 
 <script>
 import { mapState } from "pinia";
+import { useServiceStore } from "@/stores/service";
 
 export default {
   name: "OneRead",
@@ -45,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("service", ["services"]),
+    ...mapState(useServiceStore, ["services"]),
   },
   watch: {
     serviceId(id) {

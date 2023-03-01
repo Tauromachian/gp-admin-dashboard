@@ -16,6 +16,7 @@
 
 <script>
 import { mapState, mapActions } from "pinia";
+import { useServiceStore } from "@/stores/service";
 
 import ServiceUserFormFields from "@/components/app/ServiceUserFormFields.vue";
 
@@ -32,10 +33,10 @@ export default {
     };
   },
   computed: {
-    ...mapState("service", ["hasSensitiveData"]),
+    ...mapState(useServiceStore, ["hasSensitiveData"]),
   },
   methods: {
-    ...mapActions("service", ["setHasSensitiveData"]),
+    ...mapActions(useServiceStore, ["setHasSensitiveData"]),
     updateForm(form) {
       this.form = form;
     },

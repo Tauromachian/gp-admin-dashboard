@@ -76,6 +76,7 @@
 <script>
 import { required, min, sentence, password, ip } from "@/utils/rules";
 import { mapState } from "pinia";
+import { useServiceStore } from "@/stores/service";
 
 export default {
   name: "ServiceUserFormFields",
@@ -92,7 +93,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("service", ["credentialsForm", "hasSensitiveData"]),
+    ...mapState(useServiceStore, ["credentialsForm", "hasSensitiveData"]),
     deviceTokenComputed: {
       get() {
         return this.credentialsForm.device_token;

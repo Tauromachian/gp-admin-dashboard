@@ -155,6 +155,7 @@ import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
 import TransformerForm from "@/components/app/TransformerForm.vue";
 
 import { mapActions } from "pinia";
+import { useServiceStore } from "@/stores/service";
 
 export default {
   name: "ServiceForm",
@@ -277,7 +278,10 @@ export default {
     this.fillData();
   },
   methods: {
-    ...mapActions("service", ["setCredentialsFormData", "setHasSensitiveData"]),
+    ...mapActions(useServiceStore, [
+      "setCredentialsFormData",
+      "setHasSensitiveData",
+    ]),
     cleanForm() {
       this.form.name = "";
       this.form.codcli = "";
