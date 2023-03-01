@@ -216,7 +216,6 @@ export default {
           color: "error",
         });
       }
-      return data;
     },
 
     async addService(form, serviceFormCredentials) {
