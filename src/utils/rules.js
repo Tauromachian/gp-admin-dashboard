@@ -1,4 +1,4 @@
-import { isNumber, isPhone, isEmail } from "./regex";
+import { isNumber, isPhone, isEmail, isSentence } from "./regex";
 
 export function required(message = "Este valor es requerido.") {
   return (v) => !!v || message;
@@ -14,6 +14,10 @@ export function phone(message = "El número de teléfono no es válido") {
 
 export function email(message = "El email no es válido") {
   return (v) => isEmail(v) || message;
+}
+
+export function sentence(message = "El formato no es válido") {
+  return (v) => isSentence(v) || message;
 }
 
 export function password() {
