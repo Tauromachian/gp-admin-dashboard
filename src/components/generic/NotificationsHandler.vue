@@ -1,49 +1,54 @@
 <template>
   <div class="w-100 mt-10 notifications-handler">
-    <gen-notification
-      v-for="(notification, key) in messagesDirectory"
-      class="notification"
+    <v-snackbar
+      v-for="(notification, key, index) in notificationsDirectory"
       :key="key"
-      :style="{ 'margin-top': `${index * 6}em` }"
-      :notification="notification"
-      @click:delete="deleteMessage(key)"
-    ></gen-notification>
+      :content-props="{
+        style: {
+          'margin-bottom': `${(index - 1) * 4}em`,
+          left: 'unset',
+          right: '10px',
+          transform: 'unset',
+        },
+      }"
+      :color="notification.color"
+      absolute
+      close-on-content-click
+      :modelValue="true"
+      @update:modelValue="deleteNotification(key)"
+    >
+      {{ notification.message }}
+    </v-snackbar>
   </div>
 </template>
 
 <script>
-import GenNotification from "./Notification.vue";
+import { getRandomString } from "@/utils/randomGenerator";
 
 export default {
   name: "NotificationsHandler",
-  components: {
-    GenNotification,
-  },
 
   data() {
     return {
-      messagesDirectory: {},
+      notificationsDirectory: {},
     };
   },
 
   methods: {
-    deleteMessageAfterDelay(id) {
-      setTimeout(() => {
-        this.deleteMessage(id);
-      }, 5000);
+    deleteNotification(id) {
+      delete this.notificationsDirectory[id];
+      this.notificationsDirectory = { ...this.notificationsDirectory };
     },
 
-    deleteMessage(id) {
-      delete this.messagesDirectory[id];
-      this.messagesDirectory = { ...this.messagesDirectory };
-    },
+    addNotification(notification) {
+      if (!notification) return;
 
-    addMessage(message) {
       const id = getRandomString();
 
-      this.$set(this.messagesDirectory, id, message);
-
-      this.deleteMessageAfterDelay(id);
+      this.notificationsDirectory = {
+        ...this.notificationsDirectory,
+        [id]: notification,
+      };
     },
   },
 };
@@ -53,9 +58,5 @@ export default {
 .notifications-handler {
   position: fixed;
   z-index: 1000;
-}
-
-.notification {
-  position: absolute;
 }
 </style>
