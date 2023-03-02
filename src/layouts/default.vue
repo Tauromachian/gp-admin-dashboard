@@ -50,7 +50,7 @@ export default {
 
       if (!lastNotification) return;
 
-      this.$refs.notificationsHandler.addNotification(notification);
+      this.$refs.notificationsHandler.addNotification(lastNotification);
     },
   },
 };
