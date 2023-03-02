@@ -29,7 +29,7 @@ export default {
       type: String,
       default: "",
     },
-    deleteDialogButton: {
+    modelValue: {
       type: Boolean,
       default: false,
     },
@@ -37,10 +37,11 @@ export default {
   computed: {
     dialog: {
       get() {
-        return this.deleteDialogButton;
+        if (!this.isAllowedToOpen) return false;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit("update:delete-dialog-button", val);
+        this.$emit("update:modelValue", val);
       },
     },
   },
