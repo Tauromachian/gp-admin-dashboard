@@ -12,7 +12,6 @@
           <v-btn
             icon="mdi-eye"
             @click="columnSelectListDialog = true"
-            variant="text"
             color="primary"
           >
           </v-btn>
@@ -34,7 +33,7 @@
       </v-dialog>
 
       <v-btn
-        variant="text"
+        class="ml-1"
         v-if="!disable?.edit"
         color="primary"
         @click="onOpenUpdateDialog"
@@ -43,6 +42,7 @@
       </v-btn>
 
       <gen-delete-confirmation-dialog
+        class="ml-1"
         v-if="!disable?.delete"
         v-model="dialogDelete"
         :isAllowedToOpen="isRowSelected"
