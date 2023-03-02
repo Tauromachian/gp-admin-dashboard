@@ -26,7 +26,7 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn color="primary" text @click="columnSelectListDialog = false">
+            <v-btn color="primary" @click="columnSelectListDialog = false">
               {{ $t("button.actions.accept") }}
             </v-btn>
           </v-card-actions>
