@@ -17,7 +17,7 @@
         <easy-data-table
           class="mt-3"
           v-model:items-selected="selectedRows"
-          :headers="headers"
+          :headers="visibleHeaders"
           :items="services"
           :loading="false"
           v-model:items-per-page="itemsPerPage"
@@ -96,10 +96,19 @@ export default {
     return { title: this.$t(`route.${this.$route.name}`) };
   },
 
+  mounted() {
+    this.visibleColumns = this.headers.map((header) => header.value);
+  },
+
   computed: {
     ...mapState(useServiceStore, ["services"]),
     institutionId() {
       return this.$route.params.id;
+    },
+    visibleHeaders() {
+      return this.headers.filter((header) => {
+        return this.visibleColumns.includes(header.value);
+      });
     },
     headers() {
       return [
