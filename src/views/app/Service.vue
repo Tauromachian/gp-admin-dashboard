@@ -304,13 +304,19 @@ export default {
       this.formDialog = false;
     },
 
-    checkRowSelected() {
-      if (this.selectedRows.length === 0) {
-        this.addNotification({
-          message: this.$t("notifications.select_row_before_delete"),
-          color: "info",
-        });
-      }
+    isRowSelected(type) {
+      if (this.selectedRows.length !== 0) return true;
+
+      this.addNotification({
+        message: this.$t(
+          type === "delete"
+            ? "notifications.select_row_before_delete"
+            : "notifications.select_row_before_update"
+        ),
+        color: "info",
+      });
+
+      return false;
     },
 
     async removeService() {
