@@ -9,7 +9,7 @@
       variant="text"
       v-else
       :color="color"
-      @click="() => (dialog = true)"
+      @click="onDeleteButtonClick"
     >
     </v-btn>
 
@@ -50,6 +50,11 @@ export default {
     },
   },
   methods: {
+    onDeleteButtonClick() {
+      this.isAllowedToOpen && (this.dialog = true);
+
+      this.$emit("click:delete-button");
+    },
     deleteRow() {
       this.dialog = false;
       this.$emit("delete");
