@@ -21,21 +21,27 @@ export default {
       type: Array,
       default: () => [],
     },
+    hasAllActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  data: function () {
-    return {
-      visibleColumns: [],
-    };
+
+  computed: {
+    visibleColumns: {
+      get() {
+        return this.modelValue;
+      },
+      set(val) {
+        this.$emit("update:modelValue", val);
+      },
+    },
   },
+
   beforeMount() {
-    this.visibleColumns = this.columns.map((column) => {
-      if (column.children) {
-        let children = this.getChildrenFields(column);
-        return children;
-      } else if (this.modelValue.includes(column.value)) {
-        return column.value;
-      }
-    });
+    if (this.hasAllActive) {
+      this.visibleColumns = this.columns.map((column) => column.value);
+    }
   },
   methods: {
     setTableVisibleColumns(listSelectedColumns) {
@@ -91,6 +97,7 @@ export default {
     return h(
       VList,
       {
+        selected: this.visibleColumns,
         flat: true,
         selectStrategy: "classic",
         "onUpdate:selected": (visibleColumns) => {
