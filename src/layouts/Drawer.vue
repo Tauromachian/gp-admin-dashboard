@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app dark :color="color" :order="0">
+  <v-navigation-drawer v-model="drawer" app dark :order="0">
     <v-list-item :prepend-avatar="logo" title="SGE"> </v-list-item>
     <v-list-item>
       <v-list-item-subtitle class="institution-name-styles">
