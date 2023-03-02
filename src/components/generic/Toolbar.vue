@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       columnSelectListDialog: false,
+      dialogDelete: false,
       formDialog: false,
       pageAmounts: [10, 50, 100],
     };
