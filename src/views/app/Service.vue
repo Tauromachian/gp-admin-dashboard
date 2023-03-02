@@ -166,12 +166,6 @@ export default {
       }
     },
 
-    submitService(form, credentialsForm) {
-      this.isFormUpdating
-        ? this.editService(form, credentialsForm)
-        : this.addService(form, credentialsForm);
-    },
-
     openFormForInsert() {
       if (this.isFormUpdating) {
         this.$refs.form.reset();
@@ -189,11 +183,19 @@ export default {
       this.codcli = codcli;
     },
 
+    submitService(form, credentialsForm) {
+      this.isFormUpdating
+        ? this.editService(form, credentialsForm)
+        : this.addService(form, credentialsForm);
+    },
+
     async addService(form, serviceFormCredentials) {
       this.loading = true;
 
       try {
-        const serviceInsertionStatus = await this.insertService(form);
+        form.institution_id = this.institutionId;
+
+        await addService(form);
 
         if (!serviceInsertionStatus) {
           this.loading = false;
@@ -270,19 +272,6 @@ export default {
       }
     },
 
-    async insertService(form) {
-      try {
-        form.institution_id = this.institutionId;
-        await addService(form);
-        return true;
-      } catch (err) {
-        this.addNotification({
-          message: this.$t("notifications.unsuccesfull_insert"),
-          color: "error",
-        });
-        return false;
-      }
-    },
     async insertServiceCredentials(serviceFormCredentials, codcli) {
       if (!serviceFormCredentials) {
         return true;
