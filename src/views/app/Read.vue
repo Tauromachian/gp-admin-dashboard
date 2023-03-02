@@ -10,6 +10,7 @@
           @edit-click="openFormForEdit"
         />
         <easy-data-table
+          class="mt-3"
           v-model="selectedRow"
           :headers="visibleHeaders"
           :items="reads"
