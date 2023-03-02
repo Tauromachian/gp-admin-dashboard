@@ -104,12 +104,6 @@ export default {
     deleteRow() {
       this.$emit("click:delete");
     },
-    updateService() {
-      this.$emit("update:service");
-    },
-    onOpenUpdateDialog() {
-      this.$emit("click:update");
-    },
   },
 };
 </script>
