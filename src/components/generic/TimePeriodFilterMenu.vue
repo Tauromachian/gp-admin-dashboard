@@ -5,8 +5,8 @@
     :nudge-width="200"
     offset-x
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" v-bind="attrs" v-on="on">
+    <template v-slot:activator="{ props }">
+      <v-btn color="primary" v-bind="props" v-on="on">
         <v-icon dark> mdi-filter-variant </v-icon>
       </v-btn>
     </template>
