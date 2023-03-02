@@ -8,6 +8,7 @@
           :column-defs="headers"
           :isRowSelected="selectedRows.length > 0"
           @click:delete-button="isRowSelected('delete')"
+          @click:update-button="openFormForEdit"
           @click:delete="removeService"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
