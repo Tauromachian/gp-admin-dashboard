@@ -36,7 +36,7 @@
         class="ml-1"
         v-if="!disable?.edit"
         color="primary"
-        @click="onOpenUpdateDialog"
+        @click="onUpdateButtonClicked"
         icon="mdi-pencil"
       >
       </v-btn>
@@ -97,6 +97,9 @@ export default {
   methods: {
     onDeleteButtonClicked() {
       this.$emit("click:delete-button");
+    },
+    onUpdateButtonClicked() {
+      this.$emit("click:update-button");
     },
     deleteRow() {
       this.$emit("click:delete");
