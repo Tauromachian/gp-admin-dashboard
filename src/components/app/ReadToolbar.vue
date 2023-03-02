@@ -1,6 +1,6 @@
 <template>
   <gen-toolbar
-    v-model:row-amount="rowAmount"
+    v-model:row-amount="setRowAmount"
     v-model:visible-columns="visibleColumnsComputed"
     :column-defs="columnDefs"
     disable-delete

@@ -41,13 +41,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions, mapState } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
 import { getReads, addRead, updateRead } from "@/services/app/read";
 
-import ReadTable from "@/components/app/ReadTable.vue";
 import ReadServiceFilter from "@/components/app/ReadServiceFilter.vue";
 import ReadFilter from "@/components/app/ReadFilter.vue";
 
@@ -55,7 +53,6 @@ export default {
   name: "Read",
   middleware: "auth",
   components: {
-    ReadTable,
     ReadServiceFilter,
     ReadFilter,
   },
