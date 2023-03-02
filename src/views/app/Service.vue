@@ -308,7 +308,7 @@ export default {
       if (this.selectedRows.length === 0) {
         this.addNotification({
           message: this.$t("notifications.select_row_before_delete"),
-          color: "error",
+          color: "info",
         });
       }
     },
