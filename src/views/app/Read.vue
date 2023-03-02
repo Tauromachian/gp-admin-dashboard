@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card elevation="0" class="mt-4 hidden-sm-and-down">
+    <v-card class="mt-4">
       <read-toolbar
         v-model:visible-columns="visibleColumns"
         :column-defs="headers"
