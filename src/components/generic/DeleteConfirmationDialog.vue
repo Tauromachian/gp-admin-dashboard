@@ -33,6 +33,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isAllowedToOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     dialog: {
