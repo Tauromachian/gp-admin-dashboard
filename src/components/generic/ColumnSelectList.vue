@@ -21,10 +21,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    hasAllActive: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   computed: {
@@ -38,11 +34,6 @@ export default {
     },
   },
 
-  beforeMount() {
-    if (this.hasAllActive) {
-      this.visibleColumns = this.columns.map((column) => column.value);
-    }
-  },
   methods: {
     setTableVisibleColumns(listSelectedColumns) {
       const tableSelectedColumns = listSelectedColumns.flatMap(
