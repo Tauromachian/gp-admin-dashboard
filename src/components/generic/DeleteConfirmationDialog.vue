@@ -9,7 +9,7 @@
       variant="text"
       v-else
       :color="color"
-      @click="openDialog"
+      @click="() => (dialog = true)"
     >
     </v-btn>
 
