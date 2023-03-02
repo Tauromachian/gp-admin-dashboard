@@ -10,7 +10,7 @@
     transition="slide-y-transition"
     v-model="menu"
   >
-    <template #activator>
+    <template #activator="{ props }">
       <v-btn
         class="elevation-0"
         :class="{ 'position-right': right, 'position-left': left }"
@@ -21,7 +21,7 @@
         style="top: 96px"
         top
         left
-        @click="menu = !menu"
+        v-bind="props"
       >
         <v-icon>mdi-filter</v-icon>
       </v-btn>

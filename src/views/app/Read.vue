@@ -15,12 +15,6 @@
           :headers="visibleHeaders"
           :items="reads"
           :loading="false"
-          :dense="isDense"
-          :footer-props="{
-            'items-per-page-text': 'Lecturas por páginas',
-            'items-per-page-all-text': 'Todos',
-          }"
-          loading-text="Cargando Lecturas..."
           v-model:page="filters.page"
           v-model:items-per-page="filters.limit"
           :server-items-length="dataTableFields.serverItemsLength"
