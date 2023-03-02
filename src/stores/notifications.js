@@ -8,7 +8,9 @@ export const useNotificationsStore = defineStore("notifications", {
 
   actions: {
     addNotification(notification) {
-      this.notifications.push(notification);
+      if (!notification) return;
+
+      this.notifications = [...this.notifications, notification];
     },
   },
 });
