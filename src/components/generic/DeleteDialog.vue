@@ -1,7 +1,11 @@
 <template>
   <v-dialog v-model="dialogComputed" max-width="400">
     <v-card>
-      <v-card-title>¿Esta seguro de que desea borrar?</v-card-title>
+      <v-card-title>¿Está seguro de que desea borrar?</v-card-title>
+      <v-card-text>
+        La fila seleccionada será borrada de la tabla. Esta acción no se puede
+        revertir.
+      </v-card-text>
 
       <v-card-actions>
         <v-spacer />
@@ -10,6 +14,7 @@
           enable-cancel
           @click:submit="acceptClicked"
           @click:cancel="dialogComputed = false"
+          submit-button-title="Borrar"
         ></gen-form-actions>
       </v-card-actions>
     </v-card>
