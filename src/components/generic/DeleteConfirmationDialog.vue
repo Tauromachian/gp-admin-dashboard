@@ -48,9 +48,6 @@ export default {
       this.dialog = false;
       this.$emit("delete");
     },
-    openDialog() {
-      this.$emit("on-delete-button-clicked");
-    },
   },
 };
 </script>
