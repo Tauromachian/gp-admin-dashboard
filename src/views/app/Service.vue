@@ -7,7 +7,7 @@
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
           :isRowSelected="selectedRows.length > 0"
-          @click:delete-button="checkRowSelected"
+          @click:delete-button="isRowSelected('delete')"
           @click:delete="removeService"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
@@ -181,6 +181,8 @@ export default {
     },
 
     openFormForEdit(codcli) {
+      if (!this.isRowSelected("update")) return;
+
       this.isFormUpdating = true;
       this.formDialog = true;
       this.codcli = codcli;
