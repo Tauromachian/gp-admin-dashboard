@@ -46,7 +46,7 @@
         v-if="!disable?.delete"
         v-model="dialogDelete"
         :isAllowedToOpen="isRowSelected"
-        @click:delete-button="deleteButtonClicked"
+        @click:delete-button="onDeleteButtonClicked"
         @delete="deleteRow"
       />
 
@@ -95,7 +95,7 @@ export default {
   },
 
   methods: {
-    deleteButtonClicked() {
+    onDeleteButtonClicked() {
       this.$emit("click:delete-button");
     },
     deleteRow() {
