@@ -4,13 +4,7 @@
       {{ text }}
     </v-btn>
 
-    <v-btn
-      icon="mdi-delete"
-      variant="text"
-      v-else
-      :color="color"
-      @click="onDeleteButtonClick"
-    >
+    <v-btn icon="mdi-delete" v-else :color="color" @click="onDeleteButtonClick">
     </v-btn>
 
     <gen-delete-dialog v-model="dialog" @click:accept="deleteRow" />
