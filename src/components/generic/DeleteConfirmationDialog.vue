@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  name: "DeleteConfirmationDialog",
   props: {
     color: {
       type: String,
