@@ -44,8 +44,9 @@
 
       <gen-delete-confirmation-dialog
         v-if="!disable?.delete"
-        v-model:delete-dialog-button="deleteDialogButtonComputed"
-        @on-delete-button-clicked="deleteButtonClicked"
+        v-model="dialogDelete"
+        :isAllowedToOpen="isRowSelected"
+        @click:delete-button="deleteButtonClicked"
         @delete="deleteRow"
       />
 
