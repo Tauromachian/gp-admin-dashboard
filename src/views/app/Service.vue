@@ -9,7 +9,6 @@
           :isRowSelected="selectedRows.length > 0"
           @click:delete-button="checkRowSelected"
           @click:delete="removeService"
-          @click:update="openFormForEdit"
         >
           <service-form :codcli="codcli" @submit="serviceSubmit">
           </service-form>
