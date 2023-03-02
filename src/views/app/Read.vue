@@ -1,31 +1,27 @@
 <template>
   <v-container>
-    <v-row wrap>
-      <v-col>
-        <v-card elevation="0" class="mt-4 hidden-sm-and-down">
-          <v-row>
-            <v-col cols="12" md="8" lg="8">
-              <v-card max-height="600" class="overflow-y-auto" elevation="0">
-                <app-read-table
-                  v-for="serviceSelected in selection"
-                  :key="serviceSelected.id"
-                  ref="table"
-                  :service-id-for-reads="serviceSelected.id"
-                  :service-name="serviceSelected.name"
-                  class="pt-0 pb-0"
-                />
-              </v-card>
-            </v-col>
+    <v-card elevation="0" class="mt-4 hidden-sm-and-down">
+      <v-row>
+        <v-col cols="12" md="8" lg="8">
+          <v-card max-height="600" class="overflow-y-auto" elevation="0">
+            <app-read-table
+              v-for="serviceSelected in selection"
+              :key="serviceSelected.id"
+              ref="table"
+              :service-id-for-reads="serviceSelected.id"
+              :service-name="serviceSelected.name"
+              class="pt-0 pb-0"
+            />
+          </v-card>
+        </v-col>
 
-            <v-divider vertical class="ml-0 mr-0" />
+        <v-divider vertical class="ml-0 mr-0" />
 
-            <v-col cols="12" md="3" lg="3" class="pl-0 pr-0">
-              <app-read-service-filter v-model="selection" />
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
+        <v-col cols="12" md="3" lg="3" class="pl-0 pr-0">
+          <app-read-service-filter v-model="selection" />
+        </v-col>
+      </v-row>
+    </v-card>
     <read-filter v-model="selection"></read-filter>
   </v-container>
 </template>
