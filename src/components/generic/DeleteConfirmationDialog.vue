@@ -13,7 +13,7 @@
     >
     </v-btn>
 
-    <gen-delete-dialog v-model="dialog" @accept-click="deleteRow" />
+    <gen-delete-dialog v-model="dialog" @click:accept="deleteRow" />
   </span>
 </template>
 
