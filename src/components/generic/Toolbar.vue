@@ -61,6 +61,7 @@ export default {
     columnDefs: { type: Array, required: true },
     visibleColumns: { type: Array, required: true },
     selectedRows: { type: Array, default: () => [] },
+    isRowSelected: { type: Boolean, default: false },
     deleteDialogButton: { type: Boolean, default: false },
     disable: {
       type: Object,
