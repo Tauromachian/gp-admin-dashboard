@@ -2,17 +2,16 @@
   <v-main>
     <notifications-handler ref="notificationsHandler"></notifications-handler>
 
-    <default-toolbar @toggle-drawer="drawer = !drawer"></default-toolbar>
+    <default-toolbar @toggle-drawer="toggleDrawer"></default-toolbar>
 
     <default-view></default-view>
   </v-main>
 </template>
 
 <script>
-import { computed } from "vue";
-
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
+import { useAppStore } from "@/stores/app";
 
 import DefaultToolbar from "./Toolbar.vue";
 import DefaultView from "./View.vue";
@@ -32,12 +31,6 @@ export default {
     };
   },
 
-  provide() {
-    return {
-      drawer: computed(() => this.drawer),
-    };
-  },
-
   computed: {
     ...mapState(useNotificationsStore, ["notifications"]),
   },
@@ -52,6 +45,9 @@ export default {
 
       this.$refs.notificationsHandler.addNotification(lastNotification);
     },
+  },
+  methods: {
+    ...mapActions(useAppStore, ["toggleDrawer"]),
   },
 };
 </script>

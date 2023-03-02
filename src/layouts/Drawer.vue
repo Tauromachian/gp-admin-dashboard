@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app dark :order="0">
+  <v-navigation-drawer v-model="internalDrawer" app :order="0">
     <v-list-item :prepend-avatar="logo" title="SGE"> </v-list-item>
     <v-list-item>
       <v-list-item-subtitle class="institution-name-styles">
@@ -27,7 +27,7 @@
 
 <script>
 // Utilities
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useAppStore } from "@/stores/app";
 
 export default {
@@ -37,14 +37,24 @@ export default {
       required: true,
     },
   },
-  inject: ["drawer"],
   data: () => ({
     logo: "/logo.png",
     navDrawer: false,
     mini: false,
   }),
   computed: {
-    ...mapState(useAppStore, ["color", "subtitle"]),
+    ...mapState(useAppStore, ["color", "subtitle", "drawer"]),
+    internalDrawer: {
+      get() {
+        return this.drawer;
+      },
+      set(value) {
+        this.setDrawer(value);
+      },
+    },
+  },
+  methods: {
+    ...mapActions(useAppStore, ["setDrawer"]),
   },
 };
 </script>
