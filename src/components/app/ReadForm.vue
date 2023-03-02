@@ -7,49 +7,49 @@
             <v-text-field
               v-model="form.T1IAE"
               :label="$t('closure.fields.peak') + ' (kWh)'"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="4" lg="4" xl="4" cols="12">
             <v-text-field
               v-model="form.T2IAE"
               :label="$t('closure.fields.day') + ' (kWh)'"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="6" lg="6" xl="6" cols="12">
             <v-text-field
               v-model="form.T3IAE"
               :label="$t('closure.fields.morning') + ' (kWh)'"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="6" lg="6" xl="6" cols="12">
             <v-text-field
               v-model="form.TIRE"
               :label="$t('closure.fields.reactive') + ' (kVAr)'"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="6" lg="6" xl="6" cols="12">
             <v-text-field
               v-model="form.T1IMAXD"
               label="MDP (kW)"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="6" lg="6" xl="6" cols="12">
             <v-text-field
               v-model="form.T2IMAXD"
               label="MDD (kW)"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col xs="12" sm="12" md="6" lg="6" xl="6" cols="12">
             <v-text-field
               v-model="form.T3IMAXD"
               label="MDM (kW)"
-              :rules="numberRules"
+              :rules="[rules.required(), rules.number()]"
             />
           </v-col>
           <v-col cols="12">
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { isNumber } from "~/helpers/regex";
+import { required, number } from "@/utils/rules";
 
 export default {
   name: "ReadForm",
@@ -91,10 +91,7 @@ export default {
   data: function () {
     return {
       services: [],
-      numberRules: [
-        (v) => !!v || "Este campo no es opcional",
-        (v) => isNumber(v) || "Ha introducido valores no validos",
-      ],
+      rules: { required, number },
     };
   },
   computed: {
