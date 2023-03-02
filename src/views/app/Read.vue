@@ -48,6 +48,8 @@ import { getReads, addRead, updateRead } from "@/services/app/read";
 
 import ReadServiceFilter from "@/components/app/ReadServiceFilter.vue";
 import ReadFilter from "@/components/app/ReadFilter.vue";
+import ReadForm from "@/components/app/ReadForm.vue";
+import ReadToolbar from "@/components/app/ReadToolbar.vue";
 
 export default {
   name: "Read",
@@ -55,6 +57,8 @@ export default {
   components: {
     ReadServiceFilter,
     ReadFilter,
+    ReadForm,
+    ReadToolbar,
   },
   data() {
     return {
