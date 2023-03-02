@@ -1,46 +1,66 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-card elevation="0" class="mt-4 hidden-sm-and-down">
-      <v-row>
-        <v-col cols="12" md="8" lg="8">
-          <v-card max-height="600" class="overflow-y-auto" elevation="0">
-            <app-read-table
-              v-for="serviceSelected in selection"
-              :key="serviceSelected.id"
-              ref="table"
-              :service-id-for-reads="serviceSelected.id"
-              :service-name="serviceSelected.name"
-              class="pt-0 pb-0"
-            />
-          </v-card>
-        </v-col>
-
-        <v-divider vertical class="ml-0 mr-0" />
-
-        <v-col cols="12" md="3" lg="3" class="pl-0 pr-0">
-          <app-read-service-filter v-model="selection" />
-        </v-col>
-      </v-row>
+      <read-toolbar
+        v-model:visible-columns="visibleColumns"
+        :column-defs="headers"
+        v-model:dense="isDense"
+        @plus-click="openFormForInsert"
+        @edit-click="openFormForEdit"
+      />
+      <easy-data-table
+        v-model="selectedRow"
+        :headers="visibleHeaders"
+        :items="reads"
+        :loading="false"
+        :dense="isDense"
+        :footer-props="{
+          'items-per-page-text': 'Lecturas por páginas',
+          'items-per-page-all-text': 'Todos',
+        }"
+        loading-text="Cargando Lecturas..."
+        v-model:page="filters.page"
+        v-model:items-per-page="filters.limit"
+        :server-items-length="dataTableFields.serverItemsLength"
+        single-select
+        show-select
+      >
+      </easy-data-table>
     </v-card>
-    <read-filter v-model="selection"></read-filter>
+
+    <v-dialog v-model="readFormDialog" width="600">
+      <read-form
+        ref="form"
+        v-model="form"
+        :loading="loading"
+        @closure-submit="submitRead"
+        @cloose-click="readFormDialog = false"
+      />
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
 import { mapActions, mapState } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
 
+import { getReads, addRead, updateRead } from "@/services/app/read";
+
+import ReadTable from "@/components/app/ReadTable.vue";
+import ReadServiceFilter from "@/components/app/ReadServiceFilter.vue";
 import ReadFilter from "@/components/app/ReadFilter.vue";
 
 export default {
   name: "Read",
   middleware: "auth",
   components: {
+    ReadTable,
+    ReadServiceFilter,
     ReadFilter,
   },
   data() {
     return {
-      selection: [],
       formDialog: false,
       deleteDialogButton: false,
       loading: false,
@@ -49,27 +69,201 @@ export default {
       dialog: false,
       pagination: true,
       codcli: {},
+      loading: false,
+      selectedRow: [],
+      isDense: false,
+      pagination: true,
+      itemsPerPage: 10,
+      pageAmounts: [10, 50, 100],
+      reads: [],
+      dataTableFields: {
+        serverItemsLength: -1,
+      },
+      filters: {
+        page: 1,
+        limit: 10,
+      },
+      visibleColumns: [
+        "T1IAE",
+        "T2IAE",
+        "T3IAE",
+        "TIRE",
+        "T1IMAXD",
+        "T2IMAXD",
+        "T3IMAXD",
+        "date",
+      ],
+
+      readFormDialog: false,
+      isFormUpdating: false,
+      form: {
+        T1IAE: "",
+        T2IAE: "",
+        T3IAE: "",
+        TIRE: "",
+        T1IMAXD: "",
+        T2IMAXD: "",
+        T3IMAXD: "",
+        date: "",
+      },
     };
   },
+
   computed: {
-    ...mapState("read", ["servicesImportantData"]),
+    ...mapState("read", ["serviceId", "services", "servicesImportantData"]),
+    tableData() {
+      return this.reads.map((row) => {
+        const read = {
+          date: row.date,
+        };
+        return Object.assign(read, row.reading);
+      });
+    },
+
+    headers() {
+      return [
+        {
+          text: `${this.$t("read.fields.peak")} (kWh)`,
+          value: "T1IAE",
+          checkboxSelection: true,
+          //   value: 'TLMT1IAE'
+        },
+        {
+          text: `${this.$t("read.fields.day")} (kWh)`,
+          value: "T2IAE",
+          //   value: 'TLMT2IAE'
+        },
+        {
+          text: `${this.$t("read.fields.morning")} (kWh)`,
+          value: "T3IAE",
+          //   value: 'TLMT3IAE'
+        },
+        {
+          text: `${this.$t("read.fields.reactive")} (kVAr)`,
+          value: "TIRE",
+          //   value: 'TLMTIRE'
+        },
+        {
+          text: "MDP (kW)",
+          value: "T1IMAXD",
+          //   value: 'TLMTT1IMAXD'
+        },
+        {
+          text: "MDD (kW)",
+          value: "T2IMAXD",
+          //   value: 'TLMTT2IMAXD'
+        },
+        {
+          text: "MDM (kW)",
+          value: "T3IMAXD",
+          //   value: 'TLMTT3IMAXD'
+        },
+        {
+          text: this.$t("read.fields.date"),
+          value: "date",
+        },
+      ];
+    },
+    visibleHeaders() {
+      return this.headers.filter((header) =>
+        this.visibleColumns.includes(header.value)
+      );
+    },
   },
-  mounted() {
+
+  created() {
     this.loadData();
   },
-  methods: {
-    ...mapActions("read", ["setServicesImportantData"]),
-    loadData() {
-      const id = this.$route.params.id;
-      this.fetchServicesImportantData(id);
+
+  watch: {
+    filters() {
+      this.fetchReadsByService(this.serviceIdForReads);
     },
-    fetchServicesImportantData(id) {
-      axios
-        .get(`/api/v1/service?institution=${id},select=id,codcli,name&limit=10`)
-        .then(({ data }) => {
-          this.setServicesImportantData(data.data);
-        })
-        .catch((err) => console.log(err));
+  },
+
+  methods: {
+    ...mapActions(useNotificationsStore, ["addNotification"]),
+
+    async loadData() {
+      try {
+        this.reads = await getReads();
+      } catch (error) {
+        this.addNotification({
+          type: "error",
+          message: error.message,
+        });
+      }
+    },
+
+    openFormForInsert() {
+      if (this.isFormUpdating) {
+        this.$refs.form.reset();
+        this.isFormUpdating = false;
+      }
+      this.readFormDialog = true;
+    },
+
+    openFormForEdit() {
+      if (!this.isRowSelected("update")) return;
+
+      this.isFormUpdating = true;
+      this.readFormDialog = true;
+    },
+
+    isRowSelected(type) {
+      if (this.selectedRows.length !== 0) return true;
+
+      this.addNotification({
+        message: this.$t(
+          type === "delete"
+            ? "notifications.select_row_before_delete"
+            : "notifications.select_row_before_update"
+        ),
+        color: "info",
+      });
+
+      return false;
+    },
+
+    submitRead() {
+      this.isFormUpdating ? this.updateRead() : this.insertRead();
+    },
+
+    async insertRead() {
+      this.loading = true;
+
+      try {
+        await addRead(this.form);
+        this.addNotification({
+          message: this.$t("notifications.succesfull_insert"),
+          color: "success",
+        });
+      } catch (err) {
+        this.addNotification({
+          message: this.$t("notifications.unsuccesfull_insert"),
+          color: "error",
+        });
+      }
+
+      this.loading = false;
+    },
+
+    async updateRead() {
+      this.loading = true;
+      try {
+        await updateRead(this.selectedRow[0].id, this.form);
+        this.addNotification({
+          message: this.$t("notifications.succesfull_insert"),
+          color: "success",
+        });
+      } catch (err) {
+        this.addNotification({
+          message: this.$t("notifications.unsuccesfull_insert"),
+          color: "error",
+        });
+      }
+
+      this.loading = false;
     },
   },
 };
