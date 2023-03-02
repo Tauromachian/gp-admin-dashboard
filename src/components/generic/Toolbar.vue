@@ -42,7 +42,7 @@
       </v-btn>
 
       <gen-delete-confirmation-dialog
-        class="ml-1"
+        class="mx-1"
         v-if="!disable?.delete"
         v-model="dialogDelete"
         :isAllowedToOpen="isRowSelected"
