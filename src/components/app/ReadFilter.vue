@@ -16,15 +16,20 @@
     </template>
     <v-card>
       <v-card-text>
-        <app-read-service-filter v-model="selection" />
+        <read-service-filter v-model="selection" />
       </v-card-text>
     </v-card>
   </v-menu>
 </template>
 
 <script>
+import ReadServiceFilter from "@/components/app/ReadServiceFilter.vue";
+
 export default {
   name: "ReadFilter",
+  components: {
+    ReadServiceFilter,
+  },
   props: {
     modelValue: {
       type: Object,
