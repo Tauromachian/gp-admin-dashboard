@@ -2,13 +2,18 @@
   <v-container fluid>
     <v-card class="mt-4">
       <v-card-text>
-        <read-toolbar
+        <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
           v-model:dense="isDense"
           @plus-click="openFormForInsert"
           @edit-click="openFormForEdit"
-        />
+        >
+          <template #actions-append>
+            <read-filter v-model="filters"></read-filter>
+          </template>
+        </gen-toolbar>
+
         <easy-data-table
           class="mt-3"
           v-model="selectedRow"
@@ -43,7 +48,6 @@ import { useNotificationsStore } from "@/stores/notifications";
 
 import { getReads, addRead, updateRead } from "@/services/app/read";
 
-import ReadServiceFilter from "@/components/app/ReadServiceFilter.vue";
 import ReadFilter from "@/components/app/ReadFilter.vue";
 import ReadForm from "@/components/app/ReadForm.vue";
 import ReadToolbar from "@/components/app/ReadToolbar.vue";
@@ -52,7 +56,6 @@ export default {
   name: "Read",
   middleware: "auth",
   components: {
-    ReadServiceFilter,
     ReadFilter,
     ReadForm,
     ReadToolbar,
