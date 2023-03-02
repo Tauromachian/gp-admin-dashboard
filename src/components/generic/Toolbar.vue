@@ -82,15 +82,6 @@ export default {
   },
 
   computed: {
-    deleteDialogButtonComputed: {
-      get() {
-        return this.deleteDialogButton;
-      },
-      set(val) {
-        this.$emit("update:delete-dialog-button", val);
-      },
-    },
-
     visibleColumnsComputed: {
       get() {
         return this.visibleColumns;
