@@ -1,31 +1,33 @@
 <template>
   <v-container fluid>
     <v-card class="mt-4">
-      <read-toolbar
-        v-model:visible-columns="visibleColumns"
-        :column-defs="headers"
-        v-model:dense="isDense"
-        @plus-click="openFormForInsert"
-        @edit-click="openFormForEdit"
-      />
-      <easy-data-table
-        v-model="selectedRow"
-        :headers="visibleHeaders"
-        :items="reads"
-        :loading="false"
-        :dense="isDense"
-        :footer-props="{
-          'items-per-page-text': 'Lecturas por páginas',
-          'items-per-page-all-text': 'Todos',
-        }"
-        loading-text="Cargando Lecturas..."
-        v-model:page="filters.page"
-        v-model:items-per-page="filters.limit"
-        :server-items-length="dataTableFields.serverItemsLength"
-        single-select
-        show-select
-      >
-      </easy-data-table>
+      <v-card-text>
+        <read-toolbar
+          v-model:visible-columns="visibleColumns"
+          :column-defs="headers"
+          v-model:dense="isDense"
+          @plus-click="openFormForInsert"
+          @edit-click="openFormForEdit"
+        />
+        <easy-data-table
+          v-model="selectedRow"
+          :headers="visibleHeaders"
+          :items="reads"
+          :loading="false"
+          :dense="isDense"
+          :footer-props="{
+            'items-per-page-text': 'Lecturas por páginas',
+            'items-per-page-all-text': 'Todos',
+          }"
+          loading-text="Cargando Lecturas..."
+          v-model:page="filters.page"
+          v-model:items-per-page="filters.limit"
+          :server-items-length="dataTableFields.serverItemsLength"
+          single-select
+          show-select
+        >
+        </easy-data-table>
+      </v-card-text>
     </v-card>
 
     <v-dialog v-model="readFormDialog" width="600">
