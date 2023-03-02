@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     acceptClicked() {
-      this.$emit("accept-click");
+      this.$emit("click:accept");
     },
   },
 };
