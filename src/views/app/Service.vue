@@ -6,6 +6,8 @@
         <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
+          :isRowSelected="selectedRows.length > 0"
+          @click:delete-button="checkRowSelected"
           @click:delete="removeService"
           @click:update="openFormForEdit"
         >
@@ -14,7 +16,7 @@
         </gen-toolbar>
         <easy-data-table
           class="mt-3"
-          v-model:items-selected="selectedRow"
+          v-model:items-selected="selectedRows"
           :headers="headers"
           :items="services"
           :loading="false"
@@ -81,7 +83,7 @@ export default {
       isFormUpdating: false,
       serviceDetailsDialog: false,
 
-      selectedRow: [],
+      selectedRows: [],
       visibleColumns: [],
       itemsPerPage: 25,
 
@@ -302,12 +304,21 @@ export default {
       this.formDialog = false;
     },
 
-    async removeService(serviceId) {
+    checkRowSelected() {
+      if (this.selectedRows.length === 0) {
+        this.addNotification({
+          message: this.$t("notifications.select_row_before_delete"),
+          color: "error",
+        });
+      }
+    },
+
+    async removeService() {
       try {
-        await deleteService(serviceId);
+        await deleteService(this.selectedRows[0]);
         this.removeServiceFromStore(serviceId);
         this.addNotification({
-          messsage: this.$t("notifications.successful_delete"),
+          message: this.$t("notifications.successful_delete"),
           color: "success",
         });
       } catch (error) {
@@ -315,7 +326,6 @@ export default {
           message: this.$t("notifications.error_at_delete"),
           color: "error",
         });
-        console.log(error);
       }
     },
   },
