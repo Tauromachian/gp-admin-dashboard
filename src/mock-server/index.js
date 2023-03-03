@@ -57,6 +57,12 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/services", (schema) => {
         return new Response(200, {}, schema.services.all().models);
       });
+      this.delete("/service/:id", (schema, request) => {
+        const serviceId = request.params.id;
+        schema.services.find(serviceId).destroy();
+        return new Response(200);
+      });
+
       this.get("/coordinator/:id/mails", (schema, request) => {
         const coordinatorId = request.params.id;
         const coordinator = schema.coordinators.find(coordinatorId);
