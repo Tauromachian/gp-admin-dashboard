@@ -1,8 +1,8 @@
 <template>
   <div class="mt-1">
-    <v-subheader v-if="label" class="pl-0 pr-0 height-24">
+    <p v-if="label" class="pl-0 pr-0 height-24">
       {{ label }}
-    </v-subheader>
+    </p>
     <v-btn-toggle v-model="selection" group mandatory color="primary">
       <slot />
     </v-btn-toggle>
