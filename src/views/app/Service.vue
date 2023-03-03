@@ -19,7 +19,7 @@
           v-model:items-selected="selectedRows"
           :headers="visibleHeaders"
           :items="services"
-          :loading="false"
+          :loading="loading"
           v-model:items-per-page="itemsPerPage"
           loading-text="Cargando Servicios..."
           single-select
@@ -162,6 +162,7 @@ export default {
     ...mapActions(useNotificationsStore, ["addNotification"]),
 
     async loadData() {
+      this.loading = true;
       try {
         const services = await getServices({ id: this.institutionId });
         this.setServices(services);
@@ -172,6 +173,7 @@ export default {
           color: "error",
         });
       }
+      this.loading = false;
     },
 
     openFormForInsert() {
