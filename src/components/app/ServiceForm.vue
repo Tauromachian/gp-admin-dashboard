@@ -125,10 +125,12 @@
     />
 
     <v-btn
-      class="mx-0 font-weight-light btn-test"
+      class="mx-0 mb-5 font-weight-light btn-test"
       color="primary"
+      variant="text"
       large
       @click="serviceCredentialsFormDialog = true"
+      prepend-icon="mdi-account-plus"
     >
       {{ $t("services.fields.open_credentials_button") }}
     </v-btn>
