@@ -155,7 +155,6 @@ export default {
   methods: {
     ...mapActions(useServiceStore, {
       setServices: "setServices",
-      removeServiceFromStore: "deleteService",
       addServiceToStore: "addService",
       editServiceInStore: "editService",
       clearCredentialsFormData: "clearCredentialsFormData",
