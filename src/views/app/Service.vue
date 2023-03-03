@@ -31,6 +31,14 @@
             }
           "
         >
+          <template #loading>
+            <v-progress-circular
+              color="primary"
+              :size="60"
+              :width="5"
+              indeterminate
+            ></v-progress-circular>
+          </template>
         </easy-data-table>
       </v-card-text>
     </v-card>
