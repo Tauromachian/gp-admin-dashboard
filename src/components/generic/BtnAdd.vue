@@ -5,7 +5,6 @@
     color="primary"
     size="x-large"
     icon="mdi-plus"
-    @click="openInsertForm"
     v-bind="$attrs"
   >
   </v-btn>
