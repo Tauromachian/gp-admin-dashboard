@@ -1,19 +1,21 @@
 export function ip(message = "El formato del ip no es válido") {
-  const { ip, mask } = splitIpFromMask(v);
+  return (v) => {
+    const { ip, mask } = splitIpFromMask(v);
 
-  if (!isIp(ip)) {
-    return message;
-  }
+    if (!isIp(ip)) {
+      return message;
+    }
 
-  if (mask === "") {
+    if (mask === "") {
+      return true;
+    }
+
+    if (!isMask(mask)) {
+      return message;
+    }
+
     return true;
-  }
-
-  if (!isMask(mask)) {
-    return message;
-  }
-
-  return true;
+  };
 }
 
 function splitIpFromMask(completeIp) {
