@@ -47,15 +47,7 @@
     </gen-filter>
 
     <!-- Action button -->
-    <v-btn
-      class="mb-9 addition-button"
-      dark
-      color="primary"
-      size="x-large"
-      icon="mdi-plus"
-      @click="openInsertForm"
-    >
-    </v-btn>
+    <gen-btn-add @click="openFormForInsert"></gen-btn-add>
 
     <!-- Institution form -->
     <v-dialog v-model="institutionFormDialog" width="500">
@@ -276,11 +268,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.addition-button {
-  position: fixed;
-  bottom: 3em;
-  right: 3em;
-}
-</style>

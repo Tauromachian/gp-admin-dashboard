@@ -43,6 +43,8 @@
       </v-card-text>
     </v-card>
 
+    <gen-btn-add @click="openFormForInsert"></gen-btn-add>
+
     <!-- Services dialog-form -->
     <v-dialog v-model="formDialog" width="400">
       <service-form
