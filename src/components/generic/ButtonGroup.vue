@@ -19,7 +19,7 @@ export default {
   computed: {
     selection: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(selection) {
         this.$emit("update:modelValue", selection);
