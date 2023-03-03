@@ -321,8 +321,8 @@ export default {
 
     async removeService() {
       try {
-        await deleteService(this.selectedRows[0]);
-        this.removeServiceFromStore(serviceId);
+        await deleteService(this.selectedRows[0].id);
+        this.loadData();
         this.addNotification({
           message: this.$t("notifications.successful_delete"),
           color: "success",
