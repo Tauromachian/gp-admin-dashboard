@@ -34,17 +34,29 @@ export default {
     },
   }),
   service: Factory.extend({
-    codigo_cliente(i) {
-      return i;
-    },
     name(i) {
       return `Some name ${i + 1}`;
     },
-    meterNumber(i) {
-      return i;
+    codcli() {
+      return Math.floor(Math.random() * 100);
+    },
+    meter_no(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    demanda(i) {
+      return `Demanda ${i + 1}`;
+    },
+    exclusivo() {
+      return !!Math.floor(Math.random() * 2);
     },
     crf(i) {
       return `Some province ${i + 1}`;
+    },
+    metraje(i) {
+      return `Metrage ${i}`;
+    },
+    capacidad() {
+      return Math.floor(Math.random() * 10000);
     },
   }),
   coordinator: Factory.extend({
