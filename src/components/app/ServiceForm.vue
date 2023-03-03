@@ -97,11 +97,11 @@
     />
 
     <div v-if="form.metraje === 'Baja'">
-      <v-subheader class="pl-0">
+      <p class="pl-0">
         {{ $t("services.fields.transformers_amount") }}
-      </v-subheader>
+      </p>
 
-      <v-btn-toggle group class="test">
+      <v-btn-toggle group>
         <v-btn @click="transformerAmountMinusOne">
           <v-icon>mdi-minus</v-icon>
         </v-btn>
