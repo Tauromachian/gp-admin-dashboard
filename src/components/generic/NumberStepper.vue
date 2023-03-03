@@ -1,28 +1,34 @@
 <template>
   <div class="mt-1">
-    <v-subheader v-if="label" class="pl-0 pr-0 height-24">
-      {{ label }}
-    </v-subheader>
+    <v-slider
+      v-model="selectedValue"
+      track-color="primary"
+      show-ticks="always"
+      tick-size="4"
+      :step="1"
+      v-bind="$attrs"
+      thumb-label="always"
+    >
+      <template v-slot:prepend>
+        <v-btn
+          color="primary"
+          size="small"
+          variant="text"
+          icon="mdi-minus"
+          @click="decreaseValue"
+        ></v-btn>
+      </template>
 
-    <div class="d-flex">
-      <v-btn v-ripple icon color="primary" class="mt-0" @click="decreaseValue">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-
-      <v-text-field
-        v-if="showNumber"
-        v-model.number="selection"
-        :disabled="allowNumberEditing"
-        single-line
-        filled
-        dense
-        @blur="checkNumber"
-      />
-
-      <v-btn icon color="primary" class="mt-0" @click="increaseValue">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div>
+      <template v-slot:append>
+        <v-btn
+          color="primary"
+          size="small"
+          variant="text"
+          icon="mdi-plus"
+          @click="increaseValue"
+        ></v-btn>
+      </template>
+    </v-slider>
   </div>
 </template>
 
@@ -32,68 +38,32 @@ export default {
   props: {
     modelValue: { type: [String, Number], default: 0 },
     label: { type: String, default: "" },
-    showNumber: Boolean,
-    allowNumberEditing: Boolean,
-    min: {
-      type: Number,
-      default: 0,
-    },
-    max: {
-      type: Number,
-      default: 10,
-    },
   },
-  data() {
-    return {
-      selection: this.min,
-    };
-  },
+
   computed: {
-    selectionComputed() {
-      if (this.notNumber(this.value)) {
-        return this.min;
-      }
-      if (this.value > this.max) {
-        return this.max;
-      }
-      if (this.value < this.min) {
-        return this.min;
-      }
-      return this.value;
+    selectedValue: {
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
     },
   },
-  watch: {
-    selectionComputed(value) {
-      this.selection = value;
-    },
-    selection(value) {
-      this.$emit("update:modelValue", value);
-    },
-  },
+
   methods: {
     decreaseValue: function () {
-      if (this.selection > this.min) {
-        this.selection = this.selection - 1;
+      if (this.selectedValue > this.$attrs.min) {
+        this.selectedValue--;
       }
     },
     increaseValue: function () {
-      if (this.selection < this.max) {
-        this.selection = this.selection + 1;
+      if (this.selectedValue < this.$attrs.max) {
+        this.selectedValue++;
       }
     },
     notNumber(val) {
       return typeof val !== "number";
-    },
-    checkNumber() {
-      if (this.value > this.max) {
-        this.selection = this.max;
-      }
-      if (this.value < this.min) {
-        this.selection = this.min;
-      }
-      if (this.notNumber(this.selection)) {
-        this.selection = this.min;
-      }
     },
   },
 };
