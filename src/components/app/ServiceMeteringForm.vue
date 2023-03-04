@@ -139,11 +139,6 @@ export default {
     },
   },
   methods: {
-    transformerAmountMinusOne() {
-      if (this.transformers.length > 0) {
-        this.transformers.pop();
-      }
-    },
     transformerAmountPlusOne() {
       if (this.transformers.length < 3) {
         this.transformers.push({ type: "mono_phase", capacity: "" });
