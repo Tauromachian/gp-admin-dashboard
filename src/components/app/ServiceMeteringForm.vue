@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form ref="form">
     <gen-button-group
       v-model="form.metraje"
       :label="$t('services.fields.metraje')"
@@ -148,6 +148,14 @@ export default {
     },
     deleteTransformer(i) {
       this.transformers.splice(i, 1);
+    },
+
+    handleStep() {
+      return true;
+    },
+
+    async validate() {
+      return await this.$refs.form.validate();
     },
   },
 };
