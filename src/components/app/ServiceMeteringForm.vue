@@ -120,7 +120,7 @@ export default {
           }
           return capacity;
         } else {
-          return this.form.capacity;
+          return this.form.capacidad;
         }
       },
       set(val) {
