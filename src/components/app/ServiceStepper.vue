@@ -28,9 +28,6 @@
           v-if="step === 3"
           v-model="formCredentials"
           class-computed="ml-10 mr-10"
-          @on-delete-credentials="deleteServiceCredentials"
-          @click:submit="createServiceCredentials"
-          @click:cancel="closeServiceCredentialsFormDialog"
         />
       </keep-alive>
     </v-card-text>
