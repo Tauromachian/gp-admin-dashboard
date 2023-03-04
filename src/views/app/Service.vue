@@ -11,8 +11,6 @@
           @click:update-button="openFormForEdit"
           @click:delete="removeService"
         >
-          <service-form :codcli="codcli" @submit="serviceSubmit">
-          </service-form>
         </gen-toolbar>
         <easy-data-table
           class="mt-3"
@@ -47,7 +45,7 @@
 
     <!-- Services dialog-form -->
     <v-dialog v-model="formDialog" width="400">
-      <service-form
+      <service-stepper
         ref="form"
         :codcli="codcli"
         @service-submit="submitService"
@@ -62,7 +60,7 @@ import { mapState, mapActions } from "pinia";
 import { useServiceStore } from "@/stores/service";
 import { useNotificationsStore } from "@/stores/notifications";
 
-import ServiceForm from "@/components/app/ServiceForm.vue";
+import ServiceStepper from "@/components/app/ServiceStepper.vue";
 import ServiceCard from "@/components/app/ServiceCard.vue";
 import ServiceDetails from "@/components/app/ServiceDetails.vue";
 
@@ -80,7 +78,7 @@ export default {
   middleware: "auth",
 
   components: {
-    ServiceForm,
+    ServiceStepper,
     ServiceCard,
     ServiceDetails,
   },
