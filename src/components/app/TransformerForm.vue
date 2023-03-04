@@ -12,7 +12,7 @@
     </gen-button-group>
 
     <v-btn
-      color="primary"
+      color="error"
       dark
       small
       absolute
@@ -20,6 +20,7 @@
       right
       fab
       @click="closeTransformer"
+      variant="text"
       icon="mdi-cancel"
     >
     </v-btn>
