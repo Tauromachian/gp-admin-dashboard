@@ -5,19 +5,25 @@
       <gen-stepper-header class="mb-8" :steps="steps" :step="step">
       </gen-stepper-header>
 
-      <service-form v-model="form" v-if="step === 1"></service-form>
+      <keep-alive>
+        <service-form v-model="form" v-if="step === 1"></service-form>
+      </keep-alive>
 
-      <service-metering-form v-model="form" v-if="step === 2">
-      </service-metering-form>
+      <keep-alive>
+        <service-metering-form v-model="form" v-if="step === 2">
+        </service-metering-form>
+      </keep-alive>
 
-      <service-user-form
-        v-if="step === 3"
-        v-model="formCredentials"
-        class-computed="ml-10 mr-10"
-        @on-delete-credentials="deleteServiceCredentials"
-        @click:submit="createServiceCredentials"
-        @click:cancel="closeServiceCredentialsFormDialog"
-      />
+      <keep-alive>
+        <service-user-form
+          v-if="step === 3"
+          v-model="formCredentials"
+          class-computed="ml-10 mr-10"
+          @on-delete-credentials="deleteServiceCredentials"
+          @click:submit="createServiceCredentials"
+          @click:cancel="closeServiceCredentialsFormDialog"
+        />
+      </keep-alive>
     </v-card-text>
 
     <v-card-text>
