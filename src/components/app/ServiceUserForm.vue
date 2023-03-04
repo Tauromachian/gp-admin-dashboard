@@ -40,6 +40,8 @@
 <script>
 import { required, min, sentence, password, ip } from "@/utils/rules";
 
+import { CREDENTIALS_FORM } from "@/utils/formTemplates";
+
 export default {
   name: "ServiceUserForm",
   props: {
@@ -76,10 +78,7 @@ export default {
     },
 
     cleanForm() {
-      this.serviceUserForm.name = "";
-      this.serviceUserForm.username = "";
-      this.serviceUserForm.password_confirmation = "";
-      this.serviceUserForm.password_confirmation = "";
+      this.form = { ...CREDENTIALS_FORM };
     },
   },
 };
