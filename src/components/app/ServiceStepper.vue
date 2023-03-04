@@ -109,7 +109,9 @@ export default {
     },
 
     async handleStep() {
-      const step = this.$refs[this.step];
+      const keys = Object.keys(this.$refs);
+
+      const step = this.$refs[keys[this.step - 1]];
 
       let isValid = await step.validate();
 
