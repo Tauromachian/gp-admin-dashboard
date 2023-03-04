@@ -10,7 +10,7 @@ export const SERVICE_FORM = {
   demanda: "",
   meter_no: "",
   alimentacion: "",
-  metraje: "",
+  metraje: "Baja",
   device_token: "",
   accepted_ip: null,
 };
