@@ -12,6 +12,7 @@
     />
 
     <gen-button-group
+      class="mb-4"
       v-model="form.serviceTypePay"
       :label="$t('services.fields.service_type_by_payment_type')"
     >
@@ -41,9 +42,8 @@
       :rules="[rules.required(), rules.number()]"
     />
 
-    <v-col xs="12" cols="12" />
-
     <v-autocomplete
+      class="mb-4"
       v-model="form.tipo_tarifa"
       :label="$t('services.fields.tarif_type')"
       :items="tariffTypes"
@@ -52,6 +52,7 @@
     />
 
     <gen-button-group
+      class="mb-4"
       v-model="form.alimentacion"
       :label="$t('services.fields.alimentation')"
     >
@@ -121,6 +122,10 @@ export default {
       };
 
       this.$refs.form.resetValidation();
+    },
+
+    async handleStep() {
+      return true;
     },
 
     async validate() {
