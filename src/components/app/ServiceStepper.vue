@@ -113,7 +113,7 @@ export default {
 
       const step = this.$refs[keys[this.step - 1]];
 
-      let isValid = await step.validate();
+      let isValid = await step.validate().valid;
 
       if (!isValid) return false;
 
