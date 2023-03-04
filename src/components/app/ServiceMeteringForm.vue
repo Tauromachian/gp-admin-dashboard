@@ -24,21 +24,21 @@
       hide-details
     />
 
-    <div v-if="form.metraje === 'Baja'">
+    <div class="d-flex align-center" v-if="form.metraje === 'Baja'">
       <p class="pl-0">
         {{ $t("services.fields.transformers_amount") }}
       </p>
 
-      <v-btn-toggle group class="test">
-        <v-btn @click="transformerAmountMinusOne">
-          <v-icon>mdi-minus</v-icon>
-        </v-btn>
-
-        <v-btn @click="transformerAmountPlusOne">
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </v-btn-toggle>
+      <v-btn
+        color="primary"
+        class="ml-2"
+        @click="transformerAmountPlusOne"
+        icon="mdi-plus"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </div>
+
     <div v-else>
       <transformer-form
         v-for="(transformer, i) in transformers"
