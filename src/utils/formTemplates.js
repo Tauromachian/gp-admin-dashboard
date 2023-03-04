@@ -11,7 +11,6 @@ export const SERVICE_FORM = {
   meter_no: "",
   alimentacion: "",
   metraje: "",
-  capacidad: this.capacityComputed,
   device_token: "",
   accepted_ip: null,
 };
