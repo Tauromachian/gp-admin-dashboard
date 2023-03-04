@@ -104,16 +104,16 @@ export default {
     },
     capacityComputed: {
       get() {
-        let capacidad = 0;
+        let capacity = 0;
         if (this.transformers.length) {
           for (const { capacity } of this.transformers) {
             if (capacity !== "" && capacity) {
-              capacidad += capacity;
+              capacity += capacity;
             }
           }
-          return capacidad;
+          return capacity;
         } else {
-          return this.form.capacidad;
+          return this.form.capacity;
         }
       },
       set(val) {
