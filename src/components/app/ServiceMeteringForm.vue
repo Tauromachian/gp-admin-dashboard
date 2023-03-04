@@ -16,6 +16,7 @@
     />
 
     <v-autocomplete
+      class="mb-8"
       v-if="form.metraje === 'Baja'"
       v-model="serviceType"
       label="Tipo de servicio (Segun transformación)"
