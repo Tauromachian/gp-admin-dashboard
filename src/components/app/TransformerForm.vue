@@ -1,9 +1,10 @@
 <template>
-  <v-card elevation="0">
+  <v-form elevation="0">
     <v-btn-toggle v-model="typeComputed" group mandatory color="primary">
       <v-btn value="mono"> Monofásico </v-btn>
       <v-btn value="three"> Trifásico </v-btn>
     </v-btn-toggle>
+
     <v-btn
       color="primary"
       dark
@@ -22,7 +23,7 @@
       label="Capacidad (kVA)"
       :rules="[rules.required(), rules.number()]"
     />
-  </v-card>
+  </v-form>
 </template>
 
 <script>
