@@ -10,7 +10,9 @@
       Siguiente
     </v-btn>
 
-    <v-btn v-else @click="clickSubmit" :loading="disabled"> Submit </v-btn>
+    <v-btn v-else @click="clickSubmit" :loading="disabled" color="primary">
+      Submit
+    </v-btn>
 
     <v-btn
       v-if="!isFirstStep"
