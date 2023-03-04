@@ -1,9 +1,15 @@
 <template>
   <v-form elevation="0">
-    <v-btn-toggle v-model="typeComputed" group mandatory color="primary">
+    <gen-button-group
+      v-model="typeComputed"
+      group
+      mandatory
+      color="primary"
+      label="Tipo"
+    >
       <v-btn value="mono"> Monofásico </v-btn>
       <v-btn value="three"> Trifásico </v-btn>
-    </v-btn-toggle>
+    </gen-button-group>
 
     <v-btn
       color="primary"
