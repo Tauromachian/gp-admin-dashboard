@@ -1,5 +1,5 @@
 <template>
-  <v-form :title="$t('services.user.form_name')">
+  <v-form v-bind="$attrs" ref="form" :title="$t('services.user.form_name')">
     <v-text-field
       v-model="form.username"
       :disabled="disabled"
