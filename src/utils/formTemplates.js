@@ -12,6 +12,7 @@ export const SERVICE_FORM = {
   alimentacion: "",
   metraje: "Baja",
   device_token: "",
+  capacidad: 0,
   accepted_ip: null,
 };
 
