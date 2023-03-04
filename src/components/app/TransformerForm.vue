@@ -20,8 +20,8 @@
       right
       fab
       @click="closeTransformer"
+      icon="mdi-cancel"
     >
-      <v-icon>mdi-cancel</v-icon>
     </v-btn>
     <v-autocomplete
       v-model="capacityComputed"
