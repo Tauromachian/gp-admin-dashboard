@@ -1,5 +1,6 @@
 <template>
   <div class="mt-1">
+    <p class="mb-6">{{ label }}</p>
     <v-slider
       v-model="selectedValue"
       track-color="primary"
