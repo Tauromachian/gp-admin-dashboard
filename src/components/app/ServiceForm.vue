@@ -122,10 +122,6 @@ export default {
       this.$refs.form.resetValidation();
     },
 
-    closeServiceCredentialsFormDialog() {
-      this.serviceCredentialsFormDialog = false;
-    },
-
     async validate() {
       return await this.$refs.form.validate();
     },
