@@ -56,7 +56,7 @@ export default {
   data: function () {
     return {
       capacities: this.type === "mono" ? this.monoPhase : this.threePhase,
-      rules: [required, number],
+      rules: { required, number },
     };
   },
   computed: {
