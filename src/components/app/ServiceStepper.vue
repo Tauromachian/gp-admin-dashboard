@@ -39,6 +39,8 @@ import ServiceForm from "@/components/app/ServiceForm.vue";
 import TransformerForm from "@/components/app/TransformerForm.vue";
 import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
 
+import { SERVICE_FORM, CREDENTIALS_FORM } from "@/utils/formTemplates";
+
 export default {
   name: "ServiceStepper",
   components: {
@@ -60,27 +62,11 @@ export default {
       loading: false,
 
       form: {
-        name: "",
-        codcli: "",
-        serviceTypeTransformer: "",
-        serviceTypePay: "Pospago",
-        crf: "",
-        exclusivo: false,
-        tipo_tarifa: "M1A",
-        turnos: 1,
-        demanda: "",
-        meter_no: "",
-        alimentacion: "",
-        metraje: "",
-        capacidad: this.capacityComputed,
-        device_token: "",
-        accepted_ip: null,
+        ...SERVICE_FORM,
       },
+
       formCredentials: {
-        username: "",
-        name: "",
-        password: "",
-        password_confirmation: "",
+        ...CREDENTIALS_FORM,
       },
 
       serviceCredentialsFormDialog: false,
