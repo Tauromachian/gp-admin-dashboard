@@ -6,16 +6,25 @@
       </gen-stepper-header>
 
       <keep-alive>
-        <service-form v-model="form" v-if="step === 1"></service-form>
+        <service-form
+          ref="serviceForm"
+          v-model="form"
+          v-if="step === 1"
+        ></service-form>
       </keep-alive>
 
       <keep-alive>
-        <service-metering-form v-model="form" v-if="step === 2">
+        <service-metering-form
+          ref="serviceMeteringForm"
+          v-model="form"
+          v-if="step === 2"
+        >
         </service-metering-form>
       </keep-alive>
 
       <keep-alive>
         <service-user-form
+          ref="serviceUserForm"
           v-if="step === 3"
           v-model="formCredentials"
           class-computed="ml-10 mr-10"
@@ -46,6 +55,9 @@ import TransformerForm from "@/components/app/TransformerForm.vue";
 import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
 
 import { SERVICE_FORM, CREDENTIALS_FORM } from "@/utils/formTemplates";
+
+import { mapActions } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
 
 export default {
   name: "ServiceStepper",
@@ -80,8 +92,32 @@ export default {
     };
   },
   methods: {
-    confirmAndContinue() {
-      this.step++;
+    ...mapActions(useNotificationsStore, ["addNotification"]),
+    async confirmAndContinue() {
+      try {
+        const isValid = await this.handleStep();
+
+        if (!isValid) return;
+
+        this.step++;
+      } catch (error) {
+        this.addNotification({
+          type: "error",
+          message: "Error al intentar continuar",
+        });
+      }
+    },
+
+    async handleStep() {
+      const step = this.$refs[this.step];
+
+      let isValid = await step.validate();
+
+      if (!isValid) return false;
+
+      isValid = !!step.handleStep();
+
+      return isValid;
     },
 
     async deleteServiceCredentials() {
