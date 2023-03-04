@@ -12,7 +12,7 @@
       v-model="capacityComputed"
       :label="$t('services.fields.capacity') + ' (kVA)'"
       :rules="[rules.required(), rules.number()]"
-      :disabled="disableCapacityInput"
+      :disabled="!isCapacityInputEnabled"
     />
 
     <v-autocomplete
