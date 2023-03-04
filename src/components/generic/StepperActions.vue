@@ -11,7 +11,7 @@
     </v-btn>
 
     <v-btn v-else @click="clickSubmit" :loading="disabled" color="primary">
-      Submit
+      Insertar
     </v-btn>
 
     <v-btn
