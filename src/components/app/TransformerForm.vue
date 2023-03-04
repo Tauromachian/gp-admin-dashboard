@@ -12,6 +12,7 @@
     </gen-button-group>
 
     <v-btn
+      class="close-button"
       color="error"
       dark
       small
@@ -21,7 +22,7 @@
       fab
       @click="closeTransformer"
       variant="text"
-      icon="mdi-cancel"
+      icon="mdi-delete"
     >
     </v-btn>
     <v-autocomplete
@@ -103,3 +104,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.close-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+</style>
