@@ -5,7 +5,7 @@
       :key="key"
       :content-props="{
         style: {
-          'margin-bottom': `${(index - 1) * 4}em`,
+          'margin-bottom': `${index * 4}em`,
           left: 'unset',
           right: '10px',
           transform: 'unset',
