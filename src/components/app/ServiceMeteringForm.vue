@@ -26,7 +26,7 @@
     />
 
     <template v-else>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center mb-2">
         <p class="pl-0">
           {{ $t("services.fields.transformers_amount") }}
         </p>
