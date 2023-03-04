@@ -41,15 +41,22 @@
         </v-btn>
       </div>
 
-      <transformer-form
+      <v-card
+        variant="outlined"
         v-for="(transformer, i) in transformers"
+        class="mb-2"
         :key="i"
-        :mono-phase="transformerCapacitiesMonoPhase.capacities"
-        :three-phase="transformerCapacitiesThreePhase.capacities"
-        v-model:type="transformer.type"
-        v-model:capacity="transformer.capacity"
-        @on-close-transformer="deleteTransformer(i)"
-      />
+      >
+        <v-card-text>
+          <transformer-form
+            :mono-phase="transformerCapacitiesMonoPhase.capacities"
+            :three-phase="transformerCapacitiesThreePhase.capacities"
+            v-model:type="transformer.type"
+            v-model:capacity="transformer.capacity"
+            @on-close-transformer="deleteTransformer(i)"
+          />
+        </v-card-text>
+      </v-card>
     </template>
   </v-form>
 </template>
