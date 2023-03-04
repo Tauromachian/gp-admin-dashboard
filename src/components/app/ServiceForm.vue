@@ -30,6 +30,7 @@
     />
     <v-switch
       v-model="form.exclusivo"
+      color="primary"
       :label="$t('services.fields.exclusive')"
     />
     <v-text-field v-model="form.crf" label="CRF" :rules="[rules.required()]" />
