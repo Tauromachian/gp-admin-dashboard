@@ -1,60 +1,85 @@
 <template>
-  <gen-form :title="$t('services.user.form_name')">
-    <service-user-form-fields @update:form="updateForm" />
-    <gen-delete-confirmation-dialog
-      :text="$t('services.fields.delete_credentials_button')"
-      color="danger"
-      v-if="hasSensitiveData"
-      v-model:delete-dialog-button="deleteCredentialsDialog"
-      @on-delete-button-clicked="
-        deleteCredentialsDialog = !deleteCredentialsDialog
-      "
-      @delete="deleteServiceCredentials"
+  <v-form :title="$t('services.user.form_name')">
+    <v-text-field
+      v-model="form.username"
+      :disabled="disabled"
+      :label="$t('services.user.username')"
+      :rules="[rules.required(), rules.sentence(), rules.min(6)]"
     />
-  </gen-form>
+    <v-text-field
+      v-model="form.password"
+      :disabled="disabled"
+      :type="showPasswordText ? 'text' : 'password'"
+      :label="$t('services.user.password')"
+      :rules="[rules.required(), rules.password()]"
+      :append-icon="showPasswordText ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="showPasswordText = !showPasswordText"
+    />
+    <v-text-field
+      v-model="form.passwordConfirmation"
+      :disabled="disabled"
+      :type="showPasswordText ? 'text' : 'password'"
+      :label="$t('services.user.password_confirmation')"
+      :rules="[rules.required(), rules.password()]"
+      :append-icon="showPasswordText ? 'mdi-eye' : 'mdi-eye-off'"
+      @click:append="showPasswordText = !showPasswordText"
+    />
+    <v-text-field
+      v-model="form.deviceTokenComputed"
+      :label="$t('services.fields.device_token') + ` (${$t('optional')})`"
+    />
+    <v-text-field
+      v-model="form.acceptedIpComputed"
+      :disabled="disabled"
+      :label="$t('services.fields.required_ip') + ` (${$t('optional')})`"
+      :rules="[rules.required(), rules.ip()]"
+    />
+  </v-form>
 </template>
 
 <script>
-import { mapState, mapActions } from "pinia";
-import { useServiceStore } from "@/stores/service";
-
-import ServiceUserFormFields from "@/components/app/ServiceUserFormFields.vue";
+import { required, min, sentence, password, ip } from "@/utils/rules";
 
 export default {
   name: "ServiceUserForm",
-  components: {
-    ServiceUserFormFields,
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      form: {},
       deleteCredentialsDialog: false,
       loading: false,
+      rules: { required, min, sentence, password, ip },
+      showPasswordText: false,
     };
   },
   computed: {
-    ...mapState(useServiceStore, ["hasSensitiveData"]),
+    form: {
+      get() {
+        return this.modelValue;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
   },
   methods: {
-    ...mapActions(useServiceStore, ["setHasSensitiveData"]),
-    updateForm(form) {
-      this.form = form;
-    },
-    createServiceCredentials(v) {
-      if (!this.validate()) {
-        return;
-      }
-      this.$emit("click:submit", this.form);
-    },
-    closeClick() {
-      this.$emit("click:cancel");
-    },
     validate: function () {
       return this.$refs.form.validate();
     },
-    deleteServiceCredentials() {
-      this.setHasSensitiveData(false);
-      this.$emit("on-delete-credentials");
+
+    cleanForm() {
+      this.serviceUserForm.name = "";
+      this.serviceUserForm.username = "";
+      this.serviceUserForm.password_confirmation = "";
+      this.serviceUserForm.password_confirmation = "";
     },
   },
 };
