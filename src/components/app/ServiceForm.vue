@@ -77,6 +77,8 @@
 import { required, number, sentence } from "@/utils/rules";
 import { tariffTypes } from "@/utils/staticValues";
 
+import { SERVICE_FORM } from "@/utils/formTemplates";
+
 export default {
   name: "ServiceForm",
   props: {
@@ -113,21 +115,10 @@ export default {
 
   methods: {
     cleanForm() {
-      this.form.name = "";
-      this.form.codcli = "";
-      this.form.serviceTypeTransformer = "";
-      this.form.serviceTypePay = "Pospago";
-      this.form.crf = "";
-      this.form.exclusivo = false;
-      this.form.tipo_tarifa = "";
-      this.form.turnos = 1;
-      this.form.demanda = "";
-      this.form.meter_no = "";
-      this.form.alimentacion = "";
-      this.form.metraje = "";
-      this.form.capacidad = "";
-      this.form.device_token = "";
-      this.form.accepted_ip = null;
+      this.form = {
+        ...SERVICE_FORM,
+      };
+
       this.$refs.form.resetValidation();
     },
 
