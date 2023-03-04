@@ -10,7 +10,7 @@ export const SERVICE_FORM = {
   demanda: "",
   meter_no: "",
   alimentacion: "",
-  metraje: "Baja",
+  metraje: "Alta",
   device_token: "",
   capacidad: 0,
   accepted_ip: null,
