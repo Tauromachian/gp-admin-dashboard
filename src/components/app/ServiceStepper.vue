@@ -102,7 +102,7 @@ export default {
         this.step++;
       } catch (error) {
         this.addNotification({
-          type: "error",
+          color: "error",
           message: "Error al intentar continuar",
         });
       }
