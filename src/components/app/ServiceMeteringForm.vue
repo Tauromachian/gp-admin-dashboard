@@ -15,17 +15,16 @@
       :disabled="!isCapacityInputEnabled"
     />
 
-    <v-autocomplete
-      class="mb-8"
-      v-if="form.metraje === 'Baja'"
-      v-model="serviceType"
-      label="Tipo de servicio (Segun transformación)"
-      :items="serviceTypes"
-      hide-no-data
-      hide-details
-    />
+    <template v-if="form.metraje === 'Baja'">
+      <v-autocomplete
+        class="mb-8"
+        v-model="serviceType"
+        label="Tipo de servicio (Segun transformación)"
+        :items="serviceTypes"
+        hide-no-data
+        hide-details
+      />
 
-    <template v-else>
       <div class="d-flex align-center mb-2">
         <p class="pl-0">
           {{ $t("services.fields.transformers_amount") }}
