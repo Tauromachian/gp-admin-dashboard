@@ -32,6 +32,10 @@ import { required, number } from "@/utils/rules";
 export default {
   name: "TransformerForm",
   props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
     type: {
       type: String,
       default: "mono",
@@ -56,7 +60,7 @@ export default {
     };
   },
   computed: {
-    capacityComputed: {
+    transformer: {
       get() {
         return this.capacity;
       },
