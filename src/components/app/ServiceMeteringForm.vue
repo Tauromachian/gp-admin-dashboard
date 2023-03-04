@@ -130,12 +130,8 @@ export default {
     metraje() {
       return this.form.metraje;
     },
-    disableCapacityInput() {
-      if (this.form.metraje === "Alta") {
-        return false;
-      } else {
-        return true;
-      }
+    isCapacityInputEnabled() {
+      return this.form.metraje === "Alta";
     },
   },
   watch: {
