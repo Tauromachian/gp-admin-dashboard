@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-form>
     <gen-button-group
       v-model="form.metraje"
       :label="$t('services.fields.metraje')"
@@ -25,22 +25,22 @@
       hide-details
     />
 
-    <div class="d-flex align-center" v-if="form.metraje === 'Baja'">
-      <p class="pl-0">
-        {{ $t("services.fields.transformers_amount") }}
-      </p>
+    <template v-else>
+      <div class="d-flex align-center">
+        <p class="pl-0">
+          {{ $t("services.fields.transformers_amount") }}
+        </p>
 
-      <v-btn
-        color="primary"
-        class="ml-2"
-        @click="transformerAmountPlusOne"
-        icon="mdi-plus"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div>
+        <v-btn
+          color="primary"
+          class="ml-2"
+          @click="transformerAmountPlusOne"
+          icon="mdi-plus"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </div>
 
-    <div v-else>
       <transformer-form
         v-for="(transformer, i) in transformers"
         :key="i"
@@ -50,8 +50,8 @@
         v-model:capacity="transformer.capacity"
         @on-close-transformer="deleteTransformer(i)"
       />
-    </div>
-  </div>
+    </template>
+  </v-form>
 </template>
 
 <script>
