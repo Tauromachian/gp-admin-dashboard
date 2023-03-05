@@ -104,30 +104,19 @@ export default {
       },
     },
   },
-  mounted() {
-    this.initForm();
-  },
+
   methods: {
-    async initForm() {
-      if (this.update) {
-        this.fillForm();
-      }
-    },
     createClosure() {
       if (!this.$refs.form.validate()) {
         return;
       }
       this.$emit("closure-submit", this.form);
     },
+
     onCloseClick() {
       this.$emit("cloose-click");
     },
-    fillForm() {
-      const serviceId = this.$store.state.closure.serviceId;
-      const serviceCodCli = this.getServiceCodCliById(serviceId);
-      this.serviceCodCli = serviceCodCli;
-      Object.assign(this.form, this.$store.state.closure.form);
-    },
+
     reset() {
       this.$refs.form.reset();
     },
