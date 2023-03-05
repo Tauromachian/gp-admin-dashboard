@@ -59,6 +59,32 @@ export default {
       return Math.floor(Math.random() * 10000);
     },
   }),
+  read: Factory.extend({
+    T1IAE(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    T2IAE(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    T3IAE(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    TIRE(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    T1IMAXD(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    T2IMAXD(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    T3IMAXD(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    date() {
+      return new Date();
+    },
+  }),
   coordinator: Factory.extend({
     name(i) {
       return `Coordinator name ${i}`;

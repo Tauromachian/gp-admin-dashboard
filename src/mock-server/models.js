@@ -6,6 +6,12 @@ export default {
     coordinators: hasMany(),
     services: hasMany(),
   }),
+  service: Model.extend({
+    institution: belongsTo(),
+  }),
+  read: Model.extend({
+    service: belongsTo(),
+  }),
   coordinator: Model.extend({
     institution: belongsTo(),
     mails: hasMany(),
@@ -16,8 +22,5 @@ export default {
   }),
   phone: Model.extend({
     coordinator: belongsTo(),
-  }),
-  service: Model.extend({
-    institution: belongsTo(),
   }),
 };
