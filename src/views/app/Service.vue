@@ -49,7 +49,7 @@
         ref="form"
         :is-updating="isFormUpdating"
         :selected-service="selectedRows[0]"
-        @click:cancel="closeFormDialog"
+        @success="closeFormDialog"
       />
     </v-dialog>
   </v-container>
