@@ -5,7 +5,6 @@
         <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
-          v-model:dense="isDense"
           @plus-click="openFormForInsert"
           @edit-click="openFormForEdit"
         >
@@ -22,7 +21,6 @@
           :loading="false"
           v-model:page="filters.page"
           v-model:items-per-page="filters.limit"
-          :server-items-length="dataTableFields.serverItemsLength"
           single-select
           show-select
         >
@@ -32,13 +30,13 @@
 
     <gen-btn-add @click="openFormForInsert"></gen-btn-add>
 
-    <v-dialog v-model="readFormDialog" width="600">
+    <v-dialog v-model="formDialog" width="600">
       <read-form
         ref="form"
         v-model="form"
         :loading="loading"
         @closure-submit="submitRead"
-        @cloose-click="readFormDialog = false"
+        @cloose-click="formDialog = false"
       />
     </v-dialog>
   </v-container>
@@ -65,27 +63,18 @@ export default {
   data() {
     return {
       formDialog: false,
-      deleteDialogButton: false,
       loading: false,
-      columnFields: [],
-      defaultColDef: null,
-      dialog: false,
-      pagination: true,
-      codcli: {},
-      loading: false,
+      isFormUpdating: false,
+
       selectedRow: [],
-      isDense: false,
-      pagination: true,
       itemsPerPage: 10,
-      pageAmounts: [10, 50, 100],
       reads: [],
-      dataTableFields: {
-        serverItemsLength: -1,
-      },
+
       filters: {
         page: 1,
         limit: 10,
       },
+
       visibleColumns: [
         "T1IAE",
         "T2IAE",
@@ -97,8 +86,6 @@ export default {
         "date",
       ],
 
-      readFormDialog: false,
-      isFormUpdating: false,
       form: {
         T1IAE: "",
         T2IAE: "",
@@ -203,14 +190,14 @@ export default {
         this.$refs.form.reset();
         this.isFormUpdating = false;
       }
-      this.readFormDialog = true;
+      this.formDialog = true;
     },
 
     openFormForEdit() {
       if (!this.isRowSelected("update")) return;
 
       this.isFormUpdating = true;
-      this.readFormDialog = true;
+      this.formDialog = true;
     },
 
     isRowSelected(type) {
