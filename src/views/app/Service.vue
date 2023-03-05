@@ -47,8 +47,8 @@
     <v-dialog v-model="formDialog" width="400">
       <service-stepper
         ref="form"
-        :codcli="codcli"
-        @service-submit="submitService"
+        :is-updating="isFormUpdating"
+        :selected-service="selectedRows[0]"
         @click:cancel="closeFormDialog"
       />
     </v-dialog>
@@ -64,14 +64,7 @@ import ServiceStepper from "@/components/app/ServiceStepper.vue";
 import ServiceCard from "@/components/app/ServiceCard.vue";
 import ServiceDetails from "@/components/app/ServiceDetails.vue";
 
-import {
-  getServices,
-  updateService,
-  addService,
-  addServiceCredentials,
-  getService,
-  deleteService,
-} from "@/services/app/service";
+import { getServices, deleteService } from "@/services/app/service";
 
 export default {
   name: "Service",
@@ -91,6 +84,7 @@ export default {
       isFormUpdating: false,
       serviceDetailsDialog: false,
 
+      selectedService: {},
       selectedRows: [],
       visibleColumns: [],
       itemsPerPage: 25,
@@ -201,114 +195,6 @@ export default {
       this.codcli = codcli;
     },
 
-    submitService(form, credentialsForm) {
-      this.isFormUpdating
-        ? this.editService(form, credentialsForm)
-        : this.addService(form, credentialsForm);
-    },
-
-    async addService(form, serviceFormCredentials) {
-      this.loading = true;
-
-      try {
-        form.institution_id = this.institutionId;
-
-        await addService(form);
-
-        if (!serviceInsertionStatus) {
-          this.loading = false;
-          return;
-        }
-
-        const serviceCredentialsInsertionStatus =
-          await this.insertServiceCredentials(
-            serviceFormCredentials,
-            form.codcli
-          );
-
-        if (!serviceCredentialsInsertionStatus) {
-          this.loading = false;
-          return;
-        }
-
-        const newService = await getService(form.codcli);
-        this.addServiceToStore(newService);
-        this.closeFormDialog();
-        this.addNotification({
-          message: this.$t("notifications.succesfull_insert"),
-          color: "success",
-        });
-      } catch (error) {
-        this.addNotification({ message: error.message, color: "error" });
-      }
-      this.loading = false;
-    },
-
-    async editService(form, serviceCredentialsForm) {
-      this.loading = true;
-
-      const patchServiceStatus = this.patchService(form, form.id);
-
-      if (!patchServiceStatus) {
-        this.loading = false;
-        return;
-      }
-
-      const serviceCredentialsInsertionStatus =
-        await this.insertServiceCredentials(
-          serviceCredentialsForm,
-          form.codcli
-        );
-
-      if (!serviceCredentialsInsertionStatus) {
-        this.loading = false;
-        return;
-      }
-
-      this.clearCredentialsFormData();
-
-      this.editServiceInStore(form);
-
-      this.addNotification({
-        message: this.$t("notifications.succesfull_update"),
-        color: "success",
-      });
-      this.loading = false;
-      this.formDialog = false;
-    },
-
-    async patchService(form, id) {
-      try {
-        await updateService(id, form);
-        return true;
-      } catch (error) {
-        this.addNotification({
-          message: this.$t("notifications.unsuccesfull_update"),
-          color: "error",
-        });
-        return false;
-      }
-    },
-
-    async insertServiceCredentials(serviceFormCredentials, codcli) {
-      if (!serviceFormCredentials) {
-        return true;
-      }
-
-      try {
-        const data = await getService(codcli);
-        const id = data.id;
-
-        await addServiceCredentials(id, serviceFormCredentials);
-        return true;
-      } catch (error) {
-        this.addNotification({
-          message: this.$t("notifications.unsuccesfull_insert"),
-          color: "error",
-        });
-        return false;
-      }
-    },
     closeFormDialog() {
       this.formDialog = false;
     },

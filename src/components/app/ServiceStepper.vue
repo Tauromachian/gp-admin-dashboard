@@ -45,6 +45,9 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useNotificationsStore } from "@/stores/notifications";
+
 import ServiceMeteringForm from "@/components/app/ServiceMeteringForm.vue";
 import ServiceForm from "@/components/app/ServiceForm.vue";
 import TransformerForm from "@/components/app/TransformerForm.vue";
@@ -52,8 +55,12 @@ import ServiceUserForm from "@/components/app/ServiceUserForm.vue";
 
 import { SERVICE_FORM, CREDENTIALS_FORM } from "@/utils/formTemplates";
 
-import { mapActions } from "pinia";
-import { useNotificationsStore } from "@/stores/notifications";
+import {
+  updateService,
+  addService,
+  addServiceCredentials,
+  updateServiceCredentials,
+} from "@/services/app/service";
 
 export default {
   name: "ServiceStepper",
@@ -95,7 +102,7 @@ export default {
 
         if (!isValid) return;
 
-        this.step === this.steps.length ? this.$emit("submit") : this.step++;
+        this.step === this.steps.length ? this.submit() : this.step++;
       } catch (error) {
         this.addNotification({
           color: "error",
@@ -119,7 +126,54 @@ export default {
     },
 
     async fillForm() {
-      throw new Error("Not implemented");
+      this.form = { ...this.selectedService };
+      this.formCredentials = {
+        ...this.selectedService.credentials,
+      };
+    },
+
+    submit() {
+      this.isUpdating
+        ? this.editService(this.form, this.formCredentials)
+        : this.addService(this.form, this.formCredentials);
+    },
+
+    async addService(form, formCredentials) {
+      this.loading = true;
+
+      try {
+        form.institution_id = this.institutionId;
+
+        await addService(form);
+
+        await addServiceCredentials(service.id, formCredentials);
+
+        this.addNotification({
+          message: this.$t("notifications.succesfull_insert"),
+          color: "success",
+        });
+      } catch (error) {
+        this.addNotification({ message: error.message, color: "error" });
+      }
+      this.loading = false;
+    },
+
+    async editService(id, form, formCredentials) {
+      this.loading = true;
+
+      try {
+        await updateService(id, form);
+
+        await updateServiceCredentials(id, formCredentials);
+
+        this.addNotification({
+          message: this.$t("notifications.succesfull_update"),
+          color: "success",
+        });
+      } catch (error) {
+        this.addNotification({ message: error.message, color: "error" });
+      }
+      this.loading = false;
     },
   },
 };
