@@ -2,13 +2,11 @@
   <v-form ref="form" :title="$t('services.user.form_name')">
     <v-text-field
       v-model="form.username"
-      :disabled="disabled"
       :label="$t('services.user.username')"
       :rules="[rules.required(), rules.sentence(), rules.min(6)]"
     />
     <v-text-field
       v-model="form.password"
-      :disabled="disabled"
       :type="showPasswordText ? 'text' : 'password'"
       :label="$t('services.user.password')"
       :rules="[rules.required(), rules.password()]"
@@ -17,7 +15,6 @@
     />
     <v-text-field
       v-model="form.passwordConfirmation"
-      :disabled="disabled"
       :type="showPasswordText ? 'text' : 'password'"
       :label="$t('services.user.password_confirmation')"
       :rules="[rules.required(), rules.password()]"
@@ -30,7 +27,6 @@
     />
     <v-text-field
       v-model="form.acceptedIpComputed"
-      :disabled="disabled"
       :label="$t('services.fields.required_ip') + ` (${$t('optional')})`"
       :rules="[rules.required(), rules.ip()]"
     />
