@@ -75,6 +75,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    isUpdating: {
+      type: Boolean,
+      default: false,
+    },
+    selectedService: {
+      type: [Object, null],
+      default: null,
+    },
   },
   data() {
     return {
@@ -93,6 +101,18 @@ export default {
       serviceId: null,
     };
   },
+
+  watch: {
+    isUpdating: {
+      handler(val) {
+        if (val) {
+          this.fillForm();
+        }
+      },
+      immediate: true,
+    },
+  },
+
   methods: {
     ...mapActions(useNotificationsStore, ["addNotification"]),
     async confirmAndContinue() {
