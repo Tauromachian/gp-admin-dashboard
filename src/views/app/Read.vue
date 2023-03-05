@@ -196,6 +196,7 @@ export default {
     openFormForEdit() {
       if (!this.isRowSelected("update")) return;
 
+      this.fillForm();
       this.isFormUpdating = true;
       this.formDialog = true;
     },
