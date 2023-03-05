@@ -134,9 +134,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.v-subheader {
-  height: inherit;
-}
-</style>
