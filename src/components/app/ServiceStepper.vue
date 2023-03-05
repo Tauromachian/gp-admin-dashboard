@@ -90,7 +90,6 @@ export default {
         ...CREDENTIALS_FORM,
       },
 
-      serviceCredentialsFormDialog: false,
       serviceId: null,
     };
   },
