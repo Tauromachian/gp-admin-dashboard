@@ -63,6 +63,11 @@ export function makeServer({ environment = "development" } = {}) {
         const createdService = schema.institutions.create(newService);
         return new Response(201, {}, createdService.attrs);
       });
+      this.post("/service/:id/user", (schema, request) => {
+        const newService = JSON.parse(request.requestBody);
+        const createdService = schema.institutions.create(newService);
+        return new Response(201, {}, createdService.attrs);
+      });
       this.delete("/service/:id", (schema, request) => {
         const serviceId = request.params.id;
         schema.services.find(serviceId).destroy();
