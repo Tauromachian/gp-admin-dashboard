@@ -151,6 +151,7 @@ export default {
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
         });
+        this.$emit("success");
       } catch (error) {
         this.addNotification({ message: error.message, color: "error" });
       }
@@ -169,6 +170,7 @@ export default {
           message: this.$t("notifications.succesfull_update"),
           color: "success",
         });
+        this.$emit("success");
       } catch (error) {
         this.addNotification({ message: error.message, color: "error" });
       }
