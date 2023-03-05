@@ -30,6 +30,8 @@
       </v-card-text>
     </v-card>
 
+    <gen-btn-add @click="openFormForInsert"></gen-btn-add>
+
     <v-dialog v-model="readFormDialog" width="600">
       <read-form
         ref="form"
