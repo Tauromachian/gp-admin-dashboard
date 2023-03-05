@@ -119,18 +119,6 @@ export default {
       return isValid;
     },
 
-    async deleteServiceCredentials() {
-      if (!this.serviceId) return;
-
-      try {
-        await deleteService(this.serviceId);
-      } catch (error) {
-        return this.$emit("delete-unsuccesful");
-      }
-
-      this.$emit("delete-succesful");
-    },
-
     async fillForm() {
       throw new Error("Not implemented");
     },
