@@ -22,6 +22,13 @@ export function sentence(message = "El formato no es válido") {
   return (v) => isSentence(v) || message;
 }
 
+export function confirm(
+  toConfirm,
+  message = "Los valores no son equivalentes"
+) {
+  return (v) => v === toConfirm || message;
+}
+
 export function min(min = 6, message) {
   const finalMessage = message
     ? message
