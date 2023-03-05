@@ -143,7 +143,7 @@ export default {
       try {
         form.institution_id = this.institutionId;
 
-        await addService(form);
+        const service = await addService(form);
 
         await addServiceCredentials(service.id, formCredentials);
 
