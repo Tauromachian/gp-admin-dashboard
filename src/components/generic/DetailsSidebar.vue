@@ -21,7 +21,6 @@
       <slot />
     </v-sheet>
     <v-dialog
-      v-show="allowDialog"
       v-model="dialogComputed"
       fullscreen
       hide-overlay
