@@ -17,7 +17,11 @@
       v-model="form.passwordConfirmation"
       :type="showPasswordText ? 'text' : 'password'"
       :label="$t('services.user.password_confirmation')"
-      :rules="[rules.required(), rules.password()]"
+      :rules="[
+        rules.required(),
+        rules.password(),
+        rules.confirm(form.password, 'La contraseña no es correcta'),
+      ]"
       :append-icon="showPasswordText ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append="showPasswordText = !showPasswordText"
     />
@@ -34,7 +38,7 @@
 </template>
 
 <script>
-import { required, min, sentence, password, ip } from "@/utils/rules";
+import { required, min, sentence, password, ip, confirm } from "@/utils/rules";
 
 import { CREDENTIALS_FORM } from "@/utils/formTemplates";
 
@@ -54,7 +58,7 @@ export default {
     return {
       loading: false,
       showPasswordText: false,
-      rules: { required, min, sentence, password, ip },
+      rules: { required, min, sentence, password, ip, confirm },
     };
   },
 
