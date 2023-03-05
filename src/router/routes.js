@@ -63,12 +63,6 @@ export default [
           },
 
           {
-            path: "docs",
-            name: "docs",
-            component: () => import("@/views/app/Docs"),
-          },
-
-          {
             path: "consumption",
             name: "consumption",
             component: () => import("@/views/app/Consumption"),
