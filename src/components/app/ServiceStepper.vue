@@ -95,7 +95,7 @@ export default {
 
         if (!isValid) return;
 
-        this.step++;
+        this.step === this.steps.length ? this.$emit("submit") : this.step++;
       } catch (error) {
         this.addNotification({
           color: "error",
