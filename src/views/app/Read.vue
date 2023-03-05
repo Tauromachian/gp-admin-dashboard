@@ -255,6 +255,10 @@ export default {
 
       this.loading = false;
     },
+
+    fillForm() {
+      this.form = { ...this.selectedRow[0] };
+    },
   },
 };
 </script>
