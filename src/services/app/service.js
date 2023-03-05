@@ -19,11 +19,6 @@ export async function addService(form) {
   return data;
 }
 
-export async function addServiceCredentials(id, form) {
-  const { data } = await appApi.post(`service/${id}/user`, form);
-  return data;
-}
-
 export async function updateService(id, form) {
   const { data } = await appApi.patch(`services/${id}`, form);
   return data;
@@ -33,4 +28,14 @@ export async function deleteService(id) {
   const response = await appApi.delete(`service/${id}`);
 
   return response.data.name;
+}
+
+export async function addServiceCredentials(id, form) {
+  const { data } = await appApi.post(`service/${id}/user`, form);
+  return data;
+}
+
+export async function updateServiceCredentials(id, form) {
+  const { data } = await appApi.post(`service/${id}/user`, form);
+  return data;
 }
