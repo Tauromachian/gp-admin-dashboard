@@ -1,18 +1,12 @@
 import { defineStore } from "pinia";
 import { Indexer } from "basic-indexer";
 
-const CREDENTIALS_FORM_TEMPLATE = {
-  username: "",
-  password: "",
-  password_confirmation: "",
-  device_token: "",
-  accepted_ip: "",
-};
+import { CREDENTIALS_FORM } from "@/utils/formTemplates";
 
 export const useServiceStore = defineStore("service", {
   state: () => ({
     hasSensitiveData: false,
-    credentialsForm: Object.assign({}, CREDENTIALS_FORM_TEMPLATE),
+    credentialsForm: Object.assign({}, CREDENTIALS_FORM),
     services: [],
   }),
 
@@ -29,7 +23,7 @@ export const useServiceStore = defineStore("service", {
       }
     },
     clearCredentialsFormData() {
-      this.credentialsForm = { ...CREDENTIALS_FORM_TEMPLATE };
+      this.credentialsForm = { ...CREDENTIALS_FORM };
     },
     setHasSensitiveData(hasSensitiveData) {
       this.hasSensitiveData = hasSensitiveData;
