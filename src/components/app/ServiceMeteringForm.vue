@@ -110,14 +110,14 @@ export default {
     },
     capacityComputed: {
       get() {
-        let capacity = 0;
+        let totalCapacity = 0;
         if (this.transformers.length) {
           for (const { capacity } of this.transformers) {
             if (capacity !== "" && capacity) {
-              capacity += capacity;
+              totalCapacity += capacity;
             }
           }
-          return capacity;
+          return totalCapacity;
         } else {
           return this.form.capacidad;
         }
