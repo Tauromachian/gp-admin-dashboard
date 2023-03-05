@@ -2,10 +2,10 @@
   "name": "sge-admin-dashboard",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "dev": "vite --host",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
@@ -23,6 +23,8 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.0",
+    "@fullhuman/vue-cli-plugin-purgecss": "~5.0.0",
     "@vitejs/plugin-vue": "^3.0.3",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.6.0",
