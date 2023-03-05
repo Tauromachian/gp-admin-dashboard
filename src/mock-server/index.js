@@ -15,6 +15,7 @@ export function makeServer({ environment = "development" } = {}) {
       this.post("/auth/login", () => {
         return new Response(200, {}, { token: "token" });
       });
+
       this.get("/institutions", (schema) => {
         const { models } = schema.institutions.all();
         const institutions = models.map((model) => {
@@ -56,6 +57,11 @@ export function makeServer({ environment = "development" } = {}) {
 
       this.get("/services", (schema) => {
         return new Response(200, {}, schema.services.all().models);
+      });
+      this.post("/services", (schema, request) => {
+        const newService = JSON.parse(request.requestBody);
+        const createdService = schema.institutions.create(newService);
+        return new Response(201, {}, createdService.attrs);
       });
       this.delete("/service/:id", (schema, request) => {
         const serviceId = request.params.id;
