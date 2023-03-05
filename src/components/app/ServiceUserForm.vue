@@ -56,12 +56,12 @@ export default {
   },
   data() {
     return {
-      deleteCredentialsDialog: false,
       loading: false,
-      rules: { required, min, sentence, password, ip },
       showPasswordText: false,
+      rules: { required, min, sentence, password, ip },
     };
   },
+
   computed: {
     form: {
       get() {
