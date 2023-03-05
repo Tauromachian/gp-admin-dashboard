@@ -27,7 +27,6 @@
           ref="serviceUserForm"
           v-if="step === 3"
           v-model="formCredentials"
-          class-computed="ml-10 mr-10"
         />
       </keep-alive>
     </v-card-text>
