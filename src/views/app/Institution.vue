@@ -159,7 +159,7 @@ export default {
         this.createInstitution();
       }
     },
-    openInsertForm() {
+    openFormForInsert() {
       this.clearForm();
       this.isUpdating = false;
       if (this.$refs.institutionForm) {
