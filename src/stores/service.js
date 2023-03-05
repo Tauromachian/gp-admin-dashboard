@@ -9,10 +9,6 @@ export const useServiceStore = defineStore("service", {
     services: [],
   }),
 
-  getters: {
-    isLogged: (state) => !!state.token,
-  },
-
   actions: {
     setCredentialsFormData(data) {
       const keys = Object.keys(state.credentialsForm);
