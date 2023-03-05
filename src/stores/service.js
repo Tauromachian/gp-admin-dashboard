@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { Indexer } from "basic-indexer";
 
 import { CREDENTIALS_FORM } from "@/utils/formTemplates";
 
