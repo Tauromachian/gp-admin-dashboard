@@ -47,13 +47,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { api } from "~/config";
-import Form from "~/mixins/form";
-
 export default {
-  mixins: [Form],
-
   data: () => ({
     form: {
       email: null,
@@ -61,28 +55,6 @@ export default {
     },
   }),
 
-  created() {
-    this.form.email = this.$route.query.email || null;
-    this.form.username = this.$route.query.username || null;
-  },
-
-  methods: {
-    submit() {
-      if (this.$refs.form.validate()) {
-        this.loading = true;
-        axios
-          .post(api.path("password.forgot"), this.form)
-          .then((res) => {
-            this.$emit("success");
-          })
-          .catch((err) => {
-            this.handleErrors(err.response.data.errors);
-          })
-          .then(() => {
-            this.loading = false;
-          });
-      }
-    },
-  },
+  methods: {},
 };
 </script>

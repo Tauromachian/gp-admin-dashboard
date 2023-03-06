@@ -39,13 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { api } from "~/config";
-import Form from "~/mixins/form";
-
 export default {
-  mixins: [Form],
-
   data: () => ({
     passwordHidden: true,
 
@@ -62,30 +56,5 @@ export default {
       password_confirmation: null,
     },
   }),
-
-  created() {
-    this.form.email = this.$route.query.email;
-    this.form.username = this.$route.query.username;
-    this.form.token = this.$route.params.token;
-  },
-
-  methods: {
-    submit() {
-      if (this.$refs.form.validate()) {
-        this.loading = true;
-        axios
-          .post(api.path("password.reset"), this.form)
-          .then((res) => {
-            this.$emit("success", this.form);
-          })
-          .catch((err) => {
-            this.handleErrors(err.response.data.errors);
-          })
-          .then(() => {
-            this.loading = false;
-          });
-      }
-    },
-  },
 };
 </script>
