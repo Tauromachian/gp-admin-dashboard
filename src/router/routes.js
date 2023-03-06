@@ -20,19 +20,6 @@ export default [
           },
 
           {
-            path: "service/:idService",
-            name: "service",
-            component: () => import("@/views/serviceContent"),
-
-            children: [
-              {
-                path: "one-read",
-                name: "oneRead",
-                component: () => import("@/views/app/OneRead"),
-              },
-            ],
-          },
-          {
             path: "read",
             name: "read",
             component: () => import("@/views/app/Read"),
