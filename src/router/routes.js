@@ -56,28 +56,6 @@ export default [
           },
 
           {
-            path: "closure",
-            name: "closure",
-            component: () => import("@/views/app/Closure"),
-          },
-
-          {
-            path: "table-list",
-            name: "Table List",
-            component: () => import("@/views/app/TableList"),
-          },
-
-          {
-            path: "typography",
-            component: () => import("@/views/app/Typography"),
-          },
-
-          {
-            path: "icons",
-            component: () => import("@/views/app/Icons"),
-          },
-
-          {
             path: "notifications",
             name: "notifications",
             component: () => import("@/views/app/Notifications"),
