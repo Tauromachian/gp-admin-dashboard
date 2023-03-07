@@ -39,9 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions } from "pinia";
-import { api } from "~/config";
 
 export default {
   name: "UserManagement",
@@ -53,29 +51,6 @@ export default {
   },
   methods: {
     ...mapActions("app", ["addNotification"]),
-
-    createService(form) {
-      this.loading = true;
-      axios
-        .post(api.path("user"), form)
-        .then((res) => {
-          this.addNotification(
-            this.$t("notifications.succesfull_insert"),
-            "success"
-          );
-          this.$refs.table.addRow(form);
-          this.formDialog = false;
-          this.loading = false;
-        })
-        .catch((err) => {
-          this.addNotification(
-            this.$t("notifications.unsuccesfull_insert"),
-            "error"
-          );
-          console.log(err);
-          this.loading = false;
-        });
-    },
   },
 };
 </script>
