@@ -7,7 +7,7 @@ const app = createApp(App);
 registerPlugins(app);
 
 if (process.env.NODE_ENV !== "production") {
-  const { makeServer } = await import(/* @vite-ignore */ "./mock-server");
+  const { makeServer } = await import("./mock-server");
   makeServer();
 }
 
