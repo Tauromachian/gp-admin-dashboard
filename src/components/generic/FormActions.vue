@@ -2,7 +2,7 @@
   <div class="d-flex flex-row-reverse w-100">
     <v-btn
       class="ml-1"
-      color="primary"
+      :color="submitButtonColor"
       :loading="loadingButtons"
       :disabled="loadingButtons"
       @click="() => $emit('click:submit')"
@@ -27,6 +27,10 @@ export default {
   name: "FormActions",
   props: {
     submitButtonTitle: {
+      type: String,
+      default: "Submit",
+    },
+    submitButtonColor: {
       type: String,
       default: "Submit",
     },

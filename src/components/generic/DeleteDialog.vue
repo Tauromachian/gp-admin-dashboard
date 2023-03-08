@@ -7,7 +7,7 @@
         revertir.
       </v-card-text>
 
-      <v-card-actions>
+      <v-card-text>
         <v-spacer />
 
         <gen-form-actions
@@ -15,8 +15,9 @@
           @click:submit="acceptClicked"
           @click:cancel="dialogComputed = false"
           submit-button-title="Borrar"
+          submit-button-color="error"
         ></gen-form-actions>
-      </v-card-actions>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
