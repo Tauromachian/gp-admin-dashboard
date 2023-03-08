@@ -5,7 +5,7 @@
       color="primary"
       :loading="loadingButtons"
       :disabled="loadingButtons"
-      @click="submitEvent"
+      @click="() => $emit('click:submit')"
     >
       {{ submitButtonTitle }}
     </v-btn>
@@ -15,7 +15,7 @@
       variant="text"
       :loading="loadingButtons"
       :disabled="loadingButtons"
-      @click="cancelEvent"
+      @click="() => $emit('click:cancel')"
     >
       {{ $t("button.actions.cancel") }}
     </v-btn>
@@ -48,14 +48,6 @@ export default {
   },
   destroyed() {
     document.removeEventListener("keydown", this._keyListener);
-  },
-  methods: {
-    submitEvent() {
-      this.$emit("click:submit");
-    },
-    cancelEvent() {
-      this.$emit("click:cancel");
-    },
   },
 };
 </script>
