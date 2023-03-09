@@ -85,8 +85,8 @@ export default {
       this.$emit("closure-submit", this.form);
     },
 
-    onCloseClick() {
-      this.$emit("cloose-click");
+    async validate() {
+      return await this.$refs.form.validate();
     },
 
     reset() {
