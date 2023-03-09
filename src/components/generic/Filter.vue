@@ -16,6 +16,9 @@
       <v-card-text>
         <slot />
       </v-card-text>
+      <v-card-text>
+        <gen-form-actions></gen-form-actions>
+      </v-card-text>
     </v-card>
   </v-menu>
 </template>
