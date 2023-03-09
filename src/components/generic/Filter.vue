@@ -17,10 +17,5 @@
 <script>
 export default {
   name: "Filter",
-  data() {
-    return {
-      menu: false,
-    };
-  },
 };
 </script>
