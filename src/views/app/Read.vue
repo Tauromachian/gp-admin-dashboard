@@ -9,7 +9,7 @@
           @edit-click="openFormForEdit"
         >
           <template #actions-append>
-            <read-filter v-model="filters"></read-filter>
+            <read-filter></read-filter>
           </template>
         </gen-toolbar>
 
