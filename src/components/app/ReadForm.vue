@@ -41,7 +41,7 @@
       :rules="[rules.required(), rules.number()]"
     />
 
-    <v-date-picker v-model="form.date" full-width color="primary" />
+    <gen-date-picker v-model="form.date"></gen-date-picker>
   </gen-form>
 </template>
 
