@@ -1,11 +1,9 @@
 <template>
   <v-menu
     :close-on-content-click="false"
-    min-width="300"
-    max-width="300"
-    nudge-left="12"
-    offset-x
-    v-model="menu"
+    min-width="500px"
+    max-width="600px"
+    width="350px"
   >
     <template #activator="{ props }">
       <v-btn color="primary" dark v-bind="props" icon="mdi-filter"> </v-btn>
