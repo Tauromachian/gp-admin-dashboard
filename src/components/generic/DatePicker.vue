@@ -30,15 +30,31 @@ export default {
         return this.modelValue;
       },
       set(val) {
-        this.$emit(
-          "update:modelValue",
-          new Date(val).toLocaleDateString("es", {
-            year: "numeric",
-            month: "2-digit",
-            day: "numeric",
-          })
-        );
+        this.$emit("update:modelValue", this.formatDate(val));
       },
+    },
+  },
+  methods: {
+    formatDate(dateValue) {
+      if (this.$attrs.range) {
+        return this.formatRange(dateValue);
+      }
+      return this.formatSimpleDate(dateValue);
+    },
+    formatSimpleDate(date) {
+      return new Date(date).toLocaleDateString("es", {
+        year: "numeric",
+        month: "2-digit",
+        day: "numeric",
+      });
+    },
+    formatRange(dateRange) {
+      const dateRange = dateFormat.reduce((accumulator, date) => {
+        return `${this.formatSimpleDate(accumulator)} ~ ${this.formatSimpleDate(
+          date
+        )}`;
+      });
+      return dateRange;
     },
   },
 };
