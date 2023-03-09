@@ -46,7 +46,7 @@ export default {
   mounted() {
     document.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
-        this.submitEvent();
+        this.$emit("click:submit");
       }
     });
   },
