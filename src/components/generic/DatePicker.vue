@@ -49,12 +49,11 @@ export default {
       });
     },
     formatRange(dateRange) {
-      const dateRange = dateFormat.reduce((accumulator, date) => {
+      return dateRange.reduce((accumulator, date) => {
         return `${this.formatSimpleDate(accumulator)} ~ ${this.formatSimpleDate(
           date
         )}`;
       });
-      return dateRange;
     },
   },
 };
