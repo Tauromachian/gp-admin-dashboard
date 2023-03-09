@@ -71,6 +71,13 @@ export default {
       filters: {
         page: 1,
         limit: 10,
+        pico: [1, 5],
+        dia: [1, 5],
+        madrugada: [1, 5],
+        reactivo: [1, 5],
+        mdp: [1, 5],
+        mdd: [1, 5],
+        mdm: [1, 5],
       },
 
       visibleColumns: [
