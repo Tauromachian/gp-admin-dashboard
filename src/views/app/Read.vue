@@ -240,7 +240,7 @@ export default {
     async updateRead() {
       this.loading = true;
       try {
-        await updateRead(this.selectedRow[0].id, this.form);
+        await updateRead(this.selectedRows[0].id, this.form);
         this.addNotification({
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
@@ -256,7 +256,7 @@ export default {
     },
 
     fillForm() {
-      this.form = { ...this.selectedRow[0] };
+      this.form = { ...this.selectedRows[0] };
     },
   },
 };
