@@ -11,6 +11,7 @@ export function makeServer({ environment = "development" } = {}) {
       server.createList("institution", 5);
       server.createList("service", 20);
       server.createList("read", 100);
+      server.createList("plan", 100);
     },
     routes() {
       this.post("/auth/login", () => {
@@ -82,6 +83,10 @@ export function makeServer({ environment = "development" } = {}) {
         const newRead = JSON.parse(request.requestBody);
         const createdRead = schema.reads.create(newRead);
         return new Response(201, {}, createdRead.attrs);
+      });
+
+      this.get("/plans", (schema) => {
+        return new Response(200, {}, schema.plans.all().models);
       });
 
       this.get("/coordinator/:id/mails", (schema, request) => {

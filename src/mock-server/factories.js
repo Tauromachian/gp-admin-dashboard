@@ -85,6 +85,20 @@ export default {
       return new Date();
     },
   }),
+  plan: Factory.extend({
+    year() {
+      return new Date().getFullYear();
+    },
+    january(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    february(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+    march(i) {
+      return Math.floor(Math.random() * 10000);
+    },
+  }),
   coordinator: Factory.extend({
     name(i) {
       return `Coordinator name ${i}`;

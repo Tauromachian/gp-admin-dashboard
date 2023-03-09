@@ -12,6 +12,9 @@ export default {
   read: Model.extend({
     service: belongsTo(),
   }),
+  plan: Model.extend({
+    service: belongsTo(),
+  }),
   coordinator: Model.extend({
     institution: belongsTo(),
     mails: hasMany(),
