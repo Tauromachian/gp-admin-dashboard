@@ -70,6 +70,12 @@ import { isNumber } from "~/helpers/regex";
 
 export default {
   name: "ServiceForm",
+  props: {
+    modelValue: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: function () {
     return {
       alimentationSelect: "Simple",
@@ -89,6 +95,16 @@ export default {
         (v) => isNumber(v) || "Por favor entre un numero aqui",
       ],
     };
+  },
+  computed: {
+    form: {
+      get() {
+        return this.modelValue;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
   },
   methods: {
     validate: function () {
