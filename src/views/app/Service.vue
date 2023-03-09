@@ -18,7 +18,6 @@
           :headers="visibleHeaders"
           :items="services"
           :loading="loading"
-          v-model:items-per-page="itemsPerPage"
           loading-text="Cargando Servicios..."
           single-select
           show-select
