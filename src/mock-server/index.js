@@ -78,6 +78,11 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/reads", (schema) => {
         return new Response(200, {}, schema.reads.all().models);
       });
+      this.post("/reads", (schema, request) => {
+        const newRead = JSON.parse(request.requestBody);
+        const createdRead = schema.reads.create(newRead);
+        return new Response(201, {}, createdRead.attrs);
+      });
 
       this.get("/coordinator/:id/mails", (schema, request) => {
         const coordinatorId = request.params.id;
