@@ -90,7 +90,7 @@
 import { required, number } from "@/utils/rules";
 
 export default {
-  name: "ServiceForm",
+  name: "PlanForm",
   props: {
     modelValue: {
       type: Array,
