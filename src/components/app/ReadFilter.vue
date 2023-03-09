@@ -1,5 +1,5 @@
 <template>
-  <gen-filter>
+  <gen-filter title="Filtro de lecturas">
     <v-form>
       <div
         v-for="(field, index) in stepperFields"
