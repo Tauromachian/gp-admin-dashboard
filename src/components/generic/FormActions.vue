@@ -32,7 +32,7 @@ export default {
     },
     submitButtonColor: {
       type: String,
-      default: "Submit",
+      default: "primary",
     },
     enableCancel: {
       type: Boolean,
