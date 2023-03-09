@@ -184,7 +184,7 @@
     "fields": {
       "service": "Servicio",
       "peak": "Pico",
-      "day": "Dia",
+      "day": "Día",
       "morning": "Madrugada",
       "reactive": "Reactivo",
       "date": "Fecha"
@@ -195,7 +195,7 @@
     "fields": {
       "service": "Servicio",
       "peak": "Pico",
-      "day": "Dia",
+      "day": "Día",
       "morning": "Madrugada",
       "reactive": "Reactivo",
       "month": "Mes",
