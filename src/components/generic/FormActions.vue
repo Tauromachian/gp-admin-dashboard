@@ -28,7 +28,7 @@ export default {
   props: {
     submitButtonTitle: {
       type: String,
-      default: "Submit",
+      default: "Aceptar",
     },
     submitButtonColor: {
       type: String,
