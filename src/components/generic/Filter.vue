@@ -9,7 +9,9 @@
       <v-btn color="primary" dark v-bind="props" icon="mdi-filter"> </v-btn>
     </template>
     <v-card>
-      <slot />
+      <v-card-text>
+        <slot />
+      </v-card-text>
     </v-card>
   </v-menu>
 </template>
