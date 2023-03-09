@@ -5,7 +5,7 @@
         v-for="(field, index) in stepperFields"
         :key="`${field.value}-${index}`"
       >
-        <p>{{ field.text }}</p>
+        <p class="mb-8">{{ field.text }}</p>
         <v-range-slider
           :min="100"
           :max="10000000"
