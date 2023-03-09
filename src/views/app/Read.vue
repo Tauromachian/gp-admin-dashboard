@@ -15,12 +15,11 @@
 
         <easy-data-table
           class="mt-3"
+          v-model:items-selected="selectedRows"
           v-model="selectedRow"
           :headers="visibleHeaders"
           :items="reads"
           :loading="false"
-          v-model:page="filters.page"
-          v-model:items-per-page="filters.limit"
           single-select
           show-select
         >
@@ -66,7 +65,7 @@ export default {
       loading: false,
       isFormUpdating: false,
 
-      selectedRow: [],
+      selectedRows: [],
       itemsPerPage: 10,
       reads: [],
 
