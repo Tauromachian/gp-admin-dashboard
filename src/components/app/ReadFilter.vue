@@ -11,6 +11,7 @@
           :max="10000000"
           :step="100"
           v-model="form[field.value]"
+          thumb-label="always"
         >
         </v-range-slider>
       </div>
