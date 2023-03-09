@@ -164,9 +164,7 @@ export default {
   },
 
   watch: {
-    filters() {
-      this.fetchReadsByService(this.serviceIdForReads);
-    },
+    filters() {},
   },
 
   methods: {
