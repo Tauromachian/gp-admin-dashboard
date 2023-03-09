@@ -33,8 +33,7 @@
         ref="form"
         v-model="form"
         :loading="loading"
-        @closure-submit="submitRead"
-        @cloose-click="formDialog = false"
+        @submit="submitRead"
       />
     </v-dialog>
   </v-container>
