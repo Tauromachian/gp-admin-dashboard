@@ -17,7 +17,9 @@
         <slot />
       </v-card-text>
       <v-card-text>
-        <gen-form-actions></gen-form-actions>
+        <gen-form-actions
+          @click:submit="() => $emit('click:submit')"
+        ></gen-form-actions>
       </v-card-text>
     </v-card>
   </v-menu>
