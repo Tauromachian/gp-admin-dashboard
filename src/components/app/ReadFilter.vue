@@ -7,9 +7,9 @@
       >
         <p>{{ field.text }}</p>
         <v-range-slider
-          :min="1"
-          :max="10"
-          :step="1"
+          :min="100"
+          :max="10000000"
+          :step="100"
           v-model="form[field.value]"
         >
         </v-range-slider>
