@@ -16,7 +16,6 @@
         <easy-data-table
           class="mt-3"
           v-model:items-selected="selectedRows"
-          v-model="selectedRow"
           :headers="visibleHeaders"
           :items="reads"
           :loading="false"
