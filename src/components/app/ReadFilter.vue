@@ -15,13 +15,7 @@
         >
         </v-range-slider>
       </div>
-      <div class="d-flex flex-column">
-        <p>Rango de fecha</p>
-        <div class="d-flex">
-          <v-text-field class="mr-1" label="Fecha inicial"></v-text-field>
-          <v-text-field class="ml-1" label="Fecha final"></v-text-field>
-        </div>
-      </div>
+      <gen-date-picker v-model="filters.date" :range="true"></gen-date-picker>
     </v-form>
   </gen-filter>
 </template>
@@ -51,6 +45,7 @@ export default {
         mdp: [1, 5],
         mdd: [1, 5],
         mdm: [1, 5],
+        date: "",
       },
     };
   },
