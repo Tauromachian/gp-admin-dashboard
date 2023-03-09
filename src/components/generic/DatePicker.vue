@@ -30,7 +30,14 @@ export default {
         return this.modelValue;
       },
       set(val) {
-        this.$emit("update:modelValue", val);
+        this.$emit(
+          "update:modelValue",
+          new Date(val).toLocaleDateString("es", {
+            year: "numeric",
+            month: "2-digit",
+            day: "numeric",
+          })
+        );
       },
     },
   },
