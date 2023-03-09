@@ -1,5 +1,9 @@
 <template>
-  <gen-form ref="form" :title="$t('read.form_name')">
+  <gen-form
+    ref="form"
+    @submit="() => $emit('submit')"
+    :title="$t('read.form_name')"
+  >
     <v-text-field
       v-model="form.T1IAE"
       :label="$t('closure.fields.peak') + ' (kWh)'"
