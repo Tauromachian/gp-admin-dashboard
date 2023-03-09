@@ -28,7 +28,7 @@
 
     <gen-btn-add @click="openFormForInsert"></gen-btn-add>
 
-    <v-dialog v-model="formDialog" width="600">
+    <v-dialog v-model="formDialog" width="400">
       <read-form
         ref="form"
         v-model="form"
