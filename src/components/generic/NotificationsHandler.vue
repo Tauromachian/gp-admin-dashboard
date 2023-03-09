@@ -8,6 +8,7 @@
           'margin-bottom': `${index * 4}em`,
           left: 'unset',
           right: '10px',
+          bottom: '10px',
           transform: 'unset',
         },
       }"
