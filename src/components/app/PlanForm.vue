@@ -77,24 +77,7 @@ export default {
     },
   },
   data: function () {
-    return {
-      alimentationSelect: "Simple",
-      alimentationItems: ["Simple", "Doble"],
-      metrageSelect: "Alta",
-      metrageItems: ["Baja", "Alta"],
-      serviceRules: [
-        (v) => !!v || "Entre un servicio",
-        (v) => isNumber(v) || "Por favor entre un numero aqui",
-      ],
-      yearPlanRules: [
-        (v) => !!v || "Entre el total para el año",
-        (v) => isNumber(v) || "Por favor entre un numero aqui",
-      ],
-      monthPlanRules: [
-        (v) => !!v || "Entre el plan de este mes",
-        (v) => isNumber(v) || "Por favor entre un numero aqui",
-      ],
-    };
+    return {};
   },
   computed: {
     form: {
