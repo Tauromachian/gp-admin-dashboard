@@ -9,6 +9,10 @@
       <v-btn color="primary" dark v-bind="props" icon="mdi-filter"> </v-btn>
     </template>
     <v-card>
+      <v-card-title class="pt-1">
+        {{ title }}
+        <v-divider class="primary mb-2" />
+      </v-card-title>
       <v-card-text>
         <slot />
       </v-card-text>
@@ -19,5 +23,11 @@
 <script>
 export default {
   name: "Filter",
+  props: {
+    title: {
+      type: String,
+      default: "Form",
+    },
+  },
 };
 </script>
