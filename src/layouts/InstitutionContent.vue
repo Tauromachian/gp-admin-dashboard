@@ -32,6 +32,11 @@ export default {
           icon: "mdi-chart-bar-stacked ",
           text: "route.read",
         },
+        {
+          to: { name: "plans" },
+          icon: "mdi-chart-areaspline",
+          text: "route.plans",
+        },
 
         {
           to: { name: "documents" },

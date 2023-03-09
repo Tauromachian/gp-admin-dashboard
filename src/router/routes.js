@@ -26,7 +26,7 @@ export default [
           },
 
           {
-            path: "plan-form",
+            path: "plans",
             name: "plans",
             component: () => import("@/views/app/Plan"),
           },
