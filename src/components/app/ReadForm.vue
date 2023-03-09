@@ -82,7 +82,7 @@ export default {
       if (!this.$refs.form.validate()) {
         return;
       }
-      this.$emit("closure-submit", this.form);
+      this.$emit("click:submit", this.form);
     },
 
     async validate() {
