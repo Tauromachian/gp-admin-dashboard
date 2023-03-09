@@ -120,8 +120,5 @@ export default {
       this.$refs.form.validate();
     },
   },
-  computed: {
-    ...mapState("app", ["services"]),
-  },
 };
 </script>
