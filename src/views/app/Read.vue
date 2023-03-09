@@ -18,10 +18,18 @@
           v-model:items-selected="selectedRows"
           :headers="visibleHeaders"
           :items="reads"
-          :loading="false"
+          :loading="loading"
           single-select
           show-select
         >
+          <template #loading>
+            <v-progress-circular
+              color="primary"
+              :size="60"
+              :width="5"
+              indeterminate
+            ></v-progress-circular>
+          </template>
         </easy-data-table>
       </v-card-text>
     </v-card>
@@ -177,6 +185,7 @@ export default {
     ...mapActions(useNotificationsStore, ["addNotification"]),
 
     async loadData() {
+      this.loading = true;
       try {
         this.reads = await getReads();
       } catch (error) {
@@ -185,6 +194,7 @@ export default {
           message: error.message,
         });
       }
+      this.loading = false;
     },
 
     openFormForInsert() {
