@@ -1,5 +1,5 @@
 <template>
-  <gen-filter title="Filtro de lecturas">
+  <gen-filter title="Filtro de lecturas" @click:submit="submitFilters">
     <v-form>
       <div
         v-for="(field, index) in stepperFields"
@@ -10,7 +10,7 @@
           :min="100"
           :max="10000000"
           :step="100"
-          v-model="form[field.value]"
+          v-model="filters[field.value]"
           thumb-label="always"
         >
         </v-range-slider>
@@ -29,12 +29,7 @@
 <script>
 export default {
   name: "ReadFilter",
-  props: {
-    modelValue: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+
   data() {
     return {
       stepperFields: [
@@ -46,16 +41,22 @@ export default {
         { text: "MDD (kWh)", value: "mdd" },
         { text: "MDM (kWh)", value: "mdm" },
       ],
+      filters: {
+        page: 1,
+        limit: 10,
+        pico: [1, 5],
+        dia: [1, 5],
+        madrugada: [1, 5],
+        reactivo: [1, 5],
+        mdp: [1, 5],
+        mdd: [1, 5],
+        mdm: [1, 5],
+      },
     };
   },
-  computed: {
-    form: {
-      get() {
-        return this.modelValue;
-      },
-      set(val) {
-        this.$emit("update:modelValue", val);
-      },
+  methods: {
+    submitFilters() {
+      this.$emit("click:submit", this.filters);
     },
   },
 };
