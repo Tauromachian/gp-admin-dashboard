@@ -227,6 +227,7 @@ export default {
 
       try {
         await addRead(this.form);
+        this.formDialog = false;
         this.addNotification({
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
@@ -245,6 +246,7 @@ export default {
       this.loading = true;
       try {
         await updateRead(this.selectedRows[0].id, this.form);
+        this.formDialog = false;
         this.addNotification({
           message: this.$t("notifications.succesfull_insert"),
           color: "success",
