@@ -292,6 +292,22 @@ export default {
     fillForm() {
       this.form = { ...this.selectedRows[0] };
     },
+
+    async removePlan() {
+      try {
+        await deletePlan(this.selectedRows[0].id);
+        this.loadData();
+        this.addNotification({
+          message: this.$t("notifications.successful_delete"),
+          color: "success",
+        });
+      } catch (error) {
+        this.addNotification({
+          message: this.$t("notifications.error_at_delete"),
+          color: "error",
+        });
+      }
+    },
   },
 };
 </script>
