@@ -247,6 +247,8 @@ export default {
     },
 
     async insertPlan() {
+      if (!(await this.$refs.form.validate()).valid) return;
+
       this.loading = true;
 
       try {
@@ -267,6 +269,8 @@ export default {
     },
 
     async updatePlan() {
+      if (!(await this.$refs.form.validate()).valid) return;
+
       this.loading = true;
       try {
         await updatePlan(this.selectedRows[0].id, this.form);
