@@ -1,5 +1,5 @@
 <template>
-  <gen-form @submit="() => $emit('submit')" ref="form">
+  <gen-form ref="form">
     <v-text-field
       v-model="form.year"
       :rules="[rules.required(), rules.number()]"
