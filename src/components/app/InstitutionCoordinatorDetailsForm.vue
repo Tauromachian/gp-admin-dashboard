@@ -1,57 +1,49 @@
 <template>
   <gen-form :title="$t('institutions.coordinator_details_form_name')">
-    <v-form ref="form" class="pl-3 pr-3">
-      <v-text-field
-        v-model="name"
-        :label="$t('institutions.fields.name')"
-        :rules="rules.required()"
-      />
-      <v-text-field
-        v-model="charge"
-        :label="$t('institutions.fields.charge')"
-        :rules="rules.required()"
-      />
-      <v-btn icon color="primary" @click="addPhone">
-        <v-icon> mdi-plus </v-icon>
-      </v-btn>
-      {{ $t("institutions.fields.phones") }}
-      <v-text-field
-        v-for="(phone, key) in phones"
-        :key="'phone' + key"
-        v-model="phones[key]"
-        :label="$t('institutions.fields.phone')"
-        :rules="[rules.required(), rules.phone()]"
-      >
-        <template #append-outer>
-          <v-btn class="mt-0 mb-0" icon @click="deletePhone(key)">
-            <v-icon color="primary"> mdi-delete </v-icon>
-          </v-btn>
-        </template>
-      </v-text-field>
-      <v-btn icon color="primary" @click="addMail">
-        <v-icon> mdi-plus </v-icon>
-      </v-btn>
-      {{ $t("institutions.fields.mails") }}
-      <v-text-field
-        v-for="(mail, key) in emails"
-        :key="'mail' + key"
-        v-model="emails[key]"
-        :label="$t('institutions.fields.mail')"
-        :rules="[rules.required(), rules.email()]"
-      >
-        <template #append-outer>
-          <v-btn class="mt-0 mb-0" icon @click="deleteMail(key)">
-            <v-icon color="primary"> mdi-delete </v-icon>
-          </v-btn>
-        </template>
-      </v-text-field>
-      <gen-form-actions
-        class="pl-0 pr-0"
-        enable-cancel
-        @on-submit="submitClick"
-        @on-cancel="cancelClick"
-      />
-    </v-form>
+    <v-text-field
+      v-model="name"
+      :label="$t('institutions.fields.name')"
+      :rules="rules.required()"
+    />
+    <v-text-field
+      v-model="charge"
+      :label="$t('institutions.fields.charge')"
+      :rules="rules.required()"
+    />
+    <v-btn icon color="primary" @click="addPhone">
+      <v-icon> mdi-plus </v-icon>
+    </v-btn>
+    {{ $t("institutions.fields.phones") }}
+    <v-text-field
+      v-for="(phone, key) in phones"
+      :key="'phone' + key"
+      v-model="phones[key]"
+      :label="$t('institutions.fields.phone')"
+      :rules="[rules.required(), rules.phone()]"
+    >
+      <template #append-outer>
+        <v-btn class="mt-0 mb-0" icon @click="deletePhone(key)">
+          <v-icon color="primary"> mdi-delete </v-icon>
+        </v-btn>
+      </template>
+    </v-text-field>
+    <v-btn icon color="primary" @click="addMail">
+      <v-icon> mdi-plus </v-icon>
+    </v-btn>
+    {{ $t("institutions.fields.mails") }}
+    <v-text-field
+      v-for="(mail, key) in emails"
+      :key="'mail' + key"
+      v-model="emails[key]"
+      :label="$t('institutions.fields.mail')"
+      :rules="[rules.required(), rules.email()]"
+    >
+      <template #append-outer>
+        <v-btn class="mt-0 mb-0" icon @click="deleteMail(key)">
+          <v-icon color="primary"> mdi-delete </v-icon>
+        </v-btn>
+      </template>
+    </v-text-field>
   </gen-form>
 </template>
 

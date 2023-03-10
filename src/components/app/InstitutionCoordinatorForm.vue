@@ -1,23 +1,15 @@
 <template>
   <gen-form :title="$t('institutions.coordinator_form_name')">
-    <v-form ref="form" class="pl-3 pr-3">
-      <v-text-field
-        v-model="name"
-        :label="$t('institutions.fields.name')"
-        :rules="noEmptyRule"
-      />
-      <v-text-field
-        v-model="charge"
-        :label="$t('institutions.fields.charge')"
-        :rules="noEmptyRule"
-      />
-      <gen-form-actions
-        class="pl-0 pr-0"
-        enable-cancel
-        @on-submit="submitClick"
-        @on-cancel="cancelClick"
-      />
-    </v-form>
+    <v-text-field
+      v-model="name"
+      :label="$t('institutions.fields.name')"
+      :rules="noEmptyRule"
+    />
+    <v-text-field
+      v-model="charge"
+      :label="$t('institutions.fields.charge')"
+      :rules="noEmptyRule"
+    />
   </gen-form>
 </template>
 
