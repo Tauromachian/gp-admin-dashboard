@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     async validate() {
-      await this.$refs.form.validate();
+      return await this.$refs.form.validate();
     },
   },
 };
