@@ -144,42 +144,34 @@ export default {
         },
         {
           text: `${this.$t("plans.months.may")}`,
-          text: "MDD (kW)",
           value: "may",
         },
         {
           text: `${this.$t("plans.months.june")}`,
-          text: "MDM (kW)",
           value: "june",
         },
         {
           text: `${this.$t("plans.months.july")}`,
-          text: "MDM (kW)",
           value: "july",
         },
         {
           text: `${this.$t("plans.months.august")}`,
-          text: "MDM (kW)",
           value: "august",
         },
         {
           text: `${this.$t("plans.months.september")}`,
-          text: "MDM (kW)",
           value: "september",
         },
         {
           text: `${this.$t("plans.months.october")}`,
-          text: "MDM (kW)",
           value: "october",
         },
         {
           text: `${this.$t("plans.months.november")}`,
-          text: "MDM (kW)",
           value: "november",
         },
         {
           text: `${this.$t("plans.months.december")}`,
-          text: "MDM (kW)",
           value: "december",
         },
         {
