@@ -70,6 +70,7 @@ export default {
 
       visibleColumns: [
         "year",
+        "year_plan",
         "january",
         "february",
         "march",
@@ -118,6 +119,11 @@ export default {
         {
           text: `${this.$t("plans.year")}`,
           value: "year",
+          checkboxSelection: true,
+        },
+        {
+          text: `${this.$t("plans.total_plan")}`,
+          value: "year_plan",
           checkboxSelection: true,
         },
         {
