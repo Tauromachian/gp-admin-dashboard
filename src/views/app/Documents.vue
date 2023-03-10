@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="container">
     <v-row>
-      <v-col xl="3" lg="4" md="6" sm="6" xs="12">
+      <v-col lg="4" md="6" sm="6" xs="12">
         <v-card>
           <v-card-title>Ley Eléctrica 1287 de 1975</v-card-title>
           <v-card-text
@@ -17,7 +17,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col xl="3" lg="4" md="6" sm="6" xs="12">
+      <v-col lg="4" md="6" sm="6" xs="12">
         <v-card>
           <v-card-title>Res-277-2014 Tarifas no residenciales</v-card-title>
           <v-card-text
@@ -43,7 +43,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col xl="3" lg="4" md="6" sm="6" xs="12">
+      <v-col lg="4" md="6" sm="6" xs="12">
         <v-card>
           <v-card-title
             >Res-152-2018 Manual de Inspección de Portadores
@@ -76,7 +76,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col xl="3" lg="4" md="6" sm="6" xs="12">
+      <v-col lg="4" md="6" sm="6" xs="12">
         <v-card>
           <v-card-title>Metodología acomodo de carga</v-card-title>
           <v-card-text>
@@ -102,7 +102,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col xl="3" lg="4" md="6" sm="6" xs="12">
+      <v-col lg="4" md="6" sm="6" xs="12">
         <v-card>
           <v-card-title
             >Dec-Ley 345-2019 Desarrollo energías renovables</v-card-title
@@ -147,3 +147,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media screen and (min-width: 1368px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (min-width: 1668px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+</style>
