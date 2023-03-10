@@ -166,7 +166,6 @@ export default {
       try {
         const services = await getServices({ id: this.institutionId });
         this.setServices(services);
-        this.selectedService = this.tableData[0];
       } catch (err) {
         this.addNotification({
           message: this.$t("notifications.unsuccesfull_get"),
