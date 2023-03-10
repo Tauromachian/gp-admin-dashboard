@@ -1,5 +1,11 @@
 <template>
   <v-container fluid class="mx-0 px-0">
+    <div class="pl-8">
+      <gen-filter>
+        <institution-filter v-model:name="institutionName" />
+      </gen-filter>
+    </div>
+
     <v-row>
       <!-- Institution content -->
       <v-col sm="8" md="8" cols="12">
@@ -41,9 +47,6 @@
         </gen-details-sidebar>
       </v-col>
     </v-row>
-    <gen-filter left>
-      <institution-filter v-model:name="institutionName" />
-    </gen-filter>
 
     <!-- Action button -->
     <gen-btn-add @click="openFormForInsert"></gen-btn-add>
