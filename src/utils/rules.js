@@ -13,13 +13,13 @@ export function optionalFieldHelper(rules) {
   return (v) => {
     if (!v) return true;
 
-    let result;
+    for (const rule of rules) {
+      const result = rule(v);
 
-    rules.forEach((rule) => {
-      result = rule(v);
-    });
+      if (result !== true) return result;
+    }
 
-    return result || true;
+    return true;
   };
 }
 
