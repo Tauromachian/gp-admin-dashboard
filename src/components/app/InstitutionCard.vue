@@ -11,9 +11,6 @@
     </v-card-subtitle>
     <v-card-actions class="actions-styles">
       <v-spacer />
-      <v-btn color="primary" text @click="servicesClicked">
-        {{ $t("institutions.fields.services") }}
-      </v-btn>
       <v-btn icon color="primary" @click="seeClicked">
         <v-icon> mdi-eye </v-icon>
       </v-btn>
@@ -47,9 +44,6 @@ export default {
     };
   },
   methods: {
-    servicesClicked() {
-      this.$emit("services-click");
-    },
     seeClicked() {
       this.$emit("see-click");
     },
