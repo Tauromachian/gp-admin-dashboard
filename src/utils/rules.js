@@ -2,6 +2,13 @@ import { isNumber, isPhone, isEmail, isSentence } from "./regex";
 
 export { ip } from "./rules-ip";
 
+/**
+ * This function is meant to be used as a helper in case there are optional fields.
+ * @param {array} rules
+ * @returns true if  no value is provided
+ * @returns true if the value passes all the rules
+ * @returns false if the value is provided and it does not pass all the rules
+ */
 export function optionalFieldHelper(rules) {
   return (v) => {
     if (!v) return true;
