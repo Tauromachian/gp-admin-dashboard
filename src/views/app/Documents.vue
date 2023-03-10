@@ -18,16 +18,16 @@
               variant="text"
               color="primary"
               @click="openPdf(document.fileSource)"
+              icon="mdi-eye"
             >
-              {{ $t("button.actions.see") }}
             </v-btn>
             <v-btn
               variant="text"
               download
               :href="document.fileSource"
               color="primary"
+              icon="mdi-download"
             >
-              {{ $t("button.actions.download") }}
             </v-btn>
           </v-card-actions>
         </v-card>
