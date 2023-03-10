@@ -89,6 +89,9 @@ export default {
     year() {
       return new Date().getFullYear();
     },
+    year_plan() {
+      return Math.floor(Math.random() * 10000);
+    },
     january(i) {
       return Math.floor(Math.random() * 10000);
     },
