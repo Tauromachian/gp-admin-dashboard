@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <!-- Services displayer -->
     <v-card class="mt-4">
       <v-card-text>
         <gen-toolbar
