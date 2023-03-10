@@ -5,8 +5,10 @@
         <gen-toolbar
           v-model:visible-columns="visibleColumns"
           :column-defs="headers"
-          @plus-click="openFormForInsert"
-          @edit-click="openFormForEdit"
+          :isRowSelected="selectedRows.length > 0"
+          @click:delete-button="isRowSelected('delete')"
+          @click:update-button="openFormForEdit"
+          @click:delete="removePlan"
         >
         </gen-toolbar>
 
