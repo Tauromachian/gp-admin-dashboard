@@ -34,7 +34,14 @@
       </v-list>
     </v-menu>
 
-    <locale-dropdown />
+    <v-btn
+      icon
+      dark
+      class="toolbar-items btn-toolbar-color"
+      @click="toggleLanguage"
+    >
+      <v-icon>mdi-translate</v-icon>
+    </v-btn>
 
     <gen-account-button-menu />
 
@@ -43,15 +50,18 @@
 </template>
 
 <script>
-import LocaleDropdown from "./LocaleDropdown";
-
 export default {
   name: "Toolbar",
-  components: { LocaleDropdown },
 
   methods: {
     toggleDrawer() {
       this.$emit("toggle-drawer");
+    },
+
+    toggleLanguage() {
+      this.$i18n.locale === "es"
+        ? (this.$i18n.locale = "en")
+        : (this.$i18n.locale = "es");
     },
   },
 };
