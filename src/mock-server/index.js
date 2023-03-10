@@ -93,6 +93,11 @@ export function makeServer({ environment = "development" } = {}) {
         const createdPlan = schema.institutions.create(newPlan);
         return new Response(201, {}, createdPlan.attrs);
       });
+      this.delete("/plan/:id", (schema, request) => {
+        const planId = request.params.id;
+        schema.plans.find(planId).destroy();
+        return new Response(200);
+      });
 
       this.get("/coordinator/:id/mails", (schema, request) => {
         const coordinatorId = request.params.id;
