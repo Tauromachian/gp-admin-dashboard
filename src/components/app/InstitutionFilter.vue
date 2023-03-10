@@ -1,10 +1,8 @@
 <template>
-  <gen-form :title="$t('institutions.institution_filter')">
-    <v-text-field
-      v-model="nameComputed"
-      :label="$t('institutions.fields.name')"
-    />
-  </gen-form>
+  <v-text-field
+    v-model="nameComputed"
+    :label="$t('institutions.fields.name')"
+  />
 </template>
 
 <script>
