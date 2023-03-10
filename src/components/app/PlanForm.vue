@@ -15,72 +15,72 @@
     <v-text-field
       v-model="form.january"
       label="Enero (kWh) (opcional)"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
     />
 
     <v-text-field
       v-model="form.february"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Febrero (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.march"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Marzo (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.april"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Abril (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.may"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Mayo (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.june"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Junio (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.july"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Julio (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.august"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Agosto (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.september"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Septiembre (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.october"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Octubre (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.november"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Noviembre (kWh) (opcional)"
     />
 
     <v-text-field
       v-model="form.december"
-      :rules="[unRequiredHelper([rules.number()])]"
+      :rules="[optionalFieldHelper([rules.number()])]"
       label="Diciembre (kWh) (opcional)"
     />
   </gen-form>
@@ -89,7 +89,7 @@
 <script>
 import { required, number } from "@/utils/rules";
 
-import { unRequiredHelper } from "@/utils/rules";
+import { optionalFieldHelper } from "@/utils/rules";
 
 export default {
   name: "PlanForm",
@@ -101,7 +101,7 @@ export default {
   },
   data: function () {
     return {
-      unRequiredHelper,
+      optionalFieldHelper,
       rules: {
         required,
         number,

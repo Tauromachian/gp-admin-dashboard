@@ -2,7 +2,7 @@ import { isNumber, isPhone, isEmail, isSentence } from "./regex";
 
 export { ip } from "./rules-ip";
 
-export function unRequiredHelper(rules) {
+export function optionalFieldHelper(rules) {
   return (v) => {
     if (!v) return true;
 
