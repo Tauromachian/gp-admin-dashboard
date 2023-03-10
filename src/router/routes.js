@@ -10,63 +10,57 @@ export default [
         component: () => import("@/views/app/Institution"),
       },
       {
-        path: "/institution/:id",
-        component: () => import("@/layouts/InstitutionContent"),
-        children: [
-          {
-            path: "services",
-            name: "services",
-            component: () => import("@/views/app/Service"),
-          },
+        path: "services",
+        name: "services",
+        component: () => import("@/views/app/Service"),
+      },
 
-          {
-            path: "read",
-            name: "read",
-            component: () => import("@/views/app/Read"),
-          },
+      {
+        path: "read",
+        name: "read",
+        component: () => import("@/views/app/Read"),
+      },
 
-          {
-            path: "plans",
-            name: "plans",
-            component: () => import("@/views/app/Plan"),
-          },
+      {
+        path: "plans",
+        name: "plans",
+        component: () => import("@/views/app/Plan"),
+      },
 
-          {
-            path: "user-profile",
-            name: "User Profile",
-            component: () => import("@/views/app/UserProfile"),
-          },
+      {
+        path: "user-profile",
+        name: "User Profile",
+        component: () => import("@/views/app/UserProfile"),
+      },
 
-          {
-            path: "user-management",
-            name: "user-management",
-            component: () => import("@/views/app/UserManagement"),
-          },
+      {
+        path: "user-management",
+        name: "user-management",
+        component: () => import("@/views/app/UserManagement"),
+      },
 
-          {
-            path: "monitorization",
-            name: "monitoring",
-            component: () => import("@/views/app/Monitorization"),
-          },
+      {
+        path: "monitorization",
+        name: "monitoring",
+        component: () => import("@/views/app/Monitorization"),
+      },
 
-          {
-            path: "consumption",
-            name: "consumption",
-            component: () => import("@/views/app/Consumption"),
-          },
+      {
+        path: "consumption",
+        name: "consumption",
+        component: () => import("@/views/app/Consumption"),
+      },
 
-          {
-            path: "notifications",
-            name: "notifications",
-            component: () => import("@/views/app/Notifications"),
-          },
+      {
+        path: "notifications",
+        name: "notifications",
+        component: () => import("@/views/app/Notifications"),
+      },
 
-          {
-            path: "documents",
-            name: "documents",
-            component: () => import("@/views/app/Documents"),
-          },
-        ],
+      {
+        path: "documents",
+        name: "documents",
+        component: () => import("@/views/app/Documents"),
       },
     ],
   },
