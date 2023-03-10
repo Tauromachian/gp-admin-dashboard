@@ -88,6 +88,11 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/plans", (schema) => {
         return new Response(200, {}, schema.plans.all().models);
       });
+      this.post("/plans", (schema, request) => {
+        const newPlan = JSON.parse(request.requestBody);
+        const createdPlan = schema.institutions.create(newPlan);
+        return new Response(201, {}, createdPlan.attrs);
+      });
 
       this.get("/coordinator/:id/mails", (schema, request) => {
         const coordinatorId = request.params.id;
