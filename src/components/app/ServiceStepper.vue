@@ -1,7 +1,7 @@
 <template>
   <v-card>
-    <v-card-title> Formulario de servicio </v-card-title>
-    <v-card-text class="px-4">
+    <v-card-title class="px-5"> Formulario de servicio </v-card-title>
+    <v-card-text class="px-5">
       <gen-stepper-header class="mb-8" :steps="steps" :step="step">
       </gen-stepper-header>
 

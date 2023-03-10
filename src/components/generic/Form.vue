@@ -1,10 +1,10 @@
 <template>
   <v-card :elevation="0">
-    <v-card-title class="pt-3 px-4">
+    <v-card-title class="pt-3 px-5">
       {{ title }}
       <v-divider class="primary my-2" />
     </v-card-title>
-    <v-card-text class="px-4 pt-0">
+    <v-card-text class="px-5 pt-0">
       <v-form ref="form" @submit.prevent="onSubmit">
         <slot> </slot>
         <slot name="actions">
