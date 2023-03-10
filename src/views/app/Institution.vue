@@ -20,7 +20,6 @@
                 @see-click="showInstitutionDetails(institution.id)"
                 @edit-click="openUpdateForm(institution.id)"
                 @delete-click="removeInstitution(institution.id)"
-                @services-click="goToServices(institution.id, institution.name)"
               />
             </v-col>
           </v-row>
@@ -167,9 +166,7 @@ export default {
       }
       this.institutionFormDialog = true;
     },
-    goToServices(id) {
-      this.$router.push({ name: "services", params: { id } });
-    },
+
     async getInstitutions(filter) {
       try {
         const { data } = await getInstitutions(filter);
