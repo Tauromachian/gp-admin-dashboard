@@ -116,8 +116,8 @@ export default {
     },
   },
   methods: {
-    validate: function () {
-      this.$refs.form.validate();
+    async validate() {
+      await this.$refs.form.validate();
     },
   },
 };
