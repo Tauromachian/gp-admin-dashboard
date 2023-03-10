@@ -48,7 +48,7 @@
 import { mapActions, mapState } from "pinia";
 import { useNotificationsStore } from "@/stores/notifications";
 
-import { getPlans, addPlan, updatePlan } from "@/services/app/plan";
+import { getPlans, addPlan, updatePlan, deletePlan } from "@/services/app/plan";
 
 import PlanForm from "@/components/app/PlanForm.vue";
 
