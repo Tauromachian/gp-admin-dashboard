@@ -1,8 +1,8 @@
 <template>
   <v-card :elevation="0">
-    <v-card-title class="pt-1">
+    <v-card-title class="pt-3">
       {{ title }}
-      <v-divider class="primary mb-2" />
+      <v-divider class="primary my-2" />
     </v-card-title>
     <v-card-text>
       <v-form ref="form" @submit.prevent="onSubmit">
