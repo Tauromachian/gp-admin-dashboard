@@ -1,10 +1,6 @@
 <template>
   <v-app-bar id="core-toolbar" app flat :order="1">
-    <div class="ml-2" v-if="!isViewInstitution" />
-
-    <div v-if="isViewInstitution" class="dinamic-margin-left" />
-
-    <v-app-bar-nav-icon v-else @click="toggleDrawer" />
+    <v-app-bar-nav-icon @click="toggleDrawer" />
 
     <v-toolbar-title v-if="$vuetify.display.mdAndUp">
       {{ $t("route." + $route.name) }}
@@ -52,21 +48,6 @@ import LocaleDropdown from "./LocaleDropdown";
 export default {
   name: "Toolbar",
   components: { LocaleDropdown },
-  data: () => ({
-    windowWidth: 600,
-    notifications: [
-      "Mike, John responded to your email",
-      "You have 5 new tasks",
-      "You're now a friend with Andrew",
-      "Another Notification",
-      "Another One",
-    ],
-  }),
-  computed: {
-    isViewInstitution() {
-      return this.$route.name === "institutions";
-    },
-  },
 
   methods: {
     toggleDrawer() {
@@ -75,27 +56,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#core-toolbar a {
-  text-decoration: none;
-  background: #eee;
-}
-@media only screen and (max-width: 600px) {
-  .dinamic-margin-left {
-    margin-left: 0px;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .dinamic-margin-left {
-    margin-left: 0px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .dinamic-margin-left {
-    margin-left: 100px;
-  }
-}
-</style>
