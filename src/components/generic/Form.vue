@@ -1,15 +1,15 @@
 <template>
   <v-card :elevation="0">
-    <v-card-title class="pt-3">
+    <v-card-title class="pt-3 px-4">
       {{ title }}
       <v-divider class="primary my-2" />
     </v-card-title>
-    <v-card-text>
+    <v-card-text class="px-4 pt-0">
       <v-form ref="form" @submit.prevent="onSubmit">
         <slot> </slot>
         <slot name="actions">
           <gen-form-actions
-            class="pl-0 pr-0"
+            class="px-0"
             :enable-cancel="enableCancel"
             @click:submit="onSubmit"
             @click:cancel="onCancel"
