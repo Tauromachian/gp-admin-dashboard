@@ -141,7 +141,7 @@ export default {
           //   value: 'TLMT3IAE'
         },
         {
-          text: `${this.$t("read.fields.reactive")} (kVAr)`,
+          text: `${this.$t("read.fields.reactive")} (kVArh)`,
           value: "TIRE",
           //   value: 'TLMTIRE'
         },
