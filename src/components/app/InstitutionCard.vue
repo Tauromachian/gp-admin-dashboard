@@ -11,14 +11,21 @@
     </v-card-subtitle>
     <v-card-actions class="actions-styles">
       <v-spacer />
-      <v-btn icon color="primary" @click="seeClicked">
-        <v-icon> mdi-eye </v-icon>
+      <v-btn class="mx-0" icon="mdi-eye" color="primary" @click="seeClicked">
       </v-btn>
-      <v-btn icon color="primary" @click="editClicked">
-        <v-icon> mdi-pencil </v-icon>
+      <v-btn
+        class="mx-0"
+        icon="mdi-pencil"
+        color="primary"
+        @click="editClicked"
+      >
       </v-btn>
-      <v-btn icon color="primary" @click="dialog = true">
-        <v-icon> mdi-delete </v-icon>
+      <v-btn
+        class="mx-0"
+        icon="mdi-delete"
+        color="primary"
+        @click="dialog = true"
+      >
       </v-btn>
     </v-card-actions>
     <gen-delete-dialog-complex
