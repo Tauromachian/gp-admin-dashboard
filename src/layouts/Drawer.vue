@@ -1,11 +1,8 @@
 <template>
   <v-navigation-drawer v-model="internalDrawer" app :order="0">
-    <v-list-item :prepend-avatar="logo" title="SGE"> </v-list-item>
-    <v-list-item>
-      <v-list-item-subtitle class="institution-name-styles">
-        {{ subtitle }}
-      </v-list-item-subtitle>
-    </v-list-item>
+    <div class="d-flex px-16 py-2">
+      <v-img src="/logo.svg"></v-img>
+    </div>
 
     <v-divider />
 
@@ -38,7 +35,7 @@ export default {
     },
   },
   data: () => ({
-    logo: "/logo.png",
+    logo: "/logo.svg",
     navDrawer: false,
     mini: false,
   }),
