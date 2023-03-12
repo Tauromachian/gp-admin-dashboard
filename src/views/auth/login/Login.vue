@@ -91,7 +91,13 @@ export default {
 <style scoped>
 .login-form {
   max-width: 600px;
-  min-width: 400px;
+  min-width: 300px;
   max-height: 290px;
+}
+
+@media screen and (min-width: 500px) {
+  .login-form {
+    min-width: 400px;
+  }
 }
 </style>
