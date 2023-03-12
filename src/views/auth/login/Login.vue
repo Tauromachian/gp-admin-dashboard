@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column mb-16">
+  <div class="d-flex flex-column login-wrapper">
     <div class="d-flex px-16 py-2 mb-5">
       <img src="/logo.svg" />
     </div>
@@ -89,6 +89,12 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 500px) {
+  .login-wrapper {
+    margin-bottom: 1.3em;
+  }
+}
+
 .login-form {
   max-width: 600px;
   min-width: 300px;
