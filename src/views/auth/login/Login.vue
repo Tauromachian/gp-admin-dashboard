@@ -1,39 +1,52 @@
 <template>
-  <gen-form
-    title="Login"
-    ref="form"
-    class="login-form"
-    @submit="submit"
-    elevation="1"
-  >
-    <v-text-field
-      label="Nombre de usuario"
-      v-model="form.username"
-      type="email"
-      :rules="[rules.required()]"
-      :disabled="loading"
-      prepend-icon="mdi-account"
-    ></v-text-field>
+  <div class="d-flex flex-column">
+    <div class="d-flex px-16 py-2 mb-5">
+      <img src="/logo.svg" />
+    </div>
 
-    <v-text-field
-      label="Contraseña"
-      v-model="form.password"
-      :append-icon="passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
-      @click:append="() => (passwordHidden = !passwordHidden)"
-      :type="passwordHidden ? 'password' : 'text'"
-      :disabled="loading"
-      :rules="[rules.password()]"
-      prepend-icon="mdi-lock"
-    ></v-text-field>
+    <gen-form
+      title="Login"
+      ref="form"
+      class="login-form"
+      @submit="submit"
+      elevation="1"
+    >
+      <v-text-field
+        label="Nombre de usuario"
+        v-model="form.username"
+        type="email"
+        :rules="[rules.required()]"
+        :disabled="loading"
+        prepend-icon="mdi-account"
+      ></v-text-field>
 
-    <template #actions>
-      <div class="d-flex">
-        <v-btn type="submit" :loading="loading" color="primary" class="ms-auto">
-          Login
-        </v-btn>
-      </div>
-    </template>
-  </gen-form>
+      <v-text-field
+        label="Contraseña"
+        v-model="form.password"
+        :append-icon="
+          passwordHidden ? 'mdi-eye-off-outline' : 'mdi-eye-outline'
+        "
+        @click:append="() => (passwordHidden = !passwordHidden)"
+        :type="passwordHidden ? 'password' : 'text'"
+        :disabled="loading"
+        :rules="[rules.password()]"
+        prepend-icon="mdi-lock"
+      ></v-text-field>
+
+      <template #actions>
+        <div class="d-flex">
+          <v-btn
+            type="submit"
+            :loading="loading"
+            color="primary"
+            class="ms-auto"
+          >
+            Login
+          </v-btn>
+        </div>
+      </template>
+    </gen-form>
+  </div>
 </template>
 
 <script>
