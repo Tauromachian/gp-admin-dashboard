@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="internalDrawer" app :order="0">
     <div class="d-flex px-16 py-2">
-      <v-img src="/logo.svg"></v-img>
+      <img src="/logo.svg" />
     </div>
 
     <v-divider />
