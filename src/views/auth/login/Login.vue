@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column mb-16">
     <div class="d-flex px-16 py-2 mb-5">
       <img src="/logo.svg" />
     </div>
