@@ -34,12 +34,7 @@
       </v-list>
     </v-menu>
 
-    <v-btn
-      icon
-      dark
-      class="toolbar-items btn-toolbar-color"
-      @click="toggleLanguage"
-    >
+    <v-btn icon class="toolbar-items btn-toolbar-color" @click="toggleLanguage">
       <v-icon>mdi-translate</v-icon>
     </v-btn>
 
