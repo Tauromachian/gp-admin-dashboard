@@ -1,5 +1,5 @@
 <template>
-  <v-menu absolute close-on-click close-on-content-click offset-y>
+  <v-menu>
     <template #activator="{ props }">
       <v-btn icon class="toolbar-items" v-bind="props">
         <v-icon> mdi-account </v-icon>
@@ -14,13 +14,6 @@
       </v-list-item>
 
       <v-divider />
-
-      <v-list-item :to="{ name: 'docs' }">
-        <template #prepend>
-          <v-icon>mdi-api</v-icon>
-        </template>
-        <v-list-item-title>{{ $t("route.docs") }}</v-list-item-title>
-      </v-list-item>
     </v-list>
   </v-menu>
 </template>
