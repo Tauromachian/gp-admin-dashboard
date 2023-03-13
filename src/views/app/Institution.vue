@@ -6,30 +6,28 @@
       </gen-filter>
     </div>
 
-    <v-row>
-      <!-- Institution content -->
-      <v-col sm="8" md="8" cols="12">
-        <div class="mt-2 mx-8">
-          <v-row>
-            <v-col
-              v-for="(institution, key) in institutions"
-              :key="institution.name + key"
-              cols="12"
-              xs="12"
-              sm="12"
-              md="6"
-              lg="6"
-              xl="4"
-            >
-              <institution-card
-                :institution="institution"
-                @see-click="showInstitutionDetails(institution.id)"
-                @edit-click="openUpdateForm(institution.id)"
-                @delete-click="removeInstitution(institution.id)"
-              />
-            </v-col>
-          </v-row>
-        </div>
+    <!-- Institution content -->
+    <div class="mt-2 mx-8">
+      <v-row>
+        <v-col
+          v-for="(institution, key) in institutions"
+          :key="institution.name + key"
+          cols="12"
+          xs="12"
+          sm="6"
+          md="4"
+          lg="4"
+          xl="3"
+        >
+          <institution-card
+            :institution="institution"
+            @see-click="showInstitutionDetails(institution.id)"
+            @edit-click="openUpdateForm(institution.id)"
+            @delete-click="removeInstitution(institution.id)"
+          />
+        </v-col>
+      </v-row>
+    </div>
       </v-col>
 
       <!-- Institution details -->
