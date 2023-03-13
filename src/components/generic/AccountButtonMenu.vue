@@ -8,7 +8,7 @@
     <v-list>
       <v-list-item @click="() => $emit('logout')">
         <template #prepend>
-          <v-icon>mdi-logout-variant</v-icon>
+          <v-icon icon="mdi-logout-variant"></v-icon>
         </template>
         <v-list-item-title>{{ $t("button.user.logout") }}</v-list-item-title>
       </v-list-item>
