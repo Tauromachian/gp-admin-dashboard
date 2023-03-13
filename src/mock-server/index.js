@@ -15,7 +15,11 @@ export function makeServer({ environment = "development" } = {}) {
     },
     routes() {
       this.post("/auth/login", () => {
-        return new Response(200, {}, { token: "token" });
+        return new Response(
+          200,
+          {},
+          { user: { name: "Jose Garcia" }, token: "token" }
+        );
       });
 
       this.get("/institutions", (schema) => {
