@@ -6,7 +6,7 @@
       </v-btn>
     </template>
     <v-list>
-      <v-list-item @click="logout">
+      <v-list-item @click="() => $emit('logout')">
         <template #prepend>
           <v-icon>mdi-logout-variant</v-icon>
         </template>
