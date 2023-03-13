@@ -1,13 +1,7 @@
 <template>
-  <v-menu
-    absolute
-    close-on-click
-    close-on-content-click
-    offset-y
-    v-model="menu"
-  >
-    <template #activator>
-      <v-btn icon class="toolbar-items" @click="menu = !menu">
+  <v-menu absolute close-on-click close-on-content-click offset-y>
+    <template #activator="{ props }">
+      <v-btn icon class="toolbar-items" v-bind="props">
         <v-icon> mdi-account </v-icon>
       </v-btn>
     </template>
