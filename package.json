@@ -14,6 +14,7 @@
     "basic-debouncer": "^1.0.5",
     "basic-indexer": "^0.3.0",
     "pinia": "^2.0.23",
+    "pinia-plugin-persist": "^1.0.0",
     "query-string": "^8.1.0",
     "roboto-fontface": "*",
     "vue": "^3.2.38",
