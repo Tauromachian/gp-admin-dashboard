@@ -20,6 +20,7 @@ export const useAuthStore = defineStore("auth", {
     async login(form) {
       try {
         const { data } = await login(form);
+        this.user = data.user;
         this.token = data.token;
         this.router.push({ name: "institutions" });
       } catch (error) {
