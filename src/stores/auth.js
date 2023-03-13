@@ -36,4 +36,8 @@ export const useAuthStore = defineStore("auth", {
       this.router.push({ name: "login" });
     },
   },
+
+  persist: {
+    enabled: true,
+  },
 });
