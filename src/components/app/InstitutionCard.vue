@@ -8,6 +8,9 @@
       <div>
         {{ institution.organism }}
       </div>
+      <div>
+        {{ institution.description }}
+      </div>
     </v-card-subtitle>
     <v-card-actions class="actions-styles">
       <v-spacer />
