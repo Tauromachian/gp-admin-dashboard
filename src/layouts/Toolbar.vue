@@ -38,18 +38,22 @@
       <v-icon>mdi-translate</v-icon>
     </v-btn>
 
-    <gen-account-button-menu @logout="logout" />
+    <gen-account-button-menu @logout="logout" :user="user" />
 
     <div class="mr-2" />
   </v-app-bar>
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 
 export default {
   name: "Toolbar",
+
+  computed: {
+    ...mapState(useAuthStore, ["user"]),
+  },
 
   methods: {
     ...mapActions(useAuthStore, ["logout"]),
