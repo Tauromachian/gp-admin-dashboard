@@ -28,23 +28,6 @@
         </v-col>
       </v-row>
     </div>
-      </v-col>
-
-      <!-- Institution details -->
-      <v-col sm="4" md="4" cols="12">
-        <gen-details-sidebar
-          :allow-dialog="$vuetify.display.mdAndDown"
-          v-model:dialog="institutionDetailsDialog"
-          toolbar-title="Institution details"
-        >
-          <institution-details
-            :id="selectedInstitutionId"
-            @submit-details="fillAndPatch"
-            @coordinator-delete="fillAndPatch"
-          />
-        </gen-details-sidebar>
-      </v-col>
-    </v-row>
 
     <!-- Action button -->
     <gen-btn-add @click="openFormForInsert"></gen-btn-add>
