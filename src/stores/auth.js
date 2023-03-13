@@ -29,6 +29,10 @@ export const useAuthStore = defineStore("auth", {
         });
       }
     },
-    async logout() {},
+    async logout() {
+      this.token = null;
+      this.user = null;
+      this.router.push({ name: "login" });
+    },
   },
 });
