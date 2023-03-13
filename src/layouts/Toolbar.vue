@@ -43,17 +43,21 @@
       <v-icon>mdi-translate</v-icon>
     </v-btn>
 
-    <gen-account-button-menu />
+    <gen-account-button-menu @logout="logout" />
 
     <div class="mr-2" />
   </v-app-bar>
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
 export default {
   name: "Toolbar",
 
   methods: {
+    ...mapActions(useAuthStore, ["logout"]),
     toggleDrawer() {
       this.$emit("toggle-drawer");
     },
